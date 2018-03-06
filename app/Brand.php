@@ -1,0 +1,50 @@
+<?php
+
+namespace App;
+
+use App\Traits\ItemCounts;
+
+/**
+ * A lolita brand, e.g. Angelic Pretty.
+ *
+ * @property string $slug The URL slug of this brand.
+ * @property string $name The name of this brand.
+ * @property string $description An optional description for this brand.
+ * @property string $short_name The short name for this brand.
+ *
+ * @property string $image_id The ID of the {@link \App\Image image} for this brand.
+ *
+ * @property \App\Image $image The {@link \App\Image image} representing this brand, usually a logo.
+ * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $items
+ */
+class Brand extends Model
+{
+    /**
+     * The attributes not protected against mass assignment.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'short_name', 'slug', 'image_id'];
+
+    /**
+     * Attributes to hide.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'id',
+        'image_id',
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
+     * The image for this brand.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
+    }
+}
