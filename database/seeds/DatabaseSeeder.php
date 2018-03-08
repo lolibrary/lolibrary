@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(BrandSeeder::class);
         $this->call(ColorSeeder::class);
-        $this->call(TypeSeeder::class);
+        $this->call(CategorySeeder::class);
         $this->call(FeatureSeeder::class);
         $this->call(AttributeSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(StyleSeeder::class);
         $this->call(InstructionSeeder::class);
         $this->call(ImageSeeder::class);
+        $this->call(TagSeeder::class);
     }
 }

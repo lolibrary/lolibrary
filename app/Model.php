@@ -7,7 +7,6 @@ use DateTime;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Support\Str;
-use Watson\Rememberable\Rememberable;
 
 /**
  * A base model for this application.
