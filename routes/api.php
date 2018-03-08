@@ -24,3 +24,6 @@ $router->resource('brands', 'BrandController', $options);
 $router->resource('categories', 'CategoryController', $options);
 $router->resource('attributes', 'AttributeController', $options);
 $router->resource('features', 'FeatureController', $options);
+$router->resource('items', 'ItemController', $options);
+
+$router->post('search', 'SearchController@search')->name('search');
