@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+/** @var \Illuminate\Routing\Router $router */
+
+$router->group(['domain' => 'api.*'], function (Router $router) {
+    $options = ['only' => ['index', 'show']];
+
+    $router->get('tags/search', 'TagController@search')->name('tags.search');
+    $router->resource('tags', 'TagController', $options);
+    $router->resource('colors', 'ColorController', $options);
+    $router->resource('brands', 'BrandController', $options);
+    $router->resource('categories', 'CategoryController', $options);
+    $router->resource('attributes', 'CategoryController', $options);
 });
