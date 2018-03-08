@@ -15,6 +15,6 @@ class HomeController extends Controller
      */
     public function welcome()
     {
-        return response();
+        return response()->json(['status' => 'ok']);
     }
 }
