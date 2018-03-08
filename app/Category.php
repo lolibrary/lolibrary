@@ -23,13 +23,12 @@ class Category extends Model
     protected $fillable = ['name', 'slug'];
 
     /**
-     * Hidden fields.
+     * Visible attributes.
      *
      * @var array
      */
-    protected $hidden = [
-        'id',
-        'created_at',
-        'updated_at',
+    protected $visible = [
+        'name',
+        'slug',
     ];
 }

@@ -23,14 +23,13 @@ class Color extends Model
     protected $fillable = ['name', 'slug'];
 
     /**
-     * Hidden attributes.
+     * Visible attributes.
      *
      * @var array
      */
-    protected $hidden = [
-        'id',
-        'created_at',
-        'updated_at',
+    protected $visible = [
+        'name',
+        'slug',
     ];
 
     /**

@@ -25,15 +25,14 @@ class Attribute extends Model
     protected $fillable = ['name', 'slug'];
 
     /**
-     * Hidden attributes.
+     * Visible attributes.
      *
      * @var array
      */
-    protected $hidden = [
-        'id',
-        'pivot',
-        'created_at',
-        'updated_at',
+    protected $visible = [
+        'name',
+        'slug',
+        'value',
     ];
 
     /**
@@ -41,7 +40,7 @@ class Attribute extends Model
      *
      * @var array
      */
-    protected $appends = ['url', 'value'];
+    protected $appends = ['value'];
 
     /**
      * A getter for $model->value.

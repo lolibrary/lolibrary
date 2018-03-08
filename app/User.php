@@ -100,6 +100,17 @@ class User extends Authenticatable
     ];
 
     /**
+     * Visible attributes.
+     *
+     * @var array
+     */
+    protected $visible = [
+        'username',
+        'profile',
+        'created_at',
+    ];
+
+    /**
      * The items a user has submitted.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

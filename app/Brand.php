@@ -30,16 +30,23 @@ class Brand extends Model
     protected $fillable = ['name', 'short_name', 'slug', 'image_id'];
 
     /**
-     * Attributes to hide.
+     * Visible attributes.
      *
      * @var array
      */
-    protected $hidden = [
-        'id',
-        'image_id',
-        'created_at',
-        'updated_at',
+    protected $visible = [
+        'name',
+        'short_name',
+        'slug',
+        'image',
     ];
+
+    /**
+     * Eager loads.
+     *
+     * @var array
+     */
+    protected $with = ['image'];
 
     /**
      * The image for this brand.

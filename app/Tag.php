@@ -19,15 +19,13 @@ class Tag extends Model
     protected $fillable = ['name', 'slug'];
 
     /**
-     * Hidden attributes on this model.
+     * Visible attributes.
      *
      * @var array
      */
-    protected $hidden = [
-        'pivot',
-        'id',
-        'created_at',
-        'updated_at',
+    protected $visible = [
+        'name',
+        'slug',
     ];
 
     /**

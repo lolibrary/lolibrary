@@ -47,6 +47,11 @@ class Item extends Model
 {
     use ItemRelations, Publishable;
 
+    /**
+     * A list of supported currencies.
+     *
+     * @var int
+     */
     public const CURRENCIES = [
         'jpy' => 'Japanese Yen (¥)',
         'cny' => 'Chinese Yuan (RMB/¥)',
@@ -62,20 +67,24 @@ class Item extends Model
 
     /**
      * Indicates that an item is a draft and shouldn't be visible.
+     *
+     * @var int
      */
-    const DRAFT = 0;
+    public const DRAFT = 0;
 
     /**
      * Indicates that an item should be visible to everyone.
+     *
+     * @var int
      */
-    const PUBLISHED = 1;
+    public const PUBLISHED = 1;
 
     /**
      * A shortcut for fully eager loading an item.
      *
      * Use: `Item::with(Item::FULLY_LOAD)`
      */
-    const FULLY_LOAD = [
+    public const FULLY_LOAD = [
         'image',
         'images',
         'tags',
@@ -93,20 +102,13 @@ class Item extends Model
      *
      * Use: `Item::with(Item::PARTIAL_LOAD)`
      */
-    const PARTIAL_LOAD = [
+    public const PARTIAL_LOAD = [
         'submitter',
         'brand',
         'category',
         'image',
         'tags'
     ];
-
-    /**
-     * The name of the index this model is searchable under.
-     *
-     * @var string
-     */
-    protected $index = 'items';
 
     /**
      * Non-fillable attributes.
@@ -130,6 +132,13 @@ class Item extends Model
     protected $with = self::PARTIAL_LOAD;
 
     /**
+     * Attributes to append.
+     *
+     * @var array
+     */
+    protected $appends = ['price_details'];
+
+    /**
      * An array of keys to convert to dates.
      *
      * @var array
@@ -137,96 +146,34 @@ class Item extends Model
     protected $dates = ['published_at'];
 
     /**
-     * Hidden attributes.
+     * Visible attributes.
      *
      * @var array
      */
-    protected $hidden = [
-        'id',
-        'brand_id',
-        'category_id',
-        'image_id',
-        'publisher_id',
-        'user_id',
+    protected $visible = [
+        'slug',
+        'english_name',
+        'foreign_name',
+        'notes',
+        'price_details',
+        'product_number',
+
+        // relations
+        'image',
+        'images',
+        'tags',
+        'colors',
+        'features',
+        'category',
+        'brand',
+        'submitter',
+        'attributes',
+        'publisher',
+
+        'created_at',
+        'updated_at',
+        'published_at',
     ];
-
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
-    public function toSearchableArray()
-    {
-        return [
-            'id' => $this->id,
-
-            // regular attributes for searching.
-            'searchable_brand_short' => $this->brand->short_name,
-            'searchable_english_name' => $this->english_name,
-            'searchable_foreign_name' => $this->foreign_name,
-
-            // searchable facets
-            'searchable_brand' => $this->brand->name,
-            'searchable_category' => $this->category->name,
-            'searchable_tags' => $this->tags->pluck('name')->all(),
-            'searchable_colors' => $this->colors->pluck('name')->all(),
-            'searchable_features' => $this->features->pluck('name')->all(),
-            'searchable_product_number' => $this->product_number,
-
-            // special: numerical filters
-            'year' => $this->year,
-            'price' => $this->price_formatted,
-
-            // special: facets
-            '_tags' => $this->tags->pluck('slug')->all(),
-            'brand' => $this->brand->slug,
-            'category' => $this->category->slug,
-            'features' => $this->features->pluck('slug')->all(),
-            'colors' => $this->colors->pluck('slug')->all(),
-            'currency' => $this->currency,
-
-            // special: image url to describe this item
-            'thumbnail_url' => $this->image->thumbnail_url ?? null,
-        ];
-    }
-
-    /**
-     * Get a list of facet search values.
-     *
-     * @return array
-     */
-    public function getSearchFilters()
-    {
-        return [
-            '_tags',
-            'brand',
-            'category',
-            'colors',
-            'currency',
-            'features',
-        ];
-    }
-
-    /**
-     * Get a list of searchable fields to set, in ranking order.
-     *
-     * @return string[]
-     */
-    public function getSearchableFields()
-    {
-        return [
-            'searchable_brand_short',
-            'searchable_english_name',
-            'searchable_foreign_name',
-            'searchable_product_number',
-            'searchable_brand',
-            'searchable_category',
-            'searchable_colors',
-            'searchable_tags',
-            'searchable_features',
-            'year',
-        ];
-    }
 
     /**
      * Get the formatted price for this item.
@@ -254,6 +201,21 @@ class Item extends Model
         $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
         return $formatter->formatCurrency($price, $this->currency);
+    }
+
+    /**
+     * Get a list of pricing details.
+     *
+     * @return array
+     */
+    public function getPriceDetailsAttribute()
+    {
+        return [
+            'currency' => $this->currency,
+            'price' => (int) $this->price,
+            'local_price' => $this->getFullPrice(),
+            'formatted' => $this->price_formatted,
+        ];
     }
 
     /**

@@ -39,13 +39,15 @@ class Image extends Model
         'thumbnail_url',
     ];
 
-    protected $hidden = [
-        'id',
-        'filename',
-        'thumbnail',
-        'image_id',
-        'created_at',
-        'updated_at',
+    /**
+     * Visible attributes.
+     *
+     * @var array
+     */
+    protected $visible = [
+        'name',
+        'url',
+        'thumbnail_url',
     ];
 
     /**
