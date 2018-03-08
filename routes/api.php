@@ -15,13 +15,12 @@ use Illuminate\Routing\Router;
 
 /** @var \Illuminate\Routing\Router $router */
 
-$router->group(['domain' => 'api.*'], function (Router $router) {
-    $options = ['only' => ['index', 'show']];
+$options = ['only' => ['index', 'show']];
 
-    $router->get('tags/search', 'TagController@search')->name('tags.search');
-    $router->resource('tags', 'TagController', $options);
-    $router->resource('colors', 'ColorController', $options);
-    $router->resource('brands', 'BrandController', $options);
-    $router->resource('categories', 'CategoryController', $options);
-    $router->resource('attributes', 'CategoryController', $options);
-});
+$router->get('tags/search', 'TagController@search')->name('tags.search');
+$router->resource('tags', 'TagController', $options);
+$router->resource('colors', 'ColorController', $options);
+$router->resource('brands', 'BrandController', $options);
+$router->resource('categories', 'CategoryController', $options);
+$router->resource('attributes', 'AttributeController', $options);
+$router->resource('features', 'FeatureController', $options);
