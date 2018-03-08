@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Cacheable;
 use App\Traits\ItemCounts;
 
 /**
@@ -19,6 +20,8 @@ use App\Traits\ItemCounts;
  */
 class Brand extends Model
 {
+    use Cacheable;
+
     /**
      * The attributes not protected against mass assignment.
      *

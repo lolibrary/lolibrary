@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\{ItemRelations, Publishable};
 use Laravel\Scout\Searchable;
+use NumberFormatter;
 
 /**
  * An Item of Apparel.
@@ -44,7 +45,7 @@ use Laravel\Scout\Searchable;
  */
 class Item extends Model
 {
-    use Searchable, ItemRelations, Publishable;
+    use ItemRelations, Publishable;
 
     public const CURRENCIES = [
         'jpy' => 'Japanese Yen (¥)',
@@ -230,59 +231,29 @@ class Item extends Model
     /**
      * Get the formatted price for this item.
      *
-     * @return float
+     * @return string
      */
-    public function getPriceFormattedAttribute()
+    public function getFullPrice()
     {
         if (in_array($this->currency, ['jpy', 'krw', 'cny'])) {
-            return (float) round($this->price);
+            return (string) round($this->price);
         }
 
-        return (float) round($this->price / 100, 2);
+        return (string) round($this->price / 100, 2);
     }
 
     /**
-     * Get the name of this item's index.
+     * Get formatted price for an item.
      *
      * @return string
      */
-    public static function index()
+    public function getPriceFormattedAttribute()
     {
-        return (new static)->searchableAs();
-    }
+        $price = $this->getFullPrice();
 
-    /**
-     * Get a list of eager loads for when searching.
-     *
-     * @return array
-     */
-    public function searchableEagerLoads()
-    {
-        return static::PARTIAL_LOAD;
-    }
+        $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
-    /**
-     * Make all items searchable.
-     *
-     * @return void
-     */
-    public static function makeAllSearchable()
-    {
-        $self = new static;
-
-        $relations = [
-            'brand',
-            'category',
-            'colors',
-            'tags',
-            'features',
-            'image',
-        ];
-
-        $self->with($relations)
-            ->drafts(false)
-            ->orderBy($self->getKeyName())
-            ->searchable();
+        return $formatter->formatCurrency($price, $this->currency);
     }
 
     /**

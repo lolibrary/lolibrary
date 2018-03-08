@@ -24,7 +24,7 @@ use Watson\Rememberable\Rememberable;
  */
 abstract class Model extends Eloquent
 {
-    use HasUuid, Rememberable;
+    use HasUuid;
 
     /**
      * The namespace UUID used for {@see uuid5()}

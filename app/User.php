@@ -6,31 +6,43 @@ use App\Models\HasUuid;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
+use NumberFormatter;
 
 /**
- * A user of this application.
+ * An Item of Apparel.
  *
- * @property array  $auth           An array with a token + expiry + nonce for auth.
- * @property string $email          The user's email.
- * @property string $name           The user's name.
- * @property string $username       The user's login username.
- * @property string $remember_token A strong random number that allows the user to use "remember me" sessions.
+ * @property string $slug           The URL slug of an item.
+ * @property string $english_name   The English Title of an Item.
+ * @property string $foreign_name   The 'Japanese Title' of an Item.
+ * @property int|null $year           The year an Item was released.
+ * @property string|null $product_number An Item's product number.
+ * @property int $status         The status of an item (stored internally as an int).
+ * @property string $price          The price of this item, in a given currency.
+ * @property string $currency       The currency of this item, as an ISO code.
  *
- * @property int  $level  The user's level (permissions).
- * @property bool $banned If the user is banned or not.
+ * @property \App\Image $image     The primary {@link \App\Image} for this Item.
+ * @property \App\Category $category  The {@link \App\Category} of this Item (e.g. JSK).
+ * @property \App\User $submitter The {@link \App\User} who originally submitted this Item.
+ * @property \App\User $publisher The {@link \App\User} who published this Item.
+ * @property \App\Brand $brand     The {@link \App\Brand} of this Item (e.g. Angelic Pretty).
  *
- * @property \App\Image $image The user's profile image.
- * @property \App\Profile $profile The user's profile and questions.
- * @property string $image_id The user's profile image ID.
+ * @property \App\Image[]|\Illuminate\Database\Eloquent\Collection $images     The {@link \App\Image images} for this Item.
+ * @property \App\Tag[]|\Illuminate\Database\Eloquent\Collection $tags       The {@link \App\Tag search tags} for this Item.
+ * @property \App\Color[]|\Illuminate\Database\Eloquent\Collection $colors     The {@link \App\Color colorways} this Item comes in (e.g. Black).
+ * @property \App\Feature[]|\Illuminate\Database\Eloquent\Collection $features   The {@link \App\Feature features} of this item (e.g. Back Shirring).
+ * @property \App\Attribute[]|\Illuminate\Database\Eloquent\Collection $attributes The {@link \App\Attribute custom attributes} on this Item.
+ * @property \App\User[]|\Illuminate\Database\Eloquent\Collection $stargazers The {@link \App\User users} who want to own this Item.
+ * @property \App\User[]|\Illuminate\Database\Eloquent\Collection $owners     The {@link \App\Attribute users} who own this Item.
+ * @property \App\Comment[]|\Illuminate\Database\Eloquent\Collection $comments   The {@link \App\Comment comments} on this Item.
  *
- * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $items    The {@link \App\Item items} this user has submitted.
- * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $wishlist The {@link \App\Item items} this user has favourited.
- * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $closet   The {@link \App\Item items} this user owns.
- * @property \App\Post[]|\Illuminate\Database\Eloquent\Collection $posts    The posts this user has created.
- * @property \App\Topic[]|\Illuminate\Database\Eloquent\Collection $topics   The topics this user has created.
- * @property \App\Message[]|\Illuminate\Database\Eloquent\Collection $messages The messages received by this user.
- * @property \App\Message[]|\Illuminate\Database\Eloquent\Collection $sent     The messages sent by this user.
- * @property \App\Comment[]|\Illuminate\Database\Eloquent\Collection $comments The comments this user has left.
+ * @property string $image_id The ID of this Item's {@link \App\Image image}.
+ * @property string $type_id  The ID of this Item's {@link \App\Type type}.
+ * @property string $user_id  The ID of the {@link \App\User user} who submitted this Item.
+ * @property string $brand_id The ID of this Item's {@link \App\Brand brand}.
+ * @property string $submitter_id The ID of this Item's {@link \App\User submitter}.
+ * @property string $publisher_id The ID of this Item's {@link \App\User publisher}.
+ *
+ * @property \Carbon\Carbon $published_at The date this item was published.
  */
 class User extends Authenticatable
 {
@@ -86,13 +98,6 @@ class User extends Authenticatable
         'auth' => 'json',
         'level' => 'integer',
     ];
-
-    /**
-     * Appended properties.
-     *
-     * @var array
-     */
-    protected $appends = [];
 
     /**
      * The items a user has submitted.
@@ -185,123 +190,12 @@ class User extends Authenticatable
     }
 
     /**
+     * Get a user's profile.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne|\App\Profile
      */
     public function profile()
     {
         return $this->hasOne(Profile::class);
     }
-
-    /**
-     * Return the user's permission level.
-     *
-     * @return int
-     */
-    public function level(): int
-    {
-        if ($this->banned) {
-            return static::BANNED;
-        }
-
-        return $this->level;
-    }
-
-    /**
-     * Check if a user is a developer.
-     *
-     * Used for guarding sensitive functions,
-     *   e.g. debug info and feature flags.
-     *
-     * @return bool
-     */
-    public function developer(): bool
-    {
-        return $this->level() >= static::DEVELOPER;
-    }
-
-    /**
-     * Check if a user is a moderator (above admin).
-     *
-     * @return bool
-     */
-    public function admin(): bool
-    {
-        return $this->level() >= static::ADMIN;
-    }
-
-    /**
-     * Check if a user is an admin (senior lolibrarian).
-     *
-     * @return bool
-     */
-    public function senior(): bool
-    {
-        return $this->level() >= static::SENIOR_LOLIBRARIAN;
-    }
-
-    /**
-     * Check if a user is able to process the moderation queue.
-     *
-     * Lolibrarians can also suggest edits to Items
-     *
-     * @return bool
-     */
-    public function lolibrarian(): bool
-    {
-        return $this->level() >= static::LOLIBRARIAN;
-    }
-
-    /**
-     * Check if a user is able to perform basic functions
-     *
-     * @return bool
-     */
-    public function junior(): bool
-    {
-        return $this->level() >= static::JUNIOR_LOLIBRARIAN;
-    }
-
-    /**
-     * Check a user's access role.
-     *
-     * @return string
-     */
-    public function getRoleAttribute()
-    {
-        switch (true) {
-            case $this->developer():
-                return 'Developer';
-            case $this->admin():
-                return 'Administrator';
-            case $this->senior():
-                return 'Senior Lolibrarian';
-            case $this->lolibrarian():
-                return 'Lolibrarian';
-            case $this->junior():
-                return 'Junior Lolibrarian';
-            case $this->banned:
-                return 'Banned User';
-            default:
-                return 'Regular User';
-        }
-    }
-
-    /**
-     * Update the auth array on a user.
-     *
-     * @param string $driver
-     * @param array $array
-     * @return void
-     */
-    public function updateAuthArray(string $driver, array $array)
-    {
-        $auth = $this->auth;
-
-        $auth[$driver] = $array;
-
-        $this->auth = $auth;
-
-        $this->save();
-    }
-
 }

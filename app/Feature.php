@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Cacheable;
+
 /**
  * A feature of an Item (e.g. Back Shirring).
  *
@@ -11,6 +13,8 @@ namespace App;
  */
 class Feature extends Model
 {
+    use Cacheable;
+
     /**
      * Fillable attributes.
      *

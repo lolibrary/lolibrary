@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Cacheable;
+
 /**
  * A colorway for an item.
  *
@@ -11,6 +13,8 @@ namespace App;
  */
 class Color extends Model
 {
+    use Cacheable;
+
     /**
      * Fillable attributes.
      *

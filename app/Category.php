@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Cacheable;
+
 /**
  * A type of item, e.g. JSK.
  *
@@ -11,6 +13,8 @@ namespace App;
  */
 class Category extends Model
 {
+    use Cacheable;
+
     /**
      * Fillable attributes.
      *

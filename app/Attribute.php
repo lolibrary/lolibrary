@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Cacheable;
+
 /**
  * An attribute.
  *
@@ -13,6 +15,8 @@ namespace App;
  */
 class Attribute extends Model
 {
+    use Cacheable;
+
     /**
      * Fillable attributes.
      *
