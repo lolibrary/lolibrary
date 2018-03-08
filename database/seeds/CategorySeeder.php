@@ -3,7 +3,7 @@
 use App\Category;
 use Illuminate\Database\Seeder;
 
-class TypeSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +12,7 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        $types = [
+        $categories = [
             'JSK',
             'Hair Accessories',
             'Skirt',
@@ -39,14 +39,14 @@ class TypeSeeder extends Seeder
             'Cutsew',
         ];
 
-        foreach ($types as $slug => $type) {
+        foreach ($categories as $slug => $category) {
             if (is_numeric($slug)) {
-                $slug = str_slug($type);
+                $slug = str_slug($category);
             }
 
             Category::create([
                 'slug' => $slug,
-                'name' => $type,
+                'name' => $category,
             ]);
         }
     }
