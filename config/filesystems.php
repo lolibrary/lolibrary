@@ -64,6 +64,14 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        'b2' => [
+            'driver' => 'b2',
+            'key' => env('BACKBLAZE_KEY'),
+            'host' => env('BACKBLAZE_HOST'),
+            'bucket' => env('BACKBLAZE_BUCKET'),
+            'account' => env('BACKBLAZE_ACCOUNT'),
+            'bucket-id' => env('BACKBLAZE_BUCKET_ID'),
+        ],
     ],
 
 ];
