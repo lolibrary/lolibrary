@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Tag;
-use Illuminate\Database\Eloquent\Builder;
-use App\Http\Requests\Api\TagSearchRequest;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     /**
-     * Return a 200 at /
+     * Create a new controller instance.
      *
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @return void
      */
-    public function welcome()
+    public function __construct()
     {
-        return response()->json(['status' => 'ok']);
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('home');
     }
 }
