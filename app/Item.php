@@ -151,6 +151,7 @@ class Item extends Model
      * @var array
      */
     protected $visible = [
+        'id',
         'slug',
         'english_name',
         'foreign_name',
