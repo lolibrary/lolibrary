@@ -69,26 +69,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'id',
-        'password',
-        'remember_token',
-        'email',
-        'auth',
-        'url',
-        'level',
-        'banned',
-        'updated_at',
-        'created_at',
-        'image_id',
-        'profile',
-    ];
-
-    /**
      * Casts for attributes.
      *
      * @var array
