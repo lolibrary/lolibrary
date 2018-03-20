@@ -75,7 +75,7 @@ return [
     'required_with_all'    => 'The :attribute field is required when :values is present.',
     'required_without'     => 'The :attribute field is required when :values is not present.',
     'required_without_all' => 'The :attribute field is required when none of :values are present.',
-    'same'                 => 'The :attribute and :other must match.',
+    'same'                 => ':attribute and :other must match.',
     'size'                 => [
         'numeric' => 'The :attribute must be :size.',
         'file'    => 'The :attribute must be :size kilobytes.',
@@ -83,10 +83,11 @@ return [
         'array'   => 'The :attribute must contain :size items.',
     ],
     'string'               => 'The :attribute must be a string.',
-    'timezone'             => 'The :attribute must be a valid zone.',
-    'unique'               => 'The :attribute has already been taken.',
-    'uploaded'             => 'The :attribute failed to upload.',
-    'url'                  => 'The :attribute format is invalid.',
+    'timezone'             => 'The :attribute must be a valid timezone.',
+    'unique'               => 'That :attribute has already been taken.',
+    'uploaded'             => ':attribute failed to upload.',
+    'url'                  => ':attribute is an invalid URL.',
+    'username'             => ':attribute should be lowercase letters and numbers, hyphens and underscores, and must start with a letter.',
 
     /*
     |--------------------------------------------------------------------------
