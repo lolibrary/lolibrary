@@ -16,4 +16,4 @@ RUN composer install --no-dev \
     && php artisan view:clear \
     && php artisan storage:link \
     && rm -rf /var/cache/composer/* \
-    && chmod -R +w storage
+    && chown -R www-data:www-data storage bootstrap/cache
