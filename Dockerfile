@@ -2,7 +2,7 @@ FROM node:9 as build
 
 COPY . .
 
-RUN npm install && npm run production && rm -rf node_modules
+RUN npm install && npm run production
 
 FROM amelia/php:7.2
 
