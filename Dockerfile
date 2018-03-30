@@ -15,4 +15,5 @@ RUN composer install --no-dev \
     && php artisan route:cache \
     && php artisan view:clear \
     && php artisan storage:link \
-    && rm -rf /var/cache/composer/*
+    && rm -rf /var/cache/composer/* \
+    && chmod -R +w storage
