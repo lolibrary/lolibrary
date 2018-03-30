@@ -87,7 +87,7 @@ return [
     'unique'               => 'That :attribute has already been taken.',
     'uploaded'             => ':attribute failed to upload.',
     'url'                  => ':attribute is an invalid URL.',
-    'username'             => ':attribute should be lowercase letters and numbers, hyphens and underscores, and must start with a letter.',
+    'username'             => ':attribute should be lowercase letters and numbers, hyphens and underscores, and must start with a letter or number.',
 
     /*
     |--------------------------------------------------------------------------

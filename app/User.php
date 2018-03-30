@@ -9,40 +9,28 @@ use Laravel\Passport\HasApiTokens;
 use NumberFormatter;
 
 /**
- * An Item of Apparel.
+ * A user of this application.
  *
- * @property string $slug           The URL slug of an item.
- * @property string $english_name   The English Title of an Item.
- * @property string $foreign_name   The 'Japanese Title' of an Item.
- * @property int|null $year           The year an Item was released.
- * @property string|null $product_number An Item's product number.
- * @property int $status         The status of an item (stored internally as an int).
- * @property string $price          The price of this item, in a given currency.
- * @property string $currency       The currency of this item, as an ISO code.
+ * @property string $email          The user's email.
+ * @property string $name           The user's name.
+ * @property string $username       The user's login username.
+ * @property string $display_name   The user's displayed username.
+ * @property string $remember_token A strong random number that allows the user to use "remember me" sessions.
  *
- * @property \App\Image $image     The primary {@link \App\Image} for this Item.
- * @property \App\Category $category  The {@link \App\Category} of this Item (e.g. JSK).
- * @property \App\User $submitter The {@link \App\User} who originally submitted this Item.
- * @property \App\User $publisher The {@link \App\User} who published this Item.
- * @property \App\Brand $brand     The {@link \App\Brand} of this Item (e.g. Angelic Pretty).
+ * @property int  $level  The user's level (permissions).
+ * @property bool $banned If the user is banned or not.
  *
- * @property \App\Image[]|\Illuminate\Database\Eloquent\Collection $images     The {@link \App\Image images} for this Item.
- * @property \App\Tag[]|\Illuminate\Database\Eloquent\Collection $tags       The {@link \App\Tag search tags} for this Item.
- * @property \App\Color[]|\Illuminate\Database\Eloquent\Collection $colors     The {@link \App\Color colorways} this Item comes in (e.g. Black).
- * @property \App\Feature[]|\Illuminate\Database\Eloquent\Collection $features   The {@link \App\Feature features} of this item (e.g. Back Shirring).
- * @property \App\Attribute[]|\Illuminate\Database\Eloquent\Collection $attributes The {@link \App\Attribute custom attributes} on this Item.
- * @property \App\User[]|\Illuminate\Database\Eloquent\Collection $stargazers The {@link \App\User users} who want to own this Item.
- * @property \App\User[]|\Illuminate\Database\Eloquent\Collection $owners     The {@link \App\Attribute users} who own this Item.
- * @property \App\Comment[]|\Illuminate\Database\Eloquent\Collection $comments   The {@link \App\Comment comments} on this Item.
+ * @property \App\Image $image The user's profile image.
+ * @property string $image_id The user's profile image ID.
  *
- * @property string $image_id The ID of this Item's {@link \App\Image image}.
- * @property string $type_id  The ID of this Item's {@link \App\Type type}.
- * @property string $user_id  The ID of the {@link \App\User user} who submitted this Item.
- * @property string $brand_id The ID of this Item's {@link \App\Brand brand}.
- * @property string $submitter_id The ID of this Item's {@link \App\User submitter}.
- * @property string $publisher_id The ID of this Item's {@link \App\User publisher}.
- *
- * @property \Carbon\Carbon $published_at The date this item was published.
+ * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $items    The {@link \App\Item items} this user has submitted.
+ * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $wishlist The {@link \App\Item items} this user has favourited.
+ * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $closet   The {@link \App\Item items} this user owns.
+ * @property \App\Post[]|\Illuminate\Database\Eloquent\Collection $posts    The posts this user has created.
+ * @property \App\Topic[]|\Illuminate\Database\Eloquent\Collection $topics   The topics this user has created.
+ * @property \App\Message[]|\Illuminate\Database\Eloquent\Collection $messages The messages received by this user.
+ * @property \App\Message[]|\Illuminate\Database\Eloquent\Collection $sent     The messages sent by this user.
+ * @property \App\Comment[]|\Illuminate\Database\Eloquent\Collection $comments The comments this user has left.
  */
 class User extends Authenticatable
 {
@@ -75,7 +63,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'banned' => 'boolean',
-        'auth' => 'json',
         'level' => 'integer',
     ];
 
