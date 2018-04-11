@@ -1,0 +1,40 @@
+---
+version: '3'
+services:
+  web:
+    image: "amelia/php:7.2"
+    volumes:
+      - ".:/srv/code"
+      - "./pki/certificate.pem:/etc/nginx/certs/fullchain.pem:ro"
+      - "./pki/privkey.pem:/etc/nginx/certs/privkey.pem:ro"
+    ports:
+      - "8080:80"
+      - "4443:443"
+
+#  app:
+#    image: "lolibrary/php:7.2"
+#    command: "php artisan horizon"
+#    volumes:
+#      - ".:/srv/code"
+#    depends_on:
+#      - web
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "63790:6379"
+
+  postgres:
+    image: "postgres:10-alpine"
+    ports:
+      - "54320:5432"
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: lolibrary
+
+  node:
+    image: "node:9"
+    command: ["sh", "-c", "npm install && npm rebuild node-sass --force && npm run watch"]
+    working_dir: "/home/node"
+    volumes:
+      - ".:/home/node"
