@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Model;
+use Illuminate\Database\Eloquent\Model;
 
 trait HasUuid
 {
