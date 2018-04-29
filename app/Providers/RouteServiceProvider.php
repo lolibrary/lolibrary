@@ -37,6 +37,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
+        $this->mapHealthRoutes();
+
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
@@ -70,5 +72,16 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix('api/v1')
             ->namespace($this->namespace . '\Api')
             ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define health check routes.
+     * 
+     * @return void
+     */
+    protected function mapHealthRoutes()
+    {
+        Route::namespace($this->namespace)
+            ->group(base_path('routes/health.php'));
     }
 }
