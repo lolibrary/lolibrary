@@ -15,6 +15,15 @@ $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
 
+// Allow us to load data from a container's environment.
+$app->afterLoadingEnvironment(function () {
+    if (file_exists('/secrets/environment/.env')) {
+        $dotenv = new Dotenv\Dotenv('/secrets/environment', '.env');
+
+        $dotenv->overload();
+    }
+});
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
