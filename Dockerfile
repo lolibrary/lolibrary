@@ -4,7 +4,7 @@ COPY . .
 
 RUN npm install && npm run production
 
-FROM lolibrary/php:7.2
+FROM amelia/php:7.2
 
 COPY . /srv/code
 
