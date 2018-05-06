@@ -45,6 +45,13 @@ class User extends Authenticatable
     public const BANNED = -1;
 
     /**
+     * Whether or not this model has an incrementing timestamp.
+     * 
+     * @var bool
+     */
+    protected $incrementing = false;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
