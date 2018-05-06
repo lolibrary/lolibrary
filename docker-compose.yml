@@ -59,7 +59,7 @@ services:
 
   node:
     image: "node:9"
-    command: ["sh", "-c", "npm install && npm rebuild node-sass --force && npm run watch"]
+    command: ["sh", "-c", "npm rebuild node-sass --force && npm install && npm run watch"]
     working_dir: "/home/node"
     volumes:
       - ".:/home/node"
