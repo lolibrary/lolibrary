@@ -4,7 +4,7 @@ namespace App\Composers;
 
 use Illuminate\View\View;
 
-class Years extends Composer
+class Years
 {
     /**
      * Add data to the given view.
@@ -12,7 +12,7 @@ class Years extends Composer
      * @param \Illuminate\View\View
      * @return void
      */
-    protected function compose(View $view)
+    public function compose(View $view)
     {
         $view->with('years', array_reverse(range(1990, date('Y') + 3)));
     }

@@ -73,7 +73,7 @@ if (! function_exists('user')) {
             return App\User::where(DB::raw('lower(email)'), mb_strtolower($id))->first();
         }
 
-        return App\User::where('slug', $id)->first();
+        return App\User::where('username', $id)->first();
     }
 }
 

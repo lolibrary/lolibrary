@@ -4,7 +4,7 @@ namespace App\Composers;
 
 use App\Color;
 
-class Categories extends Composer
+class Colors extends Composer
 {
     /**
      * {@inheritdoc}

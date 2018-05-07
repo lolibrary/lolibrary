@@ -14,12 +14,12 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('component.categories', Composers\Categories::class);
-        View::composer('component.brands', Composers\Brands::class);
-        View::composer('component.features', Composers\Features::class);
-        View::composer('component.tags', Composers\Tags::class);
-        View::composer('component.colors', Composers\Colors::class);
-        View::composer('component.years', Composers\Years::class);
+        View::composer('components.categories', Composers\Categories::class);
+        View::composer('components.brands', Composers\Brands::class);
+        View::composer('components.features', Composers\Features::class);
+        View::composer('components.tags', Composers\Tags::class);
+        View::composer('components.colors', Composers\Colors::class);
+        View::composer('components.years', Composers\Years::class);
     }
 
     /**

@@ -3,22 +3,16 @@
 namespace Tests\Feature;
 
 use App\Tag;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\TestCase;
 
 class TagTest extends TestCase
 {
-    use DatabaseTransactions;
-
     /**
-     * A basic test example.
+     * Test the index listing of tags.
      *
      * @return void
      */
     public function testTagIndex()
     {
-        $this->seed('TagSeeder');
-
         $this->get(route('api.tags.index'))
             ->assertSuccessful()
             ->assertJsonStructure([
@@ -38,14 +32,12 @@ class TagTest extends TestCase
     }
 
     /**
-     * A basic test example.
+     * Test finding a specific tag.
      *
      * @return void
      */
     public function testTagShow()
     {
-        $this->seed('TagSeeder');
-
         $tag = Tag::query()->inRandomOrder()->first();
 
         $this->get(route('api.tags.show', $tag))
@@ -54,14 +46,12 @@ class TagTest extends TestCase
     }
 
     /**
-     * A basic test example.
+     * Test searching for a tag.
      *
      * @return void
      */
     public function testTagSearch()
     {
-        $this->seed('TagSeeder');
-
         $this->get(route('api.tags.search') . '?search=tag')
             ->assertSuccessful()
             ->assertJsonStructure([

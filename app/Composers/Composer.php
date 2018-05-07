@@ -21,7 +21,7 @@ abstract class Composer
      */
     public function compose(View $view)
     {
-        $view->with(static::KEY, $this->data());
+        $view->with($this->name(), $this->data());
     }
 
     /**
@@ -42,6 +42,16 @@ abstract class Composer
 
             return $default();
         }
+    }
+
+    /**
+     * Tags for this cache.
+     *
+     * @return string[]
+     */
+    protected function tags()
+    {
+        return ['composer', $this->name()];
     }
 
     /**

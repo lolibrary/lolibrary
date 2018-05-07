@@ -40,6 +40,8 @@ $factory->define(App\Brand::class, function (Faker $faker) {
     return [
         'name' => $name = $faker->unique()->name('female'),
         'slug' => str_slug($name),
+        'short_name' => str_slug($name),
+        'image_id' => uuid4(),
     ];
 });
 
@@ -52,7 +54,7 @@ $factory->define(App\Attribute::class, function (Faker $faker) {
 
 $factory->define(App\Tag::class, function (Faker $faker) {
     return [
-        'name' => $name = $faker->unique()->words(2),
+        'name' => $name = $faker->unique()->word,
         'slug' => str_slug($name),
     ];
 });
