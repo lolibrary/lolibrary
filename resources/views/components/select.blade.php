@@ -1,4 +1,8 @@
-<select multiple class="form-control form-control-chosen" data-placeholder="Click or type to select">
+<select multiple
+        class="form-control form-control-chosen form-control-filter"
+        data-placeholder="Tap or type to select"
+        id="{{ $id }}"
+>
     @foreach ($items as $key => $value)
         <option value="{{ $key }}">{{ $value }}</option>
     @endforeach
