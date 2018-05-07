@@ -19,7 +19,7 @@ class BrandComposerTest extends TestCase
         $mock = Mockery::mock(View::class);
         $mock->shouldReceive('with')->once()->andReturnUsing(function ($key, $value) {
             $this->assertEquals('brands', $key);
-            $this->assertEquals(Brand::all()->toSelectArray('short_name'), $value);
+            $this->assertEquals(Brand::all()->toSelectArray(), $value);
         });
 
         $composer = new Brands();

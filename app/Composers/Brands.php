@@ -11,6 +11,6 @@ class Brands extends Composer
      */
     protected function load()
     {
-        return Brand::select(['name', 'short_name'])->get()->toSelectArray('short_name');
+        return Brand::select(['name', 'slug'])->get()->toSelectArray();
     }
 }
