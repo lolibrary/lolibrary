@@ -7,13 +7,6 @@ use Illuminate\View\View;
 abstract class Composer
 {
     /**
-     * The default data key for this composer.
-     *
-     * @var string
-     */
-    protected const KEY = 'data';
-
-    /**
      * How long this key should be cached for.
      *
      * @var string
@@ -58,7 +51,17 @@ abstract class Composer
      */
     protected function key()
     {
-        return 'composer:' . snake_case(class_basename(static::class)); 
+        return 'composer:' . $this->name(); 
+    }
+
+    /**
+     * The name of this class.
+     *
+     * @return string
+     */
+    protected function name()
+    {
+        return snake_case(class_basename(static::class));
     }
 
     /**
