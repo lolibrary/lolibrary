@@ -4,10 +4,10 @@
 <div class="container">
     <!-- Search Bar -->
     <div class="row">
-        <div class="col-sm-1">
+        <div class="col-sm-4">
             @include('components.filters')
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm">
         </div>
     </div>
 </div>

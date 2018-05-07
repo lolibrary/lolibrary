@@ -8,6 +8,11 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Chosen
+@import '~sass-svg-uri/svg-uri';
+@import '~bootstrap4c-chosen/src/scss/component-variables';
+@import '~bootstrap4c-chosen/src/scss/component-chosen';
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

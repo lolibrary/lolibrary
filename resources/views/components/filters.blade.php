@@ -21,7 +21,7 @@
         </div>
         <div class="input-group">
             <label class="control-label">{{ __('Year') }}</label>
-            @include('components.year')
+            @include('components.years')
         </div>
     </div>
 </div>
