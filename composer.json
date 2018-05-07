@@ -15,7 +15,8 @@
         "laravel/horizon": "^1.2",
         "laravel/passport": "^5.0",
         "laravel/tinker": "~1.0",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "sentry/sentry-laravel": "^0.9.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
