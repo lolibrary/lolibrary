@@ -11,6 +11,6 @@ class Categories extends Composer
      */
     protected function load()
     {
-        return Color::select(['name', 'slug'])->get();
+        return Color::select(['name', 'slug'])->get()->toSelectArray();
     }
 }

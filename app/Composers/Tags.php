@@ -11,6 +11,6 @@ class Tags extends Composer
      */
     protected function load()
     {
-        return Tag::select(['name', 'slug'])->get();
+        return Tag::select(['name', 'slug'])->get()->toSelectArray();
     }
 }

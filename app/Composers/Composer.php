@@ -27,7 +27,7 @@ abstract class Composer
     /**
      * Get a list of models from this composer.
      *
-     * @return \Illuminate\Database\Eloquent\Collection|\App\Model[]|\Illuminate\Database\Eloquent\Model[]
+     * @return array
      */
     protected function data()
     {

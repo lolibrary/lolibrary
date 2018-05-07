@@ -11,6 +11,6 @@ class Categories extends Composer
      */
     protected function load()
     {
-        return Category::select(['name', 'slug'])->get();
+        return Category::select(['name', 'slug'])->get()->toSelectArray();
     }
 }
