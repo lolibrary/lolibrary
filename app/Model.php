@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Collection;
 use App\Models\HasUuid;
 use DateTime;
 use DateTimeInterface;
@@ -140,6 +141,17 @@ abstract class Model extends Eloquent
      */
     protected function serializeDate(DateTimeInterface $date)
     {
-        return $date->format(DateTime::ISO8601);
+        return $date->format(DateTime::RFC3339);
+    }
+
+    /**
+     * Create a new Eloquent Collection instance.
+     *
+     * @param  array  $models
+     * @return \App\Models\Collection
+     */
+    public function newCollection(array $models = [])
+    {
+        return new Collection($models);
     }
 }
