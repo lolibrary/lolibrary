@@ -30,7 +30,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * a simple convenience so we don't have to attach every token manually.
  */
 
-let token = document.head.querySelector('meta[name="csrf-token"]');
+const token = document.head.querySelector('meta[name="csrf-token"]');
+const endpoint = document.head.querySelector('meta[name="search-endpoint"]');
+const element = document.getElementById('search-bar');
+const Filter = require('./filter').default;
+const Search = require('./search').default;
 
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
@@ -38,8 +42,21 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+if (! endpoint) {
+    console.error('Search endpoint not set; set <meta name="search-endpoint" content="{{ route(...) }}">');
+}
+
+// only set up search if we find the search-bar
+if (element) {
+    window.Filter = new Filter(element);
+    window.Search = new Search(element, endpoint.content);
+
+    $('.form-control-filter').on('change', () => window.Filter.update());
+}
+
 window.chosen = require('chosen-js');
 
-$(function () {
-    $('.form-control-chosen').chosen();
-});
+$(() => $('.form-control-chosen').chosen());
+
+
+
