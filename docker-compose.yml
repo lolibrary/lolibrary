@@ -31,8 +31,6 @@ services:
   redis:
     image: "redis:alpine"
     command: ["redis-server", "--appendonly", "yes"]
-    ports:
-      - "6379:6379"
     volumes:
       - "redis-data:/data"
     healthcheck:
@@ -43,8 +41,6 @@ services:
 
   db:
     image: "postgres:10-alpine"
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: secret
       POSTGRES_USER: lolibrary

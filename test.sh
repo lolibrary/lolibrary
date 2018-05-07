@@ -1,22 +1,21 @@
 #!/usr/bin/env bash
 
-echo "Setting up postgres..."
-docker rm --force lolibrary-postgres &> /dev/null
-docker run -d -e POSTGRES_USER=lolibrary --name lolibrary-postgres -p 55432:5432 postgres:10 &> /dev/null
+set -e
 
-echo "Setting up redis..."
-docker rm --force lolibrary-redis &> /dev/null
-docker run -d --name lolibrary-redis -p 16379:6379 redis &> /dev/null
+# remove everything just in case
+echo "Setting up Services"
+docker-compose -p lolibrary_testing down -v &> /dev/null
 
-echo "Waiting for postgres to be ready..."
-until docker run --rm --link lolibrary-postgres:pg postgres:10 pg_isready -U lolibrary -h pg &> /dev/null; do sleep 0.5; done
+# run migrations.
+echo "Running Migrations"
+docker-compose -p lolibrary_testing run app php artisan migrate --force --step --no-interaction &> /dev/null
 
-echo "Waiting for redis to be ready..."
-until docker run --rm --link lolibrary-redis:ll redis redis-cli -h ll ping &> /dev/null; do sleep 0.5; done
+# run tests
+docker-compose -p lolibrary_testing run app php vendor/bin/phpunit
+result=$?
 
-DB_CONNECTION=testing php artisan migrate --force --step
+# clean up!
+echo "Cleaning up services"
+docker-compose -p lolibrary_testing down -v &> /dev/null
 
-vendor/bin/phpunit
-
-docker rm --force lolibrary-postgres &> /dev/null
-docker rm --force lolibrary-redis &> /dev/null
+exit $result
