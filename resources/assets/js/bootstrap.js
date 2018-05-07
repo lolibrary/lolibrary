@@ -2,6 +2,9 @@
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
 
+const Filter = require('./filter').default;
+const Search = require('./search').default;
+
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -31,10 +34,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  */
 
 const token = document.head.querySelector('meta[name="csrf-token"]');
-const endpoint = document.head.querySelector('meta[name="search-endpoint"]');
-const element = document.getElementById('search-bar');
-const Filter = require('./filter').default;
-const Search = require('./search').default;
 
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
@@ -42,21 +41,45 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-if (! endpoint) {
-    console.error('Search endpoint not set; set <meta name="search-endpoint" content="{{ route(...) }}">');
-}
-
-// only set up search if we find the search-bar
-if (element) {
-    window.Filter = new Filter(element);
-    window.Search = new Search(element, endpoint.content);
-
-    $('.form-control-filter').on('change', () => window.Filter.update());
-}
+/**
+ * Next we'll load chosen, for a nicer multi-select box with searching.
+ * This will just attach itself to any .form-control-chosen element.
+ */
 
 window.chosen = require('chosen-js');
 
 $(() => $('.form-control-chosen').chosen());
 
+/**
+ * Next we'll check if our search endpoint is set; if it's not set,
+ * we'll emit an error in the console and refuse to load anything.
+ */
+
+const endpoint = document.head.querySelector('meta[name="search-endpoint"]');
+
+if (! endpoint) {
+    console.error('Search endpoint not set; set <meta name="search-endpoint" content="{{ route(...) }}">');
+}
+
+/**
+ * Next we'll look for the "search bar" element; this will be the element
+ * we'll bind our event listeners to, in order to actually search for
+ * items. This also requires the endpoint from earlier to be set.
+ */
+else {
+    const element = document.getElementById('search-bar');
+
+    if (element) {
+        const filter = new Filter(element);
+        const search = new Search(element, endpoint.content);
+
+        $(() => {
+            $('.form-control-filter').on('change', () => filter.update());
+            $('.form-control-search').on('input change', () => filter.update(true));
+        });
+    } else {
+        console.log('Search Bar not found (looked for #search-bar)');
+    }
+}
 
 

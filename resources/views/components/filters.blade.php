@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         <div class="input-group" style="padding-bottom: 10px">
-            <label class="control-label"><strong>{{ __('Category') }}</strong></label>
+            <label class="control-label">{{ __('Category') }}</label>
             @include('components.categories')
         </div>
         <div class="input-group" style="padding-bottom: 10px">
