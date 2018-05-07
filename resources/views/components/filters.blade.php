@@ -3,23 +3,23 @@
         {{ __('Filters') }}
     </div>
     <div class="card-body">
-        <div class="input-group">
-            <label class="control-label">{{ __('Category') }}</label>
+        <div class="input-group" style="padding-bottom: 10px">
+            <label class="control-label"><strong>{{ __('Category') }}</strong></label>
             @include('components.categories')
         </div>
-        <div class="input-group">
+        <div class="input-group" style="padding-bottom: 10px">
             <label class="control-label">{{ __('Brand') }}</label>
             @include('components.brands')
         </div>
-        <div class="input-group">
+        <div class="input-group" style="padding-bottom: 10px">
             <label class="control-label">{{ __('Features') }}</label>
             @include('components.features')
         </div>
-        <div class="input-group">
+        <div class="input-group" style="padding-bottom: 10px">
             <label class="control-label">{{ __('Colorway') }}</label>
             @include('components.colors')
         </div>
-        <div class="input-group">
+        <div class="input-group" style="padding-bottom: 10px">
             <label class="control-label">{{ __('Year') }}</label>
             @include('components.years')
         </div>
