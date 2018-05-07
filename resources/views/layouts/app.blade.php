@@ -9,6 +9,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="search-endpoint" content="{{ route('api.search') }}">
 
     <!-- Styles -->
     <link href="{{ asset('assets/app.css') }}" rel="stylesheet">
