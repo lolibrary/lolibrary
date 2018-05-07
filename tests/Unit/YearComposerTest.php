@@ -19,7 +19,7 @@ class YearComposerTest extends TestCase
         $mock = Mockery::mock(View::class);
         $mock->shouldReceive('with')->once()->andReturnUsing(function ($key, $value) {
             $this->assertEquals('years', $key);
-            $this->assertEquals(array_reverse(range(1990, date('Y') + 3)), $value);
+            $this->assertEquals(array_reverse(range(1990, date('Y') + 1)), $value);
         });
 
         $composer = new Years();
