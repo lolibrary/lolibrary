@@ -23,5 +23,7 @@
         "vue": "^2.5.7",
         "laravel-vue-pagination": "^1.2.0"
     },
-    "dependencies": {}
+    "dependencies": {
+        "vue-select": "^2.4.0"
+    }
 }
