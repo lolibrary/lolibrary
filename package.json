@@ -20,10 +20,8 @@
         "lodash": "^4.17.10",
         "popper.js": "^1.14.3",
         "sass-svg-uri": "^1.0.0",
-        "vue": "^2.5.7"
+        "vue": "^2.5.7",
+        "laravel-vue-pagination": "^1.2.0"
     },
-    "dependencies": {
-        "laravel-vue-pagination": "^1.2.0",
-        "npm": "^6.0.1"
-    }
+    "dependencies": {}
 }
