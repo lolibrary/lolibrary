@@ -13,11 +13,6 @@ services:
     depends_on:
       - db
       - redis
-    healthcheck:
-      test: ["CMD", "nc", "-z", "localhost", "80"]
-      interval: 5s
-      timeout: 15s
-      retries: 2
 
   app:
     image: "amelia/php:7.2"
