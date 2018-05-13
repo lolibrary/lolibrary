@@ -1,26 +1,12 @@
 const axios = window.axios;
+const endpoint = window.endpoint || 'https://lolibrary.org/api/v1/search';
 
-export default class {
-    constructor(element, endpoint) {
-        this.element = element;
-        this.endpoint = endpoint;
+export default async payload => {
+    try {
+        // payload should be an object to be POSTed to the search endpoint.
 
-        this.element.registerEventListener('SearchStateUpdated', this.search);
+        return await axios.post(this.endpoint, payload);
+    } catch (error) {
+        console.error(error);
     }
-
-    async search(event) {
-        const request = event.detail;
-
-        try {
-            const result = await axios.post(this.endpoint, request);
-
-            await this.update(result);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    async update(data) {
-        console.log(data);
-    }
-}
+};

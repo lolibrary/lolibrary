@@ -10,7 +10,7 @@ export default class {
             colors: [],
             tags: [],
             search: '',
-        }
+        };
 
         this.element = element;
     }
@@ -37,7 +37,7 @@ export default class {
         if (bounce) {
             debounce(func, 250);
         } else {
-            func();
+            await func();
         }
     }
 
