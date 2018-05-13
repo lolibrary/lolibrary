@@ -11,18 +11,19 @@
     },
     "devDependencies": {
         "axios": "^0.18",
-        "bootstrap": "^4.0.0",
-        "cross-env": "^5.1.4",
+        "bootstrap": "^4.1.1",
+        "bootstrap4c-chosen": "^1.0.8",
+        "chosen-js": "^1.8.5",
+        "cross-env": "^5.1.5",
         "jquery": "^3.2",
         "laravel-mix": "^2.1.11",
-        "lodash": "^4.17.4",
-        "popper.js": "^1.14.1",
-        "vue": "^2.5.7",
-        "bootstrap4c-chosen": "^1.0.8",
+        "lodash": "^4.17.10",
+        "popper.js": "^1.14.3",
         "sass-svg-uri": "^1.0.0",
-        "chosen-js": "^1.8.5"
+        "vue": "^2.5.7"
     },
     "dependencies": {
-        "npm": "^5.8.0"
+        "laravel-vue-pagination": "^1.2.0",
+        "npm": "^6.0.1"
     }
 }
