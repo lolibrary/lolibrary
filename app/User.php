@@ -3,13 +3,15 @@
 namespace App;
 
 use DB;
-use App\Models\HasUuid;
-use App\Models\VerifiesEmails;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Builder;
-use Laravel\Passport\HasApiTokens;
 use NumberFormatter;
+use App\Models\HasUuid;
+use App\Models\Collection;
+use App\Models\DateHandling;
+use App\Models\VerifiesEmails;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * A user of this application.
@@ -17,7 +19,6 @@ use NumberFormatter;
  * @property string $email          The user's email.
  * @property string $name           The user's name.
  * @property string $username       The user's login username.
- * @property string $display_name   The user's displayed username.
  * @property string $remember_token A strong random number that allows the user to use "remember me" sessions.
  *
  * @property int  $level  The user's level (permissions).
@@ -37,7 +38,7 @@ use NumberFormatter;
  */
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens, HasUuid, VerifiesEmails;
+    use Notifiable, HasApiTokens, HasUuid, VerifiesEmails, DateHandling;
 
     public const DEVELOPER = 1000;
     public const ADMIN = 500;

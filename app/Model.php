@@ -2,12 +2,13 @@
 
 namespace App;
 
-use App\Models\Collection;
-use App\Models\HasUuid;
 use DateTime;
 use DateTimeInterface;
-use Illuminate\Database\Eloquent\Model as Eloquent;
+use App\Models\HasUuid;
+use App\Models\Collection;
 use Illuminate\Support\Str;
+use App\Models\DateHandling;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
 /**
  * A base model for this application.
@@ -24,7 +25,7 @@ use Illuminate\Support\Str;
  */
 abstract class Model extends Eloquent
 {
-    use HasUuid;
+    use HasUuid, DateHandling;
 
     /**
      * The namespace UUID used for {@see uuid5()}
@@ -100,48 +101,6 @@ abstract class Model extends Eloquent
         $class = class_basename($this);
 
         return Str::plural(Str::lower($class)) . '.show';
-    }
-
-    /**
-     * Return a timestamp as DateTime object, edited to always be in UTC.
-     *
-     * @param  mixed  $value
-     * @return \Carbon\Carbon
-     */
-    protected function asDateTime($value)
-    {
-        $carbon = parent::asDateTime($value);
-
-        return $carbon->setTimezone('UTC');
-    }
-
-    /**
-     * Create a new pivot model.
-     *
-     * @param \Illuminate\Database\Eloquent\Model $parent
-     * @param array $attributes
-     * @param string $table
-     * @param bool $exists
-     *
-     * @param null $using
-     * @return \App\Pivot
-     */
-    public function newPivot(Eloquent $parent, array $attributes, $table, $exists, $using = null)
-    {
-        return $using
-            ? $using::fromRawAttributes($parent, $attributes, $table, $exists)
-            : Pivot::fromAttributes($parent, $attributes, $table, $exists);
-    }
-
-    /**
-     * Prepare a date for array / JSON serialization.
-     *
-     * @param  \DateTimeInterface  $date
-     * @return string
-     */
-    protected function serializeDate(DateTimeInterface $date)
-    {
-        return $date->format(DateTime::RFC3339);
     }
 
     /**
