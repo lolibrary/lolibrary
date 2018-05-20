@@ -2,9 +2,12 @@
 
 namespace App;
 
+use DB;
 use App\Models\HasUuid;
+use App\Models\VerifiesEmails;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Passport\HasApiTokens;
 use NumberFormatter;
 
@@ -34,7 +37,7 @@ use NumberFormatter;
  */
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens, HasUuid;
+    use Notifiable, HasApiTokens, HasUuid, VerifiesEmails;
 
     public const DEVELOPER = 1000;
     public const ADMIN = 500;
@@ -182,5 +185,15 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+
+    /**
+     * Scope a query to email address.
+     * 
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
+     */
+    public function scopeEmail(Builder $query, string $email)
+    {
+        return $query->where(DB::raw('lower(email)'), mb_strtolower($email));
     }
 }
