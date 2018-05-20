@@ -2,12 +2,13 @@
 
 namespace App\Notifications;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class VerifyEmail extends Notification
+class VerifyEmail extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -47,6 +48,8 @@ class VerifyEmail extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('email.user.verify');
+        return (new MailMessage)
+            ->subject(__('Verify your Lolibrary Account'))
+            ->markdown('email.user.verify', ['user' => $this->user]);
     }
 }

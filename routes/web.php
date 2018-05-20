@@ -11,6 +11,17 @@
 |
 */
 
+// Auth
 Auth::routes();
+Route::get('auth/verify/{email}/{token}', 'EmailController@verify')->name('auth.verify');
+Route::post('auth/resend', 'EmailController@resend')->name('auth.resend');
 
+// Homepage
 Route::get('/', 'HomeController@homepage')->name('home');
+
+// User
+Route::prefix('profile')->group(function () {
+    Route::get('/', 'ProfileController@profile')->name('profile');
+    Route::get('closet', 'ProfileController@closet')->name('closet');
+    Route::get('wishlist', 'ProfileController@wishlist')->name('wishlist');
+});
