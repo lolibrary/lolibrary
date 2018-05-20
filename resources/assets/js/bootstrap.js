@@ -2,9 +2,6 @@
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
 
-const Filter = require('./filter').default;
-const Search = require('./search').default;
-
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -48,38 +45,9 @@ if (token) {
 
 window.chosen = require('chosen-js');
 
-$(() => $('.form-control-chosen').chosen());
-
-/**
- * Next we'll check if our search endpoint is set; if it's not set,
- * we'll emit an error in the console and refuse to load anything.
- */
-
-const endpoint = document.head.querySelector('meta[name="search-endpoint"]');
-
-if (! endpoint) {
-    console.error('Search endpoint not set; set <meta name="search-endpoint" content="{{ route(...) }}">');
-}
-
-/**
- * Next we'll look for the "search bar" element; this will be the element
- * we'll bind our event listeners to, in order to actually search for
- * items. This also requires the endpoint from earlier to be set.
- */
-else {
-    const element = document.getElementById('search-bar');
-
-    if (element) {
-        const filter = new Filter(element);
-        const search = new Search(element, endpoint.content);
-
-        $(() => {
-            $('.form-control-filter').on('change', () => filter.update());
-            $('.form-control-search').on('input change', () => filter.update(true));
-        });
-    } else {
-        console.log('Search Bar not found (looked for #search-bar)');
-    }
-}
+$(() => {
+    $('.form-control-chosen').chosen()
+    $('[data-toggle="tooltip"]').tooltip()
+});
 
 

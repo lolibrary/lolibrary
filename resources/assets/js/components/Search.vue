@@ -60,7 +60,7 @@
 
         // when anything else happens, we just want to search.
         update() {
-            await query(this.search);
+            query(this.search).resolve();
         },
 
         components: {
