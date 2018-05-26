@@ -4,26 +4,83 @@ services:
   web:
     image: "amelia/php:7.2"
     volumes:
-      - ".:/srv/code"
+      - "./app/next:/srv/code"
       - "./pki/certificate.pem:/etc/nginx/certs/certificate.pem:ro"
       - "./pki/privkey.pem:/etc/nginx/certs/privkey.pem:ro"
+      - "./.env:/secrets/environment/.env:ro"
     ports:
       - "80:80"
       - "443:443"
     depends_on:
-      - db
-      - redis
+      - db.lolibrary.test
+      - redis.lolibrary.test
+      - minio.lolibrary.test
+      - imaginary.lolibrary.test
 
   app:
     image: "amelia/php:7.2"
     command: "php artisan horizon"
     volumes:
-      - ".:/srv/code"
+      - "./app/next:/srv/code"
+      - "./pki/certificate.pem:/pki/certificate.pem:ro"
+      - "./pki/privkey.pem:/pki/privkey.pem:ro"
+      - "./.env:/secrets/environment/.env:ro"
     depends_on:
-      - db
-      - redis
+      - db.lolibrary.test
+      - redis.lolibrary.test
+      - minio.lolibrary.test
+      - imaginary.lolibrary.test
 
-  redis:
+  node:
+    image: "node:9"
+    command: ["sh", "-c", "npm rebuild node-sass --force && npm install && npm run watch"]
+    working_dir: "/home/node"
+    volumes:
+      - "./app/next:/home/node"
+
+  imaginary.lolibrary.test:
+    image: "h2non/imaginary:1"
+    volumes:
+      - "./pki/certificate.pem:/pki/certificate.pem:ro"
+      - "./pki/privkey.pem:/pki/privkey.pem:ro"
+    command: ["imaginary",
+      "-certfile", "/pki/certificate.pem",
+      "-keyfile", "/pki/privkey.pem",
+      "-p", "9000"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9000/ || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+  
+  minio.lolibrary.test:
+    image: "minio/minio:latest"
+    volumes:
+      - "minio-data:/data"
+    command: ["minio", "server", "/data"]
+    environment:
+      MINIO_ACCESS_KEY: MinioAccessKey
+      MINIO_SECRET_KEY: SecretExampleKey
+    ports:
+      - "9000:9000"
+    hostname: minio.lolibrary.test
+  
+  db.lolibrary.test:
+    image: "postgres:10-alpine"
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: lolibrary
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+      - "./sql:/docker-entrypoint-init.db:ro"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d lolibrary -h localhost -U lolibrary -p 5432"]
+      interval: 5s
+      timeout: 8s
+      retries: 3
+    
+  redis.lolibrary.test:
     image: "redis:alpine"
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
@@ -33,27 +90,10 @@ services:
       interval: 10s
       timeout: 10s
       retries: 3
-
-  db:
-    image: "postgres:10-alpine"
-    environment:
-      POSTGRES_PASSWORD: secret
-      POSTGRES_USER: lolibrary
-      PGDATA: /var/lib/postgresql/data/pgdata
-    volumes:
-      - "db-data:/var/lib/postgresql/data"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d lolibrary -h localhost -U lolibrary -p 5432"]
-      interval: 5s
-      timeout: 8s
-      retries: 3
-
-  node:
-    image: "node:9"
-    command: ["sh", "-c", "npm rebuild node-sass --force && npm install && npm run watch"]
-    working_dir: "/home/node"
-    volumes:
-      - ".:/home/node"
+    hostname: redis.lolibrary.test
+    ports:
+      - "5432:5432"
 volumes:
   db-data:
   redis-data:
+  minio-data:
