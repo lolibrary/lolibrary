@@ -2,20 +2,20 @@
 
 namespace App\Console\Commands;
 
-use DB;
+use Redis;
 use App\Console\WaitCommand;
 
-class DatabaseWaitCommand extends WaitCommand
+class RedisWaitCommand extends WaitCommand
 {
     /**
      * The name for this command.
      * 
      * @var string
      */
-    protected const TYPE = 'db';
+    protected const TYPE = 'redis';
 
     /**
-     * Try to connect to the database.
+     * Try to connect to the redis database.
      * 
      * @param string|null $connection
      * @return bool
@@ -23,9 +23,9 @@ class DatabaseWaitCommand extends WaitCommand
     protected function connect(?string $connection): bool
     {
         try {
-            $pdo = DB::connection($connection)->getPdo();
+            Redis::connection($connection)->ping();
 
-            return $pdo !== null;
+            return true;
         } catch (\Throwable $e) {
             return false;
         }
