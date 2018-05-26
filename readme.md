@@ -9,32 +9,23 @@ Lolibrary is a lolita fashion archive website. This repository contains code for
 
 To get started, you'll need to [install Docker](https://www.docker.com/community-edition). This should be your only real requirement to run Lolibrary's code.
 
-To get started, copy `.env.example` to `.env`; this is your entire config and sets environment variables. The default is enough to get started.
+💻 On macOS, [install Homebrew](https://brew.sh) before you run `bash setup.sh`.
 
-### First-time setup
+To get started, run `bash setup.sh`; you may be prompted for your password.
 
-Next, run these commands in order; they'll only need to be re-run if you run `docker-compose down -v` or delete your `vendor` folder.
+⚠️ Windows does not currently work with `setup.sh`; you'll need to run commands manually.
 
-```sh
-docker-compose run app composer install
-docker-compose run app php artisan key:generate
-docker-compose run app php artisan migrate:fresh --seed
-```
-
-After running the last line, you'll see something like this, which you can use to log in as a developer user:
-
-```
-Admin email: admin@example.com
-Admin password: ZWrDoq8TKf9RyVf9d4SG1qp4hG1CIel8o3HP2ucXioLmsaNwEY6JicNAEmI0KTTW
-```
+Check out `.env`; this is your entire config and sets environment variables. The default is enough to get started.
 
 ### General running
 
-Now, to run all code/containers, you'll need to run the following. This is your "normal" command to run to start Lolibrary running. This will start everything in the background; to start in the foreground just omit `-d`. To see logs, run `docker-compose logs` in the same directory as `docker-compose.yml`.
+To run all code/containers, you'll need to run the following. This is your "normal" command to run to start Lolibrary running. This will start everything in the background; to start in the foreground just omit `-d`. To see logs, run `docker-compose logs` in the same directory as `docker-compose.yml`.
 
 ```sh
 docker-compose up -d
 ```
+
+Setup will have already ran this.
 
 This will start the postgres/redis containers, spin up your web container to serve the application, run the queue workers, and build the frontend assets.
 
@@ -50,28 +41,11 @@ docker-compose will automatically restart the container that was running queue w
 
 Lolibrary in dev should be running on HTTPS, as that assumption is made everywhere. There is a self-signed certificate in the `pki` folder of this repository; you should trust this certificate on your development machine.
 
-**On macOS**
-
-- Open `/pki/certificate.pem` in finder and open it.
-- Add it to your `login` keychain.
-- Open keychain access (if it's not already there) and open the `lolibrary.test` entry.
-- Under "Trust", select "When using this certificate: Always", and exit the pane
-- Enter your password
-
-**On Windows**
-
-- Open `certmgr.msc` (Certificate Manager)
-- Go to Action > All Tasks > Import
-- Import `/pki/certificate.pem` from this repo
-- Add it to Trusted Root Certification Authorities and mark it as trusted.
+See the `pki` folder in this directory for more information; `setup.sh` will automatically add this certificate.
 
 ### Hostnames
 
-Add the following as aliases for `127.0.0.1` on your machine (`/etc/hosts` on macOS/linux):
-
-- `lolibrary.test`
-- `www.lolibrary.test`
-- `api.lolibrary.test`
+Add a dns resolver such as dnsmasq to resolve all `.test` domains to localhost. This will be needed! (`setup.sh`, again, does this automatically on mac).
 
 ## Security Vulnerabilities
 
