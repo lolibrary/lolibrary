@@ -56,6 +56,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Banner
+    |--------------------------------------------------------------------------
+    |
+    | These configuration options are used to set a global banner at the top
+    | of every page in the application. 'show' configures the display of
+    | the banner; 'style' is an alert style, and content is the text.
+    |
+    */
+
+    'banner' => [
+        'show' => env('APP_BANNER_SHOW', false),
+        'style' => env('APP_BANNER_STYLE', 'info'),
+        'content' => env('APP_BANNER', ''),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |

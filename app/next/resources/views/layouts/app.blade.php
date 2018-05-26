@@ -48,6 +48,18 @@
             </div>
         </nav>
 
+        @if (config('app.banner.show'))
+            <div class="alert-fullwidth text-center alert alert-{{ config('app.banner.style', 'info') }}" role="alert">
+                {{ config('app.banner.content') }}
+            </div>
+        @endif
+
+        @if (session('status'))
+            <div class="alert-fullwidth text-center alert alert-primary" role="alert">
+                {{ session('status') }}
+            </div>
+        @endif
+
         <main class="py-4" id="skip-navigation">
             @yield('content')
         </main>
