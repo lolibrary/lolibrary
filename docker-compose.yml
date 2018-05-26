@@ -16,10 +16,11 @@ services:
       - redis.lolibrary.test
       - minio.lolibrary.test
       - imaginary.lolibrary.test
+    hostname: lolibrary.test
 
   app:
     image: "amelia/php:7.2"
-    command: "php artisan horizon"
+    command: ["sh", "-c", "php artisan wait:db && php artisan wait:redis && php artisan horizon"]
     volumes:
       - "./app/next:/srv/code"
       - "./pki/certificate.pem:/pki/certificate.pem:ro"
@@ -46,24 +47,29 @@ services:
     command: ["imaginary",
       "-certfile", "/pki/certificate.pem",
       "-keyfile", "/pki/privkey.pem",
-      "-p", "9000"]
+      "-p", "9004"]
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:9000/ || exit 1"]
       interval: 5s
       timeout: 5s
       retries: 3
+    hostname: imaginary.lolibrary.test
+    ports:
+      - "9004:9004"
   
   minio.lolibrary.test:
     image: "minio/minio:latest"
     volumes:
       - "minio-data:/data"
+      - "./pki/certificate.pem:/root/.minio/public.crt:ro"
+      - "./pki/privkey.pem:/root/.minio/private.key:ro"
     command: ["minio", "server", "/data"]
     environment:
       MINIO_ACCESS_KEY: MinioAccessKey
       MINIO_SECRET_KEY: SecretExampleKey
-    ports:
-      - "9000:9000"
     hostname: minio.lolibrary.test
+    ports:
+      - "9003:9003"
   
   db.lolibrary.test:
     image: "postgres:10-alpine"
@@ -79,6 +85,9 @@ services:
       interval: 5s
       timeout: 8s
       retries: 3
+    hostname: db.lolibrary.test
+    ports:
+      - "5432:5432"
     
   redis.lolibrary.test:
     image: "redis:alpine"
@@ -92,7 +101,7 @@ services:
       retries: 3
     hostname: redis.lolibrary.test
     ports:
-      - "5432:5432"
+      - "6379:6379"
 volumes:
   db-data:
   redis-data:
