@@ -9,19 +9,36 @@ fi
 
 # first, trust our tls certificate
 echo "Adding a certificate to your trust store (pki/certificate.pem)"
-echo "You may need to enter your password."
+echo "⚠️  You may need to enter your password."
 
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ./pki/certificate.pem
 
+echo "Installing dnsmasq via homebrew"
+brew install dnsmasq
+
+suod brew services start dnsmasq
+
+echo 'address=/.test/127.0.0.1' > $(brew --prefix)/etc/dnsmasq.conf
+sudo bash -c "echo 'nameserver 127.0.0.1' > /etc/resolver/test"
+
 # now, docker-compose up and create the initial volumes/files etc
-echo "Starting services..."
+echo "🐳  Starting docker services..."
 docker-compose up -d
 
-# once we can, composer install and run migrations.
-echo "Running commands..."
+# run install commands; can be run each time.
+echo "💿  Installing next"
 docker-compose exec web composer install
-docker-compose exec web php artisan migrate
 
-if [ -f lolibrary.sql ]; then
-   docker-compose exec postgres psql < lolibrary.sql
+echo "⏱  Checking the database is up"
+docker-compose exec web php artisan db:wait --timeout=15 --sleep=200
+
+status=$?
+
+if [ $status -eq 1 ]; then
+    echo "Database timed out 😭";
+    exit 1
 fi
+
+docker-compose exec web php artisan migrate --seed
+
+echo "✅  All done - it may be a little while until the site comes up, because nodejs is actively building the frontend via Laravel Mix."
