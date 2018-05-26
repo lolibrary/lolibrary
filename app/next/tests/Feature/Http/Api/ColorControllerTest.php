@@ -1,10 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Api;
 
 use App\Color;
+use Tests\Feature\TestCase;
 
-class ColorTest extends TestCase
+class ColorControllerTest extends TestCase
 {
     /**
      * Test listing all colorways.

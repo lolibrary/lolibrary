@@ -1,11 +1,12 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Composers;
 
 use Mockery;
 use App\Category;
 use App\Composers\Categories;
 use Illuminate\View\View;
+use Tests\Feature\TestCase;
 
 class CategoryComposerTest extends TestCase
 {

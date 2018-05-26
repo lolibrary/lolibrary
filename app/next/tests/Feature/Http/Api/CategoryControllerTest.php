@@ -1,10 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Api;
 
 use App\Category;
+use Tests\Feature\TestCase;
 
-class CategoryTest extends TestCase
+class CategoryControllerTest extends TestCase
 {
     /**
      * Test listing all categories.

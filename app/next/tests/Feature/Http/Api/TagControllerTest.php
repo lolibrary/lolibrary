@@ -1,10 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Api;
 
 use App\Tag;
+use Tests\Feature\TestCase;
 
-class TagTest extends TestCase
+class TagControllerTest extends TestCase
 {
     /**
      * Test the index listing of tags.

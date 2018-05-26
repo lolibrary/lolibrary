@@ -1,10 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Api;
 
 use App\Feature;
+use Tests\Feature\TestCase;
 
-class FeatureTest extends TestCase
+class FeatureControllerTest extends TestCase
 {
     /**
      * Test listing all features.

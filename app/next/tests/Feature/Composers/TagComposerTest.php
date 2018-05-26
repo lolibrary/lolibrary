@@ -1,11 +1,12 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Composers;
 
 use Mockery;
 use App\Tag;
 use App\Composers\Tags;
 use Illuminate\View\View;
+use Tests\Feature\TestCase;
 
 class TagComposerTest extends TestCase
 {

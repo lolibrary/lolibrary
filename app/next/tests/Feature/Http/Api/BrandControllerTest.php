@@ -1,10 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Api;
 
 use App\Brand;
+use Tests\Feature\TestCase;
 
-class BrandTest extends TestCase
+class BrandControllerTest extends TestCase
 {
     /**
      * Test listing all brands.

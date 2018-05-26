@@ -1,11 +1,12 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Composers;
 
 use Mockery;
 use App\Color;
 use App\Composers\Colors;
 use Illuminate\View\View;
+use Tests\Feature\TestCase;
 
 class ColorComposerTest extends TestCase
 {
