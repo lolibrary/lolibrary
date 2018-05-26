@@ -17,4 +17,14 @@ trait VerifiesEmails
             $user->notify(new VerifyEmail($user));
         });
     }
+
+    /**
+     * Get a magic "verified" attribute.
+     * 
+     * @return bool
+     */
+    public function getVerifiedAttribute()
+    {
+        return $this->email_token === null;
+    }
 }

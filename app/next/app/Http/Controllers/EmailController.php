@@ -26,11 +26,7 @@ class EmailController extends Controller
     {
         $user = User::email($email)->firstOrFail();
 
-        if ($user->email_token === null) {
-            return redirect('/');
-        }
-
-        if (hash_equals($user->email_token, $token)) {
+        if ($user->verified === false && hash_equals($user->email_token, $token)) {
             $user->email_token = null;
             $user->save();
 
@@ -49,7 +45,7 @@ class EmailController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->email_token === null) {
+        if ($user->verified) {
             return back();
         }
 

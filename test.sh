@@ -2,16 +2,26 @@
 
 set -e
 
-# tear down old
-echo "Removing Old Data"
-docker-compose -p lolibrary_testing down -v &> /dev/null
-
-# run migrations.
-echo "Running Migrations"
-docker-compose -p lolibrary_testing run app php artisan migrate --seed --force --step --no-interaction
-
 # run tests
-docker-compose -p lolibrary_testing run app php vendor/bin/phpunit "$@"
+
+docker-compose \
+    -f docker-compose.test.yml \
+    -p testing \
+        up \
+            --build \
+            --renew-anon-volumes \
+            --exit-code-from test \
+            --abort-on-container-exit \
+            --remove-orphans
+
+# record the result
 result=$?
+
+# bring the env down
+docker-compose \
+    -p testing -f docker-compose.test.yml \
+        down \
+            -v \
+            --remove-orphans
 
 exit $result

@@ -20,9 +20,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $name           The user's name.
  * @property string $username       The user's login username.
  * @property string $remember_token A strong random number that allows the user to use "remember me" sessions.
+ * @property string $email_token    A token used to verify a user's email address.
  *
- * @property int  $level  The user's level (permissions).
- * @property bool $banned If the user is banned or not.
+ * @property int  $level    The user's level (permissions).
+ * @property bool $banned   If the user is banned or not.
+ * @property bool $verified Whether or not the user's email has been verified.
  *
  * @property \App\Image $image The user's profile image.
  * @property string $image_id The user's profile image ID.

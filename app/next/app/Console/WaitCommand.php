@@ -52,18 +52,24 @@ abstract class WaitCommand extends Command
 
         while (true) {
             if ($this->terminate) {
-                $this->error('Timeout reached, exiting.');
+                $this->error(
+                    $this->replaceType('Timeout reached for #TYPE#, exiting.')
+                );
 
                 return 1;
             }
 
             if ($this->connect($connection)) {
-                $this->comment('Connected.');
+                $this->comment(
+                    $this->replaceType('Connected to #TYPE#.')
+                );
 
                 return 0;
             }
 
-            $this->comment('Failed to connect, trying again...');
+            $this->comment(
+                $this->replaceType('Failed to connect to #TYPE#, trying again...')
+            );
 
             usleep($sleep * 1000);
         }
