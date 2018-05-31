@@ -19,6 +19,19 @@ use Illuminate\Support\Facades\Storage;
 class Image extends Model
 {
     /**
+     * A status bitmask mapping.
+     * 
+     * @var array
+     */
+    protected static $statuses = [
+        'generated-thumbnail' => 2 ** 0,
+        'optimized'           => 2 ** 1,
+        'optimized-thumbnail' => 2 ** 2,
+        'uploaded'            => 2 ** 3,
+        'uploaded-thumbnail'  => 2 ** 4,
+    ];
+
+    /**
      * The keys a user is allowed to fill in.
      *
      * @var array
