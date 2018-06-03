@@ -2,6 +2,7 @@
 
 use App\{Brand, Item, Model};
 use Illuminate\Support\Facades\Notification;
+use GuzzleHttp\Psr7\Uri;
 
 if (! function_exists('uuid')) {
     /**
@@ -87,5 +88,25 @@ if (! function_exists('slack')) {
     function slack(string $type = 'notifications')
     {
         return Notification::route('slack', config("services.slack.$type"));
+    }
+}
+
+if (! function_exists('add_s3_bucket')) {
+    /**
+     * 
+     * 
+     * @param string|null $url
+     * @param string|null $bucket
+     * @return string|null
+     */
+    function add_s3_bucket(?string $url, ?string $bucket)
+    {
+        if ($bucket === null || $url === null) {
+            return null;
+        }
+
+        $uri = (new Uri($url));
+
+        return (string) $uri->withHost("${bucket}." . $uri->getHost());
     }
 }

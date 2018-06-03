@@ -41,21 +41,15 @@ services:
 
   imaginary.lolibrary.test:
     image: "h2non/imaginary:1"
-    volumes:
-      - "./pki/certificate.pem:/pki/certificate.pem:ro"
-      - "./pki/privkey.pem:/pki/privkey.pem:ro"
-    command: ["imaginary",
-      "-certfile", "/pki/certificate.pem",
-      "-keyfile", "/pki/privkey.pem",
-      "-p", "9004"]
+    command: -enable-image-source
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:9000/ || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8088/ || exit 1"]
       interval: 5s
       timeout: 5s
       retries: 3
     hostname: imaginary.lolibrary.test
     ports:
-      - "9004:9004"
+      - "8088:8088"
   
   minio.lolibrary.test:
     image: "minio/minio:latest"
