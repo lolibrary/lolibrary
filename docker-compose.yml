@@ -19,6 +19,7 @@ services:
     hostname: lolibrary.test
 
   app:
+    restart: always
     image: "amelia/php:7.2"
     command: ["sh", "-c", "php artisan wait:db && php artisan wait:redis && php artisan horizon"]
     volumes:
@@ -34,20 +35,19 @@ services:
 
   node:
     image: "node:9"
-    command: ["sh", "-c", "npm rebuild node-sass --force && npm install && npm run watch"]
+    command: ["sh", "-c", "npm install && npm run watch"]
     working_dir: "/home/node"
     volumes:
       - "./app/next:/home/node"
 
   imaginary.lolibrary.test:
     image: "h2non/imaginary:1"
-    command: -enable-image-source
+    command: -enable-url-source
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8088/ || exit 1"]
       interval: 5s
       timeout: 5s
       retries: 3
-    hostname: imaginary.lolibrary.test
     ports:
       - "8088:8088"
   
@@ -55,15 +55,15 @@ services:
     image: "minio/minio:latest"
     volumes:
       - "minio-data:/data"
-      - "./pki/certificate.pem:/root/.minio/public.crt:ro"
-      - "./pki/privkey.pem:/root/.minio/private.key:ro"
+      - "./pki/certificate.pem:/root/.minio/certs/public.crt:ro"
+      - "./pki/certificate.pem:/root/.minio/certs/CAs/public.crt:ro"
+      - "./pki/privkey.pem:/root/.minio/certs/private.key:ro"
     command: ["minio", "server", "/data"]
     environment:
       MINIO_ACCESS_KEY: MinioAccessKey
       MINIO_SECRET_KEY: SecretExampleKey
-    hostname: minio.lolibrary.test
     ports:
-      - "9003:9003"
+      - "4443:9000"
   
   db.lolibrary.test:
     image: "postgres:10-alpine"
@@ -73,7 +73,6 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - "db-data:/var/lib/postgresql/data"
-      - "./sql:/docker-entrypoint-init.db:ro"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d lolibrary -h localhost -U lolibrary -p 5432"]
       interval: 5s

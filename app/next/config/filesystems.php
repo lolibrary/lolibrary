@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => env('FILESYSTEM_DRIVER', 's3'),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => env('FILESYSTEM_CLOUD', 'public'),
+    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
 
     /*
     |--------------------------------------------------------------------------
@@ -57,12 +57,12 @@ return [
 
         's3' => [
             'driver' => 'minio',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'endpoint' => env('AWS_URL'),
-            'local' => env('AWS_LOCAL', false),
+            'key' => env('AWS_ACCESS_KEY_ID', 'MinioAccessKey'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY', 'SecretExampleKey'),
+            'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+            'bucket' => env('AWS_BUCKET', 'lolibrary'),
+            'endpoint' => env('AWS_URL', 'http://minio.lolibrary.test:9000'),
+            'local' => env('AWS_LOCAL', true),
         ],
 
         'b2' => [

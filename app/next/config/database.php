@@ -33,19 +33,6 @@ return [
 
     'connections' => [
 
-        'testing' => [
-            'driver' => env('DB_TEST_DRIVER', 'pgsql'),
-            'host' => env('DB_TEST_HOST', '127.0.0.1'),
-            'port' => env('DB_TEST_PORT', '55432'),
-            'database' => env('DB_TEST_DATABASE', 'lolibrary'),
-            'username' => env('DB_TEST_USERNAME', 'lolibrary'),
-            'password' => env('DB_TEST_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'schema' => 'public',
-            'sslmode' => 'prefer',
-        ],
-
         'sqlite' => [
             'driver' => 'sqlite',
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
@@ -69,11 +56,11 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => env('DB_HOST', 'db.lolibrary.test'),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'lolibrary'),
             'username' => env('DB_USERNAME', 'lolibrary'),
-            'password' => env('DB_PASSWORD', ''),
+            'password' => env('DB_PASSWORD', 'secret'),
             'charset' => 'utf8',
             'prefix' => '',
             'schema' => 'public',
@@ -122,38 +109,31 @@ return [
         'client' => 'predis',
 
         'default' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'host' => env('REDIS_HOST', 'redis.lolibrary.test'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
             'database' => 0,
         ],
 
         'session' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'host' => env('REDIS_HOST', 'redis.lolibrary.test'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
             'database' => env('REDIS_SESSION_DATABASE', 1),
         ],
 
         'cache' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'host' => env('REDIS_HOST', 'redis.lolibrary.test'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
             'database' => env('REDIS_CACHE_DATABASE', 2),
         ],
 
         'queue' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'host' => env('REDIS_HOST', 'redis.lolibrary.test'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
             'database' => env('REDIS_QUEUE_DATABASE', 3),
-        ],
-
-        'testing' => [
-            'host' => env('REDIS_TEST_HOST', '127.0.0.1'),
-            'password' => env('REDIS_TEST_PASSWORD', null),
-            'port' => env('REDIS_TEST_PORT', 16379),
-            'database' => 0,
         ],
 
     ],

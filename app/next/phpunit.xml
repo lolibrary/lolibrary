@@ -27,6 +27,9 @@
         <env name="CACHE_DRIVER" value="redis"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
+        <env name="HTTPS" value="on"/>
+        <env name="APP_KEY" value="base64:8MFW+bPGkxGpoLnR6yazeCX+Ilhqdlwn3L/y9eHP09g="/>
+        <env name="" value=""/>
     </php>
     <listeners>
         <listener class="NunoMaduro\Collision\Adapters\Phpunit\Listener" />

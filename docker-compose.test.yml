@@ -7,8 +7,6 @@ services:
       target: build
     command: ["sh", "-c",
       "php artisan wait:db && php artisan wait:redis && php artisan migrate:fresh --seed --force --no-interaction && vendor/bin/phpunit"]
-    volumes:
-      - "./.env.test:/secrets/environment/.env:ro"
     depends_on:
       - db.lolibrary.test
       - redis.lolibrary.test
@@ -18,9 +16,6 @@ services:
     environment:
       POSTGRES_PASSWORD: secret
       POSTGRES_USER: lolibrary
-      PGDATA: /var/lib/postgresql/data/pgdata
-    volumes:
-      - "test-db-data:/var/lib/postgresql/data"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d lolibrary -h localhost -U lolibrary -p 5432"]
       interval: 5s
@@ -29,14 +24,8 @@ services:
     
   redis.lolibrary.test:
     image: "redis:alpine"
-    command: ["redis-server", "--appendonly", "yes"]
-    volumes:
-      - "test-redis-data:/data"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 10s
       retries: 3
-volumes:
-  test-db-data:
-  test-redis-data:
