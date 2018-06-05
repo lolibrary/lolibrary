@@ -3,32 +3,33 @@
 namespace App;
 
 use App\Jobs\DeleteImage;
+use App\Models\HasStatus;
 use Illuminate\Http\File;
+use App\Models\Images\ImagePaths;
 use Illuminate\Support\Facades\Storage;
 
 /**
- * An image.
- *
- * @property string $filename This image's filename.
- * @property string $name The filename/description of this image.
- * @property string $thumbnail The thumbnail of this image.
+ * An item image.
  *
  * @property string $url The location of this image, as a link.
  * @property string $thumbnail_url The location of this image's thumbnail, as a link.
+ * @property string|null $uploaded_url The temporary URL to this image.
+ * @property string|null $uploaded_filename The filename of the item that was generated to store it for processing.
+ * @property int $status The raw status of this image.
  */
 class Image extends Model
 {
+    use ImagePaths, HasStatus;
+
     /**
      * A status bitmask mapping.
      * 
      * @var array
      */
     protected static $statuses = [
-        'generated-thumbnail' => 2 ** 0,
-        'optimized'           => 2 ** 1,
-        'optimized-thumbnail' => 2 ** 2,
-        'uploaded'            => 2 ** 3,
-        'uploaded-thumbnail'  => 2 ** 4,
+        'uploaded'     => 2 ** 0,
+        'optimized'    => 2 ** 1,
+        'thumbnailled' => 2 ** 2,
     ];
 
     /**
@@ -64,26 +65,6 @@ class Image extends Model
     ];
 
     /**
-     * Override the usual route to an image.
-     *
-     * @return string
-     */
-    public function getUrlAttribute()
-    {
-        return Storage::cloud()->url($this->filename);
-    }
-
-    /**
-     * Link to the thumbnail for this image.
-     *
-     * @return string
-     */
-    public function getThumbnailUrlAttribute()
-    {
-        return Storage::cloud()->url($this->thumbnail);
-    }
-
-    /**
      * The route key name for images should be its UUID.
      *
      * @return string
@@ -100,17 +81,15 @@ class Image extends Model
      * @param string $id
      * @return static
      */
-    public static function createFromFile($file, string $id = null)
+    public static function from($file, string $id = null)
     {
-        $id = $id ?? uuid4();
+        $model = new static;
 
-        $model = new static([
-            'name' => $file->getFilename(),
-            'filename' => $id . '.' . $file->extension(),
-            'thumbnail' => $id . '_thumb.' . $file->extension(),
-        ]);
+        $filename = $file->store($model->getUploadsFolder());
 
-        $model->id = $id;
+        $model->id = $id ?? uuid4();
+        $model->uploaded_filename = $filename;
+
         $model->save();
 
         return $model;
@@ -125,5 +104,15 @@ class Image extends Model
     public static function default()
     {
         return static::findOrFail(uuid5('default'));
+    }
+
+    /**
+     * Alias "image_url" to "url".
+     * 
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return $this->getImageUrlAttribute();
     }
 }
