@@ -11,25 +11,8 @@ jobs:
           docker_layer_caching: true
       - run: docker-compose -f docker-compose.test.yml up --exit-code-from test --abort-on-container-exit
 
-  next-push:
-    docker:
-      - image: alpine:3.7
-    working_directory: ~/lolibrary
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-      - run: docker build -t lolibrary/next:$TAG_NAME -f ./app/next/Dockerfile ./app/next
-      - run: docker push lolibrary/next:$TAG_NAME
-
 workflows:
   version: 2
-  build:
+  next_app:
     jobs:
       - next-build
-      - next-push:
-          requires:
-            - next-build
-          tags:
-            only: /^r.*/
