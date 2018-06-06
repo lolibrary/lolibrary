@@ -1,4 +1,13 @@
-<p align="center"><img height="150" src="https://lolibrary.org/assets/ban1-01.png"></p>
+<p align="center"><img height="150" src="/.github/banner.png"></p>
+<p align="center">
+  <a href="https://patreon.com/lolibrary" title="Support us on Patreon">
+      <img src="/.github/patreon-donate-orange.svg">
+  </a>
+  
+  <a href="https://semaphoreci.com/ameliaikeda/lolibrary">
+      <img src="https://semaphoreci.com/api/v1/ameliaikeda/lolibrary/branches/master/badge.svg" alt="Build Status">
+  </a>
+</p>
 
 ## Lolibrary
 
