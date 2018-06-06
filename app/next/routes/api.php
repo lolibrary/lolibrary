@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +13,6 @@ use Illuminate\Routing\Router;
 */
 
 /** @var \Illuminate\Routing\Router $router */
-
 $options = ['only' => ['index', 'show']];
 
 $router->get('tags/search', 'TagController@search')->name('tags.search');

@@ -1,8 +1,8 @@
 <?php
 
-use App\{Brand, Item, Model};
-use Illuminate\Support\Facades\Notification;
+use App\Model;
 use GuzzleHttp\Psr7\Uri;
+use Illuminate\Support\Facades\Notification;
 
 if (! function_exists('uuid')) {
     /**
@@ -69,7 +69,8 @@ if (! function_exists('user')) {
      * @param string $id
      * @return \App\User|null
      */
-    function user($id) {
+    function user($id)
+    {
         if (validator(['id' => $id], ['id' => 'required|email'])->passes()) {
             return App\User::where(DB::raw('lower(email)'), mb_strtolower($id))->first();
         }
@@ -93,8 +94,6 @@ if (! function_exists('slack')) {
 
 if (! function_exists('add_s3_bucket')) {
     /**
-     * 
-     * 
      * @param string|null $url
      * @param string|null $bucket
      * @return string|null

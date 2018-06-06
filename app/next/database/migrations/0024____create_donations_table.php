@@ -13,15 +13,15 @@ class CreateDonationsTable extends Migration
     public function up()
     {
         Schema::create('donations', function (Blueprint $table) {
-                $table->uuid('id')->primary();
+            $table->uuid('id')->primary();
 
-                $table->decimal('amount', 8, 2);
-                $table->string('method');
+            $table->decimal('amount', 8, 2);
+            $table->string('method');
 
-                $table->string('reference');
+            $table->string('reference');
 
-                $table->timestampsTz();
-            });
+            $table->timestampsTz();
+        });
     }
 
     /**

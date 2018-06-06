@@ -5,7 +5,6 @@ use Illuminate\Database\Seeder;
 
 class FeatureSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *

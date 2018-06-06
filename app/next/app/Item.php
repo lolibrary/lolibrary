@@ -2,9 +2,9 @@
 
 namespace App;
 
-use App\Models\{ItemRelations, Publishable};
-use Laravel\Scout\Searchable;
 use NumberFormatter;
+use App\Models\Publishable;
+use App\Models\ItemRelations;
 
 /**
  * An Item of Apparel.
@@ -107,7 +107,7 @@ class Item extends Model
         'brand',
         'category',
         'image',
-        'tags'
+        'tags',
     ];
 
     /**

@@ -5,7 +5,7 @@ namespace App\Models;
 use App\User;
 
 /**
- * User Access Levels
+ * User Access Levels.
  *
  * @property bool $banned
  * @property int $level
@@ -74,7 +74,7 @@ trait AccessLevels
     }
 
     /**
-     * Check if a user is able to perform basic functions
+     * Check if a user is able to perform basic functions.
      *
      * @return bool
      */

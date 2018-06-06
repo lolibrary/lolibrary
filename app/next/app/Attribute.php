@@ -50,7 +50,7 @@ class Attribute extends Model
     public function getValueAttribute()
     {
         if (! $this->pivot) {
-            return null;
+            return;
         }
 
         return $this->pivot->value;

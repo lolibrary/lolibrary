@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\User;
-
 use App\Notifications\VerifyEmail;
 
 trait VerifiesEmails
@@ -20,7 +19,7 @@ trait VerifiesEmails
 
     /**
      * Get a magic "verified" attribute.
-     * 
+     *
      * @return bool
      */
     public function getVerifiedAttribute()

@@ -2,11 +2,9 @@
 
 namespace App;
 
-use App\Jobs\DeleteImage;
 use App\Models\HasStatus;
 use Illuminate\Http\File;
 use App\Models\Images\ImagePaths;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * An item image.
@@ -23,7 +21,7 @@ class Image extends Model
 
     /**
      * A status bitmask mapping.
-     * 
+     *
      * @var array
      */
     protected static $statuses = [
@@ -108,7 +106,7 @@ class Image extends Model
 
     /**
      * Alias "image_url" to "url".
-     * 
+     *
      * @return string
      */
     public function getUrlAttribute()

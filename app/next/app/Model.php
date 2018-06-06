@@ -2,8 +2,6 @@
 
 namespace App;
 
-use DateTime;
-use DateTimeInterface;
 use App\Models\HasUuid;
 use App\Models\Collection;
 use Illuminate\Support\Str;
@@ -28,7 +26,7 @@ abstract class Model extends Eloquent
     use HasUuid, DateHandling;
 
     /**
-     * The namespace UUID used for {@see uuid5()}
+     * The namespace UUID used for {@see uuid5()}.
      *
      * @var string
      */
@@ -42,7 +40,7 @@ abstract class Model extends Eloquent
     public $incrementing = false;
 
     /**
-     * Remove all guarding from models
+     * Remove all guarding from models.
      *
      * @var bool
      */

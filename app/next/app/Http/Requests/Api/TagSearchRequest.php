@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class TagSearchRequest
+ * Class TagSearchRequest.
  *
  * @property string $search
  */

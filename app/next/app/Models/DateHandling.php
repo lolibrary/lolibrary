@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Pivot;
-use DateTimeInterface;
 use InvalidArgumentException;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model as Eloquent;

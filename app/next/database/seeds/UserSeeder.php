@@ -1,13 +1,10 @@
 <?php
 
-use App\Topic;
 use App\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
 
 class UserSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *

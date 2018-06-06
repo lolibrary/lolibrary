@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     /**
      * Construct a new Profile Controller.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -31,7 +30,7 @@ class ProfileController extends Controller
 
     /**
      * Get a user's closet (owned items).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function closet()
@@ -44,7 +43,7 @@ class ProfileController extends Controller
 
     /**
      * Get a user's wishlist (favourited items).
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function wishlist()

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller as BaseController;
 
 class Controller extends BaseController
 {

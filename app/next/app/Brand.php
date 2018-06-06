@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Models\Cacheable;
-use App\Traits\ItemCounts;
 
 /**
  * A lolita brand, e.g. Angelic Pretty.

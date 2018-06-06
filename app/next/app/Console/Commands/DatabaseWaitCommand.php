@@ -9,14 +9,14 @@ class DatabaseWaitCommand extends WaitCommand
 {
     /**
      * The name for this command.
-     * 
+     *
      * @var string
      */
     protected const TYPE = 'db';
 
     /**
      * Try to connect to the database.
-     * 
+     *
      * @param string|null $connection
      * @return bool
      */

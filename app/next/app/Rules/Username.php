@@ -38,7 +38,7 @@ class Username implements Rule
     }
 
     /**
-     * The length
+     * The length.
      *
      * @param $value
      * @return bool
