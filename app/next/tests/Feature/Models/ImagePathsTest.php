@@ -102,6 +102,9 @@ class ImagePathsTest extends TestCase
      */
     protected function endpoint()
     {
-        return env('AWS_URL') . '/' . env('AWS_BUCKET');
+        $default = config('filesystems.default');
+        $config = config("filesystems.disks.{$default}");
+        
+        return "{$config['endpoint']}/{$config['bucket']}";
     }
 }
