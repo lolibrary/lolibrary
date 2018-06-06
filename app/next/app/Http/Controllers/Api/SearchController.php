@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\{
-    Brand, Category, Color, Feature, Item, Tag
-};
-use Illuminate\Database\Eloquent\Builder;
+use App\Tag;
+use App\Item;
+use App\Brand;
+use App\Color;
+use App\Feature;
+use App\Category;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
 class SearchController extends Controller
 {

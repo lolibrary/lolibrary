@@ -124,7 +124,7 @@ return [
 
     'cookie' => env(
         'SESSION_COOKIE',
-        str_slug(env('APP_NAME', 'lolibrary'), '_').'_session'
+        str_slug(env('APP_NAME', 'lolibrary'), '_') . '_session'
     ),
 
     /*

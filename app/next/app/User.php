@@ -3,9 +3,7 @@
 namespace App;
 
 use DB;
-use NumberFormatter;
 use App\Models\HasUuid;
-use App\Models\Collection;
 use App\Models\DateHandling;
 use App\Models\VerifiesEmails;
 use Laravel\Passport\HasApiTokens;
@@ -52,7 +50,7 @@ class User extends Authenticatable
 
     /**
      * Whether or not this model has an incrementing timestamp.
-     * 
+     *
      * @var bool
      */
     public $incrementing = false;
@@ -131,7 +129,7 @@ class User extends Authenticatable
     }
 
     /**
-     * The topics a user has created
+     * The topics a user has created.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany|\App\Topic[]
      */
@@ -192,7 +190,7 @@ class User extends Authenticatable
 
     /**
      * Scope a query to email address.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
      */
     public function scopeEmail(Builder $query, string $email)

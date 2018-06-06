@@ -2,9 +2,15 @@
 
 namespace App\Models;
 
-use App\{
-    Attribute, Brand, Category, Color, Comment, Feature, Image, Tag, User
-};
+use App\Tag;
+use App\User;
+use App\Brand;
+use App\Color;
+use App\Image;
+use App\Comment;
+use App\Feature;
+use App\Category;
+use App\Attribute;
 
 trait ItemRelations
 {
@@ -119,7 +125,7 @@ trait ItemRelations
     }
 
     /**
-     * The comments that have been left on this
+     * The comments that have been left on this.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

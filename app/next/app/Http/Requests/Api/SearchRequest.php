@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class SearchRequest
+ * Class SearchRequest.
  *
  * @property string|null $search
  *

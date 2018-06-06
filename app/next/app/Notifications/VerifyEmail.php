@@ -14,14 +14,14 @@ class VerifyEmail extends Notification implements ShouldQueue
 
     /**
      * The user we're notifying.
-     * 
+     *
      * @var \App\User
      */
     public $user;
 
     /**
      * Construct a new email verification notification.
-     * 
+     *
      * @param \App\User $user
      */
     public function __construct(User $user)

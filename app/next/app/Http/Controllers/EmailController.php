@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use Auth;
 use App\User;
 use App\Notifications\VerifyEmail;
@@ -19,7 +18,7 @@ class EmailController extends Controller
 
     /**
      * Verify a user's email address.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function verify(string $email, string $token)
@@ -38,7 +37,7 @@ class EmailController extends Controller
 
     /**
      * Verify a user's email address.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function resend()

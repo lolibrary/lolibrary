@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Models\HasStatus;
 use Tests\TestCase;
+use App\Models\HasStatus;
 use Illuminate\Support\Collection;
 
 class StatusTraitTest extends TestCase

@@ -61,7 +61,7 @@ abstract class Composer
      */
     protected function key()
     {
-        return 'composer:' . $this->name(); 
+        return 'composer:' . $this->name();
     }
 
     /**

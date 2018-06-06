@@ -9,14 +9,14 @@ class RedisWaitCommand extends WaitCommand
 {
     /**
      * The name for this command.
-     * 
+     *
      * @var string
      */
     protected const TYPE = 'redis';
 
     /**
      * Try to connect to the redis database.
-     * 
+     *
      * @param string|null $connection
      * @return bool
      */

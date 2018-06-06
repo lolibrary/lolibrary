@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Rules\Username;
 use Tests\TestCase;
+use App\Rules\Username;
 
 class UsernameRuleTest extends TestCase
 {
@@ -21,7 +21,6 @@ class UsernameRuleTest extends TestCase
      *
      * @param mixed $username
      * @dataProvider getInvalidUsernames
-     *
      */
     public function testInvalidUsernames($username)
     {

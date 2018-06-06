@@ -5,7 +5,6 @@ use Illuminate\Database\Seeder;
 
 class ImageSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *

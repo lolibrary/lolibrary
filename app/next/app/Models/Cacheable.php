@@ -18,7 +18,7 @@ trait Cacheable
     }
 
     /**
-     * Get a cache key for this
+     * Get a cache key for this.
      *
      * @return string
      */

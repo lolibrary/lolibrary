@@ -8,7 +8,7 @@ trait HasStatus
 {
     /**
      * Get a status map array.
-     * 
+     *
      * @var array
      */
     public function getStatusMap()
@@ -22,7 +22,7 @@ trait HasStatus
 
     /**
      * An attribute getter for a status array.
-     * 
+     *
      * @return array
      */
     public function getStatusesAttribute()
@@ -34,7 +34,7 @@ trait HasStatus
 
     /**
      * Check if this model has a given status.
-     * 
+     *
      * @param string $status
      * @return bool
      */
@@ -47,7 +47,7 @@ trait HasStatus
 
     /**
      * Check model has a specific status, by code.
-     * 
+     *
      * @return void
      */
     public function hasRawStatus(int $status)
@@ -57,7 +57,7 @@ trait HasStatus
 
     /**
      * Gets the status code of a model.
-     * 
+     *
      * @return int
      */
     public function getRawStatusCode()
@@ -67,7 +67,7 @@ trait HasStatus
 
     /**
      * Set the raw status code directly.
-     * 
+     *
      * @param int $status
      * @return void
      */
@@ -78,7 +78,7 @@ trait HasStatus
 
     /**
      * Get a raw (int) status code.
-     * 
+     *
      * @param string $status
      * @return int
      * @throws \InvalidArgumentException
@@ -94,7 +94,7 @@ trait HasStatus
 
     /**
      * Check if a given status exists on this model.
-     * 
+     *
      * @param string $status
      * @return bool
      */
@@ -107,7 +107,7 @@ trait HasStatus
 
     /**
      * Add a specific status to this model.
-     * 
+     *
      * @param string $status
      * @return void
      */
@@ -139,7 +139,7 @@ trait HasStatus
 
     /**
      * Call a model save if it's available.
-     * 
+     *
      * @return void
      */
     public function callModelSave()

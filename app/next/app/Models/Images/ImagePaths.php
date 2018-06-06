@@ -28,7 +28,7 @@ trait ImagePaths
 
     /**
      * Get a link to the "uploaded" version of this file.
-     * 
+     *
      * @return string
      */
     public function getUploadedUrlAttribute()
@@ -38,7 +38,7 @@ trait ImagePaths
 
     /**
      * Get the path to the "thumbnail" version of this file.
-     * 
+     *
      * @return string
      */
     public function getImagePath()
@@ -48,7 +48,7 @@ trait ImagePaths
 
     /**
      * Get the path to the "thumbnail" version of this file.
-     * 
+     *
      * @return string
      */
     public function getThumbnailPath()
@@ -58,7 +58,7 @@ trait ImagePaths
 
     /**
      * Get the path to the "uploaded" version of this file.
-     * 
+     *
      * @return string
      */
     public function getUploadedPath()
@@ -68,7 +68,7 @@ trait ImagePaths
 
     /**
      * Get the images folder name.
-     * 
+     *
      * @return string
      */
     public function getImagesFolder()
@@ -78,7 +78,7 @@ trait ImagePaths
 
     /**
      * Get the thumbnails folder name.
-     * 
+     *
      * @return string
      */
     public function getThumbnailsFolder()
@@ -88,7 +88,7 @@ trait ImagePaths
 
     /**
      * Get the uploads folder name.
-     * 
+     *
      * @return string
      */
     public function getUploadsFolder()

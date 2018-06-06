@@ -2,14 +2,13 @@
 
 namespace App\Console;
 
-use DB;
 use Illuminate\Console\Command;
 
 abstract class WaitCommand extends Command
 {
     /**
      * This command's signature.
-     * 
+     *
      * @var string
      */
     protected $signature = 'wait:#TYPE#
@@ -19,28 +18,28 @@ abstract class WaitCommand extends Command
 
     /**
      * This command's description.
-     * 
+     *
      * @var string
      */
     protected $description = 'Wait for the given #TYPE# connection to become available.';
 
     /**
      * If we should terminate our while loop.
-     * 
+     *
      * @var bool
      */
     protected $terminate = false;
 
     /**
      * The type to append for this command.
-     * 
+     *
      * @var string
      */
     protected const TYPE = 'invalid';
 
     /**
      * Wait for the given service to become available.
-     * 
+     *
      * @return int The status code response of this command.
      */
     public function handle()
@@ -77,7 +76,7 @@ abstract class WaitCommand extends Command
 
     /**
      * Install signal handlers for SIGALRM.
-     * 
+     *
      * @return void
      */
     protected function signal()
@@ -85,7 +84,7 @@ abstract class WaitCommand extends Command
         $timeout = (int) $this->option('timeout');
 
         pcntl_async_signals(true);
-        
+
         pcntl_signal(SIGALRM, function () {
             $this->terminate = true;
         });
@@ -101,13 +100,13 @@ abstract class WaitCommand extends Command
     protected function configureUsingFluentDefinition()
     {
         $this->signature = $this->replaceType($this->signature);
-    
+
         parent::configureUsingFluentDefinition();
     }
 
     /**
      * Set this command's description.
-     * 
+     *
      * @param string $description
      * @return void
      */
@@ -118,7 +117,7 @@ abstract class WaitCommand extends Command
 
     /**
      * Replace #TYPE# with static::TYPE in a string.
-     * 
+     *
      * @param string $str
      * @return string
      */
@@ -129,7 +128,7 @@ abstract class WaitCommand extends Command
 
     /**
      * Try to connect to the given database.
-     * 
+     *
      * @param string|null $connection
      * @return bool
      */

@@ -4,8 +4,8 @@ namespace Tests\Feature\Composers;
 
 use Mockery;
 use App\Feature;
-use App\Composers\Features;
 use Illuminate\View\View;
+use App\Composers\Features;
 use Tests\Feature\TestCase;
 
 class FeatureComposerTest extends TestCase

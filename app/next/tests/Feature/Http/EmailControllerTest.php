@@ -3,8 +3,8 @@
 namespace Tests\Feature\Http;
 
 use App\User;
-use App\Notifications\VerifyEmail;
 use Tests\Feature\TestCase;
+use App\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\WithoutEvents;
 
@@ -109,6 +109,4 @@ class EmailControllerTest extends TestCase
 
         Notification::assertNotSentTo([$user], VerifyEmail::class);
     }
-
-
 }
