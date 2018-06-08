@@ -24,6 +24,10 @@ class UserSeeder extends Seeder
             return;
         }
 
+        $dispatcher = User::getEventDispatcher();
+
+        User::unsetEventDispatcher();
+
         $user = User::forceCreate([
             'id' => static::UUID,
             'email' => config('site.admin.email') ?? 'admin@example.com',
@@ -32,6 +36,8 @@ class UserSeeder extends Seeder
             'name' => config('site.admin.name') ?? 'Admin',
             'level' => User::DEVELOPER,
         ]);
+
+        User::setEventDispatcher($dispatcher);
 
         echo "Admin email: {$user->email}" . PHP_EOL;
         echo "Admin password: {$password}" . PHP_EOL;
