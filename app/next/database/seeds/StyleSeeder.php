@@ -1,44 +1,38 @@
 <?php
 
-use App\Style;
-use Illuminate\Database\Seeder;
-
 class StyleSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * A model to use for seeding.
      *
-     * @return void
+     * @var string
      */
-    public function run()
-    {
-        $styles = [
-            'Gothic',
-            'Sweet',
-            'Classic',
-            'Casual',
-            'Hime',
-            'Shiro',
-            'Kuro',
-            'Country',
-            'Sailor',
-            'Guro',
-            'Punk',
-            'Ero',
-            'Pirate',
-            'Steampunk',
-            'Fairy',
-            'Deco',
-            'Mori',
-            'Kodona',
-            'Aristocrat',
-        ];
+    protected static $model = App\Style::class;
 
-        foreach ($styles as $style) {
-            Style::create([
-                'slug' => str_slug($style),
-                'name' => $style,
-            ]);
-        }
-    }
+    /**
+     * A list of lolita styles to seed.
+     *
+     * @var string[]
+     */
+    protected static $content = [
+        'Gothic',
+        'Sweet',
+        'Classic',
+        'Casual',
+        'Hime',
+        'Shiro',
+        'Kuro',
+        'Country',
+        'Sailor',
+        'Guro',
+        'Punk',
+        'Ero',
+        'Pirate',
+        'Steampunk',
+        'Fairy',
+        'Deco',
+        'Mori',
+        'Kodona',
+        'Aristocrat',
+    ];
 }

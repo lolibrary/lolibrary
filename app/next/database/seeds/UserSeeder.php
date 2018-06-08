@@ -2,9 +2,17 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\QueryException;
 
 class UserSeeder extends Seeder
 {
+    /**
+     * A UUID for the admin user.
+     *
+     * @var string
+     */
+    protected const UUID = '00000000-0000-0000-0000-000000000000';
+
     /**
      * Run the database seeds.
      *
@@ -12,8 +20,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        if (User::where('id', static::UUID)->exists()) {
+            return;
+        }
+
         $user = User::forceCreate([
-            'id' => '00000000-0000-0000-0000-000000000000',
+            'id' => static::UUID,
             'email' => config('site.admin.email') ?? 'admin@example.com',
             'username' => config('site.admin.username') ?? 'admin',
             'password' => bcrypt($password = str_random(64)),

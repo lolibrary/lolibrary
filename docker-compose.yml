@@ -21,7 +21,15 @@ services:
   app:
     restart: always
     image: "amelia/php:7.2"
-    command: ["sh", "-c", "php artisan wait:db && php artisan wait:redis && php artisan horizon"]
+    command:
+      - "sh"
+      - "-c"
+      - |
+        composer install
+        php artisan wait:db
+        php artisan wait:redis
+        php artisan migrate --seed
+        php artisan horizon
     volumes:
       - "./app/next:/srv/code"
       - "./pki/certificate.pem:/pki/certificate.pem:ro"

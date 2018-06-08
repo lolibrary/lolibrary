@@ -2,6 +2,7 @@
 
 use App\Image;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\QueryException;
 
 class ImageSeeder extends Seeder
 {
@@ -12,8 +13,14 @@ class ImageSeeder extends Seeder
      */
     public function run()
     {
+        $id = uuid5('default');
+
+        if (Image::where('id', $id)->exists()) {
+            return;
+        }
+        
         Image::forceCreate([
-            'id' => $id = uuid5('default'),
+            'id' => $id,
             'filename' => $id . '.png',
             'thumbnail' => $id . '_thumb.png',
             'name' => 'Default Image',

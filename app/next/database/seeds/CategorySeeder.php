@@ -1,53 +1,43 @@
 <?php
 
-use App\Category;
-use Illuminate\Database\Seeder;
-
 class CategorySeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * The model to seed.
      *
-     * @return void
+     * @var string
      */
-    public function run()
-    {
-        $categories = [
-            'JSK',
-            'Hair Accessories',
-            'Skirt',
-            'Sets',
-            'OP',
-            'Blouse',
-            'Socks',
-            'Jewelry',
-            'Bags',
-            'Coats',
-            'Bolero',
-            'Pants',
-            'bloomers' => 'Bloomers / Undergarments',
-            'Salopette',
-            'Unmentionables',
-            'Other',
-            'Cardigan',
-            'Accessories',
-            'Corset/Bustier',
-            'Cape',
-            'Vest',
-            'Petticoat',
-            'Parasols',
-            'Cutsew',
-        ];
+    protected static $model = App\Category::class;
 
-        foreach ($categories as $slug => $category) {
-            if (is_numeric($slug)) {
-                $slug = str_slug($category);
-            }
-
-            Category::create([
-                'slug' => $slug,
-                'name' => $category,
-            ]);
-        }
-    }
+    /**
+     * A listing of item categories.
+     *
+     * @var string[]
+     */
+    protected static $content = [
+        'JSK',
+        'Hair Accessories',
+        'Skirt',
+        'Sets',
+        'OP',
+        'Blouse',
+        'Socks',
+        'Jewelry',
+        'Bags',
+        'Coats',
+        'Bolero',
+        'Pants',
+        'bloomers' => 'Bloomers / Undergarments',
+        'Salopette',
+        'Unmentionables',
+        'Other',
+        'Cardigan',
+        'Accessories',
+        'Corset/Bustier',
+        'Cape',
+        'Vest',
+        'Petticoat',
+        'Parasols',
+        'Cutsew',
+    ];
 }

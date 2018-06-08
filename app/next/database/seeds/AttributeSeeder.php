@@ -1,44 +1,38 @@
 <?php
 
-use App\Attribute;
-use Illuminate\Database\Seeder;
-
 class AttributeSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * The model to seed.
      *
-     * @return void
+     * @var string
      */
-    public function run()
-    {
-        $attributes = [
-            'Bust',
-            'Length',
-            'Price',
-            'Waist',
-            'Owner Height',
-            'Owner Length',
-            'Owner Waist',
-            'Cuff',
-            'Shoulder Width',
-            'Sleeve Length',
-            'Owner Notes',
-            'Owner Bust',
-            'Owner Underbust',
+    protected static $model = App\Attribute::class;
 
-            // shoes
-            'Heel Height',
-            'Material',
-            'Soles',
-            'Finishes',
-        ];
+    /**
+     * A list of attributes to seed.
+     *
+     * @var string[]
+     */
+    protected static $content = [
+        'Bust',
+        'Length',
+        'Price',
+        'Waist',
+        'Owner Height',
+        'Owner Length',
+        'Owner Waist',
+        'Cuff',
+        'Shoulder Width',
+        'Sleeve Length',
+        'Owner Notes',
+        'Owner Bust',
+        'Owner Underbust',
 
-        foreach ($attributes as $attribute) {
-            Attribute::create([
-                'slug' => str_slug($attribute),
-                'name' => $attribute,
-            ]);
-        }
-    }
+        // shoes
+        'Heel Height',
+        'Material',
+        'Soles',
+        'Finishes',
+    ];
 }
