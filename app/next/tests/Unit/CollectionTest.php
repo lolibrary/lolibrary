@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
+use Tests\TestCase;
 use App\Models\User;
 use App\Models\Brand;
-use Tests\TestCase;
 use App\Models\Traits\Collection;
 use Illuminate\Database\Eloquent\Collection as BaseCollection;
 
