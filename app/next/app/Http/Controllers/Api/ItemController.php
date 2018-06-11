@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Item;
+use App\Models\Item;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ItemController extends Controller

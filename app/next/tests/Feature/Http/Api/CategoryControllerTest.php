@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Http\Api;
 
-use App\Category;
+use App\Models\Category;
 use Tests\Feature\TestCase;
 
 class CategoryControllerTest extends TestCase

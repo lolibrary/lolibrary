@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Http;
 
-use App\User;
+use App\Models\User;
 use Tests\Feature\TestCase;
 use App\Notifications\VerifyEmail;
 use Illuminate\Support\Facades\Notification;

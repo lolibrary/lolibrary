@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Attribute;
+use App\Models\Attribute;
 
 class AttributeController extends Controller
 {

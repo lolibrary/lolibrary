@@ -1,5 +1,7 @@
-**/vendor
-**/node_modules
-**/.idea
-/sql
+./app/next/vendor
+./app/next/node_modules
+./.idea
+./sql
+./.git
+
 

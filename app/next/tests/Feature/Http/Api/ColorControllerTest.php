@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Http\Api;
 
-use App\Color;
+use App\Models\Color;
 use Tests\Feature\TestCase;
 
 class ColorControllerTest extends TestCase

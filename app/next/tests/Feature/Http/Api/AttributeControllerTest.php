@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Http\Api;
 
-use App\Attribute;
+use App\Models\Attribute;
 use Tests\Feature\TestCase;
 
 class AttributeControllerTest extends TestCase

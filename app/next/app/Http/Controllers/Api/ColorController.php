@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Color;
+use App\Models\Color;
 
 class ColorController extends Controller
 {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Feature;
+use App\Models\Feature;
 
 class FeatureController extends Controller
 {

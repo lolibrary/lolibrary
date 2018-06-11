@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Brand;
+use App\Models\Brand;
 
 class BrandController extends Controller
 {

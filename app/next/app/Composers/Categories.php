@@ -2,7 +2,7 @@
 
 namespace App\Composers;
 
-use App\Category;
+use App\Models\Category;
 
 class Categories extends Composer
 {

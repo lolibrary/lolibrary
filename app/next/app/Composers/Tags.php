@@ -2,7 +2,7 @@
 
 namespace App\Composers;
 
-use App\Tag;
+use App\Models\Tag;
 
 class Tags extends Composer
 {

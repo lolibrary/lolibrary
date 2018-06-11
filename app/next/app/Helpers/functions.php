@@ -1,6 +1,6 @@
 <?php
 
-use App\Model;
+use App\Models\Model;
 use GuzzleHttp\Psr7\Uri;
 use Illuminate\Support\Facades\Notification;
 

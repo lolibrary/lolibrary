@@ -3,7 +3,7 @@
 namespace Tests\Feature\Models;
 
 use Tests\Feature\TestCase;
-use App\Models\Images\ImagePaths;
+use App\Models\Traits\Images\ImagePaths;
 
 class ImagePathsTest extends TestCase
 {

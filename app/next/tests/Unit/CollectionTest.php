@@ -2,10 +2,10 @@
 
 namespace Tests\Unit;
 
-use App\User;
-use App\Brand;
+use App\Models\User;
+use App\Models\Brand;
 use Tests\TestCase;
-use App\Models\Collection;
+use App\Models\Traits\Collection;
 use Illuminate\Database\Eloquent\Collection as BaseCollection;
 
 class CollectionTest extends TestCase

@@ -1,6 +1,10 @@
 FROM amelia/php:7.2 as build
 
-COPY . /srv/code
+COPY ./next /srv/code
+COPY ./models /srv/code/app/Models
+COPY ./config /srv/code/config
+COPY ./database /srv/code/database
+COPY ./bootstrap /srv/code/bootstrap
 
 RUN composer install \
     && php artisan route:cache \
@@ -11,7 +15,11 @@ RUN composer install \
 
 FROM node:9 as assets
 
-COPY . .
+COPY ./next /srv/code
+COPY ./models /srv/code/app/Models
+COPY ./config /srv/code/config
+COPY ./database /srv/code/database
+COPY ./bootstrap /srv/code/bootstrap
 
 RUN npm install && npm run production
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Rules\Username;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;

@@ -5,6 +5,10 @@ services:
     image: "amelia/php:7.2"
     volumes:
       - "./app/next:/srv/code"
+      - "./app/models:/srv/code/app/Models"
+      - "./app/database:/srv/code/database"
+      - "./app/config:/srv/code/config"
+      - "./app/bootstrap:/srv/code/bootstrap"
       - "./pki/certificate.pem:/etc/nginx/certs/certificate.pem:ro"
       - "./pki/privkey.pem:/etc/nginx/certs/privkey.pem:ro"
       - "./.env:/secrets/environment/.env:ro"
@@ -32,6 +36,10 @@ services:
         php artisan horizon
     volumes:
       - "./app/next:/srv/code"
+      - "./app/models:/srv/code/app/Models"
+      - "./app/database:/srv/code/database"
+      - "./app/config:/srv/code/config"
+      - "./app/bootstrap:/srv/code/bootstrap"
       - "./pki/certificate.pem:/pki/certificate.pem:ro"
       - "./pki/privkey.pem:/pki/privkey.pem:ro"
       - "./.env:/secrets/environment/.env:ro"

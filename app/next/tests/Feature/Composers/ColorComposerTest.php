@@ -3,7 +3,7 @@
 namespace Tests\Feature\Composers;
 
 use Mockery;
-use App\Color;
+use App\Models\Color;
 use App\Composers\Colors;
 use Illuminate\View\View;
 use Tests\Feature\TestCase;

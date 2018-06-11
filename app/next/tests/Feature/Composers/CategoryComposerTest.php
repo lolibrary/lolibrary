@@ -3,7 +3,7 @@
 namespace Tests\Feature\Composers;
 
 use Mockery;
-use App\Category;
+use App\Models\Category;
 use Illuminate\View\View;
 use Tests\Feature\TestCase;
 use App\Composers\Categories;

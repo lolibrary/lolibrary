@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Tag;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\Api\TagSearchRequest;
 

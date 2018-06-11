@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Item;
+use App\Models\Item;
 use Tests\TestCase;
 
 class ItemPriceTest extends TestCase

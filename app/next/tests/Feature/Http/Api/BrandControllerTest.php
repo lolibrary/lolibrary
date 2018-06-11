@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Http\Api;
 
-use App\Brand;
+use App\Models\Brand;
 use Tests\Feature\TestCase;
 
 class BrandControllerTest extends TestCase

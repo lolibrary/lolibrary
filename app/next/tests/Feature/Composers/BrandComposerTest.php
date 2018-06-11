@@ -3,7 +3,7 @@
 namespace Tests\Feature\Composers;
 
 use Mockery;
-use App\Brand;
+use App\Models\Brand;
 use App\Composers\Brands;
 use Illuminate\View\View;
 use Tests\Feature\TestCase;

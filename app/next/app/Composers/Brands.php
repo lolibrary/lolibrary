@@ -2,7 +2,7 @@
 
 namespace App\Composers;
 
-use App\Brand;
+use App\Models\Brand;
 
 class Brands extends Composer
 {

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Http\Api;
 
-use App\Tag;
+use App\Models\Tag;
 use Tests\Feature\TestCase;
 
 class TagControllerTest extends TestCase

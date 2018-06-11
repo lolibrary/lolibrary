@@ -2,7 +2,7 @@
 
 namespace App\Composers;
 
-use App\Feature;
+use App\Models\Feature;
 
 class Features extends Composer
 {

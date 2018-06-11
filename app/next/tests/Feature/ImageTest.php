@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Image;
+use App\Models\Image;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 

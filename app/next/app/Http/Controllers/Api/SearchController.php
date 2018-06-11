@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Tag;
-use App\Item;
-use App\Brand;
-use App\Color;
-use App\Feature;
-use App\Category;
+use App\Models\Tag;
+use App\Models\Item;
+use App\Models\Brand;
+use App\Models\Color;
+use App\Models\Feature;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
 

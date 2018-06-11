@@ -2,7 +2,7 @@
 
 namespace App\Composers;
 
-use App\Color;
+use App\Models\Color;
 
 class Colors extends Composer
 {
