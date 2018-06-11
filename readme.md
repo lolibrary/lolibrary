@@ -3,12 +3,11 @@
   <a href="https://patreon.com/lolibrary" title="Support us on Patreon"><img src="/.github/patreon-donate-orange.svg" alt=""></a>
   <a href="https://semaphoreci.com/ameliaikeda/lolibrary" title="Build Status"><img src="https://semaphoreci.com/api/v1/ameliaikeda/lolibrary/branches/master/badge.svg" alt=""></a>
   <a href="https://codeclimate.com/github/lolibrary/lolibrary/maintainability" title="Project Maintainability Score on Code Climate"><img src="https://api.codeclimate.com/v1/badges/4d4b0fa8d8f9d80a00a9/maintainability" alt=""></a>
-  <a href="https://codeclimate.com/github/lolibrary/lolibrary/test_coverage" title="Test Code Coverage on Code Climate"><img src="https://api.codeclimate.com/v1/badges/4d4b0fa8d8f9d80a00a9/test_coverage" alt=""></a>
 </p>
 
 ## Lolibrary
 
-Lolibrary is a lolita fashion archive website. This repository contains code for the API, which is consumed by the chinese mirror and parts of the main site.
+Lolibrary is a lolita fashion archive website. This repository is a monorepo containing code for what will eventually be all of Lolibrary.
 
 
 ## Getting Started
@@ -21,7 +20,7 @@ To get started, run `bash setup.sh`; you may be prompted for your password.
 
 ⚠️ Windows does not currently work with `setup.sh`; you'll need to run commands manually.
 
-Check out `.env`; this is your entire config and sets environment variables. The default is enough to get started.
+Copy `.env.example` to `.env` if it hasn't been done already; this is your entire config and sets environment variables. The default is enough to get started.
 
 ### General running
 
@@ -38,7 +37,7 @@ This will start the postgres/redis containers, spin up your web container to ser
 After making changes, your queue workers won't automatically restart. To do this, issue the following command:
 
 ```sh
-docker-compose run app php artisan horizon:terminate
+docker-compose exec app php artisan horizon:terminate
 ```
 
 docker-compose will automatically restart the container that was running queue workers.
@@ -51,7 +50,9 @@ See the `pki` folder in this directory for more information; `setup.sh` will aut
 
 ### Hostnames
 
-Add a dns resolver such as dnsmasq to resolve all `.test` domains to localhost. This will be needed! (`setup.sh`, again, does this automatically on mac).
+Add a dns resolver such as dnsmasq to resolve all `.test` domains to localhost. This will be needed! (`setup.sh`, again, does this automatically on Mac).
+
+On windows, you can get away with just adding `lolibrary.test` to your hosts file pointing to `127.0.0.1`
 
 ## Security Vulnerabilities
 
