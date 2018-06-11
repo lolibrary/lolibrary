@@ -24,6 +24,7 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img style="height: 14px" src="{{ asset('images/logo_horizontal.png') }}" alt="Lolibrary logo">
                 </a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -44,6 +45,11 @@
                             @include('components.navbar.dropdown')
                         @endguest
                     </ul>
+
+                    <form class="form-inline pl-md-3">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="far fa-search" aria-label="Search Icon"></i></button>
+                    </form>
                 </div>
             </div>
         </nav>
