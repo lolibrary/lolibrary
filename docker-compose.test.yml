@@ -4,7 +4,7 @@ services:
   test:
     build:
       context: ./app
-      dockerfile: ./next/Dockerfile
+      dockerfile: ./frontend/Dockerfile
       target: build
     command:
       - "sh"

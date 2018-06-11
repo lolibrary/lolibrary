@@ -1,11 +1,11 @@
 
-next:
-	docker build --target=build -f ./app/next/Dockerfile ./app
+frontend:
+	docker build --target=build -f ./app/frontend/Dockerfile ./app
 
-next-prod:
-	docker build --target=production -f ./app/next/Dockerfile ./app
+frontend-prod:
+	docker build --target=production -f ./app/frontend/Dockerfile ./app
 
-test:
+frontend-test:
 	docker-compose \
 		-f docker-compose.test.yml \
 		-p testing \
@@ -15,3 +15,11 @@ test:
 				--exit-code-from test \
 				--abort-on-container-exit \
 				--remove-orphans
+
+test: frontend-test
+
+build: frontend
+
+production: frontend-prod
+
+.PHONY: build

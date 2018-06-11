@@ -1,6 +1,6 @@
 FROM amelia/php:7.2 as build
 
-COPY ./next /srv/code
+COPY ./frontend /srv/code
 COPY ./models /srv/code/app/Models
 COPY ./config /srv/code/config
 COPY ./database /srv/code/database
@@ -15,7 +15,7 @@ RUN composer install \
 
 FROM node:9 as assets
 
-COPY ./next /srv/code
+COPY ./frontend /srv/code
 COPY ./models /srv/code/app/Models
 COPY ./config /srv/code/config
 COPY ./database /srv/code/database

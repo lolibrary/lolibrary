@@ -4,7 +4,7 @@ services:
   web:
     image: "amelia/php:7.2"
     volumes:
-      - "./app/next:/srv/code"
+      - "./app/frontend:/srv/code"
       - "./app/models:/srv/code/app/Models"
       - "./app/database:/srv/code/database"
       - "./app/config:/srv/code/config"
@@ -35,7 +35,7 @@ services:
         php artisan migrate --seed
         php artisan horizon
     volumes:
-      - "./app/next:/srv/code"
+      - "./app/frontend:/srv/code"
       - "./app/models:/srv/code/app/Models"
       - "./app/database:/srv/code/database"
       - "./app/config:/srv/code/config"
@@ -54,7 +54,7 @@ services:
     command: ["sh", "-c", "npm install && npm run watch"]
     working_dir: "/home/node"
     volumes:
-      - "./app/next:/home/node"
+      - "./app/frontend:/home/node"
 
   imaginary.lolibrary.test:
     image: "h2non/imaginary:1"

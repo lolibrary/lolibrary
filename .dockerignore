@@ -1,5 +1,5 @@
-./app/next/vendor
-./app/next/node_modules
+./app/frontend/vendor
+./app/frontend/node_modules
 ./.idea
 ./sql
 ./.git
