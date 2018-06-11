@@ -6,14 +6,14 @@ class InitialUploadFailed extends Notification implements ShouldQueue
 {
     /**
      * The image that failed its initial upload.
-     * 
+     *
      * @param \App\Image
      */
     public $image;
 
     /**
      * Make a new notification instance.
-     * 
+     *
      * @param \App\Image $image
      */
     public function __construct(Image $image)
