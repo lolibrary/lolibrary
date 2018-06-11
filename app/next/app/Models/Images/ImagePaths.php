@@ -33,7 +33,7 @@ trait ImagePaths
      */
     public function getUploadedUrlAttribute()
     {
-        return Storage::temporaryUrl($this->getUploadedPath());
+        return Storage::temporaryUrl($this->getUploadedPath(), now()->addMinutes(10));
     }
 
     /**
