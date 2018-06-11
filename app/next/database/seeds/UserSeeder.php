@@ -2,7 +2,6 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\QueryException;
 
 class UserSeeder extends Seeder
 {
