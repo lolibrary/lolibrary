@@ -39,7 +39,7 @@ class ImageTest extends TestCase
 
         $image = Image::from($file);
 
-        $this->assertEqual($image->getUrlAttribute(), $image->url);
-        $this->assertEqual($image->getThumbnailUrlAttribute(), $image->thumbnail_url);
+        $this->assertEquals($image->getUrlAttribute(), $image->url);
+        $this->assertEquals($image->getThumbnailUrlAttribute(), $image->thumbnail_url);
     }
 }
