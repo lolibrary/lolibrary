@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Composers;
 
-use App\Models\Tag;
 use Mockery;
+use App\Models\Tag;
 use App\Composers\Tags;
 use Illuminate\View\View;
 use Tests\Feature\TestCase;
