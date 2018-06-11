@@ -121,7 +121,10 @@ class ImagePathsTest extends TestCase
             protected $uploaded_filename = 'foobar.png';
         };
 
-        $this->assertEquals($this->endpoint() . '/uploads/00000000-0000-0000-0000-000000000000.jpeg', $class->getUploadedUrlAttribute());
+        $this->assertTrue(str_contains(
+            $class->getUploadedUrlAttribute(),
+            $this->endpoint() . '/uploads/foobar.png'
+        ));
     }
 
     /**
