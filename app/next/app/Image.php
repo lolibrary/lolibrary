@@ -85,6 +85,9 @@ class Image extends Model
 
         $filename = $file->store($model->getUploadsFolder());
 
+        // replace 'uploads/' with '' in the filename.
+        $filename = str_replace($model->getUploadsFolder() . '/', '', $filename);
+
         $model->id = $id ?? uuid4();
         $model->uploaded_filename = $filename;
 
