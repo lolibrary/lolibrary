@@ -17,7 +17,7 @@ class AddLevelToUsersTable extends Migration
         });
 
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('level')->default(App\User::JUNIOR_LOLIBRARIAN);
+            $table->integer('level')->default(App\Models\User::JUNIOR_LOLIBRARIAN);
             $table->boolean('banned')->default(false);
         });
     }

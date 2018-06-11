@@ -7,7 +7,7 @@ class AttributeSeeder extends Seeder
      *
      * @var string
      */
-    protected static $model = App\Attribute::class;
+    protected static $model = App\Models\Attribute::class;
 
     /**
      * A list of attributes to seed.

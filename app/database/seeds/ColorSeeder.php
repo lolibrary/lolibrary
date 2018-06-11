@@ -7,7 +7,7 @@ class ColorSeeder extends Seeder
      *
      * @var string
      */
-    protected static $model = App\Color::class;
+    protected static $model = App\Models\Color::class;
 
     /**
      * A list of colorways to seed.

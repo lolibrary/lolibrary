@@ -7,7 +7,7 @@ class TagSeeder extends Seeder
      *
      * @var string
      */
-    protected static $model = App\Tag::class;
+    protected static $model = App\Models\Tag::class;
 
     /**
      * Run the database seeds.

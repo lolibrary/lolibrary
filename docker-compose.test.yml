@@ -3,14 +3,22 @@ version: '3.4'
 services:
   test:
     build:
-      context: ./app/next
+      context: ./app
+      dockerfile: ./next/Dockerfile
       target: build
-    command: ["sh", "-c",
-      "php artisan wait:db && php artisan wait:redis && php artisan migrate:fresh --seed --force --no-interaction && vendor/bin/phpunit"]
+    command:
+      - "sh"
+      - "-c"
+      - |
+        set -e
+        php artisan wait:db
+        php artisan wait:redis
+        php artisan migrate:fresh --seed --force --no-interaction
+        vendor/bin/phpunit
     depends_on:
       - db.lolibrary.test
       - redis.lolibrary.test
-  
+
   db.lolibrary.test:
     image: "postgres:10-alpine"
     environment:
@@ -21,7 +29,7 @@ services:
       interval: 5s
       timeout: 8s
       retries: 3
-    
+
   redis.lolibrary.test:
     image: "redis:alpine"
     healthcheck:

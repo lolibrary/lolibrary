@@ -7,7 +7,7 @@ class CategorySeeder extends Seeder
      *
      * @var string
      */
-    protected static $model = App\Category::class;
+    protected static $model = App\Models\Category::class;
 
     /**
      * A listing of item categories.

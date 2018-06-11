@@ -15,28 +15,28 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Feature::class, function (Faker $faker) {
+$factory->define(App\Models\Feature::class, function (Faker $faker) {
     return [
         'name' => $name = $faker->unique()->domainWord,
         'slug' => str_slug($name),
     ];
 });
 
-$factory->define(App\Color::class, function (Faker $faker) {
+$factory->define(App\Models\Color::class, function (Faker $faker) {
     return [
         'name' => $name = $faker->unique()->colorName,
         'slug' => str_slug($name),
     ];
 });
 
-$factory->define(App\Category::class, function (Faker $faker) {
+$factory->define(App\Models\Category::class, function (Faker $faker) {
     return [
         'name' => $name = $faker->unique()->name,
         'slug' => str_slug($name),
     ];
 });
 
-$factory->define(App\Brand::class, function (Faker $faker) {
+$factory->define(App\Models\Brand::class, function (Faker $faker) {
     return [
         'name' => $name = $faker->unique()->name('female'),
         'slug' => str_slug($name),
@@ -45,14 +45,14 @@ $factory->define(App\Brand::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Attribute::class, function (Faker $faker) {
+$factory->define(App\Models\Attribute::class, function (Faker $faker) {
     return [
         'name' => $name = $faker->unique()->domainWord,
         'slug' => str_slug($name),
     ];
 });
 
-$factory->define(App\Tag::class, function (Faker $faker) {
+$factory->define(App\Models\Tag::class, function (Faker $faker) {
     return [
         'name' => $name = $faker->unique()->word,
         'slug' => str_slug($name),
