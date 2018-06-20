@@ -116,4 +116,16 @@ class Image extends Model
     {
         return $this->getImageUrlAttribute();
     }
+
+    /**
+     * Get the filename for an image.
+     * 
+     * Overrides {@see \App\Models\Traits\Images\ImagePaths::getRootImagePath}.
+     *
+     * @return string
+     */
+    public function getRootImagePath()
+    {
+        return $this->filename;
+    }
 }

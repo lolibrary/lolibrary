@@ -18,6 +18,9 @@ class StorageServiceProvider extends ServiceProvider
     public function boot()
     {
         Storage::extend('minio', function ($app, $config) {
+            $url = $config['url']
+                ?? add_s3_bucket($config['endpoint'], $config['bucket']);
+
             $client = new S3Client([
                 'credentials' => [
                     'key'    => $config['key'],
@@ -32,10 +35,10 @@ class StorageServiceProvider extends ServiceProvider
 
             $options = [
                 'override_visibility_on_copy' => true,
-                'url' => $config['url'] ?? add_s3_bucket($config['endpoint'], $config['bucket']),
+                'url' => $url,
             ];
 
-            return new Filesystem(new AwsS3Adapter($client, $config['bucket'], '', $options));
+            return new Filesystem(new AwsS3Adapter($client, $config['bucket'], '', $options), $options);
         });
     }
 

@@ -43,7 +43,7 @@ trait ImagePaths
      */
     public function getImagePath()
     {
-        return $this->getImagesFolder() . "/{$this->id}.jpeg";
+        return $this->getImagesFolder() . '/' . $this->getRootImagePath();
     }
 
     /**
@@ -53,7 +53,7 @@ trait ImagePaths
      */
     public function getThumbnailPath()
     {
-        return $this->getThumbnailsFolder() . "/{$this->id}.jpeg";
+        return $this->getThumbnailsFolder() . '/' . $this->getRootImagePath();
     }
 
     /**
@@ -94,5 +94,15 @@ trait ImagePaths
     public function getUploadsFolder()
     {
         return defined(static::class . '::UPLOADS') ? static::UPLOADS : 'uploads';
+    }
+
+    /**
+     * Get the root image filename for URLs.
+     *
+     * @return string
+     */
+    public function getRootImagePath()
+    {
+        return "{$this->id}.jpeg";
     }
 }
