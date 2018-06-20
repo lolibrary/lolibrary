@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\Item;
+use App\Models\Brand;
+use App\Models\Category;
+
 class HomeController extends Controller
 {
     /**
@@ -11,6 +16,21 @@ class HomeController extends Controller
      */
     public function homepage()
     {
-        return view('homepage');
+        // todo: make this a static ::homepage() method
+        $posts = Post::query()
+            ->with('user')
+            ->whereNotNull('published_at')
+            ->take(3)
+            ->orderBy('published_at', 'desc')
+            ->get();
+
+        $brands = Brand::all();
+        $categories = Category::all();
+        $recent = Item::with(Item::PARTIAL_LOAD)
+            ->orderBy('published_at', 'desc')
+            ->take(15)
+            ->get();
+
+        return view('homepage', compact('posts', 'brands', 'categories', 'recent'));
     }
 }

@@ -50,7 +50,7 @@ services:
       - imaginary.lolibrary.test
 
   node:
-    image: "node:9"
+    image: "node:10"
     command: ["sh", "-c", "npm install && npm run watch"]
     working_dir: "/home/node"
     volumes:

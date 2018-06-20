@@ -21,3 +21,9 @@
 .alert-fullwidth {
   border-radius: 0;
 }
+
+.card-focus {
+  &:hover {
+    outline: 1px solid $brand-primary;
+  }
+}

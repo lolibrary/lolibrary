@@ -3,11 +3,10 @@
 namespace App\Models;
 
 /**
- * A forum post.
+ * A blog post.
  *
  * @property string $message
  * @property string $user_id The ID of the {@link \App\User user} this post belongs to.
- * @property string $topic_id The ID of the {@link \App\Topic topic} this post belongs to.
  *
  * @property \App\User $user The {@link \App\User user} who owns this post.
  * @property \App\User $topic The {@link \App\Topic topic} this post belongs to.
@@ -15,9 +14,18 @@ namespace App\Models;
 class Post extends Model
 {
     /**
+     * Fillable attributes.
+     *
      * @var array
      */
-    protected $fillable = ['message'];
+    protected $fillable = ['preview', 'body', 'image', 'slug'];
+
+    /**
+     * Date casts for attributes.
+     *
+     * @var array
+     */
+    protected $dates = ['published_at'];
 
     /**
      * The user who created this post.
@@ -27,15 +35,5 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * The topic this post is under.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function topic()
-    {
-        return $this->belongsTo(Topic::class);
     }
 }
