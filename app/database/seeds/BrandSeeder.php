@@ -3,6 +3,7 @@
 use App\Models\Brand;
 use App\Models\Image;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\QueryException;
 
 class BrandSeeder extends Seeder
 {
@@ -70,8 +71,7 @@ class BrandSeeder extends Seeder
                 continue;
             }
 
-            $image = Image::create([
-                'id' => uuid5('brand-' . $slug),
+            $image = Image::firstOrCreate([
                 'name' => $brand . ' icon picture',
                 'filename' => "{$slug}.png",
                 'thumbnail' => "{$slug}.png",
