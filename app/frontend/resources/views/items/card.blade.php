@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-body">
+    <div class="card-body text-center">
         <p class="mb-0" style="white-space: nowrap; overflow-x: hidden;">
             {{ $item->english_name }}
         </p>
