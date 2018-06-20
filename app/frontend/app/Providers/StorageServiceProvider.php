@@ -32,7 +32,7 @@ class StorageServiceProvider extends ServiceProvider
 
             $options = [
                 'override_visibility_on_copy' => true,
-                'url' => add_s3_bucket($config['endpoint'], $config['bucket']),
+                'url' => $config['url'] ?? add_s3_bucket($config['endpoint'], $config['bucket']),
             ];
 
             return new Filesystem(new AwsS3Adapter($client, $config['bucket'], '', $options));

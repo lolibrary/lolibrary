@@ -63,6 +63,7 @@ return [
             'bucket' => env('AWS_BUCKET', 'lolibrary'),
             'endpoint' => env('AWS_URL', 'http://minio.lolibrary.test:9000'),
             'local' => env('AWS_LOCAL', true),
+            'url' => env('AWS_CDN_URL'),
         ],
 
         'b2' => [
