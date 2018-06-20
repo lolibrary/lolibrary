@@ -27,6 +27,7 @@ class HomeController extends Controller
         $brands = Brand::all();
         $categories = Category::all();
         $recent = Item::with(Item::PARTIAL_LOAD)
+            ->drafts(false)
             ->orderBy('published_at', 'desc')
             ->take(15)
             ->get();

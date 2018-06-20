@@ -37,7 +37,7 @@
             </div>
         </li>
     </ul>
-    <a class="card-body py-3 text-center" href="{{-- $item->url --}}">
+    <a class="card-body py-3 text-center" href="{{ $item->url }}">
         View Item
     </a>
 </div>

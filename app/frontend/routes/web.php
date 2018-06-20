@@ -30,3 +30,4 @@ Route::prefix('profile')->group(function () {
 Route::get('blog/{post}', 'BlogController@show')->name('posts.show');
 Route::resource('brands', 'BrandController', ['only' => ['show', 'index']]);
 Route::resource('categories', 'CategoryController', ['only' => ['show', 'index']]);
+Route::resource('items', 'ItemController', ['only' => ['show', 'index']]);

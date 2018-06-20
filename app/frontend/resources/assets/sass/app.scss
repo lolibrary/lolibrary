@@ -22,8 +22,37 @@
   border-radius: 0;
 }
 
-.card-focus {
-  &:hover {
-    outline: 1px solid $brand-primary;
+.item-image-columns {
+  .card {
+    margin-bottom: 0;
+    display: inline-block;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
   }
+
+  column-count: 2;
+  column-gap: 0;
+  orphans: 1;
+  widows: 1;
+
+  @include media-breakpoint-up(sm) {
+    column-count: 3;
+  }
+
+  @include media-breakpoint-up(md) {
+    column-count: 4;
+  }
+
+  @include media-breakpoint-up(lg) {
+    column-count: 5;
+  }
+
+  @include media-breakpoint-up(xl) {
+    column-count: 6;
+  }
+}
+
+.text-regular {
+  font-family: Helvetica, Arial, sans-serif;
 }
