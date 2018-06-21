@@ -50,6 +50,11 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+// now we'll force the root URL to the app URL.
+$app->booted(function () {
+    url()->forceRootUrl(config('app.url'));
+});
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
