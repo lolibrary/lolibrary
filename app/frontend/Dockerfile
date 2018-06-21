@@ -21,11 +21,13 @@ COPY ./config /srv/code/config
 COPY ./database /srv/code/database
 COPY ./bootstrap /srv/code/bootstrap
 
+WORKDIR /srv/code
+
 RUN npm install && npm run production
 
 FROM amelia/php:7.2 as production
 
 COPY --from=build /srv/code /srv/code
-COPY --from=assets public/assets/ /srv/code/public/assets
+COPY --from=assets /srv/code/public/assets /srv/code/public/assets
 
-RUN composer install --no-dev && && rm -rf /var/cache/composer/*
+RUN composer install --no-dev && rm -rf /var/cache/composer/*
