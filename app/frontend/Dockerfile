@@ -30,4 +30,9 @@ FROM amelia/php:7.2 as production
 COPY --from=build /srv/code /srv/code
 COPY --from=assets /srv/code/public/assets /srv/code/public/assets
 
-RUN composer install --no-dev && rm -rf /var/cache/composer/*
+RUN apk add --update ca-certificates \
+    && update-ca-certificates \
+    && composer install --no-dev \
+    && chown -R www-data:www-data /srv/code \
+    && rm -rf /var/cache/composer/* \
+    && rm -rf /var/cache/apk/*
