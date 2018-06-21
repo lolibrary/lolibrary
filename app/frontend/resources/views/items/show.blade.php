@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row mb-3">
         <div class="col text-center">
-            <h3>{{ $item->english_name }}</h3>
+            <h1 class="h3">{{ $item->english_name }}</h3>
             <h4 class="text-muted">{{ $item->foreign_name }}</h4>
         </div>
     </div>
