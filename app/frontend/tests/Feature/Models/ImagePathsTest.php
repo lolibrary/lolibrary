@@ -101,7 +101,7 @@ class ImagePathsTest extends TestCase
             protected $id = '00000000-0000-0000-0000-000000000000';
         };
 
-        $this->assertEquals($this->endpoint() . '/images/00000000-0000-0000-0000-000000000000.jpeg', $class->getImageUrlAttribute());
+        $this->assertEquals($this->endpoint() . 'images/00000000-0000-0000-0000-000000000000.jpeg', $class->getImageUrlAttribute());
     }
 
     public function testThumbnailUrl()
@@ -111,7 +111,7 @@ class ImagePathsTest extends TestCase
             protected $id = '00000000-0000-0000-0000-000000000000';
         };
 
-        $this->assertEquals($this->endpoint() . '/thumbnails/00000000-0000-0000-0000-000000000000.jpeg', $class->getThumbnailUrlAttribute());
+        $this->assertEquals($this->endpoint() . 'thumbnails/00000000-0000-0000-0000-000000000000.jpeg', $class->getThumbnailUrlAttribute());
     }
 
     public function testUploadedUrl()
@@ -123,7 +123,7 @@ class ImagePathsTest extends TestCase
 
         $this->assertTrue(str_contains(
             $class->getUploadedUrlAttribute(),
-            $this->endpoint() . '/uploads/foobar.png'
+            $this->endpoint() . 'uploads/foobar.png'
         ));
     }
 
@@ -134,9 +134,6 @@ class ImagePathsTest extends TestCase
      */
     protected function endpoint()
     {
-        $default = config('filesystems.default');
-        $config = config("filesystems.disks.{$default}");
-
-        return "{$config['endpoint']}/{$config['bucket']}";
+        return Storage::url('/');
     }
 }
