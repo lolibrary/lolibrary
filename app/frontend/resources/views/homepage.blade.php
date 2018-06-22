@@ -61,7 +61,7 @@
     </div>
 
     <h2 class="mt-5">{{ __('Recent Items') }}</h2>
-    <div style="overflow-x: scroll; white-space: nowrap; overflow-y: hidden">
+    <div style="overflow-x: scroll; white-space: nowrap; overflow-y: hidden; -webkit-overflow-scrolling: touch;">
         @foreach ($recent as $item)
             <div class="p-2 d-inline-block" style="width: 16rem; white-space: normal">
                 @include('items.card', compact('item'))
