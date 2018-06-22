@@ -53,6 +53,7 @@ $app->singleton(
 // now we'll force the root URL to the app URL.
 $app->booted(function () {
     url()->forceRootUrl(config('app.url'));
+    url()->forceScheme('https');
 });
 
 /*
