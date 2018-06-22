@@ -12,24 +12,25 @@
     <div class="row">
         <div class="col-sm p-2">
             <img src="{{ $item->image->url }}"
-                onerror="this.src = '{{ asset('images/default.png') }}'"
-                data-original-url="{{ $item->image->url }}"
-                class="rounded mw-100 d-block">
-
-            <div class="row text-center p-3">
-                <div class="col">
-                    <i class="fal fa-star"></i> {{ $item->stargazers()->count() }} Stargazers
+                        onerror="this.src = '{{ asset('images/default.png') }}'"
+                        data-original-url="{{ $item->image->url }}"
+                        class="rounded mw-100 d-block">
+            <div class="row p-0 mx-0 my-3">
+                <div class="col p-1 list-group text-center small">
+                    <button class="list-group-item" type="button">
+                        <i class="fal fa-star"></i> {{ $item->stargazers()->count() }} Stargazers
+                    </button>
                 </div>
-
-                <div class="col">
-                    <i class="fal fa-users"></i> {{ $item->owners()->count() }} Owners
+                <div class="col p-1 list-group text-center small">
+                    <button class="list-group-item" type="button">
+                        <i class="fal fa-users"></i> {{ $item->owners()->count() }} Owners
+                    </button>
                 </div>
             </div>
         </div>
 
         <div class="col-sm p-2 px-4">
-
-            <h4 class="mt-4">{{ __('Item Info') }}</h4>
+            <h4 class="mt-2">{{ __('Item Info') }}</h4>
             <div class="text-muted">
                 <p class="m-0">
                     @if ($item->year)
