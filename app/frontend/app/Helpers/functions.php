@@ -94,6 +94,8 @@ if (! function_exists('slack')) {
 
 if (! function_exists('add_s3_bucket')) {
     /**
+     * Add an S3 bucket to a URL.
+     *
      * @param string|null $url
      * @param string|null $bucket
      * @return string|null
