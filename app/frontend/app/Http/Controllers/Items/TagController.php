@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Items;
 
 use App\Models\Tag;
+use App\Models\Item;
 use App\Http\Controllers\Controller;
 
 class TagController extends Controller
@@ -15,7 +16,9 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        return view('tags.show', compact('tag'));
+        $items = $tag->items()->with(Item::PARTIAL_LOAD)->paginate(24);
+
+        return view('tags.show', compact('tag', 'items'));
     }
 
     /**

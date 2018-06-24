@@ -15,7 +15,9 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        return view('brands.show', compact('brand'));
+        $items = $brand->items()->with(Item::PARTIAL_LOAD)->paginate(24);
+
+        return view('brands.show', compact('brand', 'items'));
     }
 
     /**

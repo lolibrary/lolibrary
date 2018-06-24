@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Items;
 
+use App\Models\Item;
 use App\Models\Feature;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,9 @@ class FeatureController extends Controller
      */
     public function show(Feature $feature)
     {
-        return view('features.show', compact('feature'));
+        $items = $feature->items()->with(Item::PARTIAL_LOAD)->paginate(24);
+
+        return view('features.show', compact('feature', 'items'));
     }
 
     /**
