@@ -1,4 +1,8 @@
-<div class="row text-center mb-3">
+<div class="row">
+    <h1 class="col p-2">{{ title_case($name) }} Info</h1>
+</div>
+
+<div class="row text-center mb-4">
     <div class="p-1 list-group text-center col-lg-4 col-sm-6 small p-2">
         <a class="list-group-item" href="{{ $model->url }}">
             @if ($image ?? false)
@@ -12,7 +16,7 @@
             @endif
         </a>
     </div>
-    <div class="col-lg-8 col-sm-6 mt-2">
+    <div class="col-lg-8 col-sm-6 p-2">
         @if ($description ?? false)
             <div class="card">
                 <div class="card-body text-left">
