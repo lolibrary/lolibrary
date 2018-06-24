@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Items;
 
 use App\Models\Brand;
+use App\Http\Controllers\Controller;
 
 class BrandController extends Controller
 {

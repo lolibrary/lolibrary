@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Items;
 
 use App\Models\Item;
+use App\Http\Controllers\Controller;
 
 class ItemController extends Controller
 {

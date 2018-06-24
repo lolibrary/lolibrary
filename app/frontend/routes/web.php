@@ -28,6 +28,16 @@ Route::prefix('profile')->group(function () {
 
 // blog posts route.
 Route::get('blog/{post}', 'BlogController@show')->name('posts.show');
-Route::resource('brands', 'BrandController', ['only' => ['show', 'index']]);
-Route::resource('categories', 'CategoryController', ['only' => ['show', 'index']]);
-Route::resource('items', 'ItemController', ['only' => ['show', 'index']]);
+
+// categories/brands/features etc
+Route::group(['namespace' => 'Items\\'], function () {
+    $options = ['only' => ['show', 'index']];
+
+    Route::resource('brands', 'BrandController', $options);
+    Route::resource('categories', 'CategoryController', $options);
+    Route::resource('features', 'FeatureController', $options);
+    Route::resource('colors', 'ColorController', $options);
+    Route::resource('tags', 'TagController', $options);
+
+    Route::resource('items', 'ItemController', $options);
+});
