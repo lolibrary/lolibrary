@@ -4,9 +4,9 @@
 <div class="container">
     @include('components.info', [
         'items' => $items,
-        'model' => $tag,
-        'name' => 'tag',
-        'tag' => true,
+        'model' => $feature,
+        'name' => 'feature',
+        'description' => true,
     ])
     @include('items.listing', ['items' => $items])
 </div>
