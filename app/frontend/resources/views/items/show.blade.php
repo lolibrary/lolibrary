@@ -118,12 +118,12 @@
             <div class="row">
                 @forelse ($item->colors as $color)
                     <div class="p-1 list-group text-center col-lg-4 col-6 small">
-                        <a class="list-group-item" href="{{-- $color->url --}}">
+                        <a class="list-group-item" href="{{ $color->url }}">
                             {{ $color->name }}
                         </a>
                     </div>
                 @empty
-                    <p class="col text-muted">No features recorded!</p>
+                    <p class="col text-muted">No colors recorded!</p>
                 @endforelse
             </div>
 
@@ -131,7 +131,7 @@
             <div class="row">
                 @forelse ($item->tags as $tag)
                     <div class="p-1 list-group text-center col-lg-4 col-6 small">
-                        <a class="list-group-item" href="{{-- $tag->url --}}">
+                        <a class="list-group-item" href="{{ $tag->url }}">
                             #{{ $tag->slug }}
                         </a>
                     </div>
