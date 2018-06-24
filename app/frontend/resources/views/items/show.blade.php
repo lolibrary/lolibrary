@@ -105,7 +105,7 @@
             <div class="row">
                 @forelse ($item->features as $feature)
                     <div class="p-1 list-group text-center col-lg-4 col-6 small">
-                        <a class="list-group-item" href="{{-- $feature->url --}}">
+                        <a class="list-group-item" href="{{ $feature->url }}">
                             {{ $feature->name }}
                         </a>
                     </div>
