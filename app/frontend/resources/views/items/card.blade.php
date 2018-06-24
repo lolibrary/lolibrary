@@ -16,7 +16,9 @@
         </p>
 
         <div style="height: 7rem" class="text-center">
-            <img src="{{ $item->image->url ?? asset('images/default.png') }}" class="mw-100 mh-100 rounded">
+            <a href="{{ $item->url }}">
+                <img src="{{ $item->image->url ?? asset('images/default.png') }}" class="mw-100 mh-100 rounded">
+            </a>
         </div>
     </div>
     <ul class="list-group list-group-flush">
