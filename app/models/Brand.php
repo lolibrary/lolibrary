@@ -56,4 +56,14 @@ class Brand extends Model
     {
         return $this->belongsTo(Image::class);
     }
+
+    /**
+     * Get the items that belong to a category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

@@ -31,4 +31,14 @@ class Category extends Model
         'name',
         'slug',
     ];
+
+    /**
+     * Get the items that belong to a category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }
