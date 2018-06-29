@@ -2,9 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1 class="text-center" style="margin-bottom: 25px">
-        <img src="{{ asset('images/banners/banner01.png') }}" alt="" style="max-height: 200px; max-width: 90%">
-    </h1>
+    @include('components.hero')
 
     <h2 class="sr-only">{{ __('News') }}</h2>
     <div class="row">

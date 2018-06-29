@@ -30,9 +30,14 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
+        'model' => App\Models\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+
+    'donation' => [
+        'paypal' => env('PAYPAL_DONATION_LINK'),
+        'patreon' => env('PATREON_DONATION_LINK', 'https://patreon.com/lolibrary'),
+    ]
 
 ];

@@ -56,3 +56,14 @@
 .text-regular {
   font-family: Helvetica, Arial, sans-serif;
 }
+
+.flex-scroll-container {
+  display: flex;
+  flex-wrap: nowrap;
+
+  // give us native scrolling in iOS
+  -webkit-overflow-scrolling: touch;
+  
+  overflow-x: auto;
+  overflow-y: hidden;
+}

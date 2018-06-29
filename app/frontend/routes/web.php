@@ -41,3 +41,7 @@ Route::group(['namespace' => 'Items\\'], function () {
 
     Route::resource('items', 'ItemController', $options);
 });
+
+Route::get('donate', 'DonationController@index')->name('donate');
+Route::get('donate/paypal', 'DonationController@paypal')->name('donate.paypal');
+Route::get('donate/patreon', 'DonationController@patreon')->name('donate.patreon');
