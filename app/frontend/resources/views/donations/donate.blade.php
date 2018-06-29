@@ -5,15 +5,15 @@
     @include('components.hero')
 
     <div class="row mb-4">
-        <div class="col-sm-4 offset-sm-2 mb-4">
+        <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3 offset-xl-3 offset-lg-2 offset-sm-0 offset-md-1 mb-4">
             <a href="{{ route('donate.paypal') }}" class="btn btn-block btn-default btn-lg text-white" style="background-color: #0070ba"><i class="fab fa-paypal"></i> Donate with PayPal</a>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3">
             <a href="{{ route('donate.patreon') }}" class="btn btn-block btn-default btn-lg text-white" style="background-color: rgb(249, 104, 84)"><i class="fab fa-patreon"></i> Support us on Patreon</a>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-5 mx-auto text-center">
+        <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6 mx-auto text-center">
             <div class="card">
                 <div class="card-body">
                     <p>
