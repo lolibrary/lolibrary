@@ -11,3 +11,12 @@
     @include('items.listing', ['items' => $items])
 </div>
 @endsection
+
+@section('meta')
+    <link rel="canonical" href="{{ $tag->url }}">
+
+    <meta property="og:url" content="{{ $tag->url }}">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Tag '{{ $tag->name }}' on Lolibrary">
+    <meta property="og:image" content="{{ asset('images/banners/banner01-white.png') }}">
+@endsection

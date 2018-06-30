@@ -36,7 +36,7 @@ return [
     ],
 
     'donation' => [
-        'paypal' => env('PAYPAL_DONATION_LINK'),
+        'paypal' => env('PAYPAL_DONATION_LINK', 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q3J9VZVUMX3EU'),
         'patreon' => env('PATREON_DONATION_LINK', 'https://patreon.com/lolibrary'),
     ]
 

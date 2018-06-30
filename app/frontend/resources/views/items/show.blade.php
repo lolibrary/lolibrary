@@ -168,3 +168,13 @@
     </div>
 </div>
 @endsection
+
+@section('meta')
+    <link rel="canonical" href="{{ $item->url }}">
+
+    <meta property="og:url" content="{{ $item->url }}">
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="{{ $item->english_name }} by {{ $item->brand->name }}">
+    <meta property="og:image" content="{{ $item->image->url ?? asset('images/default.png') }}">
+    <meta property="product:brand" content="{{ $item->brand->name }}">
+@endsection

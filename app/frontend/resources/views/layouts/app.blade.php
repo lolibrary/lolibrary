@@ -15,6 +15,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('assets/app.css') }}" rel="stylesheet">
+
+    @yield('meta', '')
 </head>
 <body>
     <a class="sr-only sr-only-focusable" href="#skip-navigation">{{ __('Skip to content') }}</a>
@@ -38,6 +40,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <li><a class="nav-link" href="{{ route('donate') }}">{{ __('Donate') }}</a></li>
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
@@ -73,5 +76,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('assets/app.js') }}"></script>
+    @yield('script', '')
 </body>
 </html>
