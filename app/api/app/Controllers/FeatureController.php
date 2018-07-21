@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Controllers;
 
 use App\Models\Feature;
 

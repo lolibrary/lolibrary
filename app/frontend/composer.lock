@@ -2091,21 +2091,23 @@
         },
         {
             "name": "lolibrary/healthcheck",
-            "version": "v1.1.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lolibrary/healthcheck.git",
-                "reference": "1d571690d9a433f507d5b6cf871fcc5f93b4c087"
+                "reference": "70c4b6e49c690ec7f122cbcbd33a85446360a3e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lolibrary/healthcheck/zipball/1d571690d9a433f507d5b6cf871fcc5f93b4c087",
-                "reference": "1d571690d9a433f507d5b6cf871fcc5f93b4c087",
+                "url": "https://api.github.com/repos/lolibrary/healthcheck/zipball/70c4b6e49c690ec7f122cbcbd33a85446360a3e2",
+                "reference": "70c4b6e49c690ec7f122cbcbd33a85446360a3e2",
                 "shasum": ""
             },
             "require-dev": {
                 "laravel/framework": "5.6.*",
-                "laravel/lumen-framework": "5.6.*"
+                "laravel/lumen-framework": "5.6.*",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "^7"
             },
             "type": "library",
             "extra": {
@@ -2131,7 +2133,7 @@
                 }
             ],
             "description": "Health Checking for Laravel/Lumen",
-            "time": "2018-07-14T09:54:59+00:00"
+            "time": "2018-07-21T17:08:46+00:00"
         },
         {
             "name": "mhetreramesh/flysystem-backblaze",

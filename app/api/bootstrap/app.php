@@ -2,11 +2,7 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-try {
-    (new Dotenv\Dotenv(__DIR__.'/../'))->load();
-} catch (Dotenv\Exception\InvalidPathException $e) {
-    //
-}
+(new Dotenv\Dotenv('/secrets/environment'))->load();
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +20,10 @@ $app = new Laravel\Lumen\Application(
 );
 
 $app->withEloquent();
+$app->withFacades();
+
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
+$app->register(Lolibrary\Health\HealthServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

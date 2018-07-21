@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Controllers;
 
 use App\Models\Brand;
 
 class BrandController extends Controller
 {
     /**
-     * Return all categories, cached.
+     * Return all brands, cached.
      *
      * @return mixed
      * @throws \Exception

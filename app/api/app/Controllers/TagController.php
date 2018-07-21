@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Controllers;
 
 use App\Models\Tag;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use App\Http\Requests\Api\TagSearchRequest;
 
 class TagController extends Controller
 {
@@ -32,14 +32,21 @@ class TagController extends Controller
     /**
      * Search for a tag.
      *
-     * @param \App\Http\Requests\Api\TagSearchRequest $request
+     * @param \Illuminate\Http\Request $request
      * @return \App\Tag[]|\Illuminate\Pagination\LengthAwarePaginator
      */
-    public function search(TagSearchRequest $request)
+    public function search(Request $request)
     {
-        return Tag::orderBy('created_at')->where(function (Builder $query) use ($request) {
-            $query->where('slug', 'ilike', "%{$request->search}%")
-                ->orWhere('slug', 'ilike', "%{$request->search}%");
+        $this->validate($request, [
+            'search' => 'required_without:q|string|min:1,max:30',
+            'q' => 'required_without:search|string|min:1,max:30',
+        ]);
+
+        $search = $request->input('search') ?? $request->input('q');
+
+        return Tag::orderBy('created_at')->where(function (Builder $query) use ($request, $search) {
+            $query->where('slug', 'ilike', "%{$search}%")
+                ->orWhere('name', 'ilike', "%{$search}%");
         })->paginate(100);
     }
 }

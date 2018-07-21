@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Controllers;
 
 use App\Models\Tag;
 use App\Models\Item;
@@ -9,6 +9,8 @@ use App\Models\Color;
 use App\Models\Feature;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Requests\SearchRequest;
 use Illuminate\Database\Eloquent\Builder;
 
 class SearchController extends Controller
@@ -29,11 +31,13 @@ class SearchController extends Controller
     /**
      * Search for items.
      *
-     * @param \App\Http\Controllers\Api\SearchRequest $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\App\Item[]
      */
-    public function search(SearchRequest $request)
+    public function search(Request $request)
     {
+        $this->validate($request, (new SearchRequest)->rules());
+
         $query = Item::query();
 
         $this->filters($request, $query);
@@ -59,11 +63,11 @@ class SearchController extends Controller
     /**
      * Filter relationships.
      *
-     * @param \App\Http\Controllers\Api\SearchRequest $request
+     * @param \App\Requests\SearchRequest|\Illuminate\Http\Request $request
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return void
      */
-    protected function filters(SearchRequest $request, Builder $query)
+    protected function filters(Request $request, Builder $query)
     {
         foreach (static::FILTERS as $class => $relation) {
             [$singular, $plural] = [Str::singular($relation), Str::plural($relation)];
@@ -83,13 +87,13 @@ class SearchController extends Controller
     /**
      * Filter on year.
      *
-     * @param \App\Http\Controllers\Api\SearchRequest $request
+     * @param \App\Requests\SearchRequest|\Illuminate\Http\Request $request
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return void
      */
-    protected function years(SearchRequest $request, Builder $query)
+    protected function years(Request $request, Builder $query)
     {
-        $years = $request->years ?? $request->year;
+        $years = $request->input('years') ?? $request->input('year');
 
         if ($years !== null) {
             is_array($years)

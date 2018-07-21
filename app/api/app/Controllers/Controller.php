@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\View\View;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
@@ -19,13 +20,13 @@ class Controller extends BaseController
         $result = call_user_func_array([$this, $method], $parameters);
 
         if ($result instanceof View) {
-            return response()->json([
+            return new JsonResponse([
                 'status' => 500,
                 'exception' => 'api.view.given',
                 'message' => 'A view was supplied in an API route.',
             ], 500);
         }
 
-        return response()->json($result);
+        return new JsonResponse($result);
     }
 }

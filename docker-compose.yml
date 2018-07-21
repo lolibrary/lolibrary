@@ -59,7 +59,6 @@ services:
       - |
         composer update
         php artisan wait:db
-        php artisan wait:redis
         php -S 0.0.0.0:8080 /srv/code/server.php
     expose:
       - 8080
