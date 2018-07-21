@@ -1,37 +1,20 @@
 ---
 version: '3'
 services:
-  web:
-    image: "amelia/php:7.2"
-    volumes:
-      - "./app/frontend:/srv/code"
-      - "./app/models:/srv/code/app/Models"
-      - "./app/database:/srv/code/database"
-      - "./app/config:/srv/code/config"
-      - "./app/bootstrap:/srv/code/bootstrap"
-      - "./.env:/secrets/environment/.env:ro"
-    depends_on:
-      - db.lolibrary.test
-      - redis.lolibrary.test
-      - minio.lolibrary.test
-      - imaginary.lolibrary.test
-    hostname: lolibrary.test
-
-  app:
-    restart: always
+  www.lolibrary.test:
     image: "amelia/php:7.2"
     command:
       - "sh"
       - "-c"
       - |
-        composer install
+        composer update
         php artisan wait:db
         php artisan wait:redis
         php artisan migrate --seed
-        php artisan horizon
+        php artisan serve --host=0.0.0.0 --port=8080
     volumes:
       - "./app/frontend:/srv/code"
-      - "./app/models:/srv/code/app/Models"
+      - "./app/models:/srv/code/app/Models:ro"
       - "./app/database:/srv/code/database"
       - "./app/config:/srv/code/config:ro"
       - "./app/bootstrap:/srv/code/bootstrap"
@@ -41,6 +24,54 @@ services:
       - redis.lolibrary.test
       - minio.lolibrary.test
       - imaginary.lolibrary.test
+    expose:
+      - 8080
+
+  app:
+    restart: always
+    image: "amelia/php:7.2"
+    command:
+      - "sh"
+      - "-c"
+      - |
+        sleep 45
+        php artisan wait:db
+        php artisan wait:redis
+        php artisan horizon
+    volumes:
+      - "./app/frontend:/srv/code"
+      - "./app/models:/srv/code/app/Models:ro"
+      - "./app/database:/srv/code/database"
+      - "./app/config:/srv/code/config:ro"
+      - "./app/bootstrap:/srv/code/bootstrap"
+      - "./.env:/secrets/environment/.env:ro"
+    depends_on:
+      - db.lolibrary.test
+      - redis.lolibrary.test
+      - minio.lolibrary.test
+      - imaginary.lolibrary.test
+  
+  api.lolibrary.test:
+    image: "amelia/php:7.2"
+    command:
+      - "sh"
+      - "-c"
+      - |
+        composer update
+        php artisan wait:db
+        php artisan wait:redis
+        php -S 0.0.0.0:8080 /srv/code/server.php
+    expose:
+      - 8080
+    volumes:
+      - "./app/api:/srv/code"
+      - "./app/models:/srv/code/app/Models:ro"
+      - "./app/config:/srv/code/config:ro"
+      - "./.env:/secrets/environment/.env:ro"
+    depends_on:
+      - db.lolibrary.test
+      - redis.lolibrary.test
+      - minio.lolibrary.test
 
   node:
     image: "node:10"
@@ -80,7 +111,6 @@ services:
       interval: 5s
       timeout: 8s
       retries: 3
-    hostname: db.lolibrary.test
     ports:
       - "5432:5432"
     
@@ -92,7 +122,6 @@ services:
       interval: 10s
       timeout: 10s
       retries: 3
-    hostname: redis.lolibrary.test
     ports:
       - "6379:6379"
   
@@ -109,10 +138,10 @@ services:
       - 80
       - 443
     depends_on:
-      - web
+      - www.lolibrary.test
+      - api.lolibrary.test
       - minio.lolibrary.test
       - imaginary.lolibrary.test
 volumes:
   db-data:
-  redis-data:
   minio-data:

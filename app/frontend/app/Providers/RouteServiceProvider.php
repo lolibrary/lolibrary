@@ -36,10 +36,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapHealthRoutes();
-
-        $this->mapApiRoutes();
-
         $this->mapWebRoutes();
     }
 
@@ -55,32 +51,5 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
-    }
-
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
-    protected function mapApiRoutes()
-    {
-        Route::name('api.')
-            ->middleware('api')
-            ->prefix('api/v1')
-            ->namespace($this->namespace . '\Api')
-            ->group(base_path('routes/api.php'));
-    }
-
-    /**
-     * Define health check routes.
-     *
-     * @return void
-     */
-    protected function mapHealthRoutes()
-    {
-        Route::namespace($this->namespace)
-            ->group(base_path('routes/health.php'));
     }
 }

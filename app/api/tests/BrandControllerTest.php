@@ -1,9 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Api;
-
 use App\Models\Brand;
-use Tests\Feature\TestCase;
 
 class BrandControllerTest extends TestCase
 {

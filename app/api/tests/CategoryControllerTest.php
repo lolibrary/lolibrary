@@ -1,9 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Api;
-
 use App\Models\Category;
-use Tests\Feature\TestCase;
 
 class CategoryControllerTest extends TestCase
 {

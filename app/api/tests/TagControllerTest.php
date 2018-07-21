@@ -1,9 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Api;
-
 use App\Models\Tag;
-use Tests\Feature\TestCase;
 
 class TagControllerTest extends TestCase
 {

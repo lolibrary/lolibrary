@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: api
+spec:
+  replicas: 2
+  progressDeadlineSeconds: 60
+  minReadySeconds: 1
+  imagePullPolicy: Always
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: lolibrary/api:latest
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+          volumeMounts:
+            - name: api-environment
+              mountPath: /secrets/environment
+              readOnly: true
+          ports:
+            - containerPort: 80
+        # CloudSQL Proxy Container
+        - name: cloudsql-proxy
+          image: gcr.io/cloudsql-docker/gce-proxy:1.11
+          command: ["/cloud_sql_proxy",
+                    "-instances=lolibrary-180111:us-central1:lolibrary=tcp:5432",
+                    "-credential_file=/secrets/cloudsql/credentials.json"]
+          volumeMounts:
+            - name: cloudsql-instance-credentials
+              mountPath: /secrets/cloudsql
+              readOnly: true
+      volumes:
+        - name: cloudsql-instance-credentials
+          secret:
+            secretName: cloudsql-instance-credentials
+        - name: api-environment
+          secret:
+            secretName: api-environment

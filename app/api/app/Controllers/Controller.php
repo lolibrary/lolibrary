@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Contracts\View\View;
-use App\Http\Controllers\Controller as BaseController;
+use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
