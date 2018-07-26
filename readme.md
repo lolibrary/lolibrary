@@ -2,6 +2,7 @@
 <p align="center">
   <a href="https://patreon.com/lolibrary" title="Support us on Patreon"><img src="/.github/patreon-donate-orange.svg" alt=""></a>
   <a href="https://semaphoreci.com/ameliaikeda/lolibrary" title="Build Status"><img src="https://semaphoreci.com/api/v1/ameliaikeda/lolibrary/branches/master/badge.svg" alt=""></a>
+<a href="https://app.fossa.io/projects/git%2Bgithub.com%2Flolibrary%2Flolibrary?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Flolibrary%2Flolibrary.svg?type=shield"/></a>
   <a href="https://codeclimate.com/github/lolibrary/lolibrary/maintainability" title="Project Maintainability Score on Code Climate"><img src="https://api.codeclimate.com/v1/badges/4d4b0fa8d8f9d80a00a9/maintainability" alt=""></a>
 </p>
 
@@ -65,3 +66,6 @@ Lolibrary's code is licenced under the [BSD Licence](https://opensource.org/lice
 You may not use any of Lolibrary Inc's logos or trademarks without prior written permission.
 
 Lolibrary Inc is a 501(c)(3) non-profit incorporated in the USA.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Flolibrary%2Flolibrary.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Flolibrary%2Flolibrary?ref=badge_large)
