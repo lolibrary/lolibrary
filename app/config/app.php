@@ -53,6 +53,7 @@ return [
     */
 
     'url' => env('APP_URL', 'https://lolibrary.test'),
+    'search_url' => env('APP_SEARCH_URL', 'https://api.lolibrary.test/search'),
 
     /*
     |--------------------------------------------------------------------------

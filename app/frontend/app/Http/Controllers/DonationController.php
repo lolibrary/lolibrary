@@ -37,10 +37,12 @@ class DonationController extends Controller
     }
 
     /**
-     * 
+     * Add a view to say thanks to users for donations.
+     *
+     * @return \Illuminate\View\View
      */
-    public function stripe(DonateRequest $request)
+    public function thanks()
     {
-        //
+      return view('donations.thanks');
     }
 }
