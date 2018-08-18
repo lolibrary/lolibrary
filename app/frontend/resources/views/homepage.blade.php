@@ -45,7 +45,7 @@
                 <a href="{{ $category->url }}">
                     <div class="card-body p-0 m-0" style="height: 150px; width: 150px;">
                         <div class="d-flex justify-content-center align-items-center" style="height: 100px">
-                            <img src="{{ asset('images/icon.svg') }}" class="p-3 mh-100 mw-100" alt="">
+                            <img src="{{ asset("categories/{$category->slug}.svg") }}" class="p-1 mh-100 mw-100" alt="">
                         </div>
                         <div style="height: 50px" class="text-center">
                             <p class="text-muted small p-2">
