@@ -18,6 +18,7 @@ Route::post('auth/resend', 'EmailController@resend')->name('auth.resend');
 
 // Homepage
 Route::get('/', 'HomeController@homepage')->name('home');
+Route::get('/search', 'SearchController@index')->name('search');
 
 // User
 Route::prefix('profile')->group(function () {

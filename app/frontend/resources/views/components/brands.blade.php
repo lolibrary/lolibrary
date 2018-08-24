@@ -1,1 +1,1 @@
-@include('components.select', ['items' => $brands, 'id' => 'brands'])
+@include('components.options', ['options' => $brands])

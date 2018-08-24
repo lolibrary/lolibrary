@@ -8,6 +8,4 @@
             <option v-for="option in options" :value="option.value">{{ option.text }}</option>
         </select>
     </div>
-
-
 </template>

@@ -1,5 +1,5 @@
 {{
-  collect($tags)->map(function ($name, $slug) {
+  collect($options)->map(function ($name, $slug) {
     return compact('slug', 'name');
   })->values()->toJson()
 }}

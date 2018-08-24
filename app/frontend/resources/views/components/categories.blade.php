@@ -1,1 +1,1 @@
-@include('components.select', ['items' => $categories, 'id' => 'categories'])
+@include('components.options', ['options' => $categories])

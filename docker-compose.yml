@@ -50,7 +50,7 @@ services:
       - redis.lolibrary.test
       - minio.lolibrary.test
       - imaginary.lolibrary.test
-  
+
   api.lolibrary.test:
     image: "amelia/php:7.2"
     command:
@@ -74,7 +74,7 @@ services:
 
   node:
     image: "node:10"
-    command: ["sh", "-c", "npm install && npm run watch"]
+    command: ["sh", "-c", "npm install && npm run watch-poll"]
     working_dir: "/home/node"
     volumes:
       - "./app/frontend:/home/node"
@@ -87,7 +87,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 3
-  
+
   minio.lolibrary.test:
     image: "minio/minio:latest"
     volumes:
@@ -96,7 +96,7 @@ services:
     environment:
       MINIO_ACCESS_KEY: MinioAccessKey
       MINIO_SECRET_KEY: SecretExampleKey
-  
+
   db.lolibrary.test:
     image: "postgres:10-alpine"
     environment:
@@ -112,7 +112,7 @@ services:
       retries: 3
     ports:
       - "5432:5432"
-    
+
   redis.lolibrary.test:
     image: "redis:alpine"
     command: ["redis-server"]
@@ -123,7 +123,7 @@ services:
       retries: 3
     ports:
       - "6379:6379"
-  
+
   proxy:
     build: ./app/proxy
     volumes:

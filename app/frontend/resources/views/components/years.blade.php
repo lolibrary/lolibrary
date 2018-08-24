@@ -1,1 +1,5 @@
-@include('components.select', ['items' => $years, 'id' => 'years'])
+{{
+  collect(range(1990, date('Y') + 1))->map(function ($year) {
+    return (string) $year;
+  })->toJson()
+}}
