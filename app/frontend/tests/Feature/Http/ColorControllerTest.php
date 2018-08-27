@@ -1,6 +1,9 @@
 <?php
 
+namespace Tests\Feature\Http;
+
 use App\Models\Color;
+use Tests\Feature\TestCase;
 
 class ColorControllerTest extends TestCase
 {

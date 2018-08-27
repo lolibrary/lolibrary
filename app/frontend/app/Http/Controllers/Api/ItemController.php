@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Item;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

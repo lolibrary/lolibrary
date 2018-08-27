@@ -1,6 +1,9 @@
 <?php
 
+namespace Tests\Feature\Http;
+
 use App\Models\Attribute;
+use Tests\Feature\TestCase;
 
 class AttributeControllerTest extends TestCase
 {

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Models;
 
 use Tests\Feature\TestCase;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Traits\Images\ImagePaths;
 
 class ImagePathsTest extends TestCase
@@ -68,17 +69,17 @@ class ImagePathsTest extends TestCase
     {
         $class = new class {
             use ImagePaths;
-            protected $id = 'foobar';
+            protected $filename = 'foobar.png';
         };
 
-        $this->assertEquals('images/foobar.jpeg', $class->getImagePath());
+        $this->assertEquals('images/foobar.png', $class->getImagePath());
     }
 
     public function testThumbnailPath()
     {
         $class = new class {
             use ImagePaths;
-            protected $id = 'foobar';
+            protected $filename = 'foobar.jpeg';
         };
 
         $this->assertEquals('thumbnails/foobar.jpeg', $class->getThumbnailPath());
@@ -98,7 +99,7 @@ class ImagePathsTest extends TestCase
     {
         $class = new class {
             use ImagePaths;
-            protected $id = '00000000-0000-0000-0000-000000000000';
+            protected $filename = '00000000-0000-0000-0000-000000000000.jpeg';
         };
 
         $this->assertEquals($this->endpoint() . 'images/00000000-0000-0000-0000-000000000000.jpeg', $class->getImageUrlAttribute());
@@ -108,10 +109,10 @@ class ImagePathsTest extends TestCase
     {
         $class = new class {
             use ImagePaths;
-            protected $id = '00000000-0000-0000-0000-000000000000';
+            protected $filename = '00000000-0000-0000-0000-000000000000.png';
         };
 
-        $this->assertEquals($this->endpoint() . 'thumbnails/00000000-0000-0000-0000-000000000000.jpeg', $class->getThumbnailUrlAttribute());
+        $this->assertEquals($this->endpoint() . 'thumbnails/00000000-0000-0000-0000-000000000000.png', $class->getThumbnailUrlAttribute());
     }
 
     public function testUploadedUrl()
@@ -123,7 +124,7 @@ class ImagePathsTest extends TestCase
 
         $this->assertTrue(str_contains(
             $class->getUploadedUrlAttribute(),
-            $this->endpoint() . 'uploads/foobar.png'
+            '/uploads/foobar.png'
         ));
     }
 

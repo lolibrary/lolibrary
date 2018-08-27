@@ -89,7 +89,7 @@ class Image extends Model
         $filename = str_replace($model->getUploadsFolder() . '/', '', $filename);
 
         $model->id = $id ?? uuid4();
-        $model->filename = $id . '.' . $file->extension();
+        $model->filename = $model->id . '.' . $file->extension();
         $model->uploaded_filename = $filename;
 
         $model->save();
@@ -120,7 +120,7 @@ class Image extends Model
 
     /**
      * Get the filename for an image.
-     * 
+     *
      * Overrides {@see \App\Models\Traits\Images\ImagePaths::getRootImagePath}.
      *
      * @return string

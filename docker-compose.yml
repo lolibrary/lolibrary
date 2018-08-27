@@ -51,27 +51,6 @@ services:
       - minio.lolibrary.test
       - imaginary.lolibrary.test
 
-  api.lolibrary.test:
-    image: "amelia/php:7.2"
-    command:
-      - "sh"
-      - "-c"
-      - |
-        composer update
-        php artisan wait:db
-        php -S 0.0.0.0:8080 /srv/code/server.php
-    expose:
-      - 8080
-    volumes:
-      - "./app/api:/srv/code"
-      - "./app/models:/srv/code/app/Models:ro"
-      - "./app/config:/srv/code/config:ro"
-      - "./.env:/secrets/environment/.env:ro"
-    depends_on:
-      - db.lolibrary.test
-      - redis.lolibrary.test
-      - minio.lolibrary.test
-
   node:
     image: "node:10"
     command: ["sh", "-c", "npm install && npm run watch-poll"]

@@ -103,6 +103,6 @@ trait ImagePaths
      */
     public function getRootImagePath()
     {
-        return "{$this->id}.jpeg";
+        return "{$this->filename}";
     }
 }

@@ -18,24 +18,6 @@ services:
     depends_on:
       - db.lolibrary.test
       - redis.lolibrary.test
-  
-  api:
-    build:
-      context: ./app
-      dockerfile: ./api/Dockerfile
-      target: build
-    command:
-      - "sh"
-      - "-c"
-      - |
-        set -e
-        php artisan wait:db
-        php artisan wait:redis
-        php artisan migrate:fresh --seed --force --no-interaction
-        vendor/bin/phpunit
-    depends_on:
-      - db.lolibrary.test
-      - redis.lolibrary.test
 
   db.lolibrary.test:
     image: "postgres:10-alpine"

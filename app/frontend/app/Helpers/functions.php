@@ -111,3 +111,26 @@ if (! function_exists('add_s3_bucket')) {
         return (string) $uri->withHost("${bucket}." . $uri->getHost());
     }
 }
+
+if (! function_exists('search_route')) {
+    /**
+     * Get a search route for use with direct-linking.
+     *
+     * @param array $params
+     * @return string
+     */
+    function search_route(array $params)
+    {
+        $results = [];
+
+        foreach ($params as $key => $values) {
+            $values = (array) $values;
+
+            foreach ($values as $value) {
+              $results[] = rawurlencode($key) . "[]=" . rawurlencode($value);
+            }
+        }
+
+        return route('search') . '?' . implode('&', $results);
+    }
+}

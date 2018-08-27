@@ -1,6 +1,9 @@
 <?php
 
+namespace Tests\Feature\Http;
+
 use App\Models\Feature;
+use Tests\Feature\TestCase;
 
 class FeatureControllerTest extends TestCase
 {

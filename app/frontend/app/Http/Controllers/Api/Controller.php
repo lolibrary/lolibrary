@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\View\View;
-use Laravel\Lumen\Routing\Controller as BaseController;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class Controller extends BaseController
 {
+    use ValidatesRequests;
+
     /**
      * Execute an action on the controller.
      *

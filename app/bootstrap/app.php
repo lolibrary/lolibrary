@@ -16,8 +16,9 @@ $app = new Illuminate\Foundation\Application(
 );
 
 // Allow us to load data from a container's environment.
-$app->afterLoadingEnvironment(function () {
-    if (file_exists('/secrets/environment/.env')) {
+$app->afterLoadingEnvironment(function () use ($app) {
+    $path = '/secrets/environment/.env';
+    if (file_exists($path) && is_file($path) && is_readable($path)) {
         $dotenv = new Dotenv\Dotenv('/secrets/environment', '.env');
 
         $dotenv->overload();

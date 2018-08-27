@@ -6,17 +6,14 @@ frontend-prod:
 	docker build --target=production -f ./app/frontend/Dockerfile ./app
 
 frontend-test:
-	docker-compose \
-		-f docker-compose.test.yml \
-		-p testing \
-			up \
-				--build \
-				--renew-anon-volumes \
-				--exit-code-from test \
-				--abort-on-container-exit \
-				--remove-orphans
+	docker-compose -p frontend-test -f docker-compose.test.yml build frontend && \
+	docker-compose -p frontend-test -f docker-compose.test.yml run --rm frontend
 
-test: frontend-test
+api-test:
+	CACHE_DRIVER=array QUEUE_DRIVER=sync docker-compose -p api-test -f docker-compose.test.yml build api && \
+	docker-compose -p api-test -f docker-compose.test.yml run --rm api
+
+test: frontend-test api-test
 
 build: frontend
 

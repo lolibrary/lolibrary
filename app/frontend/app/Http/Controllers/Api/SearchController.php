@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Tag;
 use App\Models\Item;
