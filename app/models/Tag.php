@@ -26,6 +26,7 @@ class Tag extends Model
     protected $visible = [
         'name',
         'slug',
+        'url',
     ];
 
     /**

@@ -10,10 +10,12 @@ use App\Models\Feature;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Requests\SearchRequest;
+use App\Http\Requests\Api\SearchRequest;
 use Illuminate\Database\Eloquent\Builder;
 
-class SearchController extends Controller
+use App\Http\Controllers\Controller as Base;
+
+class SearchController extends Base
 {
     /**
      * An array of models that we allow searching on.
@@ -34,16 +36,14 @@ class SearchController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\App\Item[]
      */
-    public function search(Request $request)
+    public function search(SearchRequest $request)
     {
-        $this->validate($request, (new SearchRequest)->rules());
-
         $query = Item::query();
 
         $this->filters($request, $query);
         $this->years($request, $query);
 
-        if ($request->search !== null) {
+        if (is_string($request->search) && strlen($request->search) > 0) {
             $search = '%' . $request->search . '%';
 
             $query->where(function (Builder $query) use ($search) {
@@ -53,7 +53,7 @@ class SearchController extends Controller
             });
         }
 
-        $query->orderByDesc('created_at');
+        $query->orderByDesc('published_at');
 
         $query->where('status', Item::PUBLISHED);
 
@@ -72,13 +72,11 @@ class SearchController extends Controller
         foreach (static::FILTERS as $class => $relation) {
             [$singular, $plural] = [Str::singular($relation), Str::plural($relation)];
 
-            $models = $request->input($plural) ?? $request->input($singular);
+            $models = (array) ($request->input($plural) ?? $request->input($singular));
 
-            if ($models !== null) {
+            if (count($models) > 0) {
                 $query->whereHas($relation, function (Builder $query) use ($models) {
-                    is_array($models)
-                        ? $query->whereIn('slug', $models)
-                        : $query->where('slug', $models);
+                    $query->whereIn('slug', $models);
                 });
             }
         }
@@ -93,12 +91,10 @@ class SearchController extends Controller
      */
     protected function years(Request $request, Builder $query)
     {
-        $years = $request->input('years') ?? $request->input('year');
+        $years = (array) ($request->input('years') ?? $request->input('year'));
 
-        if ($years !== null) {
-            is_array($years)
-                ? $query->whereIn('year', $years)
-                : $query->where('year', $years);
+        if (count($years) > 0) {
+            $query->whereIn('year', $years);
         }
     }
 }

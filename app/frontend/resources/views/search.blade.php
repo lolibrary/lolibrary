@@ -9,5 +9,6 @@
   :colors="@include('components.colors')"
   :years=@include('components.years')
   url="{{ route('search') }}"
+  endpoint="{{ route('api.search') }}"
 ></search-page>
 @endsection

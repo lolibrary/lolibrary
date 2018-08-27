@@ -9,7 +9,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="search-endpoint" content="{{ config('app.search_url') }}">
+    <meta name="search-endpoint" content="{{ route('api.search') }}">
 
     @include('components.external.font-awesome')
 
@@ -47,10 +47,12 @@
                         @else
                             @include('components.navbar.dropdown')
                         @endguest
+
+                        <li class="d-sm-none"><a class="nav-link" href="{{ route('search') }}">{{ __('Search') }}</a></li>
                     </ul>
 
-                    <form class="form-inline pl-md-3">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="form-inline pl-md-3 d-none d-sm-flex" action="{{ route('search') }}" method="get">
+                        <input class="form-control mr-sm-2" name="search" autocomplete="off" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="far fa-search" aria-label="Search Icon"></i></button>
                     </form>
                 </div>
@@ -68,6 +70,17 @@
                 {{ session('status') }}
             </div>
         @endif
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
 
         <main class="py-4" id="skip-navigation">
             @yield('content')

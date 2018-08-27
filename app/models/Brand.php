@@ -38,6 +38,7 @@ class Brand extends Model
         'short_name',
         'slug',
         'image',
+        'url',
     ];
 
     /**

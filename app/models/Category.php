@@ -30,6 +30,7 @@ class Category extends Model
     protected $visible = [
         'name',
         'slug',
+        'url',
     ];
 
     /**

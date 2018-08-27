@@ -53,6 +53,26 @@
   }
 }
 
+.item-image-container {
+  height: 14rem;
+
+  @include media-breakpoint-up(sm) {
+    height: 10rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    height: 8rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    height: 7rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    height: 7rem;
+  }
+}
+
 .text-regular {
   font-family: Helvetica, Arial, sans-serif;
 }
@@ -63,7 +83,7 @@
 
   // give us native scrolling in iOS
   -webkit-overflow-scrolling: touch;
-  
+
   overflow-x: auto;
   overflow-y: hidden;
 }

@@ -30,6 +30,7 @@ class Feature extends Model
     protected $visible = [
         'name',
         'slug',
+        'url',
     ];
 
     /**

@@ -136,7 +136,7 @@ class Item extends Model
      *
      * @var array
      */
-    protected $appends = ['price_details'];
+    protected $appends = ['price_details', 'url'];
 
     /**
      * An array of keys to convert to dates.
@@ -153,6 +153,7 @@ class Item extends Model
     protected $visible = [
         'id',
         'slug',
+        'url',
         'english_name',
         'foreign_name',
         'notes',

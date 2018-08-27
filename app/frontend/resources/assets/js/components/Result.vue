@@ -1,4 +1,46 @@
 <template>
+<div class="card">
+    <div class="card-body text-center">
+        <p class="mb-0 no-wrap" :title="item.english_name"
+            style="white-space: nowrap; overflow-x: hidden; text-overflow: ellipsis;">
+            {{ item.english_name }}
+        </p>
+        <p class="text-muted small"
+            style="white-space: nowrap; overflow-x: hidden; text-overflow: ellipsis;"
+            :title="item.foreign_name">
+            {{ item.foreign_name ? item.foreign_name : '&nbsp;' }}
+        </p>
+
+        <div class="text-center item-image-container">
+            <a :href="item.url">
+                <img :src="item.image.url" class="mw-100 mh-100 rounded my-auto mx-auto">
+            </a>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item py-1 px-3">
+            <div class="row small text-muted">
+                <p class="col m-0 text-left">Brand</p>
+                <p class="col m-0 text-right">Category</p>
+            </div>
+            <div class="d-flex small">
+                <p class="p-0 m-0 text-left flex-fill" style="white-space: nowrap; overflow-x: ellipsis;">
+                    <a :href="item.brand.url" :title="item.brand.name">
+                        {{ item.brand.name.substring(0, 21) }}
+                    </a>
+                </p>
+                <p class="p-0 m-0 text-right flex-fill" style="white-space: nowrap; overflow-x: hidden;">
+                    <a :href="item.category.url">
+                        {{ item.category.name }}
+                    </a>
+                </p>
+            </div>
+        </li>
+    </ul>
+    <a class="card-body p-2 text-center" :href="item.url">
+        View Item
+    </a>
+</div>
 
 </template>
 
@@ -11,6 +53,7 @@ export default {
         return {
           id: "",
           slug: "",
+          url: "",
           english_name: "",
           foreign_name: "",
           product_number: "",

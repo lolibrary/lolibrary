@@ -30,6 +30,7 @@ class Color extends Model
     protected $visible = [
         'name',
         'slug',
+        'url',
     ];
 
     /**
