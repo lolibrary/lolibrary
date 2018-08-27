@@ -15,14 +15,14 @@
             @endif
         </p>
 
-        <div style="height: 7rem" class="text-center">
+        <div style="height: 14rem" class="text-center">
             <a href="{{ $item->url }}">
                 <img src="{{ $item->image->url ?? asset('images/default.png') }}" class="mw-100 mh-100 rounded">
             </a>
         </div>
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">
+        <li class="list-group-item py-1 px-3">
             <div class="row small text-muted">
                 <p class="col m-0 text-left">
                     {{ __('Brand') }}
@@ -46,7 +46,7 @@
             </div>
         </li>
     </ul>
-    <a class="card-body py-3 text-center" href="{{ $item->url }}">
+    <a class="card-body p-2 text-center" href="{{ $item->url }}">
         View Item
     </a>
 </div>

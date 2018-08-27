@@ -5,7 +5,9 @@
 <div class="row text-center mb-4">
     <div class="p-1 list-group text-center col-lg-4 col-sm-6 small p-2">
         <a class="list-group-item" href="{{ $model->url }}">
-            @if ($image ?? false)
+            @if (is_string($image ?? false))
+                <img class="d-block mx-auto mw-100 py-2 px-4" src="{{ $image }}" height="200">
+            @elseif (($image ?? false) === true)
                 <img class="d-block mx-auto mw-100 py-2 px-4" src="{{ $model->image->url ?? asset('images/default.png') }}" height="200">
             @endif
 
@@ -28,7 +30,7 @@
             <span class="text-regular">{{ $items->total() }}</span> items found with this {{ $name }}.
         </p>
 
-        <a href="{{-- route('search', [str_plural($name) => [$model->slug]]) --}}"
-            class="btn text-white btn-secondary py-2">Search using this {{ $name }} instead</a>
+        <a href="{{ search_route([str_plural($name) => [$model->slug]]) }}"
+            class="btn text-white btn-secondary py-2">Search using this {{ $name }}</a>
     </div>
 </div>

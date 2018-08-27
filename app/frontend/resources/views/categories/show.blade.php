@@ -6,7 +6,7 @@
         'items' => $items,
         'model' => $category,
         'name' => 'category',
-        'image' => true,
+        'image' => asset("categories/{$category->slug}.svg"),
         'description' => true,
     ])
     @include('items.listing', ['items' => $items])
