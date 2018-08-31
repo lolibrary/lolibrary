@@ -105,7 +105,10 @@
     };
 
     const untouched = query => {
-      return _.isEmpty(query);
+      let copy = Object.create(query);
+      delete copy.page;
+
+      return _.isEmpty(copy);
     }
 
     export default {
