@@ -56,12 +56,25 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" v-if="!loading">
           <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 p-2" v-for="result in results.data">
             <search-result :item="result"></search-result>
           </div>
+
+          <div v-if="results && results.data && results.data.length === 0" class="offset-xl-6 col-xl-3 offset-lg-4 col-lg-4 offset-md-3 col-md-6 offset-sm-3 col-sm-6 p-2">
+            <div style="height: 14rem">
+              <img src="/categories/other.svg" class="mw-100 mh-100">
+            </div>
+            <p class="h4 text-center text-muted my-0">No Results!</p>
+            <p class="text-center">Try another search?</p>
+          </div>
         </div>
 
+        <div class="row text-center p-5" v-if="loading">
+          <div class="col text-center text-muted">
+            <i class="fas fa-5x fa-spinner fa-pulse"></i>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -73,6 +86,12 @@
     import debounce from 'lodash/debounce';
 
     const axios = window.axios;
+
+    const fetchInitialState = () => {
+      const query = window.location.search.replace(/^\?/, '');
+
+      return qs.parse(query);
+    };
 
     export default {
         props: {
@@ -125,6 +144,7 @@
         data() {
           return {
             results: {},
+            loading: false,
 
             // a function so we can read the initial state from the url.
             state: {
@@ -151,7 +171,12 @@
 
         methods: {
           performSearch() {
-            axios.post(this.endpoint, this.search).then(results => this.results = results.data);
+            this.loading = true;
+
+            axios.post(this.endpoint, this.search).then(results => {
+              this.results = results.data;
+              this.loading = false;
+            });
           },
         },
 
@@ -163,8 +188,32 @@
 
         created() {
           this.debouncedSearch = _.debounce(this.performSearch, 300);
+
+          const query = fetchInitialState();
+          console.info(query);
+
+          let value;
+          for (let key of ["categories", "features", "brands", "colors", "tags"]) {
+            value = query[key];
+
+            if (value === undefined) {
+              console.log("Missing key " + key);
+              continue;
+            }
+
+            this.state[key] = this[key].filter(obj => value.indexOf(obj.slug) !== -1);
+          }
+
+          if (query.search !== undefined && query.search.length > 0) {
+            this.state.search = query.search;
+          }
+
+          if (query.years !== undefined && query.years.length > 0) {
+            this.state.years = query.years.map(year => year.toString());
+          }
         },
 
+        // dynamically generate a search property to use in searches whenever state changes.
         computed: {
           search() {
             return {
@@ -175,20 +224,15 @@
               tags: this.state.tags.map(obj => obj.slug),
               colors: this.state.colors.map(obj => obj.slug),
               years: this.state.years.map(year => parseInt(year, 10)),
-            }
-          },
-
-          query() {
-            const query = qs.stringify(this.search, { encodeValuesOnly: true, arrayFormat: 'brackets', indices: false });
-
-            window.history.pushState(this.search, query, this.url + '?' + query);
-
-            return query;
+            };
           }
         },
 
-        mounted() {
-          //
+        // on an update, update the URL.
+        updated() {
+          const query = qs.stringify(this.search, { encodeValuesOnly: true, arrayFormat: 'brackets', indices: false });
+
+          window.history.pushState(this.search, query, this.url + '?' + query);
         },
 
         components: {}
