@@ -48,7 +48,7 @@
                     <input autocomplete="off" v-model="state.search" class="form-control input-lg" type="text" name="search" placeholder="Type to filter items by name" role="search">
                   </div>
                   <div class="col-md-4 col-lg-3 col-xl-2 mb-3">
-                    <button class="btn btn-block btn-outline-primary">Search</button>
+                    <button class="btn btn-block btn-outline-primary" @click="performSearch">Search</button>
                   </div>
                 </div>
               </div>
