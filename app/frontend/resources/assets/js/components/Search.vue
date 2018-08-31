@@ -56,17 +56,28 @@
           </div>
         </div>
 
-        <div class="row" v-if="!loading">
-          <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 p-2" v-for="result in results.data">
-            <search-result :item="result"></search-result>
+        <div v-if="!loading">
+
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 p-2" v-for="result in results.data">
+              <search-result :item="result"></search-result>
+            </div>
           </div>
 
-          <div v-if="results && results.data && results.data.length === 0" class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mx-auto p-2">
-            <div style="height: 14rem">
-              <img src="/categories/other.svg" class="mw-100 mh-100">
+          <div v-if="results && results.last_page > 1" class="row">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mx-auto mb-2 mt-4">
+              <v-pagination style="font-family: Helvetica, Arial, sans-serif;" :limit="2" :data="results" @pagination-change-page="updatePage"></v-pagination>
             </div>
-            <p class="h4 text-center text-muted my-0">No Results!</p>
-            <p class="text-center">Try another search?</p>
+          </div>
+
+          <div v-if="results && results.data && results.data.length === 0" class="row">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mx-auto p-2">
+              <div style="height: 14rem">
+                <img src="/categories/other.svg" class="mw-100 mh-100">
+              </div>
+              <p class="h4 text-center text-muted my-0">No Results!</p>
+              <p class="text-center">Try another search?</p>
+            </div>
           </div>
         </div>
 
@@ -92,6 +103,10 @@
 
       return qs.parse(query);
     };
+
+    const untouched = query => {
+      return _.isEmpty(query);
+    }
 
     export default {
         props: {
@@ -157,23 +172,23 @@
               years: [],
             },
 
-            initialState: {
-              search: undefined,
-              categories: [],
-              brands: [],
-              features: [],
-              tags: [],
-              colors: [],
-              years: [],
-            },
+            page: 1,
           }
         },
 
         methods: {
+          updatePage(page) {
+            this.page = page;
+
+            this.$nextTick(function () {
+              this.performSearch();
+            });
+          },
+
           performSearch() {
             this.loading = true;
 
-            axios.post(this.endpoint, this.search).then(results => {
+            axios.post(this.endpoint + '?page=' + this.page, this.search).then(results => {
               this.results = results.data;
               this.loading = false;
             });
@@ -182,14 +197,22 @@
 
         watch: {
           search() {
-            this.performSearch();
-          },
+            this.page = 1;
+
+            this.debouncedSearch();
+          }
         },
 
         created() {
           this.debouncedSearch = _.debounce(this.performSearch, 300);
 
           const query = fetchInitialState();
+
+          if (untouched(query)) {
+            this.performSearch();
+
+            return;
+          }
 
           let value;
           for (let key of ["categories", "features", "brands", "colors", "tags"]) {
@@ -208,6 +231,10 @@
 
           if (query.years !== undefined && query.years.length > 0) {
             this.state.years = query.years.map(year => year.toString());
+          }
+
+          if (query.page !== undefined) {
+            this.page = query.page;
           }
         },
 
@@ -228,7 +255,10 @@
 
         // on an update, update the URL.
         updated() {
-          const query = qs.stringify(this.search, { encodeValuesOnly: true, arrayFormat: 'brackets', indices: false });
+          const query = qs.stringify(
+            Object.assign(this.search, { page: this.page }),
+            { encodeValuesOnly: true, arrayFormat: 'brackets', indices: false }
+          );
 
           window.history.pushState(this.search, query, this.url + '?' + query);
         },
