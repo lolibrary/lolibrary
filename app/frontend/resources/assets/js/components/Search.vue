@@ -65,7 +65,7 @@
           </div>
 
           <div v-if="results && results.last_page > 1" class="row">
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mx-auto mb-2 mt-4">
+            <div class="col mb-2 mt-4">
               <v-pagination style="font-family: Helvetica, Arial, sans-serif;" :limit="2" :data="results" @pagination-change-page="updatePage"></v-pagination>
             </div>
           </div>
@@ -104,7 +104,7 @@
       return qs.parse(query);
     };
 
-    const untouched = query => {
+    const shouldSearch = query => {
       let copy = Object.create(query);
       delete copy.page;
 
@@ -211,12 +211,6 @@
 
           const query = fetchInitialState();
 
-          if (untouched(query)) {
-            this.performSearch();
-
-            return;
-          }
-
           let value;
           for (let key of ["categories", "features", "brands", "colors", "tags"]) {
             value = query[key];
@@ -238,6 +232,12 @@
 
           if (query.page !== undefined) {
             this.page = query.page;
+          }
+
+          if (shouldSearch(query)) {
+            this.$nextTick(function () {
+              this.performSearch();
+            });
           }
         },
 

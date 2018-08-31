@@ -15,7 +15,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('v-pagination', require('laravel-vue-pagination'));
+Vue.component('v-pagination', require('./components/Pagination.vue'));
 Vue.component('search-page', require('./components/Search.vue'));
 Vue.component('v-select', require('vue-select').VueSelect);
 Vue.component('search-result', require('./components/Result.vue'));
