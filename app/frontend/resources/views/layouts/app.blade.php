@@ -14,7 +14,7 @@
     @include('components.external.font-awesome')
 
     <!-- Styles -->
-    <link href="{{ asset('assets/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('assets/app.css') }}" rel="stylesheet">
 
     @yield('meta', '')
 </head>
@@ -77,7 +77,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('assets/app.js') }}"></script>
+    <script src="{{ mix('assets/app.js') }}"></script>
     @yield('script', '')
 </body>
 </html>
