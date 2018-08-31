@@ -61,7 +61,7 @@
             <search-result :item="result"></search-result>
           </div>
 
-          <div v-if="results && results.data && results.data.length === 0" class="offset-xl-6 col-xl-3 offset-lg-4 col-lg-4 offset-md-3 col-md-6 offset-sm-3 col-sm-6 p-2">
+          <div v-if="results && results.data && results.data.length === 0" class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mx-auto p-2">
             <div style="height: 14rem">
               <img src="/categories/other.svg" class="mw-100 mh-100">
             </div>
@@ -190,14 +190,12 @@
           this.debouncedSearch = _.debounce(this.performSearch, 300);
 
           const query = fetchInitialState();
-          console.info(query);
 
           let value;
           for (let key of ["categories", "features", "brands", "colors", "tags"]) {
             value = query[key];
 
             if (value === undefined) {
-              console.log("Missing key " + key);
               continue;
             }
 
