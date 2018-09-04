@@ -53,7 +53,7 @@ trait ImagePaths
      */
     public function getThumbnailPath()
     {
-        return $this->getThumbnailsFolder() . '/' . $this->getRootImagePath();
+        return $this->getThumbnailsFolder() . '/' . $this->getRootThumbnailPath();
     }
 
     /**
@@ -63,7 +63,7 @@ trait ImagePaths
      */
     public function getUploadedPath()
     {
-        return $this->getUploadsFolder() . "/{$this->uploaded_filename}";
+        return $this->getUploadsFolder() . '/' . $this->getRootUploadedPath();
     }
 
     /**
@@ -104,5 +104,25 @@ trait ImagePaths
     public function getRootImagePath()
     {
         return "{$this->filename}";
+    }
+
+    /**
+     * Get the root image thumbnail filename for URLs.
+     *
+     * @return string
+     */
+    public function getRootThumbnailPath()
+    {
+        return "{$this->thumbnail}";
+    }
+
+    /**
+     * Get the root image uploaded filename for URLs.
+     *
+     * @return string
+     */
+    public function getRootUploadedPath()
+    {
+        return "{$this->uploaded_filename}";
     }
 }

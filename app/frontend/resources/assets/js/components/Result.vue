@@ -3,7 +3,7 @@
     <div class="card-body text-center">
         <p class="mb-0 no-wrap" :title="item.english_name"
             style="white-space: nowrap; overflow-x: hidden; text-overflow: ellipsis;">
-            {{ item.english_name }}
+            <a :href="item.url">{{ item.english_name }}</a>
         </p>
         <p class="text-muted small"
             style="white-space: nowrap; overflow-x: hidden; text-overflow: ellipsis;"
@@ -13,7 +13,7 @@
 
         <div class="text-center item-image-container">
             <a :href="item.url">
-                <img :src="item.image.url" class="mw-100 mh-100 rounded my-auto mx-auto">
+                <img :src="item.image.thumbnail_url" class="mw-100 mh-100 rounded my-auto mx-auto">
             </a>
         </div>
     </div>
@@ -30,8 +30,8 @@
                     </a>
                 </p>
                 <p class="p-0 m-0 text-right flex-fill" style="white-space: nowrap; overflow-x: hidden;">
-                    <a :href="item.category.url">
-                        {{ item.category.name }}
+                    <a :href="item.category.url" :title="item.category.name">
+                        {{ item.category.name.substring(0, 9) }}
                     </a>
                 </p>
             </div>

@@ -79,7 +79,7 @@ class ImagePathsTest extends TestCase
     {
         $class = new class {
             use ImagePaths;
-            protected $filename = 'foobar.jpeg';
+            protected $thumbnail = 'foobar.jpeg';
         };
 
         $this->assertEquals('thumbnails/foobar.jpeg', $class->getThumbnailPath());
@@ -109,7 +109,7 @@ class ImagePathsTest extends TestCase
     {
         $class = new class {
             use ImagePaths;
-            protected $filename = '00000000-0000-0000-0000-000000000000.png';
+            protected $thumbnail = '00000000-0000-0000-0000-000000000000.png';
         };
 
         $this->assertEquals($this->endpoint() . 'thumbnails/00000000-0000-0000-0000-000000000000.png', $class->getThumbnailUrlAttribute());

@@ -147,7 +147,7 @@
         <div class="item-image-columns mb-5">
             @foreach ($item->images as $image)
                 <a class="card m-0 p-0" href="{{ $image->url }}">
-                    <img src="{{ $image->url }}"
+                    <img src="{{ $image->thumbnail_url }}"
                         onerror="this.src = '{{ asset('images/default.png') }}'"
                         data-original-url="{{ $image->url }}"
                         class="mw-100">
@@ -161,7 +161,7 @@
             <a class="list-group-item rounded-0" href="#" onclick="alert('We plan to have item corrections in at some point, but this is just a sneak peek!')">
                 Submit a correction
             </a>
-            <a class="list-group-item text-danger rounded-0" href="#">
+            <a class="list-group-item text-danger rounded-0" href="#" onclick="alert('We plan to have item flagging in at some point, but this is just a sneak peek!')">
                 Flag item
             </a>
         </div>
@@ -175,6 +175,6 @@
     <meta property="og:url" content="{{ $item->url }}">
     <meta property="og:type" content="product">
     <meta property="og:title" content="{{ $item->english_name }} by {{ $item->brand->name }}">
-    <meta property="og:image" content="{{ $item->image->url ?? asset('images/default.png') }}">
+    <meta property="og:image" content="{{ $item->image->thumbnail_url ?? asset('images/default.png') }}">
     <meta property="product:brand" content="{{ $item->brand->name }}">
 @endsection
