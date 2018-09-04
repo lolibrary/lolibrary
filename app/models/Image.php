@@ -90,6 +90,7 @@ class Image extends Model
 
         $model->id = $id ?? uuid4();
         $model->filename = $model->id . '.' . $file->extension();
+        $model->thumbnail = $model->id . '.jpeg';
         $model->uploaded_filename = $filename;
 
         $model->save();
