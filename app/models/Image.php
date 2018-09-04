@@ -20,6 +20,13 @@ class Image extends Model
     use ImagePaths, HasStatus;
 
     /**
+     * Set the thumbnail folder to a different value.
+     *
+     * @var string
+     */
+    protected const THUMBNAILS = 'thumbnail';
+
+    /**
      * A status bitmask mapping.
      *
      * @var array
