@@ -17,7 +17,8 @@
 
         <div style="height: 14rem" class="text-center">
             <a href="{{ $item->url }}">
-                <img src="{{ $item->image->thumbnail_url ?? asset('images/default.png') }}" class="mw-100 mh-100 rounded">
+                <img src="{{ $item->image->thumbnail_url ?? asset('images/default.png') }}" class="mw-100 mh-100 rounded"
+                    onerror="if (this.src !== '/images/default.png') this.src = '/images/default.png'">
             </a>
         </div>
     </div>

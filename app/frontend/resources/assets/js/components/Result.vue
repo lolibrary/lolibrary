@@ -13,7 +13,7 @@
 
         <div class="text-center item-image-container">
             <a :href="item.url">
-                <img :src="item.image.thumbnail_url" class="mw-100 mh-100 rounded my-auto mx-auto" onerror="if this.src !== '/images/default.png' this.src = '/images/default.png'">
+                <img :src="item.image.thumbnail_url" class="mw-100 mh-100 rounded my-auto mx-auto" onerror="if (this.src !== '/images/default.png') this.src = '/images/default.png'">
             </a>
         </div>
     </div>
