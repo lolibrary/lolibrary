@@ -8,6 +8,6 @@
     @endif
 </div>
 
-<div class="p-2">
+<div class="col p-2">
     {{ $items->links('pagination::simple-bootstrap-4') }}
 </div>
