@@ -19,5 +19,5 @@
     <meta property="og:url" content="{{ $category->url }}">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Lolibrary: {{ $category->name }}">
-    <meta property="og:image" content="{{ $category->image->url ?? asset('images/default.png') }}">
+    <meta property="og:image" content="{{ $category->image->url ?? default_asset() }}">
 @endsection

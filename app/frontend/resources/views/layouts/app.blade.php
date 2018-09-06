@@ -10,6 +10,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="search-endpoint" content="{{ route('api.search') }}">
+    <meta name="default-image" content="{{ default_asset() }}">
 
     @include('components.external.font-awesome')
 

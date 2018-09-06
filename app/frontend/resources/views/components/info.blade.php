@@ -8,7 +8,7 @@
             @if (is_string($image ?? false))
                 <img class="d-block mx-auto mw-100 py-2 px-4" src="{{ $image }}" height="200">
             @elseif (($image ?? false) === true)
-                <img class="d-block mx-auto mw-100 py-2 px-4" src="{{ $model->image->url ?? asset('images/default.png') }}" height="200">
+                <img class="d-block mx-auto mw-100 py-2 px-4" src="{{ $model->image->url ?? default_asset() }}" height="200">
             @endif
 
             @if ($tag ?? false)

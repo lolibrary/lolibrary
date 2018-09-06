@@ -11,8 +11,8 @@
 
     <div class="row">
         <div class="col-sm p-2">
-            <img src="{{ $item->image->url }}"
-                        onerror="this.src = '{{ asset('images/default.png') }}'"
+            <img src="{{ $item->image->url ?? default_asset() }}"
+                        onerror="this.src = '{{ default_asset() }}'"
                         data-original-url="{{ $item->image->url }}"
                         class="rounded mw-100 d-block">
             <div class="row p-0 mx-0 my-3">
@@ -148,7 +148,7 @@
             @foreach ($item->images as $image)
                 <a class="card m-0 p-0" href="{{ $image->url }}">
                     <img src="{{ $image->thumbnail_url }}"
-                        onerror="this.src = '{{ asset('images/default.png') }}'"
+                        onerror="this.src = '{{ default_asset() }}'"
                         data-original-url="{{ $image->url }}"
                         class="mw-100">
                 </a>
@@ -175,6 +175,6 @@
     <meta property="og:url" content="{{ $item->url }}">
     <meta property="og:type" content="product">
     <meta property="og:title" content="{{ $item->english_name }} by {{ $item->brand->name }}">
-    <meta property="og:image" content="{{ $item->image->thumbnail_url ?? asset('images/default.png') }}">
+    <meta property="og:image" content="{{ $item->image->thumbnail_url ?? default_asset() }}">
     <meta property="product:brand" content="{{ $item->brand->name }}">
 @endsection

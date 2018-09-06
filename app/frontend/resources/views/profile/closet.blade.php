@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="text-center">
-                <img src="{{ asset('images/default.png') }}" alt="" style="max-height: 150px; max-width: 150px; margin-top: 10px; margin-bottom: 10px" class="img-thumbnail circle">
+                <img src="{{ default_asset() }}" alt="" style="max-height: 150px; max-width: 150px; margin-top: 10px; margin-bottom: 10px" class="img-thumbnail circle">
             </div>
             
             <div class="list-group">

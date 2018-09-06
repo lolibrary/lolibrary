@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Image;
 use App\Models\Model;
 use GuzzleHttp\Psr7\Uri;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Notification;
 
 if (! function_exists('uuid')) {
@@ -132,5 +134,17 @@ if (! function_exists('search_route')) {
         }
 
         return route('search') . '?' . implode('&', $results);
+    }
+}
+
+if (! function_exists('default_asset')) {
+    /**
+     * Get the default asset, preferrably from the CDN.
+     *
+     * @return string
+     */
+    function default_asset()
+    {
+        return Storage::url((new Image)->getThumbnailsFolder() . '/default.jpeg');
     }
 }
