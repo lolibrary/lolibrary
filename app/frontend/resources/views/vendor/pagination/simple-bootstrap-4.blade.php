@@ -1,7 +1,7 @@
 <div class="text-center">
     <div class="d-inline-block">
 @if ($paginator->hasPages())
-    <ul class="pagination" role="navigation">
+    <ul class="pagination justify-content-center" role="navigation">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="page-item disabled" aria-disabled="true">
