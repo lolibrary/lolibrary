@@ -22,15 +22,12 @@ class BrandController extends Controller
     }
 
     /**
-     * Show a paginated list of brands.
+     * Redirect to the search page.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // todo: make this a static ::index() method.
-        $brands = Brand::paginate(36);
-
-        return view('brands.index', compact('brands'));
+        return redirect()->route('search');
     }
 }

@@ -22,15 +22,12 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show a paginated list of categories.
+     * Redirect to the search page.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // todo: make this a static ::index() method.
-        $categories = Category::paginate(36);
-
-        return view('categories.index', compact('categories'));
+        return redirect()->route('search');
     }
 }

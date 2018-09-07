@@ -22,15 +22,12 @@ class TagController extends Controller
     }
 
     /**
-     * Show a paginated list of tags.
+     * Redirect to the search page.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // todo: make this a static ::index() method.
-        $tags = Tag::paginate(36);
-
-        return view('tags.index', compact('tags'));
+        return redirect()->route('search');
     }
 }

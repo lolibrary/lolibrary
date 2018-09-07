@@ -22,15 +22,12 @@ class ColorController extends Controller
     }
 
     /**
-     * Show a paginated list of colors.
+     * Redirect to the search page.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // todo: make this a static ::index() method.
-        $colors = Color::paginate(36);
-
-        return view('colors.index', compact('colors'));
+        return redirect()->route('search');
     }
 }

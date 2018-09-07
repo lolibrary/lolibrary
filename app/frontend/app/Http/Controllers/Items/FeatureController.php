@@ -22,15 +22,12 @@ class FeatureController extends Controller
     }
 
     /**
-     * Show a paginated list of features.
+     * Redirect to the search page.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // todo: make this a static ::index() method.
-        $features = Feature::paginate(36);
-
-        return view('features.index', compact('features'));
+        return redirect()->route('search');
     }
 }
