@@ -16,52 +16,46 @@
     {{-- todo: put brands in here with their images --}}
     {{-- todo: carousel these! (or scroll left/right) --}}
     <h2 class="mt-5">{{ __('Brands') }}</h2>
-    <div style="display: flex; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; overflow-x: auto; overflow-y: hidden">
+    <div class="scrollbox">
         @foreach ($brands as $brand)
-            <div class="card shadow-sm m-2" style="flex: 0 0 auto">
+        <div class="scrollbox-item m-2">
+            <div class="card shadow-sm scrollbox-square">
                 <a href="{{ $brand->url }}">
-                    <div class="card-body p-0 m-0" style="height: 150px; width: 150px;">
-                        <div class="d-flex justify-content-center align-items-center" style="height: 100px">
-                            <img src="{{ $brand->image->url }}"
-                                onerror="this.src = '{{ asset('images/icon.svg') }}'"
-                                class="p-3 mh-100 mw-100" alt=""
-                                data-original-url="{{ $brand->image->url }}">
-                        </div>
-                        <div style="height: 50px" class="text-center">
-                            <p class="text-muted small p-2">
-                                {{ $brand->name }}
-                            </p>
-                        </div>
+                    <div class="scrollbox-img">
+                        <img src="{{ $brand->image->url }}" alt="" data-original-url="{{ $brand->image->url }}"
+                            onerror="if (this.src !== '{{ asset('categories/other.svg') }}') this.src = '{{ asset('categories/other.svg') }}'">
+                    </div>
+                    <div class="scrollbox-text">
+                        <p class="text-muted small p-0 m-0">{{ $brand->name }}</p>
                     </div>
                 </a>
             </div>
+        </div>
         @endforeach
     </div>
 
     <h2 class="mt-5">{{ __('Categories') }}</h2>
-    <div style="display: flex; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; overflow-x: auto; overflow-y: hidden">
+    <div class="scrollbox">
         @foreach ($categories as $category)
-            <div class="card shadow-sm m-2" style="flex: 0 0 auto">
+        <div class="scrollbox-item m-2">
+            <div class="card shadow-sm scrollbox-square">
                 <a href="{{ $category->url }}">
-                    <div class="card-body p-0 m-0" style="height: 150px; width: 150px;">
-                        <div class="d-flex justify-content-center align-items-center" style="height: 100px">
-                            <img src="{{ asset("categories/{$category->slug}.svg") }}" class="p-1 mh-100 mw-100" alt="">
-                        </div>
-                        <div style="height: 50px" class="text-center">
-                            <p class="text-muted small p-2">
-                                {{ $category->name }}
-                            </p>
-                        </div>
+                    <div class="scrollbox-img">
+                        <img src="{{ asset("categories/{$category->slug}.svg") }}" alt="">
+                    </div>
+                    <div class="scrollbox-text">
+                        <p class="text-muted small p-0 m-0">{{ $category->name }}</p>
                     </div>
                 </a>
             </div>
+        </div>
         @endforeach
     </div>
 
     <h2 class="mt-5">{{ __('Recent Items') }}</h2>
-    <div style="overflow-x: scroll; white-space: nowrap; overflow-y: hidden; -webkit-overflow-scrolling: touch;">
+    <div class="scrollbox">
         @foreach ($recent as $item)
-            <div class="p-2 d-inline-block" style="width: 16rem; white-space: normal">
+            <div class="scrollbox-item scrollbox-item-card m-2">
                 @include('items.card', compact('item'))
             </div>
         @endforeach
