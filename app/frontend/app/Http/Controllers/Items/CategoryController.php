@@ -28,6 +28,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return redirect()->route('search');
+        $categories = Category::orderBy('name', 'asc')->paginate(36);
+
+        return view('categories.index', compact('categories'));
     }
 }

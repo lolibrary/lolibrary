@@ -90,3 +90,14 @@
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+.flex-grid-container { 
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+.flex-grid-card {
+    flex: 0 0 auto; 
+    display: inline-block;
+}
+

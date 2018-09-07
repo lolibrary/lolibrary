@@ -28,6 +28,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return redirect()->route('search');
+        $brands = Brand::orderBy('name', 'asc')->paginate(36);
+
+        return view('brands.index', compact('brands'));
     }
 }

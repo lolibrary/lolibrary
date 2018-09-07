@@ -21,15 +21,12 @@ class ItemController extends Controller
     }
 
     /**
-     * Show a paginated list of items.
+     * Redirect to search, because an unfiltered item list would be silly.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // todo: make this a static ::index() method.
-        $items = Item::paginate(52);
-
-        return view('items.index', compact('items'));
+        return redirect()->route('search');
     }
 }
