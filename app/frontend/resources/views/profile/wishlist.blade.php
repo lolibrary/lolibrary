@@ -4,7 +4,11 @@
 @if ($items->count() > 0)
     <div class="row">
         @foreach ($items as $item)
-            @include('items.card', $item)
+            @component('items.card', ['item' => $item])
+                <button class="btn btn-outline-danger btn-block rounded-0" style="border: none; border-top: 1px solid rgba(0, 0, 0, 0.125);" href="{{ $item->url }}">
+                    Remove from Wishlist
+                </button>
+            @endcomponent
         @endforeach
     </div>
 

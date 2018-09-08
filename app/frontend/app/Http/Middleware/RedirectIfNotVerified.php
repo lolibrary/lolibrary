@@ -20,7 +20,7 @@ class RedirectIfNotVerified
         $user = Auth::guard($guard)->user();
 
         if ($user === null || $user->email_token !== null) {
-            redirect()->route('verify');
+            redirect()->route('auth.pending');
         }
 
         return $next($request);

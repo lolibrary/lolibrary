@@ -17,9 +17,7 @@
                         class="rounded mw-100 d-block">
             <div class="row p-0 mx-0 my-3">
                 <div class="col p-1 list-group text-center small">
-                    <button class="list-group-item" type="button">
-                        <i class="fal fa-star"></i> {{ $item->stargazers()->count() }} Stargazers
-                    </button>
+                    @include('components.items.wishlist')
                 </div>
                 <div class="col p-1 list-group text-center small">
                     <button class="list-group-item" type="button">

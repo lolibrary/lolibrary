@@ -13,6 +13,7 @@
 
 // Auth
 Auth::routes();
+Route::get('auth/verify', 'EmailController@pending')->name('auth.pending');
 Route::get('auth/verify/{email}/{token}', 'EmailController@verify')->name('auth.verify');
 Route::post('auth/resend', 'EmailController@resend')->name('auth.resend');
 

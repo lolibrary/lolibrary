@@ -47,7 +47,9 @@
             </div>
         </li>
     </ul>
-    <a class="card-body p-2 text-center" href="{{ $item->url }}">
+    <a class=" btn btn-outline-primary rounded-0" style="border: none;" href="{{ $item->url }}">
         View Item
     </a>
+
+    {{ $slot ?? '' }}
 </div>

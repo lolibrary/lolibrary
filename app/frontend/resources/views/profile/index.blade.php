@@ -31,6 +31,10 @@
         <small class="form-text text-muted">Leave this blank if you don't want to change your password.</small>
     </div>
 
-    <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3 col-md-4 offset-md-4">
+            <button type="submit" class="btn btn-block btn-outline-primary my-4">{{ __('Save') }}</button>
+        </div>
+    </div>
 </form>
 @endsection

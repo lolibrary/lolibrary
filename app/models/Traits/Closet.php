@@ -37,6 +37,6 @@ trait Closet
      */
     public function owns(Item $item)
     {
-        return $this->closet()->where('item.id', $item->id)->exists();
+        return $this->closet()->where('item_id', $item->id)->exists();
     }
 }

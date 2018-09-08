@@ -37,6 +37,6 @@ trait Wishlist
      */
     public function wants(Item $item)
     {
-        return $this->wishlist()->where('item.id', $item->id)->exists();
+        return ! $this->wishlist()->where('item_id', $item->id)->exists();
     }
 }
