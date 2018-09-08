@@ -4,7 +4,7 @@ namespace App\Models\Traits;
 
 use App\Models\Item;
 
-trait Wishlist
+trait Closet
 {
     /**
      * The items a user owns.
