@@ -2,12 +2,14 @@
 
 return [
     'wishlist' => [
-        'added' => 'Added item to wishlist',
-        'removed' => 'Removed item from your wishlist',
+        'added' => 'Added ":item" to your wishlist',
+        'removed' => 'Removed ":item" from your wishlist',
+        'stargazers' => 'Stargazer|Stargazers',
     ],
 
     'closet' => [
-        'added' => 'Added that item to your closet',
-        'removed' => 'Removed that item from your closet',
+        'added' => 'Added ":item" to your closet',
+        'removed' => 'Removed ":item" from your closet',
+        'owners' => 'Owner|Owners',
     ],
 ];

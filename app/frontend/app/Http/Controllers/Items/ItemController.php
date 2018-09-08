@@ -45,7 +45,7 @@ class ItemController extends Controller
         $attached = $user->updateWishlist($item);
         $status = $attached ? 'added' : 'removed';
 
-        return back()->withStatus(trans("user.wishlist.{$status}"));
+        return back()->withStatus(trans("user.wishlist.{$status}", ['item' => str_limit($item->english_name, 28)]));
     }
 
     /**
@@ -60,6 +60,6 @@ class ItemController extends Controller
         $attached = $user->updateCloset($item);
         $status = $attached ? 'added' : 'removed';
 
-        return back()->withStatus(trans("user.closet.{$status}"));
+        return back()->withStatus(trans("user.closet.{$status}", ['item' => str_limit($item->english_name, 28)]));
     }
 }
