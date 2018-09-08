@@ -1,7 +1,8 @@
 <?php
 
-use App\Models\Image;
-use App\Models\Model;
+use App\Models\{
+    Brand, Category, Color, Feature, Model, Image, User, Tag
+};
 use GuzzleHttp\Psr7\Uri;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Notification;
@@ -66,18 +67,22 @@ if (! function_exists('userify')) {
 
 if (! function_exists('user')) {
     /**
-     * Get a user by email or slug.
+     * Get a user by email, slug or uuid.
      *
      * @param string $id
-     * @return \App\User|null
+     * @return \App\Models\User|null
      */
     function user($id)
     {
         if (validator(['id' => $id], ['id' => 'required|email'])->passes()) {
-            return App\User::where(DB::raw('lower(email)'), mb_strtolower($id))->first();
+            return User::where(DB::raw('lower(email)'), mb_strtolower($id))->first();
         }
 
-        return App\User::where('username', $id)->first();
+        if (Ramsey\Uuid\Uuid::isValid($id)) {
+            return User::find($id);
+        }
+
+        return User::where('username', $id)->first();
     }
 }
 
@@ -146,5 +151,65 @@ if (! function_exists('default_asset')) {
     function default_asset()
     {
         return Storage::url((new Image)->getThumbnailsFolder() . '/default.jpeg');
+    }
+}
+
+if (! function_exists('brand')) {
+    /**
+     * Get a brand while in a tinker session by UUID or username.
+     *
+     * @param string $slug
+     * @return \App\Models\Brand
+     */
+    function brand(string $slug) {
+        return Brand::where('slug', $slug)->orWhere('short_name', $slug)->first();
+    }
+}
+
+if (! function_exists('category')) {
+    /**
+     * Get a category while in a tinker session by UUID or username.
+     *
+     * @param string $slug
+     * @return \App\Models\Category
+     */
+    function category(string $slug) {
+        return Category::where('slug', $slug)->first();
+    }
+}
+
+if (! function_exists('tag')) {
+    /**
+     * Get a tag while in a tinker session by UUID or username.
+     *
+     * @param string $slug
+     * @return \App\Models\Tag
+     */
+    function tag(string $slug) {
+        return Tag::where('slug', $slug)->first();
+    }
+}
+
+if (! function_exists('feature')) {
+    /**
+     * Get a feature while in a tinker session by UUID or username.
+     *
+     * @param string $slug
+     * @return \App\Models\Feature
+     */
+    function feature(string $slug) {
+        return Feature::where('slug', $slug)->first();
+    }
+}
+
+if (! function_exists('color')) {
+    /**
+     * Get a color while in a tinker session by UUID or username.
+     *
+     * @param string $slug
+     * @return \App\Models\Color
+     */
+    function color(string $slug) {
+        return Color::where('slug', $slug)->first();
     }
 }
