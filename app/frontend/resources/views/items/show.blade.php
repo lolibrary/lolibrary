@@ -20,9 +20,7 @@
                     @include('components.items.wishlist')
                 </div>
                 <div class="col p-1 list-group text-center small">
-                    <button class="list-group-item" type="button">
-                        <i class="fal fa-users"></i> {{ $item->owners()->count() }} Owners
-                    </button>
+                    @include('components.items.closet')
                 </div>
             </div>
         </div>
@@ -80,6 +78,19 @@
                 <h4 class="mt-4">Notes</h4>
                 <p class="text-muted text-regular">{{ $item->notes }}</p>
             @endif
+
+            <div class="row">
+                <div class="col p-1 list-group text-center small">
+                    <div class="list-group-item">
+                        <i class="fal fa-star"></i> {{ $item->stargazers()->count() }} {{ trans_choice('user.wishlist.stargazers', $item->stargazers()->count()) }}
+                    </div>
+                </div>
+                <div class="col p-1 list-group text-center small">
+                    <div class="list-group-item">
+                        <i class="fal fa-shopping-bag"></i> {{ $item->owners()->count() }} {{ trans_choice('user.closet.owners', $item->owners()->count()) }}
+                    </div>
+                </div>
+            </div>
 
             <h4 class="mt-4">{{ __('Brand') }}</h4>
             <div class="row">
