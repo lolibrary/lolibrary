@@ -13,7 +13,7 @@
         <div class="col-sm p-2">
             <img src="{{ $item->image->url ?? default_asset() }}"
                         onerror="this.src = '{{ default_asset() }}'"
-                        data-original-url="{{ $item->image->url }}"
+                        data-original-url="{{ $item->image->url ?? default_asset() }}"
                         class="rounded mw-100 d-block">
             <div class="row p-0 mx-0 my-3">
                 <div class="col p-1 list-group text-center small">
