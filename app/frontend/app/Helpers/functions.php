@@ -161,7 +161,8 @@ if (! function_exists('brand')) {
      * @param string $slug
      * @return \App\Models\Brand
      */
-    function brand(string $slug) {
+    function brand(string $slug)
+    {
         return Brand::where('slug', $slug)->orWhere('short_name', $slug)->first();
     }
 }
@@ -173,7 +174,8 @@ if (! function_exists('category')) {
      * @param string $slug
      * @return \App\Models\Category
      */
-    function category(string $slug) {
+    function category(string $slug)
+    {
         return Category::where('slug', $slug)->first();
     }
 }
@@ -185,7 +187,8 @@ if (! function_exists('tag')) {
      * @param string $slug
      * @return \App\Models\Tag
      */
-    function tag(string $slug) {
+    function tag(string $slug)
+    {
         return Tag::where('slug', $slug)->first();
     }
 }
@@ -197,7 +200,8 @@ if (! function_exists('feature')) {
      * @param string $slug
      * @return \App\Models\Feature
      */
-    function feature(string $slug) {
+    function feature(string $slug)
+    {
         return Feature::where('slug', $slug)->first();
     }
 }
@@ -209,7 +213,8 @@ if (! function_exists('color')) {
      * @param string $slug
      * @return \App\Models\Color
      */
-    function color(string $slug) {
+    function color(string $slug)
+    {
         return Color::where('slug', $slug)->first();
     }
 }
