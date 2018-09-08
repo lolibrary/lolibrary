@@ -4,11 +4,20 @@
 @if ($items->count() > 0)
     <div class="row">
         @foreach ($items as $item)
-            @component('items.card', ['item' => $item])
-                <button class="btn btn-outline-danger btn-block rounded-0" style="border: none; border-top: 1px solid rgba(0, 0, 0, 0.125);" href="{{ $item->url }}">
-                    Remove from Wishlist
-                </button>
+        <div class="col-lg-4 col-md-6 col-sm-6 p-2">
+            @component('items.card', ['item' => $item, 'type' => 'small'])
+                <form action="{{ route('items.wishlist', $item) }}" method="post">
+                    @csrf
+                    <input type="hidden" name="_method" value="put">
+
+                    <button class="btn btn-outline-danger btn-block rounded-0"
+                        style="border: none; border-top: 1px solid rgba(0, 0, 0, 0.125);"
+                        type="submit">
+                        Remove from Wishlist
+                    </button>
+                </form>
             @endcomponent
+        </div>
         @endforeach
     </div>
 

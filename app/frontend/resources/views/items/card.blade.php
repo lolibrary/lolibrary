@@ -15,7 +15,7 @@
             @endif
         </p>
 
-        <div style="height: 14rem" class="text-center">
+        <div style="height: {{ ($type ?? null) === 'small' ? '7rem' : '14rem' }}" class="text-center">
             <a href="{{ $item->url }}">
                 <img src="{{ $item->image->thumbnail_url ?? default_asset() }}" class="mw-100 mh-100 rounded"
                     onerror="if (this.src !== '{{ default_asset() }}') this.src = '{{ default_asset() }}'">
