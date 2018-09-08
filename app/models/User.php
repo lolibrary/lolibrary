@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use DB;
-use App\Models\Traits\HasUuid;
-use App\Models\Traits\DateHandling;
-use App\Models\Traits\VerifiesEmails;
+use App\Models\Traits\{
+    HasUuid, DateHandling, VerifiesEmails, Wishlist, Closet
+};
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
@@ -38,7 +38,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens, HasUuid, VerifiesEmails, DateHandling;
+    use Notifiable, HasApiTokens, HasUuid, VerifiesEmails, DateHandling, Wishlist, Closet;
 
     public const DEVELOPER = 1000;
     public const ADMIN = 500;
@@ -129,16 +129,6 @@ class User extends Authenticatable
     }
 
     /**
-     * The topics a user has created.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\App\Topic[]
-     */
-    public function topics()
-    {
-        return $this->hasMany(Topic::class);
-    }
-
-    /**
      * The profile image for a user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\App\Image
@@ -146,36 +136,6 @@ class User extends Authenticatable
     public function image()
     {
         return $this->belongsTo(Image::class);
-    }
-
-    /**
-     * All messages for this user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\App\Message[]
-     */
-    public function messages()
-    {
-        return $this->hasMany(Message::class, 'recipient_id');
-    }
-
-    /**
-     * Sent messages for this user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\App\Message[]
-     */
-    public function sent()
-    {
-        return $this->hasMany(Message::class, 'sender_id');
-    }
-
-    /**
-     * The comments a user has left on items.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\App\Comment[]
-     */
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
     }
 
     /**
