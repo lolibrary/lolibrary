@@ -6,7 +6,6 @@ use App\Models\Item;
 
 trait Wishlist
 {
-
     /**
      * The items a user has favourited/wishlisted.
      *
