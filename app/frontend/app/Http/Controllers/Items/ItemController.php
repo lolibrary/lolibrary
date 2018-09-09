@@ -27,10 +27,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        // todo: make this a static ::index() method.
-        $items = Item::paginate(52);
-
-        return view('items.index', compact('items'));
+        return redirect()->route('search');
     }
 
     /**

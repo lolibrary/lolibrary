@@ -16,9 +16,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        $items = $tag->items()->with(Item::PARTIAL_LOAD)->paginate(24);
-
-        return view('tags.show', compact('tag', 'items'));
+        return redirect()->to(search_route(['tags' => [$tag->slug]]));
     }
 
     /**

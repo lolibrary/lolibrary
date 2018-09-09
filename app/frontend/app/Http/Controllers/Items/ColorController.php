@@ -16,9 +16,7 @@ class ColorController extends Controller
      */
     public function show(Color $color)
     {
-        $items = $color->items()->with(Item::PARTIAL_LOAD)->paginate(24);
-
-        return view('colors.show', compact('color', 'items'));
+        return redirect()->to(search_route(['colors' => [$color->slug]]));
     }
 
     /**

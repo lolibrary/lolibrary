@@ -16,9 +16,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $items = $category->items()->with(Item::PARTIAL_LOAD)->paginate(24);
-
-        return view('categories.show', compact('category', 'items'));
+        return redirect()->to(search_route(['categories' => [$category->slug]]));
     }
 
     /**

@@ -16,9 +16,7 @@ class FeatureController extends Controller
      */
     public function show(Feature $feature)
     {
-        $items = $feature->items()->with(Item::PARTIAL_LOAD)->paginate(24);
-
-        return view('features.show', compact('feature', 'items'));
+        return redirect()->to(search_route(['features' => [$feature->slug]]));
     }
 
     /**
