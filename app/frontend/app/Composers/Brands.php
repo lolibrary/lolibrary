@@ -11,6 +11,9 @@ class Brands extends Composer
      */
     protected function load()
     {
-        return Brand::select(['name', 'slug'])->get()->toSelectArray();
+        return Brand::select(['name', 'slug'])
+            ->orderBy('slug', 'asc')
+            ->get()
+            ->toSelectArray();
     }
 }

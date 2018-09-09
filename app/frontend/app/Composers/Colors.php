@@ -11,6 +11,9 @@ class Colors extends Composer
      */
     protected function load()
     {
-        return Color::select(['name', 'slug'])->get()->toSelectArray();
+        return Color::select(['name', 'slug'])
+            ->orderBy('slug', 'asc')
+            ->get()
+            ->toSelectArray();
     }
 }

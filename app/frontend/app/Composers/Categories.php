@@ -11,6 +11,9 @@ class Categories extends Composer
      */
     protected function load()
     {
-        return Category::select(['name', 'slug'])->get()->toSelectArray();
+        return Category::select(['name', 'slug'])
+            ->orderBy('slug', 'asc')
+            ->get()
+            ->toSelectArray();
     }
 }

@@ -11,6 +11,9 @@ class Features extends Composer
      */
     protected function load()
     {
-        return Feature::select(['name', 'slug'])->get()->toSelectArray();
+        return Feature::select(['name', 'slug'])
+            ->orderBy('slug', 'asc')
+            ->get()
+            ->toSelectArray();
     }
 }
