@@ -16,7 +16,7 @@ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keyc
 echo "Installing dnsmasq via homebrew"
 brew install dnsmasq
 
-suod brew services start dnsmasq
+sudo brew services start dnsmasq
 
 echo 'address=/.test/127.0.0.1' > $(brew --prefix)/etc/dnsmasq.conf
 sudo bash -c "echo 'nameserver 127.0.0.1' > /etc/resolver/test"
