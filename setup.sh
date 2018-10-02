@@ -27,10 +27,10 @@ docker-compose up -d
 
 # run install commands; can be run each time.
 echo "💿  Installing next"
-docker-compose exec web composer install
+docker-compose exec www.lolibrary.test composer install
 
 echo "⏱  Checking the database is up"
-docker-compose exec web php artisan db:wait --timeout=15 --sleep=200
+docker-compose exec www.lolibrary.test php artisan wait:db --timeout=15 --sleep=200
 
 status=$?
 
@@ -39,6 +39,6 @@ if [ $status -eq 1 ]; then
     exit 1
 fi
 
-docker-compose exec web php artisan migrate --seed
+docker-compose exec www.lolibrary.test php artisan migrate --seed
 
 echo "✅  All done - it may be a little while until the site comes up, because nodejs is actively building the frontend via Laravel Mix."
