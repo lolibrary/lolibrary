@@ -54,6 +54,10 @@ Add a dns resolver such as dnsmasq to resolve all `.test` domains to localhost. 
 
 On windows, you can get away with just adding `lolibrary.test` to your hosts file pointing to `127.0.0.1`
 
+## Infrastructure Overivew
+
+![Infrastructure Overview](https://github.com/ChunCVL/lolibrary/blob/master/InfrastructureAnalysis.png)
+
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within this repo, email [amelia@lolibrary.org](mailto:amelia@lolibrary.org). All security vulnerabilities will be promptly addressed.
