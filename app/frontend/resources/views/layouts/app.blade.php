@@ -35,7 +35,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                    @junior
+                        @include('components.navbar.admin')
+                    @endjunior
                     </ul>
 
                     <!-- Right Side Of Navbar -->

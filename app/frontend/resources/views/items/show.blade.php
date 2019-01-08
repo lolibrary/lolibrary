@@ -175,7 +175,26 @@
             </a>
         </div>
     </div>
+    @junior
+    <div class="row">
+        <div class="col col-sm-4 mx-auto m-0 p-0 list-group text-center">
+            @if ($item->draft())
+                <a onclick="event.preventDefault(); $('#publish-item').submit()" class="list-group-item rounded-0 text-info">Publish Item</a>
+            @endif
+            <a href="{{ route('items.edit', $item) }}" class="list-group-item rounded-0 text-success">Edit Item</a>
+            <a onclick="event.preventDefault(); $('#delete-item').submit()" class="list-group-item text-danger rounded-0">Delete Item</a>
+        </div>
+    </div>
+    @endjunior
+
 </div>
+
+    {{ Form::open(['route' => ['items.publish', $item], 'method' => 'put', 'id' => 'publish-item']) }}
+    {{ Form::close() }}
+
+    {{ Form::open(['route' => ['items.destroy', $item], 'method' => 'delete', 'id' => 'delete-item']) }}
+    {{ Form::close() }}
+
 @endsection
 
 @section('meta')

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use DB;
 use App\Models\Traits\{
-    HasUuid, DateHandling, VerifiesEmails, Wishlist, Closet
+    HasUuid, DateHandling, VerifiesEmails, Wishlist, Closet, AccessLevels
 };
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -38,7 +38,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens, HasUuid, VerifiesEmails, DateHandling, Wishlist, Closet;
+    use Notifiable, HasApiTokens, HasUuid, VerifiesEmails, DateHandling, Wishlist, Closet, AccessLevels;
 
     public const DEVELOPER = 1000;
     public const ADMIN = 500;
@@ -157,4 +157,5 @@ class User extends Authenticatable
     {
         return $query->where(DB::raw('lower(email)'), mb_strtolower($email));
     }
+
 }
