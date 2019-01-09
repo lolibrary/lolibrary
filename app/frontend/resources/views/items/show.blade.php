@@ -178,6 +178,14 @@
 </div>
 @endsection
 
+@section('script')
+<script>
+    var SimpleLightbox = window.SimpleLightbox;
+    new SimpleLightbox({elements: '.item-image-columns a'});
+</script>
+
+@endsection
+
 @section('meta')
     <link rel="canonical" href="{{ $item->url }}">
 

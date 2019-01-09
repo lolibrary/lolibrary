@@ -53,3 +53,4 @@ $(() => {
 const image = document.head.querySelector('meta[name="default-image"]');
 
 window.defaultImage = image ? image.content : '/images/default.png';
+window.SimpleLightbox = require('simple-lightbox');
