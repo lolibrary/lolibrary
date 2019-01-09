@@ -155,7 +155,7 @@
         <h4 class="my-4 px-4">{{ __('Images') }}</h4>
         <div class="item-image-columns mb-5">
             @foreach ($item->images as $image)
-                <a class="card m-0 p-0" href="{{ $image->url }}">
+                <a class="card m-0 p-0" href="{{ $image->url }}" data-lightbox="show">
                     <img src="{{ $image->thumbnail_url }}"
                         onerror="this.src = '{{ default_asset() }}'"
                         data-original-url="{{ $image->url }}"
@@ -180,8 +180,7 @@
 
 @section('script')
 <script>
-    var SimpleLightbox = window.SimpleLightbox;
-    new SimpleLightbox({elements: '.item-image-columns a'});
+
 </script>
 
 @endsection
