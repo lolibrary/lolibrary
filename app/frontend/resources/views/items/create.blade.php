@@ -47,7 +47,7 @@
                     <div class="form-group">
                         <label for="features" class="col-form-label">Features</label>
 
-                        <select id="features" name="features[]" class="form-control chosen" multiple>
+                        <select id="features" name="features[]" class="form-control form-control-chosen" multiple>
                             @foreach ($features as $feature)
                                 <option value="{{ $feature->id }}" @if (in_array($feature->id, old('features', []), true)) selected @endif>{{ $feature->name }}</option>
                             @endforeach
@@ -57,7 +57,7 @@
                     <div class="form-group">
                         <label for="colors" class="col-form-label">Colorways</label>
 
-                        <select id="colors" name="colors[]" class="form-control chosen" multiple>
+                        <select id="colors" name="colors[]" class="form-control form-control-chosen" multiple>
                             @foreach ($colors as $color)
                                 <option value="{{ $color->id }}" @if (in_array($color->id, old('colors', []), true)) selected @endif>{{ $color->name }}</option>
                             @endforeach
@@ -67,7 +67,7 @@
                     <div class="form-group">
                         <label for="tags" class="col-form-label">Tags</label>
 
-                        <select name="tags[]" id="tags" class="form-control chosen" multiple>
+                        <select name="tags[]" id="tags" class="form-control form-control-chosen" multiple>
                             @foreach ($tags as $tag)
                                 <option value="{{ $tag->id }}" @if (in_array($tag->id, old('tags', []), true)) selected @endif>{{ $tag->slug }}</option>
                             @endforeach
@@ -77,7 +77,7 @@
                     <div class="form-group">
                         <label for="brand" class="col-form-label">Brand <span class="text-danger">*</span></label>
 
-                        <select id="brand" name="brand" class="form-control chosen" required>
+                        <select id="brand" name="brand" class="form-control form-control-chosen" required>
                             @foreach ($brands as $brand)
                                 <option value="{{ $brand->id }}" @if ($brand->id === old('brand')) selected @endif>{{ $brand->name }}</option>
                             @endforeach
@@ -87,7 +87,7 @@
                     <div class="form-group">
                         <label for="category" class="col-form-label">Category <span class="text-danger">*</span></label>
 
-                        <select id="category" name="category" class="form-control chosen" required>
+                        <select id="category" name="category" class="form-control form-control-chosen" required>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" @if ($category->id === old('category')) selected @endif>{{ $category->name }}</option>
                             @endforeach
@@ -122,7 +122,7 @@
                     <div class="form-group">
                         <label for="year" class="col-form-label">Release Year <span class="text-danger">*</span></label>
 
-                        <select name="year" id="year" class="form-control chosen" required>
+                        <select name="year" id="year" class="form-control form-control-chosen" required>
                             @foreach (array_reverse(range(1990, date('Y') + 3)) as $year)
                                 <option value="{{ $year }}" @if ($year == old('year', date('Y'))) selected @endif>{{ $year }}</option>
                             @endforeach
@@ -134,7 +134,7 @@
                             <div class="form-group">
                                 <label for="currency" class="col-form-label">Currency <span class="text-danger">*</span></label>
 
-                                <select id="currency" name="currency" class="form-control chosen" required>
+                                <select id="currency" name="currency" class="form-control form-control-chosen" required>
                                     @foreach ($currencies as $code => $currency)
                                         <option value="{{ $code }}" @if ($code === old('currency')) selected @endif>{{ $currency }}</option>
                                     @endforeach
@@ -212,8 +212,6 @@
 @endsection
 
 @section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.7.0/chosen.jquery.min.js"></script>
-
     <script>
         $('[data-type="attribute.button"]').click(function (event) {
             event.preventDefault();
@@ -249,12 +247,5 @@
         });
     </script>
 
-    <script>
-        $('.chosen').chosen();
-    </script>
 </div>
-@endsection
-
-@section('head')
-    <link rel="stylesheet" href="{{ asset('chosen/bootstrap-chosen.css') }}">
 @endsection

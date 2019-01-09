@@ -13,7 +13,7 @@
         "axios": "^0.18",
         "bootstrap": "^4.1.1",
         "bootstrap4c-chosen": "^1.0.8",
-        "chosen-js": "^1.8.5",
+        "chosen-js": "^1.8.7",
         "cross-env": "^5.1.5",
         "jquery": "^3.2",
         "laravel-mix": "^2.1.14",
