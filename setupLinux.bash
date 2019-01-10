@@ -106,7 +106,7 @@ function start_lolibrary_containers {
 # Ping the lolibrary website to test if the DNS is correctly working.
 function ping_lolibrary_website {
     #Constants.
-    declare -ir AMOUNT_PINGS = 4
+    declare -ir AMOUNT_PINGS=4
     
     ping -c $AMOUNT_PINGS lolibrary.test
     
