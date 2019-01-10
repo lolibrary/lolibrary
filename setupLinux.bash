@@ -5,13 +5,15 @@
 
 #Copy last repository of Lolibrary
 function clone_lolibrary {
-   sudo apt-get install git -y
+    baseDirectory=$(pwd)
+    sudo apt-get install git -y
     sudo git clone https://github.com/lolibrary/lolibrary.git
+    cp ./installLinux.sh $baseDirectory/lolibrary/
     cd lolibrary
-}
+ }
 
 function configure_everything_for_lolibrary {
-	 sudo echo "Please run this from lolibrary root folder where docker-compose.yml is located."
+	sudo echo "Please run this from lolibrary root folder where docker-compose.yml is located."
 	#Base directory
 	baseDirectory=$(pwd)
 
