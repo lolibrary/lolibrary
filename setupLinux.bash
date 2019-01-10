@@ -55,7 +55,7 @@ function configure_everything_for_lolibrary {
     sudo curl -L "https://github.com/docker/compose/releases/download/1.23"
 }
 
-function start_lolibrary_containers{
+function start_lolibrary_containers {
     #Run correctly please
     sudo echo "Please run this from lolibrary root folder where docker-compose.yml is located."
 
