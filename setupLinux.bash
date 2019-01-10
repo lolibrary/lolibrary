@@ -25,12 +25,14 @@ function clone_lolibrary {
 
 #Install the required sofware and configurate software to run the lolibrary website.
 #@CERTIFICATE_PATH_REPOSITORY
+#@DOCKER_COMPOSER_VERSION
 function configure_everything_for_lolibrary {
     #Base directory
     baseDirectory=$(pwd)
     
     #Constants
     declare -r CERTIFICATE_PATH_REPOSITORY="$baseDirectory/pki/certificate.pem"
+    declare -r DOCKER_COMPOSER_VERSION=1.23.2
 
     #Rename .env.example to .env
     sudo set -e
@@ -69,7 +71,7 @@ function configure_everything_for_lolibrary {
     sudo docker run hello-world
 
     #Install Docker-compose.
-    sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo curl -L "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSER_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
     sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     
