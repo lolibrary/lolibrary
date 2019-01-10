@@ -10,7 +10,6 @@ function clone_lolibrary {
     sudo apt-get install git -y
     sudo git clone https://github.com/lolibrary/lolibrary.git
     cp ./$thisScriptName $baseDirectory/lolibrary/
-    cd lolibrary
 }
 
 function configure_everything_for_lolibrary {
