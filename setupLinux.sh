@@ -1,4 +1,4 @@
-#Working under Debian 9.6.
+#Working under Debian 9.6
 #!/usr/bin/env bash
 
 #Copy last repository of Lolibrary
