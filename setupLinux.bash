@@ -37,6 +37,8 @@ function configure_everything_for_lolibrary {
     sudo apt-get install dnsmasq -y
     sudo service dnsmasq start
     sudo cp /etc/host /etc/hosts_backup
+    
+    #Add Hostname to hosts file
     sed -i "2i127.0.0.1  lolibrary.test lolibrary" /etc/hosts
 
     #Install Docker
@@ -47,10 +49,17 @@ function configure_everything_for_lolibrary {
     sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
     sudo apt-get update
     sudo apt-get install docker-ce -y
+    
+    #Test Docker
     sudo docker run hello-world
 
     #Install Docker-compose
-    sudo curl -L "https://github.com/docker/compose/releases/download/1.23"
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    
+    #Test Docker Compose
+    docker-compose --version
 }
 
 function start_lolibrary_containers {
