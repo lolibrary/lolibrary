@@ -5,10 +5,11 @@
 
 #Copy last repository of Lolibrary
 function clone_lolibrary {
+    thisbashname=`basename "$0"`
     baseDirectory=$(pwd)
     sudo apt-get install git -y
     sudo git clone https://github.com/lolibrary/lolibrary.git
-    cp ./installLinux.sh $baseDirectory/lolibrary/
+    cp ./thisbashname $baseDirectory/lolibrary/
     cd lolibrary
  }
 
