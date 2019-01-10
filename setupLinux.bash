@@ -10,6 +10,7 @@ declare -f start_lolibrary_containers
 declare -f ping_lolibrary_website
 
 #Copy last repository of Lolibrary.
+#@GIT_LOLIBRARY
 function clone_lolibrary {
     #Constants.
     declare -r GIT_LOLIBRARY="https://github.com/lolibrary/lolibrary.git"
@@ -22,7 +23,8 @@ function clone_lolibrary {
     cp ./$thisScriptName $baseDirectory/lolibrary/
 }
 
-#Install the required sofwar and configurate software to run the lolibrary website.
+#Install the required sofware and configurate software to run the lolibrary website.
+#@CERTIFICATE_PATH_REPOSITORY
 function configure_everything_for_lolibrary {
     #Base directory
     baseDirectory=$(pwd)
@@ -103,7 +105,8 @@ function start_lolibrary_containers {
     sudo echo "All done - it may be a little while until the site comes up, because nodejs is actively building the frontend via Laravel Mix."
 }
 
-# Ping the lolibrary website to test if the DNS is correctly working.
+#Ping the lolibrary website to test if the DNS is correctly working.
+#@AMOUNT_PINGS
 function ping_lolibrary_website {
     #Constants.
     declare -ir AMOUNT_PINGS=4
@@ -124,7 +127,8 @@ function ping_lolibrary_website {
     fi
 }
 
-#Bash menu to execute different functions.
+#Bash menu to execute different functions, these can be found in each case.
+#@Type Array[<Integer> UserInput]
 PS3='Please enter your choice (1/2/3/4): '
 sudo echo "Option 2 and 3 have to be runned within lolibrary root folder where docker-compose.yml is located."
 options=("Clone Lolibrary with Git" "Configure everything for Lolibrary" "Start Lolibrary Containers" "Test Website Connection Lolibrary" "Quit")
