@@ -10,10 +10,10 @@ declare -f start_lolibrary_containers
 declare -f ping_lolibrary_website
 
 #Copy last repository of Lolibrary.
-#@GIT_LOLIBRARY
+#@GIT_LOLIBRARY_URL
 function clone_lolibrary {
     #Constants.
-    declare -r GIT_LOLIBRARY="https://github.com/lolibrary/lolibrary.git"
+    declare -r GIT_LOLIBRARY_URL="https://github.com/lolibrary/lolibrary.git"
     
     #Procedure.
     thisScriptName=`basename "$0"`
@@ -32,7 +32,7 @@ function configure_everything_for_lolibrary {
     
     #Constants
     declare -r CERTIFICATE_PATH_REPOSITORY="$baseDirectory/pki/certificate.pem"
-    declare -r DOCKER_COMPOSER_VERSION=1.23.2
+    declare -r DOCKER_COMPOSER_VERSION="1.23.2"
 
     #Rename .env.example to .env
     sudo set -e
