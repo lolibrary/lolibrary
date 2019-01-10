@@ -22,7 +22,7 @@ fi
 
 # first, trust our tls certificate
 sudo echo "Adding a certificate to your trust store (pki/certificate.pem)"
-sudo echo "⚠️  You may need to enter your password."
+sudo echo "You may need to enter your password."
 sudo apt-get update
 sudo apt-get install ca-certificates -y
 sudo cp $baseDirectory/pki/certificate.pem --target-directory="/usr/local/share/ca-certificates/certificate.crt"
