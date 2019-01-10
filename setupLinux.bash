@@ -11,10 +11,10 @@ declare -f ping_lolibrary_website
 
 #Copy last repository of Lolibrary.
 function clone_lolibrary {
-    #CONSTANTS
+    #Constants.
     GIT_LOLIBRARY="https://github.com/lolibrary/lolibrary.git"
     
-    #Procedure
+    #Procedure.
     thisScriptName=`basename "$0"`
     baseDirectory=$(pwd)
     sudo apt-get install git -y
@@ -26,6 +26,9 @@ function clone_lolibrary {
 function configure_everything_for_lolibrary {
     #Base directory
     baseDirectory=$(pwd)
+    
+    #Constants
+    CERTIFICATE_PATH_REPOSITORY="$baseDirectory/pki/certificate.pem"
 
     #Rename .env.example to .env
     sudo set -e
@@ -39,8 +42,7 @@ function configure_everything_for_lolibrary {
     sudo echo "Adding a certificate to your trust store (pki/certificate.pem)"
     sudo apt-get update
     sudo apt-get install ca-certificates -y
-    sudo cp $baseDirectory/pki/certificate.pem --target-directory="/usr/local/share/ca-certificates/certificate.crt"
-    sudo mv /usr/local/share/ca-certificates/certificate.pem /usr/local/share/ca-certificates/certificate.crt
+    sudo cp $CERTIFICATE_PATH_REPOSITORY /usr/local/share/ca-certificates/certificate.crt
     sudo update-ca-certificates
 
     #Installing DNS.
@@ -103,7 +105,10 @@ function start_lolibrary_containers {
 
 # Ping the lolibrary website to test if the DNS is correctly working.
 function ping_lolibrary_website {
-    ping -c 4 lolibrary.test
+    #Constants.
+    AMOUNT_PINGS = 4
+    
+    ping -c $AMOUNT_PINGS lolibrary.test
     
     status=$?
     
