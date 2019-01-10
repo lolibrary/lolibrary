@@ -1,13 +1,15 @@
 #Working under Debian 9.6 x64 (Tested in VirtualBox v5.2.22r 126460 (Qt5.6.2)
 #!/usr/bin/env bash
 
-#---Bash Menu can be found at the end---
+#---Main Procedure can be found at the end---
 
 #Declare Interfaces.
+declare -f startup
 declare -f clone_lolibrary
 declare -f configure_everything_for_lolibrary
 declare -f start_lolibrary_containers
 declare -f ping_lolibrary_website
+declare -f menu_lolibrary
 
 #Check if sudo is installed.
 function startup{
