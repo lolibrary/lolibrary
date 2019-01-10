@@ -59,7 +59,7 @@ function configure_everything_for_lolibrary {
     sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     
     #Test Docker Compose
-    docker-compose --version
+    sudo docker-compose --version
 }
 
 function start_lolibrary_containers {
