@@ -1,7 +1,7 @@
 #Working under Debian 9.6 x64 (Tested in VirtualBox v5.2.22r 126460 (Qt5.6.2)
 #!/usr/bin/env bash
 
-#---Define functions used for menu at the end--
+#---Bash Menu can be found at the end---
 
 #Declare Interfaces.
 declare -f clone_lolibrary
