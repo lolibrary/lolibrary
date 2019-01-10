@@ -50,7 +50,7 @@ window.chosen = require('chosen-js');
  * item photos a little nicer. It will register on elements with 'data-lightbox="show"'
  */
 
-var SimpleLightbox = require('simple-lightbox');
+ window.SimpleLightbox = require('simple-lightbox');
 
 /**
  * Both chosen and simple-lightbox need to be initialized *after* the rest of the
@@ -60,7 +60,7 @@ var SimpleLightbox = require('simple-lightbox');
 $(() => {
     $('.form-control-chosen').chosen()
     $('[data-toggle="tooltip"]').tooltip()
-    var lightbox = new SimpleLightbox({elements: '[data-lightbox="show"]'});
+    let lightbox = new SimpleLightbox({elements: '[data-lightbox="show"]'});
 });
 
 const image = document.head.querySelector('meta[name="default-image"]');

@@ -178,13 +178,6 @@
 </div>
 @endsection
 
-@section('script')
-<script>
-
-</script>
-
-@endsection
-
 @section('meta')
     <link rel="canonical" href="{{ $item->url }}">
 
