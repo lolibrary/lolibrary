@@ -101,6 +101,9 @@ do
             echo "you chose choice 3"
             start_lolibrary_containers
             ;;
+        "Exit")
+            break
+            ;;    
         "Quit")
             break
             ;;
