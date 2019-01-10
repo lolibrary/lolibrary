@@ -13,7 +13,6 @@ function clone_lolibrary {
 }
 
 function configure_everything_for_lolibrary {
-    sudo echo "Please run this from lolibrary root folder where docker-compose.yml is located."
     #Base directory
     baseDirectory=$(pwd)
 
@@ -83,7 +82,7 @@ function start_lolibrary_containers {
 
 #Bash Menu
 PS3='Please enter your choice: '
-sudo echo "Option 2 and 3 has to be runned within lolibrary root folder where docker-compose.yml is located."
+sudo echo "Option 2 and 3 have to be runned within lolibrary root folder where docker-compose.yml is located."
 options=("Clone Lolibrary with Git" "Configure everything for Lolibrary" "Start Lolibrary Containers" "Quit")
 select opt in "${options[@]}"
 do
