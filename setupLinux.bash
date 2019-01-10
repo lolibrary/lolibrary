@@ -56,9 +56,9 @@ function configure_everything_for_lolibrary {
 }
 
 function start_lolibrary_containers{
-   	#Run correctly please
-   	sudo echo "Please run this from lolibrary root folder where docker-compose.yml is located."
-   
+    #Run correctly please
+    sudo echo "Please run this from lolibrary root folder where docker-compose.yml is located."
+
     #now, docker-compose up and create the initial volumes/files etc
     sudo echo "Starting docker services..."
     sudo docker-compose up -d
