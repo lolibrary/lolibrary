@@ -89,10 +89,26 @@ function start_lolibrary_containers {
     sudo echo "All done - it may be a little while until the site comes up, because nodejs is actively building the frontend via Laravel Mix."
 }
 
+function ping_lolibrary_website {
+    ping lolibrary.test
+    
+    status=$?
+    
+    if [ $status -eq 0 ]; then
+        sudo echo "Website Up";
+        exit 1
+    else
+        sudo "Website Down"
+        sudo "Check dns program status if hostname is readed"
+        sudo service dnsmasq status
+        exit 1
+    fi
+}
+
 #Bash Menu
 PS3='Please enter your choice (1/2/3/4): '
 sudo echo "Option 2 and 3 have to be runned within lolibrary root folder where docker-compose.yml is located."
-options=("Clone Lolibrary with Git" "Configure everything for Lolibrary" "Start Lolibrary Containers" "Quit")
+options=("Clone Lolibrary with Git" "Configure everything for Lolibrary" "Start Lolibrary Containers" "Test Website Connection Lolibrary" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -107,6 +123,10 @@ do
         "Start Lolibrary Containers")
             echo "you chose choice 3"
             start_lolibrary_containers
+            ;;
+        "Test Website Connection Lolibrary")
+            echo "you chose choice 4"
+            ping_lolibrary_website
             ;;
         "Quit")
             break
