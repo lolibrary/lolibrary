@@ -5,11 +5,11 @@
 
 #Copy last repository of Lolibrary
 function clone_lolibrary {
-    thisbashname=`basename "$0"`
+    thisScriptName=`basename "$0"`
     baseDirectory=$(pwd)
     sudo apt-get install git -y
     sudo git clone https://github.com/lolibrary/lolibrary.git
-    cp ./thisbashname $baseDirectory/lolibrary/
+    cp ./$thisScriptName $baseDirectory/lolibrary/
     cd lolibrary
 }
 
@@ -84,7 +84,7 @@ function start_lolibrary_containers {
 
 #Bash Menu
 PS3='Please enter your choice: '
-sudo echo "Option 1 and 2 has to be runned within lolibrary root folder where docker-compose.yml is located."
+sudo echo "Option 2 and 3 has to be runned within lolibrary root folder where docker-compose.yml is located."
 options=("Clone Lolibrary with Git" "Configure everything for Lolibrary" "Start Lolibrary Containers" "Quit")
 select opt in "${options[@]}"
 do
