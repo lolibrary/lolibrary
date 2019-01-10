@@ -90,7 +90,7 @@ function start_lolibrary_containers {
 }
 
 #Bash Menu
-PS3='Please enter your choice: '
+PS3='Please enter your choice (1/2/3/4): '
 sudo echo "Option 2 and 3 have to be runned within lolibrary root folder where docker-compose.yml is located."
 options=("Clone Lolibrary with Git" "Configure everything for Lolibrary" "Start Lolibrary Containers" "Quit")
 select opt in "${options[@]}"
