@@ -22,7 +22,7 @@ function startup{
         exit 0
     else
         echo "Please install sudo"
-	apte-get update
+	apt-get update
         apt-get install sudo
         
         status_2=$?
