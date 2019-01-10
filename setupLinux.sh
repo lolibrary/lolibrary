@@ -1,9 +1,16 @@
 #Working under Debian 9.6.
-#Run sh ./setupLinux.sh
 #!/usr/bin/env bash
 
+#Copy last repository of Lolibrary
+sudo apt-get install git -y
+sudo git clone https://github.com/lolibrary/lolibrary.git
+cd lolibrary
+
+#Execute install script
+#sudo sh ./installLinux.sh
+
 #Base directory
-sudo pwd=$(pwd)
+pwd=$(pwd)
 
 #Rename .env.example to .env
 sudo set -e
@@ -40,12 +47,11 @@ sudo apt-get install docker-ce -y
 sudo docker run hello-world
 
 #Install Docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23"
 
 #now, docker-compose up and create the initial volumes/files etc
 sudo echo "Starting docker services..."
+cd $pwd
 sudo docker-compose up -d
 
 # run install commands; can be run each time.
