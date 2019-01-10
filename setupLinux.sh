@@ -10,7 +10,7 @@ cd lolibrary
 #sudo sh ./installLinux.sh
 
 #Base directory
-pwd=$(pwd)
+baseDirectory=$(pwd)
 
 #Rename .env.example to .env
 sudo set -e
@@ -25,7 +25,7 @@ sudo echo "Adding a certificate to your trust store (pki/certificate.pem)"
 sudo echo "⚠️  You may need to enter your password."
 sudo apt-get update
 sudo apt-get install ca-certificates -y
-sudo cp $pwd/pki/certificate.pem --target-directory="/usr/local/share/ca-certificates/certificate.crt"
+sudo cp $baseDirectory/pki/certificate.pem --target-directory="/usr/local/share/ca-certificates/certificate.crt"
 sudo mv /usr/local/share/ca-certificates/certificate.pem /usr/local/share/ca-certificates/certificate.crt
 sudo update-ca-certificates
 
@@ -51,7 +51,7 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.23"
 
 #now, docker-compose up and create the initial volumes/files etc
 sudo echo "Starting docker services..."
-cd $pwd
+cd $baseDirectory
 sudo docker-compose up -d
 
 # run install commands; can be run each time.
