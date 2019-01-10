@@ -117,8 +117,9 @@ function ping_lolibrary_website {
         exit 1
     else
         sudo "Website Down"
-        sudo "Check dns program status if hostname is readed"
+        sudo "Check DNS program status if hostname is readed, if required please edit /etc/hosts"
         sudo service dnsmasq status
+        cat /etc/hosts
         exit 1
     fi
 }
