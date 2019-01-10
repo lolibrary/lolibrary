@@ -94,7 +94,7 @@ do
             ;;
         "Configure everything for Lolibrary")
             echo "you chose choice 2"
-            configure_everything_for_Lolibrary
+            configure_everything_for_lolibrary
             ;;
         "Start Lolibrary Containers")
             echo "you chose choice 3"
