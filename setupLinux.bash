@@ -1,13 +1,14 @@
 #Working under Debian 9.6 x64 (Tested in VirtualBox v5.2.22r 126460 (Qt5.6.2)
 #!/usr/bin/env bash
 
-#Copy last repository of Lolibrary
-sudo apt-get install git -y
-sudo git clone https://github.com/lolibrary/lolibrary.git
-cd lolibrary
+#---Define functions used for menu at the end
 
-#Execute install script
-#sudo sh ./installLinux.sh
+#Copy last repository of Lolibrary
+function clone_lolibrary {
+   sudo apt-get install git -y
+    sudo git clone https://github.com/lolibrary/lolibrary.git
+    cd lolibrary
+}
 
 #Base directory
 baseDirectory=$(pwd)
@@ -71,3 +72,25 @@ fi
 sudo docker-compose exec www.lolibrary.test php artisan migrate --seed
 
 sudo echo "All done - it may be a little while until the site comes up, because nodejs is actively building the frontend via Laravel Mix."
+
+#Bash Menu
+PS3='Please enter your choice: '
+options=("Clone Lolibrary with Git" "Option 2" "Option 3" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Option 1")
+            echo "you chose choice 1"
+            ;;
+        "Option 2")
+            echo "you chose choice 2"
+            ;;
+        "Option 3")
+            echo "you chose choice $REPLY which is $opt"
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
