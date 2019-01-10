@@ -11,10 +11,14 @@ declare -f ping_lolibrary_website
 
 #Copy last repository of Lolibrary.
 function clone_lolibrary {
+    #CONSTANTS
+    GIT_LOLIBRARY="https://github.com/lolibrary/lolibrary.git"
+    
+    #Procedure
     thisScriptName=`basename "$0"`
     baseDirectory=$(pwd)
     sudo apt-get install git -y
-    sudo git clone https://github.com/lolibrary/lolibrary.git
+    sudo git clone $GIT_LOLIBRARY
     cp ./$thisScriptName $baseDirectory/lolibrary/
 }
 
