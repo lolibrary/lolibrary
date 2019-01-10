@@ -12,7 +12,7 @@ declare -f ping_lolibrary_website
 #Copy last repository of Lolibrary.
 function clone_lolibrary {
     #Constants.
-    GIT_LOLIBRARY="https://github.com/lolibrary/lolibrary.git"
+    declare -r GIT_LOLIBRARY="https://github.com/lolibrary/lolibrary.git"
     
     #Procedure.
     thisScriptName=`basename "$0"`
@@ -28,7 +28,7 @@ function configure_everything_for_lolibrary {
     baseDirectory=$(pwd)
     
     #Constants
-    CERTIFICATE_PATH_REPOSITORY="$baseDirectory/pki/certificate.pem"
+    declare -r CERTIFICATE_PATH_REPOSITORY="$baseDirectory/pki/certificate.pem"
 
     #Rename .env.example to .env
     sudo set -e
@@ -106,7 +106,7 @@ function start_lolibrary_containers {
 # Ping the lolibrary website to test if the DNS is correctly working.
 function ping_lolibrary_website {
     #Constants.
-    AMOUNT_PINGS = 4
+    declare -ir AMOUNT_PINGS = 4
     
     ping -c $AMOUNT_PINGS lolibrary.test
     
