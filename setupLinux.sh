@@ -30,11 +30,11 @@ sudo mv /usr/local/share/ca-certificates/certificate.pem /usr/local/share/ca-cer
 sudo update-ca-certificates
 
 #Installing DNS
-#sudo echo "edit hostfile by adding 127.0.0.1
-#sudo echo nano /etc/hosts
 echo "Installing dnsmasq via apt-get"
 sudo apt-get install dnsmasq -y
 sudo service dnsmasq start
+sudo cp /etc/host /etc/hosts_backup
+sed -i "2i127.0.0.1  lolibrary.test lolibrary" /etc/hosts
 
 #Install Docker
 sudo apt-get update
