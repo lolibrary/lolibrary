@@ -186,7 +186,7 @@ function start_lolibrary_containers {
 #Add hostname to hosts file.
 #@LOLIBRARY_HOSTNAME_ADDED
 function add_hostname_to_host {
-    if [ $LOLIBRARY_HOSTNAME_ADDED] then
+    if [ $LOLIBRARY_HOSTNAME_ADDED ]; then
         sudo echo "Hostname exist in host file"
     else
         sudo sed -i "2i127.0.0.1  lolibrary.test lolibrary" /etc/hosts
