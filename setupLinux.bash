@@ -51,7 +51,8 @@ function clone_lolibrary {
         sudo echo "$REPOSITORY_DIRECTORY_NAME already exists"
         read -r -p "Are you sure you want to delete this directory? [y/N] " response
         case "$response" in
-        [yY][eE][sS]|[yY]) 
+        [yY][eE][sS]|[yY])
+	sudo rm -rf $REPOSITORY_DIRECTORY_NAME
         sudo echo "Folder deleted"
         ;;
     *)
