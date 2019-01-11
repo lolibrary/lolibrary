@@ -4,11 +4,13 @@
 #---Main Procedure can be found at the end---
 
 #Declare Interfaces.
-declare -f startup
+declare -f startup_check_repostiory_directory
+declare -f startup_check_sudo
 declare -f install_sudo
 declare -f clone_lolibrary
 declare -f configure_everything_for_lolibrary
 declare -f start_lolibrary_containers
+declare -f add_hostname_to_host
 declare -f ping_lolibrary_website
 declare -f menu_lolibrary
 
@@ -17,7 +19,7 @@ declare -g IS_SUDO_INSTALLED=false
 declare -g RUNNING_WITHIN_ROOT_REPOSITORY=false
 
 #Check if sudo is installed.
-function startup {
+function startup_check_sudo {
     #Check sudo
     dpkg -s sudo
     
@@ -28,25 +30,25 @@ function startup {
         IS_SUDO_INSTALLED=true
         return 0
     fi
-    
+}
+function startup_check_repostiory_directory {
     #Check directory where the script is running from.
     
     #Local Variable
-    baseDirectory=$(pwd)
+    currentDirectoryName=$(basename $(pwd))
     
-    if [ -d "$REPOSITORY_DIRECTORY_NAME" ]; then
-    REPOSITORY_DIRECTORY_NAME="$baseDirectory/lolibrary"
+    if [ $currentDirectoryName == "lolibrary" ]; then
     RUNNING_WITHIN_ROOT_REPOSITORY=true
     fi
 }
 
 #Install sudo and add user to sudo group.
 function install_sudo {
-    echo "Su is called to login as root account, please enter your root passsword and use the below commands to configure sudo."
+    echo "use command <Su> to login as root account, please enter your root passsword and use the below commands to configure sudo."
     echo "Install command: apt-get install sudo"
     echo "Add useracount to sudo group: usermod -aG sudo <username>"
     echo "A reboot is required to apply sudo rights the the inputed username. Command: reboot"
-    su
+    exit 0
 }
 
 #Copy last repository of Lolibrary.
@@ -113,9 +115,6 @@ function configure_everything_for_lolibrary {
     sudo apt-get install dnsmasq -y
     sudo service dnsmasq start
     sudo cp /etc/host /etc/hosts_backup
-    
-    #Add hostname to hosts file.
-    sudo sed -i "2i127.0.0.1  lolibrary.test lolibrary" /etc/hosts
 
     #Install Docker.
     sudo apt-get update
@@ -170,6 +169,14 @@ function start_lolibrary_containers {
     return 0
 }
 
+#Add hostname to hosts file.
+function add_hostname_to_host {
+    sudo sed -i "2i127.0.0.1  lolibrary.test lolibrary" /etc/hosts
+    sudo echo "hostname added"
+    cat /etc/hosts
+    read -n 1 -s -r -p "Press any key to continue"
+}
+
 #Ping the lolibrary website to test if the DNS is correctly working.
 #@AMOUNT_PINGS
 function ping_lolibrary_website {
@@ -213,7 +220,8 @@ do
     Clone Lolibrary with Git           (2)
     Configure everything for Lolibrary (3)
     Start Lolibrary Containers         (4)
-    Test Website Connection Lolibrary  (5)
+    Add Hostname to host file          (5)
+    Test Website Connection Lolibrary  (6)
     Quit                               (Q)
     ------------------------------
 EOF
@@ -232,6 +240,9 @@ EOF
     start_lolibrary_containers
     ;;
     "5")  echo "you chose choice 5"
+    add_hostname_to_host
+    ;;
+    "6")  echo "you chose choice 6"
     ping_lolibrary_website
     ;;
     "Q")  exit
@@ -246,5 +257,6 @@ done
 }
 
 #Main
-startup
+startup_check_sudo
+startup_check_repostiory_directory
 menu_lolibrary
