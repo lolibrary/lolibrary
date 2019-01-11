@@ -53,7 +53,7 @@ function clone_lolibrary {
         case "$response" in
         [yY][eE][sS]|[yY])
 	   sudo rm -rf $REPOSITORY_DIRECTORY_NAME
-            sudo echo "Folder deleted"
+           sudo echo "Folder deleted"
         ;;
     *)
         return 0
