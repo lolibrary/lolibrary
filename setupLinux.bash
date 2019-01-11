@@ -19,14 +19,16 @@ function startup {
     
     if [ $status_1 -eq 0 ]; then
         sudo printf "Welcome to the menu\n";
+	return 0
     else
         echo "Please install sudo"
-    apt-get update
+        apt-get update
         apt-get install sudo
         
         status_2=$?
         if [ $status_2 -eq 0 ]; then
             sudo printf "Welcome to the menu\n";
+	    return 0
         else
             exit 1
         fi
@@ -45,6 +47,8 @@ function clone_lolibrary {
     sudo apt-get install git -y
     sudo git clone $GIT_LOLIBRARY
     cp ./$thisScriptName $baseDirectory/lolibrary/
+    
+    return 0
 }
 
 #Install the required sofware and configurate software to run the lolibrary website.
@@ -101,6 +105,8 @@ function configure_everything_for_lolibrary {
     
     #Test Docker Compose.
     sudo docker-compose --version
+    
+    return 0
 }
 
 #Start Composing Lolibrary Containers.
@@ -129,6 +135,8 @@ function start_lolibrary_containers {
     sudo docker-compose exec www.lolibrary.test php artisan migrate --seed
 
     sudo echo "All done - it may be a little while until the site comes up, because nodejs is actively building the frontend via Laravel Mix."
+    
+    return 0
 }
 
 #Ping the lolibrary website to test if the DNS is correctly working.
@@ -143,7 +151,7 @@ function ping_lolibrary_website {
     
     if [ $status -eq 0 ]; then
         sudo echo "Website Up";
-        exit 1
+        return 0
     else
         sudo "Website Down"
         sudo "Check DNS program status if hostname is readed, if required please edit /etc/hosts"
