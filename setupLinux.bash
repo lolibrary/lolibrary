@@ -33,10 +33,8 @@ function startup {
     
     #Local Variable
     baseDirectory=$(pwd)
-    REPOSITORY_DIRECTORY_NAME="$baseDirectory/lolibrary"
     
     if [ -d "$REPOSITORY_DIRECTORY_NAME" ]; then
-    baseDirectory=$(pwd)
     REPOSITORY_DIRECTORY_NAME="$baseDirectory/lolibrary"
     RUNNING_WITHIN_ROOT_REPOSITORY=true
     fi
@@ -186,9 +184,9 @@ function ping_lolibrary_website {
         sudo echo "Website Up";
         return 0
     else
-        sudo "Website Down"
-        sudo "Check DNS program status if hostname is readed, if required please edit /etc/hosts"
-        sudo service dnsmasq status
+        sudo echo "Website Down"
+        sudo echo "Check DNS program status if hostname is readed, if required please edit /etc/hosts"
+        sudo service dnsmasq status | cat
         cat /etc/hosts
         exit 1
     fi
@@ -224,16 +222,16 @@ EOF
     "1")  echo "you chose choice 1"
     install_sudo
     ;;   
-    "2")  echo "you chose choice 1"
+    "2")  echo "you chose choice 2"
     clone_lolibrary
     ;;
-    "3")  echo "you chose choice 2"
+    "3")  echo "you chose choice 3"
     configure_everything_for_lolibrary
     ;;
-    "4")  echo "you chose choice 3"
+    "4")  echo "you chose choice 4"
     start_lolibrary_containers
     ;;
-    "5")  echo "you chose choice 4"
+    "5")  echo "you chose choice 5"
     ping_lolibrary_website
     ;;
     "Q")  exit
