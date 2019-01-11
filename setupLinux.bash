@@ -5,38 +5,37 @@
 
 #Declare Interfaces.
 declare -f startup
+declare -f install_sudo
 declare -f clone_lolibrary
 declare -f configure_everything_for_lolibrary
 declare -f start_lolibrary_containers
 declare -f ping_lolibrary_website
 declare -f menu_lolibrary
 
+#Variable
+declare -gi IS_SUDO_INSTALLED=false
+
 #Check if sudo is installed.
 function startup {
-    dpkg -s sudo
+    dpkg -s sudo | 'grep Package|Status'
     
     status_1=$?
     
     if [ $status_1 -eq 0 ]; then
-        sudo printf "Welcome to the menu\n";
 	return 0
     else
-        echo "Please install sudo"
-	echo "Su is called to login as root account, please enter your root passsword."
-	su
-	apt-get install sudo
-	echo "Please enter the username you want to make sudo. A reboot is required to apply sudo rights the the inputed username."
-	read -p "Enter username: " username
-	sudo usermod -aG sudo $username
-
+	IS_SUDO_INSTALLED=true
         status_2=$?
-        if [ $status_2 -eq 0 ]; then
-            sudo printf "Welcome to the menu\n";
-	    return 1
-        else
-            exit 1
-        fi
     fi
+}
+
+function install_sudo {
+    echo "Su is called to login as root account, please enter your root passsword."
+    su
+    apt-get install sudo
+    echo "Please enter the username you want to make sudo. A reboot is required to apply sudo rights the the inputed username."
+    read -p "Enter username: " username
+    udo usermod -aG sudo $username
 }
 
 #Copy last repository of Lolibrary.
@@ -182,40 +181,7 @@ function ping_lolibrary_website {
     fi
 }
 
-#REDUNDANT.
-#Bash menu to execute different functions, these can be found in each case.
-#@Type Array[<Integer> UserInput]
-function menu_lolibrary_simple {
-	PS3='Please enter your choice (1/2/3/4/5): '
-	sudo echo "Option 2 and 3 have to be runned within lolibrary root folder where docker-compose.yml is located."
-	options=("Clone Lolibrary with Git" "Configure everything for Lolibrary" "Start Lolibrary Containers" "Test Website Connection Lolibrary" "Quit")
-	select opt in "${options[@]}"
-		case $opt in
-			"Clone Lolibrary with Git")
-				echo "you chose choice 1"
-				clone_lolibrary
-				;;
-			"Configure everything for Lolibrary")
-				echo "you chose choice 2"
-				configure_everything_for_lolibrary
-				;;
-			"Start Lolibrary Containers")
-				echo "you chose choice 3"
-				start_lolibrary_containers
-				;;
-			"Test Website Connection Lolibrary")
-				echo "you chose choice 4"
-				ping_lolibrary_website
-				;;
-			"Quit")
-				LOOP_CONTROL_VARIABLE=1
-				break
-				;;
-			*) echo "invalid option $REPLY";;
-		esac
-}
-
-function menu_lolibrary_clean {
+function menu_lolibrary {
 while :
 do
     clear
@@ -223,27 +189,35 @@ do
     ==============================
     Menu Lolibrary Installation Linux
     ------------------------------
+    Sudo installed: $IS_SUDO_INSTALLED
+    Option 2 and 3 have to be runned within lolibrary root folder 
+    where docker-compose.yml is located.
+    
     Please enter your choice:
 
-    Clone Lolibrary with Git           (1)
-    Configure everything for Lolibrary (2)
-    Start Lolibrary Containers         (3)
-    Test Website Connection Lolibrary  (4)
+    Install sudo (if not installed)    (1)
+    Clone Lolibrary with Git           (2)
+    Configure everything for Lolibrary (3)
+    Start Lolibrary Containers         (4)
+    Test Website Connection Lolibrary  (5)
     Quit                               (Q)
     ------------------------------
 EOF
     read -n1 -s
     case "$REPLY" in
     "1")  echo "you chose choice 1"
+    install_sudo
+    ;;   
+    "2")  echo "you chose choice 1"
     clone_lolibrary
     ;;
-    "2")  echo "you chose choice 2"
+    "3")  echo "you chose choice 2"
     configure_everything_for_lolibrary
     ;;
-    "3")  echo "you chose choice 3"
+    "4")  echo "you chose choice 3"
     start_lolibrary_containers
     ;;
-    "4")  echo "you chose choice 4"
+    "5")  echo "you chose choice 4"
     ping_lolibrary_website
     ;;
     "Q")  exit
@@ -257,7 +231,6 @@ EOF
 done
 }
 
-
 #Main
 startup
-menu_lolibrary_clean
+menu_lolibrary
