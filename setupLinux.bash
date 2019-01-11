@@ -46,7 +46,7 @@ function clone_lolibrary {
     baseDirectory=$(pwd)
     sudo apt-get install git -y
     sudo git clone $GIT_LOLIBRARY_URL
-    cp ./$thisScriptName $baseDirectory/lolibrary/
+    sudo cp ./$thisScriptName $baseDirectory/lolibrary/
     
     return 0
 }
