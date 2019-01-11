@@ -41,9 +41,24 @@ function clone_lolibrary {
     #Constants.
     declare -r GIT_LOLIBRARY_URL="https://github.com/lolibrary/lolibrary.git"
     
-    #Procedure.
+    #Variables
     thisScriptName=`basename "$0"`
     baseDirectory=$(pwd)
+    REPOSITORY_DIRECTORY_NAME="$baseDirectory/lolibrary
+    
+    #Procedure.
+    if [ -d "$REPOSITORY_DIRECTORY_NAME" ]; then
+       read -r -p "Are you sure? [y/N] " response
+        case "$response" in
+        [yY][eE][sS]|[yY]) 
+        do_something
+        ;;
+    *)
+        return 0
+        ;;
+    esac
+    fi
+
     sudo apt-get install git -y
     sudo git clone $GIT_LOLIBRARY_URL
     sudo cp ./$thisScriptName $baseDirectory/lolibrary/
