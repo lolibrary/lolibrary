@@ -22,9 +22,9 @@ function startup {
     status_1=$?
     
     if [ $status_1 -eq 0 ]; then
-	return 0
+    return 0
     else
-	IS_SUDO_INSTALLED=true
+    IS_SUDO_INSTALLED=true
         status_2=$?
     fi
 }
@@ -56,7 +56,7 @@ function clone_lolibrary {
         read -r -p "Are you sure you want to delete this directory? [y/N] " response
         case "$response" in
         [yY][eE][sS]|[yY])
-	   sudo rm -rf $REPOSITORY_DIRECTORY_NAME
+           sudo rm -rf $REPOSITORY_DIRECTORY_NAME
            sudo echo "Folder deleted"
         ;;
     *)
@@ -195,7 +195,6 @@ do
     where docker-compose.yml is located.
     
     Please enter your choice:
-
     Install sudo (if not installed)    (1)
     Clone Lolibrary with Git           (2)
     Configure everything for Lolibrary (3)
