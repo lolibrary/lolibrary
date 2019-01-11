@@ -189,7 +189,7 @@ function add_hostname_to_host {
     if [ $LOLIBRARY_HOSTNAME_ADDED ]; then
         sudo echo "Hostname exist in host file"
     else
-        sudo sed -i "2i127.0.0.1  lolibrary.test lolibrary" /etc/hosts
+        sudo sed -i "2i127.0.0.1       lolibrary.test lolibrary" /etc/hosts
         sudo echo "hostname added"
         cat /etc/hosts
         read -n 1 -s -r -p "Press any key to continue"
