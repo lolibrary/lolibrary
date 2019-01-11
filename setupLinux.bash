@@ -6,6 +6,7 @@
 #Declare Interfaces.
 declare -f startup_check_repostiory_directory
 declare -f startup_check_sudo
+declare -f startup_check_hostname_in_hostfile
 declare -f install_sudo
 declare -f clone_lolibrary
 declare -f configure_everything_for_lolibrary
@@ -17,6 +18,7 @@ declare -f menu_lolibrary
 #Global variable.
 declare -g IS_SUDO_INSTALLED=false
 declare -g RUNNING_WITHIN_ROOT_REPOSITORY=false
+declare -g LOLIBRARY_HOSTNAME_ADDED=false
 
 #Check if sudo is installed.
 function startup_check_sudo {
@@ -38,7 +40,19 @@ function startup_check_repostiory_directory {
     currentDirectoryName=$(basename $(pwd))
     
     if [ $currentDirectoryName == "lolibrary" ]; then
-    RUNNING_WITHIN_ROOT_REPOSITORY=true
+        RUNNING_WITHIN_ROOT_REPOSITORY=true
+    fi
+}
+
+function startup_check_hostname_in_hostfile {
+    grep "lolibrary.test" /etc/hosts
+   
+    status_1=$?
+   
+    # Status 0 OK ->  Installed
+    if [ $status_1 -eq 0 ]; then
+        LOLIBRARY_HOSTNAME_ADDED=true
+        return 0
     fi
 }
 
@@ -170,11 +184,14 @@ function start_lolibrary_containers {
 }
 
 #Add hostname to hosts file.
+#@LOLIBRARY_HOSTNAME_ADDED
 function add_hostname_to_host {
-    sudo sed -i "2i127.0.0.1  lolibrary.test lolibrary" /etc/hosts
-    sudo echo "hostname added"
-    cat /etc/hosts
-    read -n 1 -s -r -p "Press any key to continue"
+    if [ $LOLIBRARY_HOSTNAME_ADDED -eq false ] then
+        sudo sed -i "2i127.0.0.1  lolibrary.test lolibrary" /etc/hosts
+        sudo echo "hostname added"
+        cat /etc/hosts
+        read -n 1 -s -r -p "Press any key to continue"
+        LOLIBRARY_HOSTNAME_ADDED=true      
 }
 
 #Ping the lolibrary website to test if the DNS is correctly working.
@@ -185,9 +202,9 @@ function ping_lolibrary_website {
     
     ping -c $AMOUNT_PINGS lolibrary.test
     
-    status=$?
+    status_1=$?
     
-    if [ $status -eq 0 ]; then
+    if [ $status_1 -eq 0 ]; then
         sudo echo "Website Up";
         return 0
     else
@@ -212,6 +229,7 @@ do
     ------------------------------
     Sudo installed: $IS_SUDO_INSTALLED
     Running within root folder of repository: $RUNNING_WITHIN_ROOT_REPOSITORY
+    Hostname Lolibrary.test added: $LOLIBRARY_HOSTNAME_ADDED
     Option 2 and 3 have to be runned within lolibrary root folder 
     where docker-compose.yml is located.
     
@@ -259,4 +277,5 @@ done
 #Main
 startup_check_sudo
 startup_check_repostiory_directory
+startup_check_hostname_in_hostfile
 menu_lolibrary
