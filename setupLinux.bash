@@ -21,11 +21,10 @@ function startup {
     
     status_1=$?
     
+    # Status 0 OK ->  Installed
     if [ $status_1 -eq 0 ]; then
-    return 0
-    else
-    IS_SUDO_INSTALLED=true
-        status_2=$?
+        IS_SUDO_INSTALLED=true
+        return 0
     fi
 }
 
