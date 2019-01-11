@@ -214,8 +214,8 @@ function ping_lolibrary_website {
         sudo echo "Website Down"
         sudo echo "Check DNS program status if hostname is readed, if required please edit /etc/hosts"
         sudo service dnsmasq status | cat
+        sudo printf "\nContent hostfile"
         cat /etc/hosts
-        exit 1
     fi
 }
 
