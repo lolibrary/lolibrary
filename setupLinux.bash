@@ -201,7 +201,7 @@ function add_hostname_to_host {
 #@AMOUNT_PINGS
 function ping_lolibrary_website {
     #Constants.
-    declare -ir AMOUNT_PINGS=4
+    declare -ir AMOUNT_PINGS=3
     
     ping -c $AMOUNT_PINGS lolibrary.test
     
