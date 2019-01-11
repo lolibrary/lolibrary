@@ -44,7 +44,7 @@ function clone_lolibrary {
     #Variables
     thisScriptName=`basename "$0"`
     baseDirectory=$(pwd)
-    REPOSITORY_DIRECTORY_NAME="$baseDirectory/lolibrary
+    REPOSITORY_DIRECTORY_NAME="$baseDirectory/lolibrary"
     
     #Procedure.
     if [ -d "$REPOSITORY_DIRECTORY_NAME" ]; then
