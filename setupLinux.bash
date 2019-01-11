@@ -22,6 +22,7 @@ function startup {
 	return 0
     else
         echo "Please install sudo"
+	echo "Su is called to login as root account, please enter your root passsword."
 	su
 	apt-get install sudo
 	"Please enter the username you want to make sudo. A reboot is required to apply sudo rights."
