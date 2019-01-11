@@ -44,12 +44,11 @@ function startup {
 
 #Install sudo and add user to sudo group.
 function install_sudo {
-    echo "Su is called to login as root account, please enter your root passsword."
+    echo "Su is called to login as root account, please enter your root passsword and use the below commands to configure sudo."
+    echo "Install command: apt-get install sudo"
+    echo "Add useracount to sudo group: usermod -aG sudo <username>"
+    echo "A reboot is required to apply sudo rights the the inputed username. Command: reboot"
     su
-    apt-get install sudo
-    echo "Please enter the username you want to make sudo. A reboot is required to apply sudo rights the the inputed username."
-    read -p "Enter username: " username
-    udo usermod -aG sudo $username
 }
 
 #Copy last repository of Lolibrary.
