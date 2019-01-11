@@ -22,6 +22,11 @@ function startup {
 	return 0
     else
         echo "Please install sudo"
+	su
+	apt-get install sudo
+	"Please enter the username you want to make sudo. A reboot is required to apply sudo rights."
+	read -p "Enter username: " username
+	sudo usermod -aG sudo $username
 
         status_2=$?
         if [ $status_2 -eq 0 ]; then
