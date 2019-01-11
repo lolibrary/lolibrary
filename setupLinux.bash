@@ -13,11 +13,13 @@ declare -f ping_lolibrary_website
 declare -f menu_lolibrary
 
 #Global variable.
-declare -gi IS_SUDO_INSTALLED=false
+declare -g IS_SUDO_INSTALLED=false
+declare -g RUNNING_WITHIN_ROOT_REPOSITORY=false
 
 #Check if sudo is installed.
 function startup {
-    dpkg -s sudo | 'grep Package|Status'
+    #Check sudo
+    dpkg -s sudo
     
     status_1=$?
     
@@ -25,6 +27,18 @@ function startup {
     if [ $status_1 -eq 0 ]; then
         IS_SUDO_INSTALLED=true
         return 0
+    fi
+    
+    #Check directory where the script is running from.
+    
+    #Local Variable
+    baseDirectory=$(pwd)
+    REPOSITORY_DIRECTORY_NAME="$baseDirectory/lolibrary"
+    
+    if [ -d "$REPOSITORY_DIRECTORY_NAME" ]; then
+    baseDirectory=$(pwd)
+    REPOSITORY_DIRECTORY_NAME="$baseDirectory/lolibrary"
+    RUNNING_WITHIN_ROOT_REPOSITORY=true
     fi
 }
 
@@ -190,6 +204,7 @@ do
     Menu Lolibrary Installation Linux
     ------------------------------
     Sudo installed: $IS_SUDO_INSTALLED
+    Running within root folder of repository: $RUNNING_WITHIN_ROOT_REPOSITORY
     Option 2 and 3 have to be runned within lolibrary root folder 
     where docker-compose.yml is located.
     
