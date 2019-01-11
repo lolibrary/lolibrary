@@ -164,7 +164,7 @@ function ping_lolibrary_website {
 #Bash menu to execute different functions, these can be found in each case.
 #@Type Array[<Integer> UserInput]
 function menu_lolibrary {
-	PS3='Please enter your choice (1/2/3/4): '
+	PS3='Please enter your choice (1/2/3/4/5): '
 	sudo echo "Option 2 and 3 have to be runned within lolibrary root folder where docker-compose.yml is located."
 	options=("Clone Lolibrary with Git" "Configure everything for Lolibrary" "Start Lolibrary Containers" "Test Website Connection Lolibrary" "Quit")
 	select opt in "${options[@]}"
