@@ -22,9 +22,7 @@ function startup {
 	return 0
     else
         echo "Please install sudo"
-        apt-get update
-        apt-get install sudo
-        
+
         status_2=$?
         if [ $status_2 -eq 0 ]; then
             sudo printf "Welcome to the menu\n";
