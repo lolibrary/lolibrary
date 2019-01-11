@@ -32,7 +32,7 @@ function startup {
         status_2=$?
         if [ $status_2 -eq 0 ]; then
             sudo printf "Welcome to the menu\n";
-	    return 0
+	    return 1
         else
             exit 1
         fi
@@ -182,14 +182,14 @@ function ping_lolibrary_website {
     fi
 }
 
+#REDUNDANT.
 #Bash menu to execute different functions, these can be found in each case.
 #@Type Array[<Integer> UserInput]
-function menu_lolibrary {
+function menu_lolibrary_simple {
 	PS3='Please enter your choice (1/2/3/4/5): '
 	sudo echo "Option 2 and 3 have to be runned within lolibrary root folder where docker-compose.yml is located."
 	options=("Clone Lolibrary with Git" "Configure everything for Lolibrary" "Start Lolibrary Containers" "Test Website Connection Lolibrary" "Quit")
 	select opt in "${options[@]}"
-	do
 		case $opt in
 			"Clone Lolibrary with Git")
 				echo "you chose choice 1"
@@ -208,13 +208,56 @@ function menu_lolibrary {
 				ping_lolibrary_website
 				;;
 			"Quit")
+				LOOP_CONTROL_VARIABLE=1
 				break
 				;;
 			*) echo "invalid option $REPLY";;
 		esac
-	done
 }
+
+function menu_lolibrary_clean {
+while :
+do
+    clear
+    cat<<EOF
+    ==============================
+    Menu Lolibrary Installation Linux
+    ------------------------------
+    Please enter your choice:
+
+    Clone Lolibrary with Git           (1)
+    Configure everything for Lolibrary (2)
+    Start Lolibrary Containers         (3)
+    Test Website Connection Lolibrary  (4)
+    Quit                               (Q)
+    ------------------------------
+EOF
+    read -n1 -s
+    case "$REPLY" in
+    "1")  echo "you chose choice 1"
+    clone_lolibrary
+    ;;
+    "2")  echo "you chose choice 2"
+    configure_everything_for_lolibrary
+    ;;
+    "3")  echo "you chose choice 3"
+    start_lolibrary_containers
+    ;;
+    "4")  echo "you chose choice 4"
+    ping_lolibrary_website
+    ;;
+    "Q")  exit
+    ;;
+    "q")  exit
+    ;; 
+     * )  echo "Invalid option."
+    ;;
+    esac
+    sleep 1
+done
+}
+
 
 #Main
 startup
-menu_lolibrary
+menu_lolibrary_clean
