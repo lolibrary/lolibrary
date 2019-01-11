@@ -12,7 +12,7 @@ declare -f start_lolibrary_containers
 declare -f ping_lolibrary_website
 declare -f menu_lolibrary
 
-#Variable
+#Global variable.
 declare -gi IS_SUDO_INSTALLED=false
 
 #Check if sudo is installed.
@@ -29,6 +29,7 @@ function startup {
     fi
 }
 
+#Install sudo and add user to sudo group.
 function install_sudo {
     echo "Su is called to login as root account, please enter your root passsword."
     su
