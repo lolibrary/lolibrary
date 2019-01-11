@@ -41,7 +41,7 @@ function clone_lolibrary {
     #Constants.
     declare -r GIT_LOLIBRARY_URL="https://github.com/lolibrary/lolibrary.git"
     
-    #Variables
+    #Variables.
     thisScriptName=`basename "$0"`
     baseDirectory=$(pwd)
     REPOSITORY_DIRECTORY_NAME="$baseDirectory/lolibrary"
