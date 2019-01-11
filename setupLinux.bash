@@ -48,10 +48,11 @@ function clone_lolibrary {
     
     #Procedure.
     if [ -d "$REPOSITORY_DIRECTORY_NAME" ]; then
-       read -r -p "Are you sure? [y/N] " response
+        sudo echo "$REPOSITORY_DIRECTORY_NAME already exists"
+        read -r -p "Are you sure you want to delete this directory? [y/N] " response
         case "$response" in
         [yY][eE][sS]|[yY]) 
-        do_something
+        sudo echo "Folder deleted"
         ;;
     *)
         return 0
@@ -93,7 +94,7 @@ function configure_everything_for_lolibrary {
     sudo update-ca-certificates
 
     #Installing DNS.
-    echo "Installing dnsmasq via apt-get"
+    sudo echo "Installing dnsmasq via apt-get"
     sudo apt-get install dnsmasq -y
     sudo service dnsmasq start
     sudo cp /etc/host /etc/hosts_backup
