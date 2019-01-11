@@ -18,7 +18,7 @@ function startup {
     status_1=$?
     
     if [ $status_1 -eq 0 ]; then
-        sudo echo "Welcome to the menu\n";
+        sudo prtinf "Welcome to the menu\n";
         exit 0
     else
         echo "Please install sudo"
@@ -27,7 +27,7 @@ function startup {
         
         status_2=$?
         if [ $status_2 -eq 0 ]; then
-            sudo echo "Welcome to the menu\n";
+            sudo prtinf "Welcome to the menu\n";
         else
             exit 1
         fi
