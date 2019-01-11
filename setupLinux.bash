@@ -52,8 +52,8 @@ function clone_lolibrary {
         read -r -p "Are you sure you want to delete this directory? [y/N] " response
         case "$response" in
         [yY][eE][sS]|[yY])
-	sudo rm -rf $REPOSITORY_DIRECTORY_NAME
-        sudo echo "Folder deleted"
+	   sudo rm -rf $REPOSITORY_DIRECTORY_NAME
+            sudo echo "Folder deleted"
         ;;
     *)
         return 0
