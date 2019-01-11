@@ -12,7 +12,7 @@ declare -f ping_lolibrary_website
 declare -f menu_lolibrary
 
 #Check if sudo is installed.
-function startup{
+function startup {
     dpkg -s sudo
     
     status_1=$?
