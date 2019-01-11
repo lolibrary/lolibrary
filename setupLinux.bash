@@ -194,6 +194,9 @@ function ping_lolibrary_website {
     fi
 }
 
+#Main menu
+#@IS_SUDO_INSTALLED
+#@RUNNING_WITHIN_ROOT_REPOSITORY
 function menu_lolibrary {
 while :
 do
