@@ -25,7 +25,7 @@ function startup {
 	echo "Su is called to login as root account, please enter your root passsword."
 	su
 	apt-get install sudo
-	"Please enter the username you want to make sudo. A reboot is required to apply sudo rights."
+	echo "Please enter the username you want to make sudo. A reboot is required to apply sudo rights the the inputed username."
 	read -p "Enter username: " username
 	sudo usermod -aG sudo $username
 
