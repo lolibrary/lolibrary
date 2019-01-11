@@ -115,7 +115,7 @@ function configure_everything_for_lolibrary {
     sudo cp /etc/host /etc/hosts_backup
     
     #Add hostname to hosts file.
-    sed -i "2i127.0.0.1  lolibrary.test lolibrary" /etc/hosts
+    sudo sed -i "2i127.0.0.1  lolibrary.test lolibrary" /etc/hosts
 
     #Install Docker.
     sudo apt-get update
