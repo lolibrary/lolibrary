@@ -4150,7 +4150,6 @@
             "time": "2018-08-30T16:28:28+00:00"
         },
         {
-            "name": "symfony/routing",
             "version": "v4.2.2",
             "source": {
                 "type": "git",

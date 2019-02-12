@@ -26,6 +26,7 @@
         "vue-select": "^2.4.0"
     },
     "dependencies": {
-        "qs": "^6.5.2"
+        "qs": "^6.5.2",
+        "simple-lightbox": "^2.1.0"
     }
 }

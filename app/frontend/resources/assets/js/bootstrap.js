@@ -45,11 +45,26 @@ if (token) {
 
 window.chosen = require('chosen-js');
 
+/**
+ * simple-lightbox is a lightweight lightbox interface, to make paging through
+ * item photos a little nicer. It will register on elements with 'data-lightbox="show"'
+ */
+
+ window.SimpleLightbox = require('simple-lightbox');
+
+/**
+ * Both chosen and simple-lightbox need to be initialized *after* the rest of the
+ * page has loaded - otherwise their elements may not be present yet.
+ */
+
 $(() => {
     $('.form-control-chosen').chosen()
     $('[data-toggle="tooltip"]').tooltip()
+    let lightbox = new SimpleLightbox({elements: '[data-lightbox="show"]'});
 });
 
 const image = document.head.querySelector('meta[name="default-image"]');
 
 window.defaultImage = image ? image.content : '/images/default.png';
+
+
