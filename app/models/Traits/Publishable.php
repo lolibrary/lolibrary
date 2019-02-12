@@ -22,7 +22,6 @@ trait Publishable
         $this->published_at = now();
         $this->save();
 
-        $this->searchable();
     }
 
     /**

@@ -28,11 +28,28 @@ Route::prefix('profile')->group(function () {
     Route::get('wishlist', 'ProfileController@wishlist')->name('wishlist');
 });
 
+// Admin
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:junior'], 'as' => 'admin.'], function() {
+    Route::get('/', 'AdminController@dashboard')->name('dashboard');
+    Route::group(['middleware' => 'role:senior'], function () {
+        Route::get('items/queue', 'AdminController@queue')->name('items.queue');
+    });
+});
+
 // blog posts route.
 Route::get('blog/{post}', 'BlogController@show')->name('posts.show');
 
 // categories/brands/features etc
 Route::group(['namespace' => 'Items\\'], function () {
+
+    Route::group(['middleware' => ['role:junior']], function () {
+        Route::get('items/{item}/edit', 'ItemController@edit')->name('items.edit');
+        Route::get('items/create', 'ItemController@create')->name('items.create');
+        Route::put('items/store', 'ItemController@store')->name('items.store');
+        Route::put('items/{item}/update', 'ItemController@update')->name('items.update');
+        Route::delete('items/{item}/image/{image}', 'ItemController@deleteImage')->name('items.images.destroy');
+    });
+
     $options = ['only' => ['show', 'index']];
 
     Route::resource('brands', 'BrandController', $options);
@@ -41,7 +58,15 @@ Route::group(['namespace' => 'Items\\'], function () {
     Route::resource('colors', 'ColorController', $options);
     Route::resource('tags', 'TagController', $options);
 
-    Route::resource('items', 'ItemController', $options);
+    Route::get('items', 'ItemController@index')->name('items.index');
+    Route::get('items/{item}/show', 'ItemController@show')->name('items.show');
+
+
+
+    Route::group(['middleware' => ['role:lolibrarian']], function () {
+        Route::put('items/{item}/publish', 'ItemController@publish')->name('items.publish');
+        Route::delete('items/{item}/destroy', 'ItemController@destroy')->name('items.destroy');
+    });
 });
 
 Route::get('donate', 'DonationController@index')->name('donate');
