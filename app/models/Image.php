@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Http\File;
-use App\Models\Traits\HasStatus;
-use App\Models\Traits\Images\ImagePaths;
-
 /**
  * An item image.
  *
@@ -17,26 +13,6 @@ use App\Models\Traits\Images\ImagePaths;
  */
 class Image extends Model
 {
-    use ImagePaths, HasStatus;
-
-    /**
-     * Set the thumbnail folder to a different value.
-     *
-     * @var string
-     */
-    protected const THUMBNAILS = 'thumbnail';
-
-    /**
-     * A status bitmask mapping.
-     *
-     * @var array
-     */
-    protected static $statuses = [
-        'uploaded'     => 2 ** 0,
-        'optimized'    => 2 ** 1,
-        'thumbnailled' => 2 ** 2,
-    ];
-
     /**
      * The keys a user is allowed to fill in.
      *
@@ -45,7 +21,6 @@ class Image extends Model
     protected $fillable = [
         'filename',
         'name',
-        'thumbnail',
     ];
 
     /**
@@ -90,15 +65,10 @@ class Image extends Model
     {
         $model = new static;
 
-        $filename = $file->store($model->getUploadsFolder());
-
-        // replace 'uploads/' with '' in the filename.
-        $filename = str_replace($model->getUploadsFolder() . '/', '', $filename);
-
         $model->id = $id ?? uuid4();
         $model->filename = $model->id . '.' . $file->extension();
-        $model->thumbnail = $model->id . '.jpeg';
-        $model->uploaded_filename = $filename;
+
+        $file->storePubliclyAs(config('cdn.image.folder') . '/' . $model->filename);
 
         $model->save();
 
@@ -117,24 +87,22 @@ class Image extends Model
     }
 
     /**
-     * Alias "image_url" to "url".
+     * Create a URL to an image.
      *
      * @return string
      */
     public function getUrlAttribute()
     {
-        return $this->getImageUrlAttribute();
+        return cdn_path($this->filename);
     }
 
     /**
-     * Get the filename for an image.
-     *
-     * Overrides {@see \App\Models\Traits\Images\ImagePaths::getRootImagePath}.
+     * Get a URL to a thumbnail of this image.
      *
      * @return string
      */
-    public function getRootImagePath()
+    public function getThumbnailUrlAttribute()
     {
-        return $this->filename;
+        return $this->getUrlAttribute() . "?width=300&height=300&fit=bounds";
     }
 }

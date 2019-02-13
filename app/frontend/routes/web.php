@@ -59,7 +59,7 @@ Route::group(['namespace' => 'Items\\'], function () {
     Route::resource('tags', 'TagController', $options);
 
     Route::get('items', 'ItemController@index')->name('items.index');
-    Route::get('items/{item}/show', 'ItemController@show')->name('items.show');
+    Route::get('items/{item}', 'ItemController@show')->name('items.show');
 
 
 

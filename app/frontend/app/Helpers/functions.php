@@ -150,7 +150,7 @@ if (! function_exists('default_asset')) {
      */
     function default_asset()
     {
-        return Storage::url((new Image)->getThumbnailsFolder() . '/default.jpeg');
+        return Storage::url('images/default.jpeg');
     }
 }
 
@@ -217,4 +217,17 @@ if (! function_exists('color')) {
     {
         return Color::where('slug', $slug)->first();
     }
+}
+
+if (! function_exists('cdn_path')) {
+    /**
+     * Get the CDN path to an image.
+     *
+     * @param string $path
+     * @return string
+     */
+     function cdn_path(string $path)
+     {
+         return config('cdn.image.url') . '/' . config('cdn.image.folder') . '/' . $path;
+     }
 }
