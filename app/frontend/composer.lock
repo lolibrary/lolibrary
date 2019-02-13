@@ -4,73 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9bcd50201950cb6dbbd5dd5d2d581a28",
+    "content-hash": "729b8028778411f7801984ac7549d004",
     "packages": [
         {
-            "name": "amelia/backblaze",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ameliaikeda/backblaze.git",
-                "reference": "72dd26a55549e3bfd7a551e019b9eefad7e50f5e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ameliaikeda/backblaze/zipball/72dd26a55549e3bfd7a551e019b9eefad7e50f5e",
-                "reference": "72dd26a55549e3bfd7a551e019b9eefad7e50f5e",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/cache": "5.3.* | 5.4.* | 5.5.* | 5.6.*",
-                "illuminate/support": "5.3.* | 5.4.* | 5.5.* | 5.6.*",
-                "mhetreramesh/flysystem-backblaze": "^1.0",
-                "php": ">=5.6"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Amelia\\Backblaze\\BackblazeServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Amelia\\Backblaze\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Amelia Ikeda",
-                    "email": "amelia@dorks.io"
-                }
-            ],
-            "description": "Backblaze laravel storage adapter",
-            "keywords": [
-                "Flysystem",
-                "b2",
-                "backblaze",
-                "laravel",
-                "storage"
-            ],
-            "time": "2018-02-09T06:52:36+00:00"
-        },
-        {
             "name": "aws/aws-sdk-php",
-            "version": "3.87.8",
+            "version": "3.87.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "28f117c221ee53dc2486ffcbf7288a9af6d21612"
+                "reference": "3508f119723b7ee69929c102e350ea26f3c5ff2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/28f117c221ee53dc2486ffcbf7288a9af6d21612",
-                "reference": "28f117c221ee53dc2486ffcbf7288a9af6d21612",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3508f119723b7ee69929c102e350ea26f3c5ff2d",
+                "reference": "3508f119723b7ee69929c102e350ea26f3c5ff2d",
                 "shasum": ""
             },
             "require": {
@@ -139,7 +86,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-02-11T23:07:51+00:00"
+            "time": "2019-02-12T23:15:22+00:00"
         },
         {
             "name": "cakephp/chronos",
@@ -1079,60 +1026,6 @@
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
             "time": "2017-06-27T22:17:23+00:00"
-        },
-        {
-            "name": "gliterd/backblaze-b2",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gliterd/backblaze-b2.git",
-                "reference": "1fa0fa0f03cced94cf634c441604cb024826db6e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gliterd/backblaze-b2/zipball/1fa0fa0f03cced94cf634c441604cb024826db6e",
-                "reference": "1fa0fa0f03cced94cf634c441604cb024826db6e",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.1",
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.8.*",
-                "scrutinizer/ocular": "~1.1",
-                "squizlabs/php_codesniffer": "~2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "BackblazeB2\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ramesh Mhetre",
-                    "email": "mhetreramesh@gmail.com",
-                    "homepage": "https://gliterd.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP SDK for working with backblaze B2 cloud storage.",
-            "homepage": "https://github.com/gliterd/b2-sdk-php",
-            "keywords": [
-                "b2",
-                "backblaze",
-                "backup",
-                "cloud",
-                "cloud-storage",
-                "filesystem",
-                "storage"
-            ],
-            "time": "2018-12-29T10:31:19+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2211,107 +2104,6 @@
             ],
             "description": "Health Checking for Laravel/Lumen",
             "time": "2018-07-21T17:08:46+00:00"
-        },
-        {
-            "name": "mhetreramesh/flysystem-backblaze",
-            "version": "1.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gliterd/flysystem-backblaze.git",
-                "reference": "42549be7b3e6f372c824896ccd1d901052cb6d8c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gliterd/flysystem-backblaze/zipball/42549be7b3e6f372c824896ccd1d901052cb6d8c",
-                "reference": "42549be7b3e6f372c824896ccd1d901052cb6d8c",
-                "shasum": ""
-            },
-            "require": {
-                "gliterd/backblaze-b2": "*",
-                "league/flysystem": "~1.0",
-                "mikey179/vfsstream": "*",
-                "php": "^7.1.8",
-                "psr/http-message-implementation": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0||~5.0",
-                "scrutinizer/ocular": "~1.1",
-                "squizlabs/php_codesniffer": "~2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Mhetreramesh\\Flysystem\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ramesh Mhetre",
-                    "email": "mhetreramesh@gmail.com",
-                    "homepage": "https://about.me/rameshmhetre",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Backblaze adapter for the flysystem filesystem abstraction library",
-            "homepage": "https://github.com/mhetreramesh/flysystem-backblaze",
-            "keywords": [
-                "Flysystem",
-                "api",
-                "backblaze",
-                "client",
-                "filesystem"
-            ],
-            "time": "2019-01-11T22:47:47+00:00"
-        },
-        {
-            "name": "mikey179/vfsStream",
-            "version": "v1.6.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mikey179/vfsStream.git",
-                "reference": "d5fec95f541d4d71c4823bb5e30cf9b9e5b96145"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mikey179/vfsStream/zipball/d5fec95f541d4d71c4823bb5e30cf9b9e5b96145",
-                "reference": "d5fec95f541d4d71c4823bb5e30cf9b9e5b96145",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.6.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "org\\bovigo\\vfs\\": "src/main/php"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Frank Kleine",
-                    "homepage": "http://frankkleine.de/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Virtual file system to mock the real file system in unit tests.",
-            "homepage": "http://vfs.bovigo.org/",
-            "time": "2017-08-01T08:02:14+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4906,16 +4698,16 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "dc4f10b6b1148744facb784015e4b339d7feec23"
+                "reference": "0eb0b48c3f07b3b89f5169ce005b7d05b18cf1d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/dc4f10b6b1148744facb784015e4b339d7feec23",
-                "reference": "dc4f10b6b1148744facb784015e4b339d7feec23",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/0eb0b48c3f07b3b89f5169ce005b7d05b18cf1d2",
+                "reference": "0eb0b48c3f07b3b89f5169ce005b7d05b18cf1d2",
                 "shasum": ""
             },
             "require": {
@@ -4967,7 +4759,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2019-02-08T14:43:54+00:00"
+            "time": "2019-02-13T09:37:52+00:00"
         },
         {
             "name": "myclabs/deep-copy",

@@ -23,7 +23,6 @@ services:
       - db.lolibrary.test
       - redis.lolibrary.test
       - minio.lolibrary.test
-      - imaginary.lolibrary.test
     expose:
       - 8080
 
@@ -49,7 +48,6 @@ services:
       - db.lolibrary.test
       - redis.lolibrary.test
       - minio.lolibrary.test
-      - imaginary.lolibrary.test
 
   node:
     image: "node:10"
@@ -57,15 +55,6 @@ services:
     working_dir: "/home/node"
     volumes:
       - "./app/frontend:/home/node"
-
-  imaginary.lolibrary.test:
-    image: "h2non/imaginary:1"
-    command: -enable-url-source
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8088/ || exit 1"]
-      interval: 5s
-      timeout: 5s
-      retries: 3
 
   minio.lolibrary.test:
     image: "minio/minio:latest"
@@ -118,7 +107,6 @@ services:
     depends_on:
       - www.lolibrary.test
       - minio.lolibrary.test
-      - imaginary.lolibrary.test
 volumes:
   db-data:
   minio-data:

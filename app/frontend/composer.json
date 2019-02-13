@@ -6,7 +6,6 @@
     "type": "project",
     "require": {
         "php": ">=7.2",
-        "amelia/backblaze": "^1.2",
         "cartalyst/stripe-laravel": "^8.0",
         "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~4.0",
