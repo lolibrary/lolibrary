@@ -1,0 +1,38 @@
+# github.com/cihub/seelog v0.0.0-20170130134532-f561c5e57575
+github.com/cihub/seelog
+github.com/cihub/seelog/archive
+github.com/cihub/seelog/archive/gzip
+github.com/cihub/seelog/archive/tar
+github.com/cihub/seelog/archive/zip
+# github.com/davecgh/go-spew v1.1.0
+github.com/davecgh/go-spew/spew
+# github.com/deckarep/golang-set v1.7.1
+github.com/deckarep/golang-set
+# github.com/golang/protobuf v1.2.0
+github.com/golang/protobuf/proto
+# github.com/monzo/slog v0.0.0-20180411100359-4277a1759ecc
+github.com/monzo/slog
+# github.com/monzo/terrors v0.0.0-20181205142146-d977e210f156
+github.com/monzo/terrors
+github.com/monzo/terrors/proto
+github.com/monzo/terrors/stack
+# github.com/monzo/typhon v0.0.0-20190110183238-0e904ef19174
+github.com/monzo/typhon
+# github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
+github.com/nu7hatch/gouuid
+# github.com/pmezard/go-difflib v1.0.0
+github.com/pmezard/go-difflib/difflib
+# github.com/stretchr/testify v1.3.0
+github.com/stretchr/testify/assert
+# golang.org/x/net v0.0.0-20190213061140-3a22650c66bd
+golang.org/x/net/http/httpguts
+golang.org/x/net/http2
+golang.org/x/net/http2/h2c
+golang.org/x/net/context
+golang.org/x/net/idna
+golang.org/x/net/http2/hpack
+# golang.org/x/text v0.3.0
+golang.org/x/text/secure/bidirule
+golang.org/x/text/unicode/bidi
+golang.org/x/text/unicode/norm
+golang.org/x/text/transform
