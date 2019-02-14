@@ -39,16 +39,17 @@
 
                     </td>
                     <td>
-                        <a href="{{ route('items.show', $item) }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('items.show', $item) }}" class="btn btn-sm btn-outline-primary">
                             View
                         </a>
-                        <a href="{{ route('items.edit', $item) }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('items.edit', $item) }}" class="btn btn-sm btn-outline-success">
                             Edit
                         </a>
                         @senior
-                        <a onclick="event.preventDefault(); $('#delete-item').submit()" class="btn btn-sm btn-danger">Delete</a>
-                        {{ Form::open(['route' => ['items.destroy', $item], 'method' => 'delete', 'id' => 'delete-item']) }}
-                        {{ Form::close() }}
+                            <a href="#" onclick="event.preventDefault(); $('#delete-item').submit()" class="btn btn-sm btn-outline-danger">Delete</a>
+
+                            {{ Form::open(['route' => ['items.destroy', $item], 'method' => 'delete', 'id' => 'delete-item']) }}
+                            {{ Form::close() }}
                         @endsenior
                     </td>
                 </tr>

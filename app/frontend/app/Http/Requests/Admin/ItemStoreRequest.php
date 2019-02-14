@@ -33,6 +33,11 @@ class ItemStoreRequest extends FormRequest
         return true;
     }
 
+    /**
+     * Get a list of rules for this request.
+     *
+     * @return array
+     */
     public function rules()
     {
         return [
@@ -50,7 +55,7 @@ class ItemStoreRequest extends FormRequest
             'attributes' => 'array',
             'features.*' => 'string|exists:features,id',
             'colors.*' => 'string|exists:colors,id',
-            'image' => 'image',
+            'image' => 'nullable|image',
             'images.*' => 'image',
         ];
     }

@@ -11,7 +11,13 @@ class AdminController extends Controller
      */
     public function dashboard()
     {
-        return view('admin.index');
+        $recents = Item::with(Item::PARTIAL_LOAD)
+            ->drafts()
+            ->orderBy('updated_at', 'desc')
+            ->take(10)
+            ->get();
+
+        return view('admin.dashboard', compact('recents'));
     }
 
      /**

@@ -279,7 +279,7 @@
                 <div class="col-lg-4 offset-lg-4 text-center">
                     @if ($item->published())
                         @if (
-                            ($item->publisher->is(auth()->user()) && auth()->user()->lolibrarian())
+                            ($item->publisher && $item->publisher->is(auth()->user()) && auth()->user()->lolibrarian())
                             || auth()->user()->senior()
                         )
                             <button type="submit" class="btn btn-success btn-block btn-lg">
