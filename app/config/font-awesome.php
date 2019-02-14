@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'url' => env('FONT_AWESOME_URL', 'https://use.fontawesome.com/releases/v5.0.13/js/all.js'),
+    'url' => env('FONT_AWESOME_URL', 'https://use.fontawesome.com/releases/v5.7.2/js/all.js'),
 
     /*
     |--------------------------------------------------------------------------
@@ -25,5 +25,5 @@ return [
     |
     */
 
-    'hash' => env('FONT_AWESOME_HASH', 'sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe'),
+    'hash' => env('FONT_AWESOME_HASH', 'sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP'),
 ];
