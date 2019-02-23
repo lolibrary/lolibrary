@@ -73,7 +73,7 @@ class ItemController extends Controller
         return back()->withStatus(trans("user.closet.{$status}", ['item' => str_limit($item->english_name, 28)]));
     }
 
-        /**
+    /**
      * Edit an item.
      *
      * @param Item $item
@@ -100,6 +100,7 @@ class ItemController extends Controller
             'currencies' => Item::CURRENCIES,
         ]);
     }
+
     /**
      * Create an item.
      *
@@ -117,6 +118,7 @@ class ItemController extends Controller
             'tags' => Tag::select(['id', 'slug'])->get(),
         ]);
     }
+
     /**
      * Create an item.
      *
@@ -125,17 +127,21 @@ class ItemController extends Controller
      */
     public function store(ItemStoreRequest $request)
     {
+        DB::transaction(function () {
             $brand = Brand::findOrFail($request->brand);
             $category = Category::findOrFail($request->category);
+
             // handle the main image.
             if ($request->image instanceof UploadedFile) {
                 $image = Image::from($request->image);
             } else {
                 $image = Image::default();
             }
-            // handle the extra images (can be done async)
+
+            // handle the extra images
             $images = collect($request->images)->map(function (UploadedFile $file) {
                 $image = Image::from($file);
+
                 return $image->id;
             });
 
@@ -162,14 +168,16 @@ class ItemController extends Controller
             $item->features()->attach($request->features);
             $item->colors()->attach($request->colors);
             $item->tags()->attach($request->tags);
-            $item->attributes()->attach( 
+            $item->attributes()->attach(
                 collect($request->input('attributes'))
                     ->filter()
-                    ->map(function ($value, $key) { 
-                        return ["attribute_id" => $key, "value" => $value]; 
+                    ->map(function ($value, $key) {
+                        return ["attribute_id" => $key, "value" => $value];
                     }
                 )
             );
+        });
+
         return redirect()->route('items.show', $item);
     }
     /**
