@@ -1,0 +1,44 @@
+# Item is the base graph node for searching.
+type Item {
+    id: String!
+    slug: String!
+    englishName: String!
+    foreignName: String!
+    productNumber: String!
+    currency: Currency!
+    price: Integer!
+    notes: String
+    brand: Brand!
+    category: Category!
+    image: Image
+    features: [Feature!]!
+    colors: [Color!]!
+    tags: [Tag!]!
+    attributes: [Attribute!]!
+    stargazers: Integer!
+    owners: Integer!
+}
+
+# Currency is a list of valid, accepted currencies on the site.
+enum Currency {
+    JPY # Japanese Yen (¥)
+    CNY # Chinese Yuan (RMB/¥)
+    HKD # Hong Kong Dollar (HK$)
+    KRW # South Korean Won (₩)
+    EUR # Euro (€)
+    USD # US Dollars ($)
+    GBP # Pound Sterling (£)
+    CAD # Canadian Dollar (CA$)
+    AUD # Australian Dollar (AU$)
+    MXN # Mexican Pesos ($)
+}
+
+type Image {
+    # id is the UUID for this entity.
+    id: String!
+
+    # filename is the
+    filename: String!
+    url: String!
+    thumbnail: String!
+}

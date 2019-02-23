@@ -10,6 +10,9 @@ github.com/davecgh/go-spew/spew
 github.com/deckarep/golang-set
 # github.com/golang/protobuf v1.2.0
 github.com/golang/protobuf/proto
+# github.com/jmoiron/sqlx v1.2.0
+github.com/jmoiron/sqlx
+github.com/jmoiron/sqlx/reflectx
 # github.com/monzo/slog v0.0.0-20180411100359-4277a1759ecc
 github.com/monzo/slog
 # github.com/monzo/terrors v0.0.0-20181205142146-d977e210f156

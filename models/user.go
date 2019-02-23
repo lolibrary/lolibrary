@@ -5,8 +5,6 @@ import "time"
 // User is the generic "user" model implementation.
 // User should be passed around anywhere that involves authentication.
 type User struct {
-	Model
-
 	ID        string     `json:"id"`
 	Name      string     `json:"name"`
 	Username  string     `json:"username"`
