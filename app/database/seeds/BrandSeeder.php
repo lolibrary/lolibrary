@@ -74,7 +74,6 @@ class BrandSeeder extends Seeder
             $image = Image::firstOrCreate([
                 'name' => $brand . ' icon picture',
                 'filename' => "{$slug}.png",
-                'thumbnail' => "{$slug}.png",
             ]);
 
             Brand::create([
