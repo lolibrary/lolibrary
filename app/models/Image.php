@@ -5,11 +5,12 @@ namespace App\Models;
 /**
  * An item image.
  *
- * @property string $url The location of this image, as a link.
- * @property string $thumbnail_url The location of this image's thumbnail, as a link.
- * @property string|null $uploaded_url The temporary URL to this image.
+ * @property string $filename               This image's filename
+ * @property string $url                    The location of this image, as a link.
+ * @property string $thumbnail_url          The location of this image's thumbnail, as a link.
+ * @property string|null $uploaded_url      The temporary URL to this image.
  * @property string|null $uploaded_filename The filename of the item that was generated to store it for processing.
- * @property int $status The raw status of this image.
+ * @property int $status                    The raw status of this image.
  */
 class Image extends Model
 {
@@ -78,7 +79,7 @@ class Image extends Model
     /**
      * Get the default image.
      *
-     * @return \App\Image
+     * @return \App\Models\Image
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public static function default()

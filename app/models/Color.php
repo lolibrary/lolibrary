@@ -9,7 +9,7 @@ use App\Models\Traits\Cacheable;
  *
  * @property string $slug The URL slug for this colorway
  * @property string $name The name of this colorway (e.g. Wine)
- * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $items
+ * @property \App\Models\Item[]|\Illuminate\Database\Eloquent\Collection $items
  */
 class Color extends Model
 {

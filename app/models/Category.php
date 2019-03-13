@@ -9,7 +9,7 @@ use App\Models\Traits\Cacheable;
  *
  * @property string $slug The URL slug of this type.
  * @property string $name The friendly name of this type.
- * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $items
+ * @property \App\Models\Item[]|\Illuminate\Database\Eloquent\Collection $items
  */
 class Category extends Model
 {

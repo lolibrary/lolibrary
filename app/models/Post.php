@@ -8,8 +8,8 @@ namespace App\Models;
  * @property string $message
  * @property string $user_id The ID of the {@link \App\User user} this post belongs to.
  *
- * @property \App\User $user The {@link \App\User user} who owns this post.
- * @property \App\User $topic The {@link \App\Topic topic} this post belongs to.
+ * @property \App\Models\User $user The {@link \App\User user} who owns this post.
+ * @property \App\Models\User $topic The {@link \App\Topic topic} this post belongs to.
  */
 class Post extends Model
 {

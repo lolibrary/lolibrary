@@ -9,7 +9,7 @@ use App\Models\Traits\Cacheable;
  *
  * @property string $name The name of this Feature.
  * @property string $slug The URL slug of this Feature.
- * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $items
+ * @property \App\Models\Item[]|\Illuminate\Database\Eloquent\Collection $items
  */
 class Feature extends Model
 {

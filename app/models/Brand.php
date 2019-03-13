@@ -14,8 +14,8 @@ use App\Models\Traits\Cacheable;
  *
  * @property string $image_id The ID of the {@link \App\Image image} for this brand.
  *
- * @property \App\Image $image The {@link \App\Image image} representing this brand, usually a logo.
- * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $items
+ * @property \App\Models\Image $image The {@link \App\Image image} representing this brand, usually a logo.
+ * @property \App\Models\Item[]|\Illuminate\Database\Eloquent\Collection $items
  */
 class Brand extends Model
 {

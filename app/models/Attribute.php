@@ -10,8 +10,8 @@ use App\Models\Traits\Cacheable;
  * @property string $slug The URL route slug of this model.
  * @property string $name The name of this model.
  * @property string $value The value of this attribute's pivot.
- * @property \App\Pivot $pivot A pivot object containing the value of this attribute.
- * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $items
+ * @property \App\Models\Pivot $pivot A pivot object containing the value of this attribute.
+ * @property \App\Models\Item[]|\Illuminate\Database\Eloquent\Collection $items
  */
 class Attribute extends Model
 {

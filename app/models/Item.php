@@ -19,20 +19,19 @@ use App\Models\Traits\ItemRelations;
  * @property float       $price_formatted The price of this item, formatted to the rules of the given currency (e.g. /100 for gbp/usd)
  * @property string      $currency        The currency of this item, as an ISO code.
  *
- * @property \App\Image    $image     The primary {@link \App\Image} for this Item.
- * @property \App\Category $category  The {@link \App\Category} of this Item (e.g. JSK).
- * @property \App\User     $submitter The {@link \App\User} who originally submitted this Item.
- * @property \App\User     $publisher The {@link \App\User} who published this Item.
- * @property \App\Brand    $brand     The {@link \App\Brand} of this Item (e.g. Angelic Pretty).
+ * @property \App\Models\Image    $image     The primary {@link \App\Image} for this Item.
+ * @property \App\Models\Category $category  The {@link \App\Category} of this Item (e.g. JSK).
+ * @property \App\Models\User     $submitter The {@link \App\User} who originally submitted this Item.
+ * @property \App\Models\User     $publisher The {@link \App\User} who published this Item.
+ * @property \App\Models\Brand    $brand     The {@link \App\Brand} of this Item (e.g. Angelic Pretty).
  *
- * @property \App\Image[]|\Illuminate\Database\Eloquent\Collection     $images     The {@link \App\Image images} for this Item.
- * @property \App\Tag[]|\Illuminate\Database\Eloquent\Collection       $tags       The {@link \App\Tag search tags} for this Item.
- * @property \App\Color[]|\Illuminate\Database\Eloquent\Collection     $colors     The {@link \App\Color colorways} this Item comes in (e.g. Black).
- * @property \App\Feature[]|\Illuminate\Database\Eloquent\Collection   $features   The {@link \App\Feature features} of this item (e.g. Back Shirring).
- * @property \App\Attribute[]|\Illuminate\Database\Eloquent\Collection $attributes The {@link \App\Attribute custom attributes} on this Item.
- * @property \App\User[]|\Illuminate\Database\Eloquent\Collection      $stargazers The {@link \App\User users} who want to own this Item.
- * @property \App\User[]|\Illuminate\Database\Eloquent\Collection      $owners     The {@link \App\Attribute users} who own this Item.
- * @property \App\Comment[]|\Illuminate\Database\Eloquent\Collection   $comments   The {@link \App\Comment comments} on this Item.
+ * @property \App\Models\Image[]|\Illuminate\Database\Eloquent\Collection     $images     The {@link \App\Image images} for this Item.
+ * @property \App\Models\Tag[]|\Illuminate\Database\Eloquent\Collection       $tags       The {@link \App\Tag search tags} for this Item.
+ * @property \App\Models\Color[]|\Illuminate\Database\Eloquent\Collection     $colors     The {@link \App\Color colorways} this Item comes in (e.g. Black).
+ * @property \App\Models\Feature[]|\Illuminate\Database\Eloquent\Collection   $features   The {@link \App\Feature features} of this item (e.g. Back Shirring).
+ * @property \App\Models\Attribute[]|\Illuminate\Database\Eloquent\Collection $attributes The {@link \App\Attribute custom attributes} on this Item.
+ * @property \App\Models\User[]|\Illuminate\Database\Eloquent\Collection      $stargazers The {@link \App\User users} who want to own this Item.
+ * @property \App\Models\User[]|\Illuminate\Database\Eloquent\Collection      $owners     The {@link \App\Attribute users} who own this Item.
  *
  * @property string $image_id The ID of this Item's {@link \App\Image image}.
  * @property string $category_id  The ID of this Item's {@link \App\Category category}.

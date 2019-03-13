@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use DB;
 use App\Models\Traits\{
     HasUuid, DateHandling, VerifiesEmails, Wishlist, Closet, AccessLevels
 };
+use Illuminate\Support\Facades\DB;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
@@ -24,17 +24,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property bool $banned   If the user is banned or not.
  * @property bool $verified Whether or not the user's email has been verified.
  *
- * @property \App\Image $image The user's profile image.
- * @property string $image_id The user's profile image ID.
+ * @property \App\Models\Image $image The user's profile image.
+ * @property string $image_id         The user's profile image ID.
  *
- * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $items    The {@link \App\Item items} this user has submitted.
- * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $wishlist The {@link \App\Item items} this user has favourited.
- * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $closet   The {@link \App\Item items} this user owns.
- * @property \App\Post[]|\Illuminate\Database\Eloquent\Collection $posts    The posts this user has created.
- * @property \App\Topic[]|\Illuminate\Database\Eloquent\Collection $topics   The topics this user has created.
- * @property \App\Message[]|\Illuminate\Database\Eloquent\Collection $messages The messages received by this user.
- * @property \App\Message[]|\Illuminate\Database\Eloquent\Collection $sent     The messages sent by this user.
- * @property \App\Comment[]|\Illuminate\Database\Eloquent\Collection $comments The comments this user has left.
+ * @property \App\Models\Item[]|\Illuminate\Database\Eloquent\Collection $items    The {@link \App\Item items} this user has submitted.
+ * @property \App\Models\Item[]|\Illuminate\Database\Eloquent\Collection $wishlist The {@link \App\Item items} this user has favourited.
+ * @property \App\Models\Item[]|\Illuminate\Database\Eloquent\Collection $closet   The {@link \App\Item items} this user owns.
+ * @property \App\Models\Post[]|\Illuminate\Database\Eloquent\Collection $posts    The posts this user has created.
  */
 class User extends Authenticatable
 {
@@ -101,7 +97,7 @@ class User extends Authenticatable
     /**
      * The items a user has favourited/wishlisted.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\App\Item[]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\App\Models\Item[]
      */
     public function wishlist()
     {
@@ -111,7 +107,7 @@ class User extends Authenticatable
     /**
      * The items a user owns.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\App\Item[]
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\App\Models\Item[]
      */
     public function closet()
     {
@@ -121,7 +117,7 @@ class User extends Authenticatable
     /**
      * The posts a user has.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\App\Post[]
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\App\Models\Post[]
      */
     public function posts()
     {
@@ -131,7 +127,7 @@ class User extends Authenticatable
     /**
      * The profile image for a user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\App\Image
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\App\Models\Image
      */
     public function image()
     {
@@ -141,7 +137,7 @@ class User extends Authenticatable
     /**
      * Get a user's profile.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\App\Profile
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\App\Models\Profile
      */
     public function profile()
     {
@@ -151,6 +147,8 @@ class User extends Authenticatable
     /**
      * Scope a query to email address.
      *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $email
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder
      */
     public function scopeEmail(Builder $query, string $email)

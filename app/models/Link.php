@@ -6,7 +6,7 @@ namespace App\Models;
  * @property string $linkable_type
  * @property string $linkable_id
  * @property string $slug
- * @property \App\Model $linkable
+ * @property \App\Models\Model $linkable
  */
 class Link extends Model
 {
@@ -32,7 +32,7 @@ class Link extends Model
      * @param string $slug
      * @param string $type
      *
-     * @return \App\Link
+     * @return \App\Models\Link
      */
     public static function get(string $slug, string $type = self::ITEM)
     {

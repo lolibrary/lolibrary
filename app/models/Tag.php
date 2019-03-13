@@ -7,7 +7,7 @@ namespace App\Models;
  *
  * @property string $slug The URL slug of this tag.
  * @property string $name The friendly name of this tag.
- * @property \App\Item[]|\Illuminate\Database\Eloquent\Collection $items
+ * @property \App\Models\Item[]|\Illuminate\Database\Eloquent\Collection $items
  */
 class Tag extends Model
 {
