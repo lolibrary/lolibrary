@@ -11,7 +11,7 @@
 
 <div class="col-md-6 mx-auto">
     <div class="card" style="margin-bottom: 10px">
-        <img class="card-img-top" src="{{ $post->image ?? asset('images/backgrounds/pattern_dark_blog-cropped.png') }}" alt="" style="max-height: 320px; width: 100%">
+        <img class="card-img-top" src="{{ $post->image ?? cdn_link('assets/backgrounds/pattern_dark_blog-cropped.png') }}" alt="" style="max-height: 320px; width: 100%">
         <div class="card-body">
             <h5 class="card-title">{{ $post->title }}</h5>
             <h6 class="card-subtitle mb-2 text-muted text-right">

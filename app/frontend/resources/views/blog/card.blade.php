@@ -1,6 +1,6 @@
 <div class="card" style="margin-bottom: 10px">
     <img class="card-img-top"
-         src="{{ $post->image ?? asset('images/backgrounds/pattern_dark_blog-cropped.png') }}"
+         src="{{ $post->image ?? cdn_link('assets/backgrounds/pattern_dark_blog-cropped.png') }}"
          alt="" style="min-height: 120px; max-height: 150px; width: 100%; background-color: #ffffff;">
     <div class="card-body">
         <h5 class="card-title">{{ $post->title }}</h5>

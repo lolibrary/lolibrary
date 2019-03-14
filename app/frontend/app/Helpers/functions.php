@@ -231,3 +231,16 @@ if (! function_exists('cdn_path')) {
          return config('cdn.image.url') . '/' . config('cdn.image.folder') . '/' . $path;
      }
 }
+
+if (! function_exists('cdn_link')) {
+    /**
+     * Gets a CDN path to a specific URL, not just an image.
+     *
+     * @param string $path
+     * @return string
+     */
+    function cdn_link(string $path)
+    {
+        return config('cdn.image.url') . '/' . $path;
+    }
+}

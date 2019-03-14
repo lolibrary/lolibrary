@@ -18,5 +18,5 @@
     <meta property="og:url" content="{{ $tag->url }}">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Tag '{{ $tag->name }}' on Lolibrary">
-    <meta property="og:image" content="{{ asset('images/banners/banner01-white.png') }}">
+    <meta property="og:image" content="{{ cdn_link('assets/banners/banner01-white.png') }}">
 @endsection

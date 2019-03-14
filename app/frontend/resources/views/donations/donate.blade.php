@@ -13,7 +13,7 @@
 
           <p class="my-4">
             <a title="Support us on patreon" href="{{ config('services.donation.patreon') }}" target="_blank" rel="external">
-              <img src="{{ asset('images/become_a_patron_button@2x.png') }}"
+              <img src="{{ cdn_link('assets/become_a_patron_button@2x.png') }}"
                 style="max-width: 217px; max-height: 51px">
             </a>
           </p>
@@ -40,5 +40,5 @@
     <meta property="og:url" content="{{ route('donate') }}">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Donate to Lolibrary">
-    <meta property="og:image" content="{{ asset('images/banners/banner01-white.png') }}">
+    <meta property="og:image" content="{{ cdn_link('assets/banners/banner01-white.png') }}">
 @endsection

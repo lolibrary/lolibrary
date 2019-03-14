@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="text-center m-4">
-                <img src="{{ asset('categories/other.svg') }}" alt="" style="max-height: 150px; max-width: 150px" class="img-thumbnail circle">
+                <img src="{{ cdn_link('categories/other.svg') }}" alt="" style="max-height: 150px; max-width: 150px" class="img-thumbnail circle">
             </div>
 
             <div class="list-group">

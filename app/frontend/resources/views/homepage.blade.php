@@ -23,7 +23,7 @@
                 <a href="{{ $brand->url }}">
                     <div class="scrollbox-img">
                         <img src="{{ $brand->image->url }}" alt="" data-original-url="{{ $brand->image->url }}"
-                            onerror="if (this.src !== '{{ asset('categories/other.svg') }}') this.src = '{{ asset('categories/other.svg') }}'">
+                            onerror="if (this.src !== '{{ cdn_link('categories/other.svg') }}') this.src = '{{ cdn_link('categories/other.svg') }}'">
                     </div>
                     <div class="scrollbox-text">
                         <p class="text-muted small p-0 m-0">{{ $brand->name }}</p>
@@ -41,7 +41,7 @@
             <div class="card shadow-sm scrollbox-square">
                 <a href="{{ $category->url }}">
                     <div class="scrollbox-img">
-                        <img src="{{ asset("categories/{$category->slug}.svg") }}" alt="">
+                        <img src="{{ cdn_link("categories/{$category->slug}.svg") }}" alt="">
                     </div>
                     <div class="scrollbox-text">
                         <p class="text-muted small p-0 m-0">{{ $category->name }}</p>
