@@ -100,77 +100,83 @@
             </div>
         </div>
         <div class="col-lg-8">
-            <div class="form-group">
-                <label for="english_name" class="col-form-label">English Name <span class="text-danger">*</span></label>
+            <div class="form-label-group">
                 {{ Form::text('english_name', null, ['placeholder' => 'English Name', 'class' => 'form-control', 'required' => true]) }}
+                <label for="english_name">English Name <span class="text-danger">*</span></label>
+
                 <p class="form-text">
-                    An english or romanized version of this item's name. This will be used to identify the item in the search index.
-                    <br>
-                    If a name is a duplicate, a -0 or -1 (etc). will be added to the generated URL for this item.
+                    An english or romanized version of this item's name. <span title="This will be used to identify the item in the search index. If a name is a duplicate, a -0 or -1 (etc). will be added to the generated URL for this item." data-placement="top" data-toggle="tooltip" class="far fa-info-circle"></span>
                 </p>
             </div>
 
-            <div class="form-group">
-                <label for="foreign_name" class="col-form-label">Foreign Name <span class="text-danger">*</span></label>
+            <div class="form-label-group">
                 {{ Form::text('foreign_name', null, ['placeholder' => 'Foreign Name', 'class' => 'form-control', 'required' => true]) }}
+                <label for="foreign_name">Foreign Name <span class="text-danger">*</span></label>
 
                 <p class="form-text">The non-english version of this item's name. Usually the original.</p>
             </div>
 
-            <div class="form-group">
-                <label for="product_number" class="col-form-label">Product Number</label>
-                {{ Form::text('product_number', null, ['placeholder' => 'Product Number', 'class' => 'form-control']) }}
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-label-group">
+                        <select name="year" id="year" class="form-control form-control-chosen" required>
+                            @foreach (array_reverse(range(1990, date('Y'))) as $year)
+                                <option value="{{ $year }}" @if ($year == old('year', date('Y'))) selected @endif>{{ $year }}</option>
+                            @endforeach
+                        </select>
+                        <label for="year">Release Year <span class="text-danger">*</span></label>
 
-                <p class="form-txt">The seller's product number for this item.</p>
-            </div>
+                        <p class="form-text">The release year.</p>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label for="year" class="col-form-label">Release Year <span class="text-danger">*</span></label>
+                <div class="col-lg-8">
+                    <div class="form-label-group">
+                        {{ Form::text('product_number', null, ['placeholder' => 'Product Number', 'class' => 'form-control']) }}
+                        <label for="product_number">Product Number</label>
 
-                <select name="year" id="year" class="form-control form-control-chosen" required>
-                    @foreach (array_reverse(range(1990, date('Y') + 3)) as $year)
-                        <option value="{{ $year }}" @if ($year == old('year', date('Y'))) selected @endif>{{ $year }}</option>
-                    @endforeach
-                </select>
+                        <p class="form-text">The seller's product number for this item.</p>
+                    </div>
+                </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="currency" class="col-form-label">Currency <span class="text-danger">*</span></label>
-
+                    <div class="form-label-group">
                         <select id="currency" name="currency" class="form-control form-control-chosen" required>
                             @foreach ($currencies as $code => $currency)
                                 <option value="{{ $code }}" @if ($code === old('currency')) selected @endif>{{ $currency }}</option>
                             @endforeach
                         </select>
+                        <label for="currency">Currency <span class="text-danger">*</span></label>
+
                         <p class="form-text">Use the release currency.</p>
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <div class="form-group">
-                        <label for="price" class="col-form-label">Item Price <span class="text-danger">*</span></label>
-
+                    <div class="form-label-group">
                         {{ Form::text('price', null, ['placeholder' => '1000', 'class' => 'form-control','required' => true]) }}
-                        <p class="form-text">Prices should be in whole numbers! (hint: you can use 0 here but please try not to!)</p>
+                        <label for="price">Item Price <span class="text-danger">*</span></label>
+
+                        <p class="form-text">Prices should be in whole numbers! If unknown, use 0.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="notes" class="col-form-label">Item Notes</label>
+            <div class="form-label-group">
                 {{ Form::textarea('notes', null, ['placeholder' => 'Item Notes. Note that this no longer supports HTML/bbcode, but may in the future!', 'class' => 'form-control']) }}
+                <label for="notes">Item Notes</label>
             </div>
 
+            <h2>Attributes</h2>
             <div class="form-group">
-                <label class="ccol-form-label">Attributes</label>
                 <p class="form-text">
                     Select a button below to add that particular attribute to this item.
                 </p>
                 <div class="col-lg-12" style="margin-bottom: 20px">
                     @foreach ($attributes as $attribute)
                         <button
-                            type="button" class="btn btn-sm btn-secondary"
+                            type="button" class="btn btn-sm btn-outline-primary"
                             data-type="attribute.button"
                             data-id="{{ $attribute->id }}"
                             data-clicked="0"
@@ -186,8 +192,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     @foreach ($attributes as $attribute)
-                        <div class="form-group" id="attribute-{{ $attribute->id }}" style="display: none">
-                            <label for="attribute.{{ $attribute->slug }}" class="col-form-label">{{ $attribute->name }}</label>
+                        <div class="form-label-group" id="attribute-{{ $attribute->id }}" style="display: none">
                             {{ Form::text(
                                 "attributes[{$attribute->id}]",
                                 null,
@@ -199,6 +204,7 @@
                                     'data-id' => $attribute->id,
                                 ]
                             ) }}
+                            <label for="attribute.{{ $attribute->slug }}">{{ $attribute->name }}</label>
                         </div>
                     @endforeach
                 </div>
@@ -217,37 +223,41 @@
 
 @section('script')
     <script>
-        $('[data-type="attribute.button"]').click(function (event) {
-            event.preventDefault();
+        $(function () {
+            $('[data-type="attribute.button"]').click(function (event) {
+                event.preventDefault();
 
-            var $button = $(this),
-                data = $button.data(),
-                $attribute = $('#attribute-' + data.id);
+                var $button = $(this),
+                    data = $button.data(),
+                    $attribute = $('#attribute-' + data.id);
 
-            console.log(data);
-            console.log($attribute);
+                console.log(data);
+                console.log($attribute);
 
-            if (data.clicked) {
-                $button.addClass('btn-default').removeClass('btn-primary');
-                $button.data('clicked', 0);
+                if (data.clicked) {
+                    $button.addClass('btn-outline-primary').removeClass('btn-primary');
+                    $button.data('clicked', 0);
 
-                $attribute.hide();
-            } else {
-                $button.removeClass('btn-default').addClass('btn-primary');
-                $button.data('clicked', 1);
+                    $attribute.hide();
+                } else {
+                    $button.removeClass('btn-outline-primary').addClass('btn-primary');
+                    $button.data('clicked', 1);
 
-                $attribute.show();
-            }
-        });
+                    $attribute.show();
+                }
+            });
 
-        $('[data-type="attribute.input"]').each(function () {
-            var $input = $(this),
-                data = $input.data(),
-                $button = $('#attribute-button-' + data.id);
+            $('[data-type="attribute.input"]').each(function () {
+                var $input = $(this),
+                    data = $input.data(),
+                    $button = $('#attribute-button-' + data.id);
 
-            if ($input.val()) {
-                $button.click();
-            }
+                if ($input.val()) {
+                    $button.click();
+                }
+            });
+
+            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 
