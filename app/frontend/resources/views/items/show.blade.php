@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['title' => "{$item->english_name} by {$item->brand->name}"])
 
 @section('content')
 <div class="container">

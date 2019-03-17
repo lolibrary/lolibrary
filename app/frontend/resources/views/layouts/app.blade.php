@@ -5,7 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ cdn_link('images/favicon.png') }}" type="image/png" sizes="any">
-    <title>{{ $title or config('app.name', 'Lolibrary') }}</title>
+    <title>
+    @isset($title)
+        {{ $title }} |
+    @endisset
+        {{ config('app.name', 'Lolibrary') }}
+    </title>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -25,7 +30,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img style="height: 14px" src="{{ cdn_link('assets/logo_horizontal.png') }}" alt="Lolibrary logo">
+                    <img style="height: 14px" src="{{ cdn_link('images/logo_horizontal.png') }}" alt="Lolibrary logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-{{-- todo: add article opengraph stuff --}}
+@extends('layouts.app', ['title' => $post->title])
 
 @section('content')
 <div class="col" style="height: 3rem">
@@ -31,4 +29,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('meta')
+    <link rel="canonical" href="{{ $post->url }}">
+    <meta property="og:url" content="{{ $post->url }}">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Lolibrary: {{ $post->title }}">
+    <meta property="og:image" content="{{ $post->image ?? cdn_link('assets/backgrounds/pattern_dark_blog-cropped.png') ?? default_asset() }}">
 @endsection
