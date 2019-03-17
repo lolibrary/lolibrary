@@ -30,7 +30,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img style="height: 14px" src="{{ cdn_link('images/logo_horizontal.png') }}" alt="Lolibrary logo">
+                    <img style="height: 14px" src="{{ cdn_link('assets/logo_horizontal.png') }}" alt="Lolibrary logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
