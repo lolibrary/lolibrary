@@ -1,4 +1,4 @@
-@extends('profile.layout')
+@extends('profile.layout', ['title' => 'Profile'])
 
 @section('profile')
 <form id="nav-profile" method="POST" action="{{ route('profile') }}">
