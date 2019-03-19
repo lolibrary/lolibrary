@@ -77,6 +77,19 @@
         <main class="py-4" id="skip-navigation">
             @yield('content')
         </main>
+
+        <footer class="footer mt-4 py-5 text-muted">
+            <div class="container">
+                <p class="npo-statement">Lolibrary Inc is a 501(c)(3) non-profit incorporated in the USA.</p>
+
+                <p>
+                    Powered by <a href="https://www.fastly.com" title="Fastly" rel="external nofollow">
+                        <img style="height: 1.5rem" src="{{ cdn_link('assets/fastly.svg') }}" alt="Fastly">
+                    </a>
+                </p>
+
+            </div>
+        </footer>
     </div>
 
     <!-- Scripts -->

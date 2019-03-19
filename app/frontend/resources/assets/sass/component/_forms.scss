@@ -1,0 +1,14 @@
+.input-group .selected-tag {
+  height: 100% !important;
+  margin: 0 0 0.5em 0 !important;
+  padding: 1px 0.5em !important;
+  background-color: theme-color-level(primary, -10) !important;
+}
+
+.v-select .dropdown-toggle {
+  border: 0 !important;
+}
+
+.form-control {
+  border: 1px solid #ccc !important;
+}
