@@ -21,7 +21,6 @@ class ImageSeeder extends Seeder
         Image::forceCreate([
             'id' => $id,
             'filename' => $id . '.png',
-            'thumbnail' => $id . '_thumb.png',
             'name' => 'Default Image',
         ]);
     }
