@@ -10,18 +10,18 @@ class ImageTest extends TestCase
 {
     public function testImageCreation()
     {
-        $fake = Storage::fake();
+        Storage::fake();
 
         $file = UploadedFile::fake()->image('foobar.jpeg');
 
         $image = Image::from($file);
 
-        Storage::disk()->assertExists($image->getUploadedPath());
+        Storage::disk()->assertExists(config('cdn.image.folder') . '/' . $image->filename);
     }
 
     public function testImageUrls()
     {
-        $fake = Storage::fake();
+        Storage::fake();
 
         $file = UploadedFile::fake()->image('foobar.jpeg');
 
@@ -33,7 +33,7 @@ class ImageTest extends TestCase
 
     public function testImageUrlEquality()
     {
-        $fake = Storage::fake();
+        Storage::fake();
 
         $file = UploadedFile::fake()->image('foobar.jpeg');
 

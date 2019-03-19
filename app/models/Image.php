@@ -69,7 +69,7 @@ class Image extends Model
         $model->id = $id ?? uuid4();
         $model->filename = $model->id . '.' . $file->extension();
 
-        $file->storePubliclyAs(config('cdn.image.folder') . '/' . $model->filename);
+        $file->storePubliclyAs(config('cdn.image.folder'), $model->filename);
 
         $model->save();
 
