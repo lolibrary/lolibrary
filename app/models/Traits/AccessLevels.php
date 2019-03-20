@@ -90,21 +90,6 @@ trait AccessLevels
      */
     public function getRoleAttribute()
     {
-        switch (true) {
-            case $this->developer():
-                return 'Developer';
-            case $this->admin():
-                return 'Administrator';
-            case $this->senior():
-                return 'Senior Lolibrarian';
-            case $this->lolibrarian():
-                return 'Lolibrarian';
-            case $this->junior():
-                return 'Junior Lolibrarian';
-            case $this->banned:
-                return 'Banned User';
-            default:
-                return 'Regular User';
-        }
+        return User::ROLES[$this->level()];
     }
 }

@@ -44,6 +44,16 @@ class User extends Authenticatable
     public const REGULAR = 0;
     public const BANNED = -1;
 
+    public const ROLES = [ 
+                            User::DEVELOPER => 'Developer',
+                            User::ADMIN => 'Administrator',
+                            User::SENIOR_LOLIBRARIAN => 'Senior Lolibrarian',
+                            User::LOLIBRARIAN => 'Lolibrarian',
+                            User::JUNIOR_LOLIBRARIAN => 'Junior Lolibrarian',
+                            User::REGULAR => 'Regular User',
+                            User::BANNED => 'Banned User',
+                        ];
+
     /**
      * Whether or not this model has an incrementing timestamp.
      *
@@ -61,6 +71,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'level',
     ];
 
     /**

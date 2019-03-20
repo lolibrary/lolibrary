@@ -21,5 +21,11 @@
             <i class="fal fa-fw fa-plus"></i> {{ __('Drafts Queue') }}
         </a>
     @endsenior
+
+    @admin
+        <a class="dropdown-item" href="{{ route('admin.users') }}">
+            <i class="fal fa-fw fa-plus"></i> {{ __('All Users') }}
+        </a>
+    @endadmin
     </div>
 </li>
