@@ -1,4 +1,4 @@
-@extends('profile.layout')
+@extends('profile.layout', ['title' => 'Wishlist'])
 
 @section('profile')
 @if ($items->count() > 0)
