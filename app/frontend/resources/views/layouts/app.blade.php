@@ -26,7 +26,7 @@
 </head>
 <body>
     <a class="sr-only sr-only-focusable" href="#skip-navigation">{{ __('Skip to content') }}</a>
-    <div id="app" style="margin-top: 55px">
+    <div id="app" style="margin-top: 5vh">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -79,11 +79,11 @@
             </div>
         @endif
 
-        <main class="py-4" id="skip-navigation">
+        <main class="py-4" id="skip-navigation" style="min-height: 70vh">
             @yield('content')
         </main>
 
-        <footer class="footer mt-4 py-5 text-muted">
+        <footer class="footer mt-4 py-5 text-muted" style="height: 25vh">
             <div class="container">
                 <p class="npo-statement">Lolibrary Inc is a 501(c)(3) non-profit incorporated in the USA.</p>
 
