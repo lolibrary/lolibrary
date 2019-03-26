@@ -222,7 +222,7 @@ class Item extends Model
     /**
      * Get a slug for an item.
      *
-     * @param \App\Item $item
+     * @param \App\Models\Item $item
      * @return string
      */
     public static function slug(self $item)

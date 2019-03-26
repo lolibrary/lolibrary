@@ -3,21 +3,20 @@
 namespace App\Http\Controllers\Items;
 
 use App\Models\Tag;
+use App\Models\Item;
 use App\Models\User;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Image;
-use App\Models\Comment;
 use App\Models\Feature;
 use App\Models\Category;
 use App\Models\Attribute;
-use App\Models\Item;
+use Illuminate\Http\Request;
 use App\Http\Requests\Admin\{
     ItemStoreRequest, ItemUpdateRequest
 };
-use App\Jobs\ProcessImage;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class ItemController extends Controller
@@ -132,7 +131,7 @@ class ItemController extends Controller
      */
     public function store(ItemStoreRequest $request)
     {
-        DB::transaction(function () {
+        DB::transaction(function () use ($request) {
             $brand = Brand::findOrFail($request->brand);
             $category = Category::findOrFail($request->category);
 
@@ -324,7 +323,11 @@ class ItemController extends Controller
             return back()->withErrors("You aren't allowed to do that!");
         }
 
-        $this->dispatchNow(new DeleteImage($image));
+        if ($image->id === uuid5('default')) {
+            return back()->withErrors("You can't delete the default image.");
+        }
+
+        $image->delete();
 
         return back()->with('status', 'Image Deleted');
     }

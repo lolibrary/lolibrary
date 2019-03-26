@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Storage;
+
 /**
  * An item image.
  *
@@ -44,6 +46,16 @@ class Image extends Model
         'url',
         'thumbnail_url',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // if we can't delete the file, don't delete the image from the database.
+        static::deleting(function (self $model) {
+            return Storage::disk('cloud')->delete(config('cdn.image.folder') . '/' . $model->filename);
+        });
+    }
 
     /**
      * The route key name for images should be its UUID.
