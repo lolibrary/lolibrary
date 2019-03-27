@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -52,5 +54,32 @@ class ProfileController extends Controller
         $items = $user->wishlist()->paginate(24);
 
         return view('profile.wishlist', compact('user', 'items'));
+    }
+
+    public function edit(String $username)
+    {   $profile = User::where('username', $username)->first();
+        $user = Auth::user();
+        return view('profile.edit', [ 'user' => $profile, 'roles' => User::ROLES]);
+    }
+
+    public function destroy(String $username)
+    {   $user = User::where('username', $username)->first();
+        $user->delete();
+        return redirect()
+            ->route('admin.users')
+            ->with('status', 'User deleted successfully');
+    }
+
+    public function save(Request $request, String $username)
+    {   $user = User::where('username', $username)->first();
+        $user->fill($request->only([
+            'email',
+            'name',
+            'level',
+        ]));
+        $user->save();
+        return redirect()
+            ->route('profile.edit', $username)
+            ->with('status', 'User saved successfully');
     }
 }

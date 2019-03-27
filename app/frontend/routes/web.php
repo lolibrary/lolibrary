@@ -26,6 +26,12 @@ Route::prefix('profile')->group(function () {
     Route::get('/', 'ProfileController@profile')->name('profile');
     Route::get('closet', 'ProfileController@closet')->name('closet');
     Route::get('wishlist', 'ProfileController@wishlist')->name('wishlist');
+
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::get('{user}/edit', 'ProfileController@edit')->name('profile.edit');
+        Route::delete('{user}/delete', 'ProfileController@delete')->name('profile.destroy');
+        Route::post('{user}/save', 'ProfileController@save')->name('profile.save');
+    });
 });
 
 // Admin
@@ -34,6 +40,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:junior'], 'as'
     Route::group(['middleware' => 'role:senior'], function () {
         Route::get('items/queue', 'AdminController@queue')->name('items.queue');
     });
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::match(['get', 'post'], 'users', 'AdminController@users')->name('users');
+    });
+
 });
 
 // blog posts route.
