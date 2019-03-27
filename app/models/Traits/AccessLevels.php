@@ -90,6 +90,6 @@ trait AccessLevels
      */
     public function getRoleAttribute()
     {
-        return User::ROLES[$this->level()];
+        return User::ROLES[$this->level()] ?? User::REGULAR;
     }
 }

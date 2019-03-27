@@ -25,8 +25,8 @@
     <div class="form-group">
         <label for="level">{{ __('Lolibrary Role') }}</label>
             <select id="level" name="level" class="form-control form-control-chosen">
-                @foreach (array_keys($roles) as $role)
-                    <option value="{{ $role }}" @if ($user->level() == $role) selected @endif>{{ $roles[$role] }}</option>
+                @foreach($roles as $role => $name)
+                    <option value="{{ $role }}" @if ($user->level() == $role) selected @endif>{{ $name }}</option>
                 @endforeach
             </select>
         </div>
