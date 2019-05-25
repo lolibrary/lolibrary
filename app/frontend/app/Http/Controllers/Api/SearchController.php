@@ -44,12 +44,13 @@ class SearchController extends Base
         $this->years($request, $query);
 
         if (is_string($request->search) && strlen($request->search) > 0) {
-            $search = '%' . $request->search . '%';
+            $search = $request->search;
+
 
             $query->where(function (Builder $query) use ($search) {
-                $query->where('english_name', 'ilike', $search);
-                $query->orWhere('foreign_name', 'ilike', $search);
-                $query->orWhere('product_number', 'ilike', $search);
+                $query->whereRaw('english_name %> ?',[$search]);
+                $query->orWhereRaw('foreign_name %> ?', [$search]);
+                $query->orWhereRaw('product_number %> ?', [$search]);
             });
         }
 
