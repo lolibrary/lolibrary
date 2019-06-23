@@ -7,15 +7,6 @@ import (
 	"github.com/monzo/typhon"
 )
 
-const seelogConfig = `<seelog>
-	<outputs formatid="common">
-		<console />
-		<filter levels="info,warn,error,critical">
-			<custom name="slog">
-		</filter>
-	</outputs>
-</seelog>`
-
 type Server struct {
 	version string
 	name    string
