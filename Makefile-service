@@ -1,0 +1,40 @@
+SHELL=/bin/bash -O extglob -c
+binary := $(shell pwd | rev | cut -d '/' -f 1 | rev)
+fq-binary := org.lolibrary.$(binary)
+docker-tag ?= $(fq-binary)
+version ?= $(shell git rev-parse HEAD)
+repo-base ?= $(shell git rev-parse --show-toplevel)
+
+define DOCKERFILE_SCRATCH
+FROM scratch
+LABEL maintainer=engineering@lolibrary.org
+EXPOSE 8080
+ADD $(fq-binary) /
+ENTRYPOINT ["/$(fq-binary)"]
+endef
+export DOCKERFILE_SCRATCH
+
+define DOCKERIGNORE_CONTENTS
+**/*
+!$(fq-binary)
+endef
+export DOCKERIGNORE_CONTENTS
+
+.PHONY: .dockerignore
+.dockerignore: Makefile
+	echo "$$DOCKERIGNORE_CONTENTS" > .dockerignore
+
+.PHONY: Dockerfile
+Dockerfile: Makefile
+	echo "$$DOCKERFILE_CONTENTS" > Dockerfile
+
+.INTERMEDIATE: $(fq-binary)
+$(fq-binary):
+	CGO_ENABLED=0 GOOS=linux ARCH=amd64 go build -i installsuffix docker \
+	-ldflags "-X \"github.com/lolibrary/lolibrary/foundation.Version=$(version)\"" \
+	-o $(fq-binary)
+
+.PHONY: docker
+.DELETE_ON_ERROR: docker
+docker: Dockerfile .dockerignore $(fq-binary)
+	docker build -t $(docker-tag) .
