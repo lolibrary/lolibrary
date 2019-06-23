@@ -1,0 +1,4 @@
+{
+  "CN": "lolibrary.test",
+  "hosts": ["lolibrary.test", "*.lolibrary.test", "*.tools.lolibrary.test"]
+}
