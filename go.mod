@@ -10,6 +10,7 @@ require (
 	github.com/golang/protobuf v1.3.1
 	github.com/jinzhu/gorm v1.9.9
 	github.com/jmoiron/sqlx v1.2.0 // indirect
+	github.com/logrusorgru/aurora v0.0.0-20190428105938-cea283e61946
 	github.com/mattes/migrate v3.0.1+incompatible // indirect
 	github.com/mattn/go-colorable v0.1.2 // indirect
 	github.com/monzo/slog v0.0.0-20180411100359-4277a1759ecc
@@ -23,6 +24,6 @@ require (
 	golang.org/x/net v0.0.0-20190620200207-3b0461eec859 // indirect
 	gopkg.in/src-d/go-kallax.v1 v1.3.5 // indirect
 	gopkg.in/src-d/go-parse-utils.v1 v1.1.2 // indirect
-	gopkg.in/urfave/cli.v1 v1.20.0 // indirect
+	gopkg.in/urfave/cli.v1 v1.20.0
 	mellium.im/sasl v0.2.1 // indirect
 )

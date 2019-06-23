@@ -47,6 +47,8 @@ github.com/lib/pq
 github.com/lib/pq/hstore
 github.com/lib/pq/oid
 github.com/lib/pq/scram
+# github.com/logrusorgru/aurora v0.0.0-20190428105938-cea283e61946
+github.com/logrusorgru/aurora
 # github.com/monzo/slog v0.0.0-20180411100359-4277a1759ecc
 github.com/monzo/slog
 # github.com/monzo/terrors v0.0.0-20181205142146-d977e210f156
@@ -184,5 +186,7 @@ google.golang.org/grpc/credentials/alts/internal/handshaker/service
 google.golang.org/grpc/credentials/alts/internal/proto/grpc_gcp
 google.golang.org/grpc/credentials/alts/internal/authinfo
 google.golang.org/grpc/credentials/alts/internal/conn
+# gopkg.in/urfave/cli.v1 v1.20.0
+gopkg.in/urfave/cli.v1
 # mellium.im/sasl v0.2.1
 mellium.im/sasl
