@@ -39,6 +39,6 @@ func (s *stackdriverLogger) Flush() error {
 
 // Init sets up the default logger.
 func Init() {
-	logger := logging.NewClient()
+	logger, err := logging.NewClient()
 	slog.SetDefaultLogger(&stackdriverLogger{})
 }
