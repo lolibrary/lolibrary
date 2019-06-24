@@ -1,0 +1,90 @@
+syntax = "proto3";
+package brandproto;
+
+service brand {
+    rpc ReadBrand (GETReadBrandRequest) returns (GETReadBrandResponse) {
+        //option (handler).path = "/read";
+    }
+
+    rpc UpdateBrand (PUTUpdateBrandRequest) returns (PUTUpdateBrandResponse) {
+        //option (handler).path = "/update";
+    }
+
+    rpc DeleteBrand (DELETERemoveBrandRequest) returns (DELETERemoveBrandResponse) {
+        //option (handler).path = "/delete";
+    }
+
+    rpc CreateBrand (POSTCreateBrandRequest) returns (POSTCreateBrandResponse) {
+        //option (handler).path = "/create";
+    }
+
+    rpc ListBrands (GETListBrandsRequest) returns (GETListBrandsResponse) {
+        //option (handler).path = "/list";
+    }
+}
+
+message Brand {
+    string id = 1;
+    string slug = 2;
+    string short_name = 3;
+    string name = 4;
+    string description = 5;
+    string image_id = 6;
+
+    // timestamps
+    string created_at = 100;
+    string updated_at = 101;
+}
+
+// GET /service.brand/read {"id": "<uuid>"}
+
+message GETReadBrandRequest {
+    string id = 1;
+    string slug = 2;
+    string short_name = 3;
+}
+
+message GETReadBrandResponse {
+    Brand brand = 1;
+}
+
+// GET /service.brand/list
+
+message GETListBrandsRequest {}
+
+message GETListBrandsResponse {
+    repeated Brand brands = 1;
+}
+
+// POST /service.brand/create {"brand": {...}}
+
+message POSTCreateBrandRequest {
+    string slug = 1;
+    string short_name = 2;
+    string name = 3;
+    string description = 4;
+    string image_id = 5;
+}
+
+message POSTCreateBrandResponse {
+    Brand brand = 1;
+}
+
+// PUT /service.brand/update {"id": "...", "brand": {...}}
+
+message PUTUpdateBrandRequest {
+    string id = 1;
+    Brand brand = 2;
+}
+
+message PUTUpdateBrandResponse {
+    Brand brand = 1;
+}
+
+// DELETE /service.brand/delete {"id": "..."}
+
+message DELETERemoveBrandRequest {
+    string id = 1;
+}
+
+message DELETERemoveBrandResponse {}

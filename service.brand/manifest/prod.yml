@@ -1,0 +1,132 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    lolibrary.org/routing-name: service.brand
+  name: s-brand
+  namespace: lolibrary
+  selfLink: /apis/extensions/v1beta1/namespaces/lolibrary/deployments/s-brand
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: org.lolibrary.service.brand
+      lolibrary.org/routing-name: service.brand
+  strategy:
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 20%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: org.lolibrary.service.brand
+        lolibrary.org/routing-name: service.brand
+      namespace: lolibrary
+    spec:
+      serviceAccountName: s-brands
+      volumes:
+        - name: cloudsql-instance-credentials
+          secret:
+            secretName: cloudsql-instance-credentials
+      containers:
+        - name: s-brand
+          securityContext:
+            readOnlyRootFilesystem: true
+          image: PLACEHOLDER
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "80"
+            - name: REGION
+              value: "us-central1"
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.hostIP
+            - name: GOMAXPROCS
+              value: "1"
+            - name: DB_DATABASE
+                valueFrom:
+                  secretKeyRef:
+                    name: cloudsql-db-credentials
+                    key: database
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsql-db-credentials
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsql-db-credentials
+                  key: password
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: sentry-credentials
+                  key: dsn
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 80
+              name: http-service
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 80
+              httpHeaders:
+                - name: Host
+                  value: service.brand
+        - name: cloudsql-proxy
+          image: gcr.io/cloudsql-docker/gce-proxy:1.14
+          command: ["/cloud_sql_proxy",
+                    "-instances=lolibrary-180111:us-central1:lolibrary=tcp:5432",
+                    "-credential_file=/secrets/cloudsql/credentials.json"]
+          volumeMounts:
+            - name: cloudsql-instance-credentials
+              mountPath: /secrets/cloudsql
+              readOnly: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    lolibrary.org/routing-name: service.brand
+  name: s-brand
+  namespace: lolibrary
+  selfLink: /api/v1/namespaces/lolibrary/services/s-brand
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: org.lolibrary.service.brand
+    lolibrary.org/routing-name: service.brand
+  sessionAffinity: None
+  type: ClusterIP
