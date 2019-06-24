@@ -1,0 +1,92 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    lolibrary.org/routing-name: edge-proxy.internal
+  name: s-brand
+  namespace: lolibrary
+  selfLink: /apis/extensions/v1beta1/namespaces/lolibrary/deployments/edge-proxy-internal
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: org.lolibrary.edge-proxy.internal
+      lolibrary.org/routing-name: edge-proxy.internal
+  strategy:
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 20%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: org.lolibrary.edge-proxy.internal
+        lolibrary.org/routing-name: edge-proxy.internal
+      namespace: lolibrary
+    spec:
+      serviceAccountName: edge-proxy-internal
+      containers:
+        - name: edge-proxy-internal
+          securityContext:
+            readOnlyRootFilesystem: true
+          image: PLACEHOLDER
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "80"
+            - name: REGION
+              value: "us-central1"
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.hostIP
+            - name: GOMAXPROCS
+              value: "1"
+          resources:
+            requests:
+              cpu: 25m
+              memory: 25Mi
+            limits:
+              cpu: 50m
+              memory: 50Mi
+          ports:
+            - containerPort: 80
+              name: http-service
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 80
+              httpHeaders:
+                - name: Host
+                  value: edge-proxy.internal
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    lolibrary.org/routing-name: edge-proxy.internal
+  name: s-brand
+  namespace: lolibrary
+  selfLink: /api/v1/namespaces/lolibrary/services/edge-proxy-internal
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: org.lolibrary.edge-proxy.internal
+    lolibrary.org/routing-name: edge-proxy.internal
+  sessionAffinity: None
+  type: ClusterIP
