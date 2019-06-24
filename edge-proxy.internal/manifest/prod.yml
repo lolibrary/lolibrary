@@ -76,7 +76,7 @@ kind: Service
 metadata:
   labels:
     lolibrary.org/routing-name: edge-proxy.internal
-  name: s-brand
+  name: edge-proxy-internal
   namespace: lolibrary
   selfLink: /api/v1/namespaces/lolibrary/services/edge-proxy-internal
 spec:
