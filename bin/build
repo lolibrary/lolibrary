@@ -1,0 +1,87 @@
+#!/bin/bash
+
+set -e
+
+VERSION=$(git rev-parse HEAD)
+BASE="${GOPATH}/src/github.com/lolibrary/lolibrary"
+PROJECT="lolibrary-180111"
+
+cd "${BASE}"
+
+rst="\033[0m"
+grn="\033[0;32m"
+blu="\033[0;36m"
+red="\033[0;31m"
+
+name=$1
+dir="${BASE}/${name}"
+binary="org.lolibrary.${name}"
+dockerfile="${BASE}/Dockerfile-service"
+dockerignore="${BASE}/.dockerignore"
+tag="gcr.io/${PROJECT}/${binary}:${VERSION}"
+cache="${BASE}/.cache/${name}"
+
+DOCKERFILE="
+FROM scratch
+LABEL maintainer=engineering@lolibrary.org
+EXPOSE 8080
+ADD ${binary} /
+ENTRYPOINT [\"/${binary}\"]
+"
+
+DOCKERIGNORE="
+**/*
+!${binary}
+"
+
+
+if [ -z "$name" ]; then
+    echo -e "❓  Usage: ${grn}./bin/build <service.foo> [--push]${rst}"
+    exit 1
+fi
+
+if [ ! -d "${BASE}/${name}" ]; then
+    echo -e "⚠️  ${blu}${name}${rst} not found"
+    exit 1
+fi
+
+echo -e "Building ${red}${name}${rst}"
+echo
+echo -e "\tVersion      : ${blu}${VERSION}${rst}"
+echo -e "\tBinary       : ${blu}${binary}${rst}"
+echo -e "\tDocker Image : ${blu}${tag}${rst}"
+echo
+
+# create context directory; it's .gitignored.
+mkdir -p "${cache}"
+echo "$DOCKERIGNORE" > "${cache}/.dockerignore"
+echo "$DOCKERFILE" > "${cache}/Dockerfile"
+
+echo -e "👷‍♀️  Building ${grn}${binary}${rst} with go toolchain"
+echo
+
+CGO_ENABLED=0 GOOS=linux ARCH=amd64 \
+    go build -i -installsuffix docker \
+        -ldflags "-X \"github.com/lolibrary/lolibrary/foundation.Version=${version}\"" \
+        -o "${cache}/${binary}" "./${name}"
+
+echo -e "🐳  Building docker image ${grn}${tag}${rst}"
+echo
+docker build -t "${tag}" "${BASE}/.cache/${name}" > /dev/null 2>&1
+
+# check if we should also push
+if [ "$2" = "--push" ]; then
+    echo -e "🚢  Pushing docker image to ${grn}${tag}${rst}"
+    echo
+
+    docker push "${tag}"
+
+    echo
+    read -p "    🔔  Would you like to deploy the new image? [y/N] " confirm
+    echo
+
+    if [[ "${confirm}" =~ ^[Yy]$ ]]; then
+        echo "⚠️  Sorry, this script currently can't deploy yet.️"
+    fi
+fi
+
