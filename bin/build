@@ -87,7 +87,7 @@ if [ "$2" = "--push" ]; then
         echo "♻️  Waiting for replicas..."
 
         service=$(echo "${name}" | sed "s/service./s-/" | sed "s/edge-proxy./edge-proxy-/")
-        kubectl rollout status "deployments/${service}"
+        kubectl rollout status "deployment/${service}" -n lolibrary
 
         echo -e "✅  Deployed ${grn}${tag}${rst} 😇"
     fi
