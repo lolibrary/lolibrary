@@ -11,11 +11,9 @@ require (
 	github.com/deckarep/golang-set v1.7.1 // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
-	github.com/facebookgo/clock v0.0.0-20150410010913-600d898af40a // indirect
-	github.com/facebookgo/httpdown v0.0.0-20180706035922-5979d39b15c2 // indirect
-	github.com/facebookgo/stats v0.0.0-20151006221625-1b76add642e4 // indirect
 	github.com/fortytw2/leaktest v1.3.0 // indirect
 	github.com/golang/protobuf v1.3.1
+	github.com/gotestyourself/gotestyourself v2.2.0+incompatible // indirect
 	github.com/jinzhu/gorm v1.9.9
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/logrusorgru/aurora v0.0.0-20190428105938-cea283e61946
@@ -29,7 +27,6 @@ require (
 	github.com/opencontainers/image-spec v1.0.1 // indirect
 	github.com/opencontainers/runc v0.1.1 // indirect
 	github.com/ory/dockertest v3.3.4+incompatible
-	github.com/peterh/liner v1.1.0
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/proullon/ramsql v0.0.0-20181213202341-817cee58a244
 	github.com/sirupsen/logrus v1.4.2 // indirect
@@ -37,4 +34,5 @@ require (
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	golang.org/x/net v0.0.0-20190620200207-3b0461eec859 // indirect
 	gopkg.in/urfave/cli.v1 v1.20.0
+	gotest.tools v2.2.0+incompatible // indirect
 )
