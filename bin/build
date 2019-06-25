@@ -83,7 +83,7 @@ if [ "$2" = "--push" ]; then
     if [[ "${confirm}" =~ ^[Yy]$ ]]; then
         echo -e "🔵  Deploying ${blu}${tag}${rst} to k8s!"
 
-        echo "${dir}/manifest/prod.yml" | sed "s/PLACEHOLDER/${tag}/" | kubectl apply --record -f -
+        echo "${dir}/manifest/prod.yml" | sed "s#PLACEHOLDER#${tag}#" | kubectl apply --record -f -
         echo "♻️  Waiting for replicas..."
 
         service=echo $(echo "${name}" | sed "s/service./s-/" | sed "s/edge-proxy./edge-proxy-/")
