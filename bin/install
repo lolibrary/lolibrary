@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+BASE=$GOPATH/src/github.com/lolibrary/lolibrary
+
+go build -o $GOPATH/bin/flower $BASE/cmd/flower/main.go
+go build -o $GOPATH/bin/shipper $BASE/cmd/shipper/main.go
