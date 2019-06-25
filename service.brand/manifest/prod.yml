@@ -36,10 +36,6 @@ spec:
       namespace: lolibrary
     spec:
       serviceAccountName: s-brand
-      volumes:
-        - name: cloudsql-instance-credentials
-          secret:
-            secretName: cloudsql-instance-credentials
       containers:
         - name: s-brand
           securityContext:
@@ -86,6 +82,15 @@ spec:
               httpHeaders:
                 - name: Host
                   value: service.brand
+          volumeMounts:
+            - name: cockroach-service-account
+              mountPath: /certs
+              readOnly: true
+      volumes:
+        - name: cockroach-service-account
+          secret:
+            defaultMode: 0400
+            secretName: cockroach-service-account
 ---
 apiVersion: v1
 kind: Service
