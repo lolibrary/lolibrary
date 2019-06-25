@@ -3,6 +3,8 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: s-brand
+  namespace: lolibrary
+  selfLink: /api/v1/namespaces/lolibrary/serviceaccounts/s-brand
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
