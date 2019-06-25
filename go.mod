@@ -27,9 +27,12 @@ require (
 	github.com/opencontainers/image-spec v1.0.1 // indirect
 	github.com/opencontainers/runc v0.1.1 // indirect
 	github.com/ory/dockertest v3.3.4+incompatible
+	github.com/peterh/liner v1.1.0
+	github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/proullon/ramsql v0.0.0-20181213202341-817cee58a244
 	github.com/sirupsen/logrus v1.4.2 // indirect
+	github.com/spf13/cobra v0.0.5
 	github.com/stretchr/testify v1.3.0
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	golang.org/x/net v0.0.0-20190620200207-3b0461eec859 // indirect

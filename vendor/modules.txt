@@ -42,6 +42,8 @@ github.com/golang/protobuf/protoc-gen-go/descriptor
 github.com/googleapis/gax-go/v2
 # github.com/hashicorp/golang-lru v0.5.1
 github.com/hashicorp/golang-lru/simplelru
+# github.com/inconshreveable/mousetrap v1.0.0
+github.com/inconshreveable/mousetrap
 # github.com/jinzhu/gorm v1.9.9
 github.com/jinzhu/gorm
 github.com/jinzhu/gorm/dialects/postgres
@@ -56,6 +58,8 @@ github.com/lib/pq/oid
 github.com/lib/pq/scram
 # github.com/logrusorgru/aurora v0.0.0-20190428105938-cea283e61946
 github.com/logrusorgru/aurora
+# github.com/mattn/go-runewidth v0.0.3
+github.com/mattn/go-runewidth
 # github.com/monzo/slog v0.0.0-20180411100359-4277a1759ecc
 github.com/monzo/slog
 # github.com/monzo/terrors v0.0.0-20181205142146-d977e210f156
@@ -99,6 +103,10 @@ github.com/ory/dockertest/docker/pkg/term/windows
 github.com/ory/dockertest/docker/types/blkiodev
 github.com/ory/dockertest/docker/types/strslice
 github.com/ory/dockertest/docker/types/versions
+# github.com/peterh/liner v1.1.0
+github.com/peterh/liner
+# github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
+github.com/phayes/freeport
 # github.com/pkg/errors v0.8.1
 github.com/pkg/errors
 # github.com/pmezard/go-difflib v1.0.0
@@ -111,6 +119,10 @@ github.com/proullon/ramsql/engine/parser
 github.com/proullon/ramsql/engine/protocol
 # github.com/sirupsen/logrus v1.4.2
 github.com/sirupsen/logrus
+# github.com/spf13/cobra v0.0.5
+github.com/spf13/cobra
+# github.com/spf13/pflag v1.0.3
+github.com/spf13/pflag
 # github.com/stretchr/testify v1.3.0
 github.com/stretchr/testify/assert
 # go.opencensus.io v0.21.0
