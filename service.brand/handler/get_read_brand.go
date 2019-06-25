@@ -12,7 +12,7 @@ import (
 )
 
 func handleReadBrand(req typhon.Request) typhon.Response {
-	body := brandproto.GETReadBrandRequest{}
+	body := &brandproto.GETReadBrandRequest{}
 	if err := req.Decode(body); err != nil {
 		slog.Error(req, "Error decoding body: %v", err)
 		return typhon.Response{Error: err}
