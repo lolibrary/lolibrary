@@ -1,8 +1,6 @@
 syntax = "proto3";
-package templateproto;
+package templatepackagenameproto;
 
-service template {
-    rpc ReadTemplate (GETReadTemplateRequest) returns (GETReadTemplateResponse) {
-        //
-    }
+service template_service_name {
+    //
 }

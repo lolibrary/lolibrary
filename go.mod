@@ -11,12 +11,15 @@ require (
 	github.com/deckarep/golang-set v1.7.1 // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
+	github.com/fatih/color v1.7.0 // indirect
 	github.com/fortytw2/leaktest v1.3.0 // indirect
 	github.com/golang/protobuf v1.3.1
 	github.com/gotestyourself/gotestyourself v2.2.0+incompatible // indirect
+	github.com/hokaccha/go-prettyjson v0.0.0-20180920040306-f579f869bbfe
 	github.com/jinzhu/gorm v1.9.9
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/logrusorgru/aurora v0.0.0-20190428105938-cea283e61946
+	github.com/mattn/go-colorable v0.1.2 // indirect
 	github.com/monzo/slog v0.0.0-20180411100359-4277a1759ecc
 	github.com/monzo/terrors v0.0.0-20181205142146-d977e210f156
 	github.com/monzo/typhon v0.0.0-20190515120538-43b5a6150e20
