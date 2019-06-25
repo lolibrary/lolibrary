@@ -25,7 +25,7 @@ func Proxy(req typhon.Request) typhon.Response {
 
 // handleService takes a request and sends it to an internal service.
 func handleService(req typhon.Request) typhon.Response {
-	path := "http://" + strings.TrimPrefix(req.URL.Path, "/")
+	path := "http://s-" + strings.TrimPrefix(req.URL.Path, "/service.")
 	slog.Trace(req, "Sending request to: %v", path)
 
 	return typhon.NewRequest(req, req.Method, path, req.Body).Send().Response()
