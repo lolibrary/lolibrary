@@ -12,6 +12,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/hokaccha/go-prettyjson"
 	"github.com/monzo/slog"
 	"github.com/monzo/terrors"
 	"github.com/monzo/typhon"
