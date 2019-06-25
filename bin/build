@@ -53,6 +53,7 @@ echo -e "\tDocker Image : ${blu}${tag}${rst}"
 echo
 
 # create context directory; it's .gitignored.
+rm -rf "${cache}"
 mkdir -p "${cache}"
 echo "$DOCKERIGNORE" > "${cache}/.dockerignore"
 echo "$DOCKERFILE" > "${cache}/Dockerfile"
@@ -60,7 +61,7 @@ echo "$DOCKERFILE" > "${cache}/Dockerfile"
 echo -e "👷‍♀️  Building ${grn}${binary}${rst} with go toolchain"
 echo
 
-CGO_ENABLED=0 GOOS=linux ARCH=amd64 \
+GOCACHE="${cache}" CGO_ENABLED=0 GOOS=linux ARCH=amd64 \
     go build -i -installsuffix docker \
         -ldflags "-X \"github.com/lolibrary/lolibrary/foundation.Version=${version}\"" \
         -o "${cache}/${binary}" "./${name}"
