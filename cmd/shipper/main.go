@@ -14,7 +14,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "shipper"
 	app.Version = "1.0.0"
-	app.Description = "🚢 Deploys and runs scripts for you."
+	app.Usage = "🚢 Deploys and runs scripts for you."
 	app.Commands = []cli.Command{
 		{
 			Name:      "cql",
