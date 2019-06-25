@@ -2,3 +2,5 @@
 .DS_Store
 /.env
 laravel.log
+
+/template.service/proto/template.pb.go
