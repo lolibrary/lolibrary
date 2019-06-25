@@ -28,7 +28,7 @@ spec:
         lolibrary.org/routing-name: service.brand
       namespace: lolibrary
     spec:
-      serviceAccountName: s-brands
+      serviceAccountName: s-brand
       volumes:
         - name: cloudsql-instance-credentials
           secret:

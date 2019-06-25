@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   labels:
     lolibrary.org/routing-name: edge-proxy.internal
-  name: s-brand
+  name: edge-proxy-internal
   namespace: lolibrary
   selfLink: /apis/extensions/v1beta1/namespaces/lolibrary/deployments/edge-proxy-internal
 spec:

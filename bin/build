@@ -81,7 +81,15 @@ if [ "$2" = "--push" ]; then
     echo
 
     if [[ "${confirm}" =~ ^[Yy]$ ]]; then
-        echo "⚠️  Sorry, this script currently can't deploy yet.️"
+        echo -e "🔵  Deploying ${blu}${tag}${rst} to k8s!"
+
+        echo "${dir}/manifest/prod.yml" | sed "s/PLACEHOLDER/${tag}/" | kubectl apply --record -
+        echo "♻️  Waiting for replicas..."
+
+        service=echo $(echo "${name}" | sed "s/service./s-/" | sed "s/edge-proxy./edge-proxy-/")
+        kubectl rollout status deployments/${service}
+
+        echo -e "✅  Deployed ${grn}${tag}${rst} 😇"
     fi
 fi
 
