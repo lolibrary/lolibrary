@@ -57,10 +57,10 @@ spec:
             - name: GOMAXPROCS
               value: "1"
             - name: DB_DATABASE
-                valueFrom:
-                  secretKeyRef:
-                    name: cloudsql-db-credentials
-                    key: database
+              valueFrom:
+                secretKeyRef:
+                  name: cloudsql-db-credentials
+                  key: database
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
