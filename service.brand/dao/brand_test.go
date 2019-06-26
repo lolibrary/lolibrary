@@ -51,7 +51,7 @@ func TestReadBrand(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		t.Run(tc.name, func (t *testing.T) {
+		t.Run(tc.name, func(t *testing.T) {
 			// for _, b := range tc.database {
 			// 	err := CreateBrand(b)
 			// 	require.NoError(t, err)

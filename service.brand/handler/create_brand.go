@@ -3,6 +3,7 @@ package handler
 import (
 	"time"
 
+	"github.com/iancoleman/strcase"
 	"github.com/lolibrary/lolibrary/libraries/idgen"
 	"github.com/lolibrary/lolibrary/libraries/validation"
 	"github.com/lolibrary/lolibrary/service.brand/dao"
@@ -31,6 +32,10 @@ func handleCreateBrand(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: validation.ErrMissingParam("description")}
 	case body.ImageId == "":
 		return typhon.Response{Error: validation.ErrMissingParam("image_id")}
+	case body.Slug != strcase.ToKebab(body.Slug):
+		return typhon.Response{Error: validation.ErrBadParam("slug", "slug should be in kebab-case")}
+	case body.ShortName != strcase.ToKebab(body.ShortName):
+		return typhon.Response{Error: validation.ErrBadParam("short_name", "short_name should be in kebab-case")}
 	}
 
 	id, err := idgen.New()

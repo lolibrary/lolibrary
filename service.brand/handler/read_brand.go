@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"github.com/iancoleman/strcase"
 	"github.com/lolibrary/lolibrary/libraries/validation"
 	"github.com/lolibrary/lolibrary/service.brand/dao"
 	"github.com/lolibrary/lolibrary/service.brand/domain"
@@ -21,6 +22,10 @@ func handleReadBrand(req typhon.Request) typhon.Response {
 	switch {
 	case !validation.AtLeastOne(body.Id, body.Slug, body.ShortName):
 		return typhon.Response{Error: validation.ErrMissingOneOf("id", "slug", "short_name")}
+	case body.Slug != strcase.ToKebab(body.Slug):
+		return typhon.Response{Error: validation.ErrBadParam("slug", "slug should be in kebab-case")}
+	case body.ShortName != strcase.ToKebab(body.ShortName):
+		return typhon.Response{Error: validation.ErrBadParam("short_name", "short_name should be in kebab-case")}
 	}
 
 	var (

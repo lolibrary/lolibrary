@@ -74,7 +74,9 @@ message POSTCreateBrandResponse {
 
 message PUTUpdateBrandRequest {
     string id = 1;
-    Brand brand = 2;
+    string name = 2;
+    string description = 3;
+    string image_id = 4;
 }
 
 message PUTUpdateBrandResponse {

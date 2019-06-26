@@ -19,8 +19,8 @@ func BrandToProto(brand *domain.Brand) *brandproto.Brand {
 		Name:        brand.Name,
 		Description: brand.Description,
 		ImageId:     brand.ImageID,
-		CreatedAt:     util.TimeToProto(brand.CreatedAt),
-		UpdatedAt:     util.TimeToProto(brand.UpdatedAt),
+		CreatedAt:   util.TimeToProto(brand.CreatedAt),
+		UpdatedAt:   util.TimeToProto(brand.UpdatedAt),
 	}
 }
 

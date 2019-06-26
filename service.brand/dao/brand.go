@@ -14,17 +14,17 @@ func CreateBrand(brand *domain.Brand) error {
 	return nil
 }
 
-func UpdateBrand(brand *domain.Brand) (*domain.Brand, error) {
+func UpdateBrand(brand *domain.Brand) error {
 	res := DB.Update(brand)
 	if res.Error != nil {
 		if res.RecordNotFound() {
-			return nil, terrors.NotFound("brand", "Brand not found", nil)
+			return terrors.NotFound("brand", "Brand not found", nil)
 		}
 
-		return nil, terrors.Wrap(res.Error, nil)
+		return terrors.Wrap(res.Error, nil)
 	}
 
-	return brand, nil
+	return nil
 }
 
 func ReadBrand(id string) (*domain.Brand, error) {
