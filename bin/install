@@ -2,7 +2,16 @@
 
 set -e
 
+rst="\033[0m"
+grn="\033[0;32m"
+
 BASE=$GOPATH/src/github.com/lolibrary/lolibrary
 
+echo "⚙️  Installing tools"
+echo
+
 go build -o $GOPATH/bin/flower $BASE/cmd/flower/main.go
+echo -e "✅ ${grn}flower${rst} "
+
 go build -o $GOPATH/bin/shipper $BASE/cmd/shipper/main.go
+echo -e "✅ ${grn}shipper${rst} "
