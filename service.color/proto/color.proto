@@ -1,6 +1,11 @@
 syntax = "proto3";
 package colorproto;
 
+import "github.com/lolibrary/lolibrary/cmd/protoc-gen-router/proto/router.proto";
+
 service color {
+    option (router).name = "service.color";
+    option (router).short_name = "s-color";
+
     //
 }

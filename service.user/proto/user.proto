@@ -1,0 +1,11 @@
+syntax = "proto3";
+package userproto;
+
+import "github.com/lolibrary/lolibrary/cmd/protoc-gen-router/proto/router.proto";
+
+service user {
+    option (router).name = "service.user";
+    option (router).short_name = "s-user";
+
+    //
+}

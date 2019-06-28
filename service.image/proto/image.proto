@@ -1,6 +1,11 @@
 syntax = "proto3";
 package imageproto;
 
+import "github.com/lolibrary/lolibrary/cmd/protoc-gen-router/proto/router.proto";
+
 service image {
+    option (router).name = "service.image";
+    option (router).short_name = "s-image";
+
     //
 }

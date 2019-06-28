@@ -2,26 +2,26 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: s-item
+  name: s-attribute
   namespace: lolibrary
-  selfLink: /api/v1/namespaces/lolibrary/serviceaccounts/s-item
+  selfLink: /api/v1/namespaces/lolibrary/serviceaccounts/s-attribute
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    lolibrary.org/routing-name: service.item
-  name: s-item
+    lolibrary.org/routing-name: service.attribute
+  name: s-attribute
   namespace: lolibrary
-  selfLink: /apis/extensions/v1beta1/namespaces/lolibrary/deployments/s-item
+  selfLink: /apis/extensions/v1beta1/namespaces/lolibrary/deployments/s-attribute
 spec:
   progressDeadlineSeconds: 600
   replicas: 3
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: org.lolibrary.service.item
-      lolibrary.org/routing-name: service.item
+      app: org.lolibrary.service.attribute
+      lolibrary.org/routing-name: service.attribute
   strategy:
     rollingUpdate:
       maxSurge: 30%
@@ -31,13 +31,13 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: org.lolibrary.service.item
-        lolibrary.org/routing-name: service.item
+        app: org.lolibrary.service.attribute
+        lolibrary.org/routing-name: service.attribute
       namespace: lolibrary
     spec:
-      serviceAccountName: s-item
+      serviceAccountName: s-attribute
       containers:
-        - name: s-item
+        - name: s-attribute
           securityContext:
             readOnlyRootFilesystem: true
           image: PLACEHOLDER
@@ -81,7 +81,7 @@ spec:
               port: 80
               httpHeaders:
                 - name: Host
-                  value: service.item
+                  value: service.attribute
           volumeMounts:
             - name: cockroach-service-account
               mountPath: /certs
@@ -96,10 +96,10 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    lolibrary.org/routing-name: service.item
-  name: s-item
+    lolibrary.org/routing-name: service.attribute
+  name: s-attribute
   namespace: lolibrary
-  selfLink: /api/v1/namespaces/lolibrary/services/s-item
+  selfLink: /api/v1/namespaces/lolibrary/services/s-attribute
 spec:
   ports:
     - name: http
@@ -107,7 +107,7 @@ spec:
       protocol: TCP
       targetPort: 80
   selector:
-    app: org.lolibrary.service.item
-    lolibrary.org/routing-name: service.item
+    app: org.lolibrary.service.attribute
+    lolibrary.org/routing-name: service.attribute
   sessionAffinity: None
   type: ClusterIP

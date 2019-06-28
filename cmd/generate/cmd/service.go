@@ -100,6 +100,8 @@ func replaceProtoContents(content []byte, t template) []byte {
 
 	str = strings.ReplaceAll(str, "templatepackagename", t.ProtoPackageName)
 	str = strings.ReplaceAll(str, "template_service_name", t.ProtoServiceName)
+	str = strings.ReplaceAll(str, "template.service", t.ServiceName)
+	str = strings.ReplaceAll(str, "s-template", t.ServiceShortName)
 
 	return []byte(str)
 }
@@ -110,9 +112,9 @@ func getDirectories(service string) (string, string) {
 		log.Fatal("😬 GOPATH not set, please set it first.")
 	}
 
-	root := path.Join(gopath, "/src/github.com/lolibrary/lolibrary")
+	root := path.Join(gopath, "src/github.com/lolibrary/lolibrary")
 
-	return path.Join(root, "template.service"), path.Join(root, service)
+	return path.Join(root, "cmd", "generate", "template.service"), path.Join(root, service)
 }
 
 func validateServiceName(svc string) string {

@@ -9,6 +9,7 @@ ROOT=$GOPATH/src/github.com/lolibrary/lolibrary
 OUTPUT=$GOPATH/src
 
 find $ROOT -maxdepth 3 -type f -name "*.pb.go" -exec rm -rf {} \;
+find $ROOT -maxdepth 3 -type f -name "*.router.go" -exec rm -rf {} \;
 
 files=$(find $ROOT -maxdepth 3 -type f -name "*.proto")
 for f in $files; do

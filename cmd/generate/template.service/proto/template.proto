@@ -1,0 +1,11 @@
+syntax = "proto3";
+package templatepackagenameproto;
+
+import "github.com/lolibrary/lolibrary/cmd/protoc-gen-router/proto/router.proto";
+
+service template_service_name {
+    option (router).name = "template.service";
+    option (router).short_name = "s-template";
+
+    //
+}

@@ -1,6 +1,11 @@
 syntax = "proto3";
 package categoryproto;
 
+import "github.com/lolibrary/lolibrary/cmd/protoc-gen-router/proto/router.proto";
+
 service category {
+    option (router).name = "service.category";
+    option (router).short_name = "s-category";
+
     //
 }

@@ -1,25 +1,30 @@
 syntax = "proto3";
 package brandproto;
 
+import "github.com/lolibrary/lolibrary/cmd/protoc-gen-router/proto/router.proto";
+
 service brand {
+    option (router).name = "service.brand";
+    option (router).short_name = "s-brand";
+
     rpc ReadBrand (GETReadBrandRequest) returns (GETReadBrandResponse) {
-        //option (handler).path = "/read";
+        option (handler).path = "/read";
     }
 
     rpc UpdateBrand (PUTUpdateBrandRequest) returns (PUTUpdateBrandResponse) {
-        //option (handler).path = "/update";
+        option (handler).path = "/update";
     }
 
     rpc DeleteBrand (DELETERemoveBrandRequest) returns (DELETERemoveBrandResponse) {
-        //option (handler).path = "/delete";
+        option (handler).path = "/delete";
     }
 
     rpc CreateBrand (POSTCreateBrandRequest) returns (POSTCreateBrandResponse) {
-        //option (handler).path = "/create";
+        option (handler).path = "/create";
     }
 
     rpc ListBrands (GETListBrandsRequest) returns (GETListBrandsResponse) {
-        //option (handler).path = "/list";
+        option (handler).path = "/list";
     }
 }
 
