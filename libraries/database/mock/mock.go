@@ -20,7 +20,7 @@ func spawnCockroachDB() (*sql.DB, func()) {
 
 	opts := &dockertest.RunOptions{
 		Repository: "cockroachdb/cockroach",
-		Tag:  "v19.1.2",
+		Tag:        "v19.1.2",
 		Cmd: []string{
 			"cockroach", "start", "--insecure",
 		},
@@ -63,7 +63,6 @@ func spawnCockroachDB() (*sql.DB, func()) {
 		cleanup()
 		log.Fatalf("Failed to connect to cockroachdb: %v", err)
 	}
-
 
 	return mockDB, cleanup
 }

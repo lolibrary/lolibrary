@@ -42,7 +42,6 @@ func NewMock() *gorm.DB {
 		panic(err)
 	}
 
-
 	// disable logging for tests. we're using ramsql, the index errors are going to get noisy.
 	// TODO: figure out a better way to do in-memory testing, probably with cockroachdb itself!
 	gormDB.LogMode(true)

@@ -8,6 +8,7 @@ import (
 var commonFilters = [...]typhon.Filter{
 	PingFilter,
 	HealthCheckFilter,
+	VersionFilter,
 	PanicFilter,
 	typhon.ErrorFilter,
 }

@@ -23,4 +23,3 @@ func HealthCheckFilter(req typhon.Request, svc typhon.Service) typhon.Response {
 func matchesHealthCheckPath(req typhon.Request) bool {
 	return req.Method == http.MethodGet && req.URL.Path == "/healthz"
 }
-

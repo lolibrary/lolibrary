@@ -15,7 +15,7 @@ var severityMap = map[slog.Severity]logging.Severity{
 }
 
 type stackdriverLogger struct {
-	logger *logging.Logger
+	logger        *logging.Logger
 	defaultLabels map[string]string
 }
 
@@ -28,7 +28,7 @@ func (s *stackdriverLogger) Log(events ...slog.Event) {
 
 		s.logger.Log(logging.Entry{
 			Severity: sev,
-			Labels: s.defaultLabels,
+			Labels:   s.defaultLabels,
 		})
 	}
 }

@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	env string
+	env           string
 	createForward bool
 )
 
