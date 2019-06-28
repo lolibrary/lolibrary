@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+message RPCHandler {
+    string path = 1;
+}
+
+extend google.protobuf.MethodOptions {
+    RPCHandler handler = 50000;
+}
+
+message ServiceRouter {
+    string name = 1;
+    string short_name = 2;
+}
+
+extend google.protobuf.ServiceOptions {
+    ServiceRouter router = 60000;
+}

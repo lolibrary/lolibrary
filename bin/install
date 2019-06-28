@@ -16,5 +16,11 @@ echo -e "✅ ${grn}flower${rst} "
 go build -o $GOPATH/bin/shipper $BASE/cmd/shipper/main.go
 echo -e "✅ ${grn}shipper${rst} "
 
+go build -o $GOPATH/bin/generate $BASE/cmd/generate/main.go
+echo -e "✅ ${grn}generate${rst} "
+
+go build -o $GOPATH/bin/protoc-gen-router $BASE/cmd/protoc-gen-router/main.go
+echo -e "✅ ${grn}protoc-gen-router${rst} "
+
 go get -u moul.io/protoc-gen-gotemplate >/dev/null 2>&1
 echo -e "✅ ${grn}moul.io/protoc-gen-gotemplate${rst}"
