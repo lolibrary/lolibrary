@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/logrusorgru/aurora"
-	"github.com/lolibrary/lolibrary/cmd/flower/portforward"
+	"github.com/lolibrary/lolibrary/libraries/portforward"
 	"github.com/spf13/cobra"
 )
 
