@@ -1,0 +1,10 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: debug
+spec:
+  containers:
+    - name: debug
+      image: ubuntu:18.04
+      command: ["/bin/bash", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+  restartPolicy: Never
