@@ -66,13 +66,11 @@ CGO_ENABLED=0 GOOS=linux ARCH=amd64 \
         -o "${cache}/${binary}" "./${name}"
 
 echo -e "🐳  Building docker image ${grn}${tag}${rst}"
-echo
 docker build -t "${tag}" "${BASE}/.cache/${name}" > /dev/null 2>&1
 
 # check if we should also push
 if [ "$2" = "--push" ]; then
     echo -e "🚢  Pushing docker image to ${grn}${tag}${rst}"
-    echo
 
     docker push "${tag}"
 
