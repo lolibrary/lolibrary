@@ -262,6 +262,8 @@ import (
         if err := f.Response.Decode(body); err != nil {
             return nil, err
         }
+
+		return body, nil
     }
 
 {{- end }}
