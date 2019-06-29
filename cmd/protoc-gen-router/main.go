@@ -236,7 +236,7 @@ import (
 
     // Send creates a typhon future and immediately returns it.
     // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
-    func (body {{ .Request }}) Send(ctx context.Context) ({{ .Future }}, error) {
+    func (body {{ .Request }}) Send(ctx context.Context) *{{ .Future }} {
         return &{{ .Future }}{Future: body.Request(ctx).Send()}
     }
 
