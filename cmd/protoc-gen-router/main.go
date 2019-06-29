@@ -230,7 +230,7 @@ import (
 
     // Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
     // This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
-    func (body {{ .Request }}) Response(ctx context.Context) ({{ .Response }}, error) {
+    func (body {{ .Request }}) Response(ctx context.Context) (*{{ .Response }}, error) {
         return body.Send(ctx).DecodeResponse()
     }
 
@@ -255,7 +255,7 @@ import (
     }
 
     // DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
-    func (f *{{ .Future }}) DecodeResponse() ({{ .Response }}, error) {
+    func (f *{{ .Future }}) DecodeResponse() (*{{ .Response }}, error) {
         f.Done()
 
         body := &{{ .Response }}{}
