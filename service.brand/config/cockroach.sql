@@ -11,5 +11,5 @@ create table if not exists brands
     primary key (id)
 );
 
-create unique index brands_slug_unique on brands (slug);
-create unique index brands_short_name_unique on brands (short_name);
+create unique index if not exists brands_slug_unique on brands (slug);
+create unique index if not exists brands_short_name_unique on brands (short_name);
