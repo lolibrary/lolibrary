@@ -21,8 +21,6 @@ github.com/cihub/seelog/archive/tar
 github.com/cihub/seelog/archive/zip
 # github.com/containerd/continuity v0.0.0-20190426062206-aaeac12a7ffc
 github.com/containerd/continuity/pathdriver
-# github.com/davecgh/go-spew v1.1.1
-github.com/davecgh/go-spew/spew
 # github.com/deckarep/golang-set v1.7.1
 github.com/deckarep/golang-set
 # github.com/docker/go-connections v0.4.0
@@ -45,6 +43,11 @@ github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/empty
 # github.com/googleapis/gax-go/v2 v2.0.5
 github.com/googleapis/gax-go/v2
+# github.com/gosuri/uilive v0.0.3
+github.com/gosuri/uilive
+# github.com/gosuri/uiprogress v0.0.1
+github.com/gosuri/uiprogress
+github.com/gosuri/uiprogress/util/strutil
 # github.com/hashicorp/golang-lru v0.5.1
 github.com/hashicorp/golang-lru/simplelru
 # github.com/hokaccha/go-prettyjson v0.0.0-20180920040306-f579f869bbfe
@@ -122,8 +125,6 @@ github.com/peterh/liner
 github.com/phayes/freeport
 # github.com/pkg/errors v0.8.1
 github.com/pkg/errors
-# github.com/pmezard/go-difflib v1.0.0
-github.com/pmezard/go-difflib/difflib
 # github.com/proullon/ramsql v0.0.0-20181213202341-817cee58a244
 github.com/proullon/ramsql/driver
 github.com/proullon/ramsql/engine
@@ -136,8 +137,6 @@ github.com/sirupsen/logrus
 github.com/spf13/cobra
 # github.com/spf13/pflag v1.0.3
 github.com/spf13/pflag
-# github.com/stretchr/testify v1.3.0
-github.com/stretchr/testify/assert
 # go.opencensus.io v0.22.0
 go.opencensus.io/plugin/ocgrpc
 go.opencensus.io/plugin/ochttp

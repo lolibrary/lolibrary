@@ -7,5 +7,83 @@ service category {
     option (router).name = "service.category";
     option (router).short_name = "s-category";
 
-    //
+    rpc ReadCategory (GETReadCategoryRequest) returns (GETReadCategoryResponse) {
+        option (handler).path = "/read";
+    }
+
+    rpc UpdateCategory (PUTUpdateCategoryRequest) returns (PUTUpdateCategoryResponse) {
+        option (handler).path = "/update";
+    }
+
+    rpc DeleteCategory (DELETERemoveCategoryRequest) returns (DELETERemoveCategoryResponse) {
+        option (handler).path = "/delete";
+    }
+
+    rpc CreateCategory (POSTCreateCategoryRequest) returns (POSTCreateCategoryResponse) {
+        option (handler).path = "/create";
+    }
+
+    rpc ListCategories (GETListCategoriesRequest) returns (GETListCategoriesResponse) {
+        option (handler).path = "/list";
+    }
 }
+
+message Category {
+    string id = 1;
+    string slug = 2;
+    string name = 4;
+
+    // timestamps
+    string created_at = 100;
+    string updated_at = 101;
+}
+
+// GET /service.category/read {"id": "<uuid>"}
+
+message GETReadCategoryRequest {
+    string id = 1;
+    string slug = 2;
+}
+
+message GETReadCategoryResponse {
+    Category category = 1;
+}
+
+// GET /service.category/list
+
+message GETListCategoriesRequest {}
+
+message GETListCategoriesResponse {
+    repeated Category categories = 1;
+}
+
+// POST /service.category/create {"category": {...}}
+
+message POSTCreateCategoryRequest {
+    string slug = 1;
+    string name = 3;
+}
+
+message POSTCreateCategoryResponse {
+    Category category = 1;
+}
+
+// PUT /service.category/update {"id": "...", "category": {...}}
+
+message PUTUpdateCategoryRequest {
+    string id = 1;
+    string name = 2;
+}
+
+message PUTUpdateCategoryResponse {
+    Category category = 1;
+}
+
+// DELETE /service.category/delete {"id": "..."}
+
+message DELETERemoveCategoryRequest {
+    string id = 1;
+}
+
+message DELETERemoveCategoryResponse {}
+

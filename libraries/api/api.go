@@ -2,16 +2,18 @@ package api
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/lolibrary/lolibrary/libraries/portforward"
+	"github.com/monzo/slog"
 	"github.com/monzo/typhon"
 )
 
 var endpoint = defaultEndpoint
 
 const (
-	defaultEndpoint    = "localhost:8080"
-	defaultEndpointFmt = "localhost:%d"
+	defaultEndpoint    = "127.0.0.1:8080"
+	defaultEndpointFmt = "127.0.0.1:%d"
 )
 
 // SetEndpoint sets the current endpoint for the edge proxy.
@@ -25,7 +27,7 @@ func Endpoint() string {
 }
 
 // Run opens a port-forward to the edge proxy and runs f with this open.
-func Run(f func() error) error {
+func Run(f func()) {
 	port, c := portforward.Enable()
 	defer func() {
 		c.Close()
@@ -36,15 +38,18 @@ func Run(f func() error) error {
 	SetEndpoint(fmt.Sprintf(defaultEndpointFmt, port))
 	typhon.Client = Client
 
-	return f()
+	f()
 }
 
-// Client is a wrapped typhon client
+// Client is a wrapped typhon client that will send all requests via the edge proxy instead.
 func Client(req typhon.Request) typhon.Response {
-	host := req.URL.Host
+	url := fmt.Sprintf("http://%s/%s/%s",
+		Endpoint(),
+		req.URL.Host,
+		strings.TrimPrefix(req.URL.Path, "/"))
 
-	req.URL.Host = Endpoint()
-	req.URL.Path = fmt.Sprintf("/%s%s", host, req.URL.Path)
+	req = typhon.NewRequest(req, req.Method, url, req.Body)
+	slog.Trace(req, "Sending request via edge proxy: %v", req)
 
 	return typhon.HttpService(typhon.RoundTripper)(req)
 }
