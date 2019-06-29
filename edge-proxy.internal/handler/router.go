@@ -3,6 +3,7 @@ package handler
 import (
 	"fmt"
 	"regexp"
+	"strings"
 
 	"github.com/monzo/slog"
 	"github.com/monzo/terrors"
@@ -29,9 +30,11 @@ func Proxy(req typhon.Request) typhon.Response {
 	slog.Trace(req, "Incoming request to: %v", path)
 
 	switch {
-	case reAPI.MatchString(path):
+	case strings.HasPrefix(path, "/s-"):
+		return handleShortService(req)
+	case strings.HasPrefix(path, "/service.api"):
 		return handleAPI(req)
-	case reService.MatchString(path):
+	case strings.HasPrefix(path, "/service."):
 		return handleService(req)
 	}
 
@@ -67,4 +70,15 @@ func handleService(req typhon.Request) typhon.Response {
 	}
 
 	return handle(req, "s-"+parts[1], parts[2])
+}
+
+// handleShortService lets you send requests directly to the service name of a service.
+func handleShortService(req typhon.Request) typhon.Response {
+	path := strings.TrimPrefix(req.URL.Path, "/")
+	parts := strings.SplitN(path, "/", 2)
+	if len(parts) != 2 {
+		parts[1] = ""
+	}
+
+	return handle(req, parts[0], "/" + parts[1])
 }
