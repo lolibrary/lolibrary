@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"net"
 	"os/exec"
 	"syscall"
+	"time"
 
 	"github.com/logrusorgru/aurora"
 	"github.com/phayes/freeport"
@@ -80,6 +82,30 @@ func Enable() (uint16, io.Closer) {
 	fmt.Printf("↔️  Starting a port forward for %v on port %v\n", aurora.Green("service/edge-proxy-internal"), aurora.Green(port))
 	if err := bg.Start(); err != nil {
 		log.Fatalf("❌ Failed to start port forward: %v\n", err)
+	}
+
+	attempts := 0
+
+	// wait for the port to start listening.
+	fmt.Printf("⏳  Waiting for connection ")
+	for {
+		conn, err := net.Dial("tcp", fmt.Sprintf("127.0.0.1:%d", port))
+		if err != nil {
+			if attempts > 5 {
+				fmt.Println(" ❌")
+				log.Fatalf("⚠️  timed out waiting for port forward: %v\n", err)
+			}
+
+			attempts++
+			fmt.Printf("💤")
+			time.Sleep(time.Second)
+			continue
+		}
+
+		fmt.Println(" ✅")
+
+		conn.Close()
+		break
 	}
 
 	return uint16(port), bg
