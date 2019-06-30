@@ -45,6 +45,7 @@ var serviceCmd = &cobra.Command{
 func walk(t template, baseTemplate, targetDirectory string) {
 	err := filepath.Walk(baseTemplate, func(filepath string, info os.FileInfo, err error) error {
 		target := path.Join(targetDirectory, strings.TrimPrefix(filepath, baseTemplate))
+		target = strings.TrimSuffix(target, ".tmpl")
 		if info.IsDir() {
 			if err := os.Mkdir(target, 0755); err != nil {
 				log.Fatalf("😬 couldn't create service directory: %v\n", err)
@@ -59,7 +60,7 @@ func walk(t template, baseTemplate, targetDirectory string) {
 		}
 
 		switch {
-		case strings.HasSuffix(filepath, ".go"):
+		case strings.HasSuffix(filepath, ".go.tmpl"):
 			contents = replaceGoContents(contents, t)
 		case strings.HasSuffix(filepath, ".yml"):
 			contents = replaceYAMLContents(contents, t)
