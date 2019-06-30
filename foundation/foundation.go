@@ -65,7 +65,7 @@ func (s *Server) Version() string {
 	return s.version
 }
 
-// Run runs a service using httpdown to handle graceful exit.
+// Run runs a service with typhon, handling shutdown gracefully.
 func (s *Server) Run(svc typhon.Service) {
 	shutdown := make(chan os.Signal, 2)
 	signal.Notify(shutdown, os.Interrupt, syscall.SIGTERM)

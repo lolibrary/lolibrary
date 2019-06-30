@@ -2,6 +2,7 @@ package handler
 
 import (
 	"fmt"
+	"net"
 	"regexp"
 	"strings"
 
@@ -45,9 +46,9 @@ func Proxy(req typhon.Request) typhon.Response {
 func handle(req typhon.Request, service, path string) typhon.Response {
 	url := fmt.Sprintf(requestFormat, service, path)
 
-	// TODO: validate that service exists first via a TCP dial and return a 404, service %s not found.
-
-	slog.Trace(req, "Sending request to: %v", url)
+	if _, err := net.Dial("tcp", "%s:80"); err != nil {
+		return typhon.Response{Error: terrors.NotFound("service", "Unable to connect to the specified service.", nil)}
+	}
 
 	return typhon.NewRequest(req, req.Method, url, req.Body).Send().Response()
 }
