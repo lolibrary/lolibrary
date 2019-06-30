@@ -51,9 +51,7 @@ func InternalRequest(ctx context.Context, method, path, body string) (string, er
 	req := typhon.NewRequest(ctx, method, internalEdgeProxyURL+path, nil)
 	if n, err := req.Write(b); err != nil || n != len(b) {
 		slog.Error(ctx, "Response not fully written. Aborting Request.")
-		if err != nil {
-			return "", err
-		}
+		return "", err
 	}
 
 	rsp := req.Send().Response()

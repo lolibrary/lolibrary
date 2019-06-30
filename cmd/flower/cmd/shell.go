@@ -3,6 +3,9 @@ package cmd
 import (
 	"fmt"
 	"io"
+	"os"
+	"os/user"
+	"path"
 	"strings"
 
 	"github.com/logrusorgru/aurora"
@@ -41,7 +44,11 @@ var shellCmd = &cobra.Command{
 	Hidden: true,
 	Run: func(cmd *cobra.Command, args []string) {
 		state := liner.NewLiner()
-		defer state.Close()
+		readHistory(state)
+		defer func() {
+			saveHistory(state)
+			state.Close()
+		}()
 
 		lastLineErrored := false
 
@@ -67,6 +74,8 @@ var shellCmd = &cobra.Command{
 			if input == "" {
 				continue
 			}
+
+			state.AppendHistory(input)
 
 			// "tokenize" input and check the first word
 			fields := strings.Fields(input)
@@ -132,11 +141,46 @@ var shellCmd = &cobra.Command{
 
 				cmd.Println(result)
 			default:
-				cmd.Printf("Command '%v' not found.", fields[0])
+				cmd.Printf("Command '%v' not found.\n", fields[0])
+				lastLineErrored = true
 			}
-
-			// add to history
-			state.AppendHistory(input)
 		}
 	},
+}
+
+func historyFile() string {
+	u, err := user.Current()
+	if err != nil {
+		slog.Error(nil, "Error getting current user: %v", err)
+		os.Exit(1)
+	}
+
+	return path.Join(u.HomeDir, ".flower_history")
+}
+
+func saveHistory(state *liner.State) {
+	if f, err := os.Create(historyFile()); err != nil {
+		slog.Error(nil, "Failed to open history file: %v", err)
+	} else {
+		defer f.Close()
+		if _, err := state.WriteHistory(f); err != nil {
+			slog.Error(nil, "Failed to write history file: %v", err)
+		}
+	}
+}
+
+func readHistory(state *liner.State) {
+	f, err := os.Open(historyFile())
+	if os.IsNotExist(err) {
+		return
+	}
+	if err != nil {
+		slog.Error(nil, "Failed to read history: %v", err)
+		return
+	}
+
+	if _, err := state.ReadHistory(f); err != nil {
+		slog.Error(nil, "Failed to read history: %v", err)
+		return
+	}
 }
