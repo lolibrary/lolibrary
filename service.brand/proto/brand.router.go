@@ -45,13 +45,13 @@ func (body GETReadBrandRequest) Request(ctx context.Context) typhon.Request {
 
 // Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
 // This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
-func (body GETReadBrandRequest) Response(ctx context.Context) (GETReadBrandResponse, error) {
+func (body GETReadBrandRequest) Response(ctx context.Context) (*GETReadBrandResponse, error) {
 	return body.Send(ctx).DecodeResponse()
 }
 
 // Send creates a typhon future and immediately returns it.
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
-func (body GETReadBrandResponse) Send(ctx context.Context) (GETReadBrandFuture, error) {
+func (body GETReadBrandRequest) Send(ctx context.Context) *GETReadBrandFuture {
 	return &GETReadBrandFuture{Future: body.Request(ctx).Send()}
 }
 
@@ -70,13 +70,15 @@ func (f *GETReadBrandFuture) Done() {
 }
 
 // DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
-func (f *GETReadBrandFuture) DecodeResponse() (GETReadBrandResponse, error) {
+func (f *GETReadBrandFuture) DecodeResponse() (*GETReadBrandResponse, error) {
 	f.Done()
 
 	body := &GETReadBrandResponse{}
 	if err := f.Response.Decode(body); err != nil {
 		return nil, err
 	}
+
+	return body, nil
 }
 
 // -------------------------
@@ -116,13 +118,13 @@ func (body PUTUpdateBrandRequest) Request(ctx context.Context) typhon.Request {
 
 // Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
 // This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
-func (body PUTUpdateBrandRequest) Response(ctx context.Context) (PUTUpdateBrandResponse, error) {
+func (body PUTUpdateBrandRequest) Response(ctx context.Context) (*PUTUpdateBrandResponse, error) {
 	return body.Send(ctx).DecodeResponse()
 }
 
 // Send creates a typhon future and immediately returns it.
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
-func (body PUTUpdateBrandResponse) Send(ctx context.Context) (PUTUpdateBrandFuture, error) {
+func (body PUTUpdateBrandRequest) Send(ctx context.Context) *PUTUpdateBrandFuture {
 	return &PUTUpdateBrandFuture{Future: body.Request(ctx).Send()}
 }
 
@@ -141,13 +143,15 @@ func (f *PUTUpdateBrandFuture) Done() {
 }
 
 // DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
-func (f *PUTUpdateBrandFuture) DecodeResponse() (PUTUpdateBrandResponse, error) {
+func (f *PUTUpdateBrandFuture) DecodeResponse() (*PUTUpdateBrandResponse, error) {
 	f.Done()
 
 	body := &PUTUpdateBrandResponse{}
 	if err := f.Response.Decode(body); err != nil {
 		return nil, err
 	}
+
+	return body, nil
 }
 
 // -------------------------
@@ -187,13 +191,13 @@ func (body DELETERemoveBrandRequest) Request(ctx context.Context) typhon.Request
 
 // Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
 // This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
-func (body DELETERemoveBrandRequest) Response(ctx context.Context) (DELETERemoveBrandResponse, error) {
+func (body DELETERemoveBrandRequest) Response(ctx context.Context) (*DELETERemoveBrandResponse, error) {
 	return body.Send(ctx).DecodeResponse()
 }
 
 // Send creates a typhon future and immediately returns it.
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
-func (body DELETERemoveBrandResponse) Send(ctx context.Context) (DELETERemoveBrandFuture, error) {
+func (body DELETERemoveBrandRequest) Send(ctx context.Context) *DELETERemoveBrandFuture {
 	return &DELETERemoveBrandFuture{Future: body.Request(ctx).Send()}
 }
 
@@ -212,13 +216,15 @@ func (f *DELETERemoveBrandFuture) Done() {
 }
 
 // DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
-func (f *DELETERemoveBrandFuture) DecodeResponse() (DELETERemoveBrandResponse, error) {
+func (f *DELETERemoveBrandFuture) DecodeResponse() (*DELETERemoveBrandResponse, error) {
 	f.Done()
 
 	body := &DELETERemoveBrandResponse{}
 	if err := f.Response.Decode(body); err != nil {
 		return nil, err
 	}
+
+	return body, nil
 }
 
 // -------------------------
@@ -258,13 +264,13 @@ func (body POSTCreateBrandRequest) Request(ctx context.Context) typhon.Request {
 
 // Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
 // This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
-func (body POSTCreateBrandRequest) Response(ctx context.Context) (POSTCreateBrandResponse, error) {
+func (body POSTCreateBrandRequest) Response(ctx context.Context) (*POSTCreateBrandResponse, error) {
 	return body.Send(ctx).DecodeResponse()
 }
 
 // Send creates a typhon future and immediately returns it.
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
-func (body POSTCreateBrandResponse) Send(ctx context.Context) (POSTCreateBrandFuture, error) {
+func (body POSTCreateBrandRequest) Send(ctx context.Context) *POSTCreateBrandFuture {
 	return &POSTCreateBrandFuture{Future: body.Request(ctx).Send()}
 }
 
@@ -283,13 +289,15 @@ func (f *POSTCreateBrandFuture) Done() {
 }
 
 // DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
-func (f *POSTCreateBrandFuture) DecodeResponse() (POSTCreateBrandResponse, error) {
+func (f *POSTCreateBrandFuture) DecodeResponse() (*POSTCreateBrandResponse, error) {
 	f.Done()
 
 	body := &POSTCreateBrandResponse{}
 	if err := f.Response.Decode(body); err != nil {
 		return nil, err
 	}
+
+	return body, nil
 }
 
 // -------------------------
@@ -329,13 +337,13 @@ func (body GETListBrandsRequest) Request(ctx context.Context) typhon.Request {
 
 // Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
 // This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
-func (body GETListBrandsRequest) Response(ctx context.Context) (GETListBrandsResponse, error) {
+func (body GETListBrandsRequest) Response(ctx context.Context) (*GETListBrandsResponse, error) {
 	return body.Send(ctx).DecodeResponse()
 }
 
 // Send creates a typhon future and immediately returns it.
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
-func (body GETListBrandsResponse) Send(ctx context.Context) (GETListBrandsFuture, error) {
+func (body GETListBrandsRequest) Send(ctx context.Context) *GETListBrandsFuture {
 	return &GETListBrandsFuture{Future: body.Request(ctx).Send()}
 }
 
@@ -354,11 +362,13 @@ func (f *GETListBrandsFuture) Done() {
 }
 
 // DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
-func (f *GETListBrandsFuture) DecodeResponse() (GETListBrandsResponse, error) {
+func (f *GETListBrandsFuture) DecodeResponse() (*GETListBrandsResponse, error) {
 	f.Done()
 
 	body := &GETListBrandsResponse{}
 	if err := f.Response.Decode(body); err != nil {
 		return nil, err
 	}
+
+	return body, nil
 }

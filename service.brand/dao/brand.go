@@ -60,7 +60,7 @@ func ReadBrandBySlug(slug string) (*domain.Brand, error) {
 func ReadBrandByShortName(shortName string) (*domain.Brand, error) {
 	brand := &domain.Brand{}
 
-	res := DB.Where("slug = ?", shortName).First(brand)
+	res := DB.Where("short_name = ?", shortName).First(brand)
 	if res.Error != nil {
 		if res.RecordNotFound() {
 			return nil, nil
