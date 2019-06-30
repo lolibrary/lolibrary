@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/lolibrary/lolibrary/libraries/filters"
 	"github.com/monzo/slog"
 	"github.com/monzo/typhon"
 )
@@ -20,6 +21,10 @@ type Server struct {
 	id      string
 
 	srv *typhon.Server
+}
+
+func init() {
+	typhon.Client = typhon.Client.Filter(filters.ClientFilters)
 }
 
 var runOnce sync.Once
