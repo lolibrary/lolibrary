@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/lolibrary/lolibrary/libraries/portforward"
-	"github.com/monzo/slog"
 	"github.com/monzo/typhon"
 )
 
@@ -49,7 +48,6 @@ func Client(req typhon.Request) typhon.Response {
 		strings.TrimPrefix(req.URL.Path, "/"))
 
 	req = typhon.NewRequest(req, req.Method, url, req.Body)
-	slog.Trace(req, "Sending request via edge proxy: %v", req)
 
 	return typhon.HttpService(typhon.RoundTripper)(req)
 }
