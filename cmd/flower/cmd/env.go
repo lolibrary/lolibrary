@@ -10,14 +10,14 @@ import (
 var (
 	// EnvProd is where we'll spin up a port-forward for service/edge-proxy-internal.
 	// edge-proxy.internal is able to route requests to any defined internal service.
-	EnvProd = "http://localhost:8080"
+	EnvProd = "localhost:8080"
 
 	// EnvProdAPI is where we'll connect to service/edge-proxy-external via our ingress.
 	// edge-proxy.external can only route to service.api.* services.
 	EnvProdAPI = "https://external-api.lolibrary.org"
 
 	// local service/edge-proxy-internal
-	EnvLocal = "http://localhost:18080"
+	EnvLocal = "localhost:18080"
 
 	// local service/edge-proxy-external
 	EnvLocalAPI = "http://localhost:18081"

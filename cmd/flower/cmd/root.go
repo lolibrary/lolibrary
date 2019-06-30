@@ -26,7 +26,7 @@ var rootCmd = &cobra.Command{
 			port, forward := portforward.Enable()
 			defer forward.Close()
 
-			EnvProd = fmt.Sprintf("http://localhost:%d", port)
+			EnvProd = fmt.Sprintf("localhost:%d", port)
 		}
 
 		if err := environment(); err != nil {

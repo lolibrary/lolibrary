@@ -131,15 +131,16 @@ var shellCmd = &cobra.Command{
 					continue
 				}
 
+				lastLineErrored = false
 				result, err := rpc.InternalRequest(nil, fields[1], fields[2], strings.Join(fields[3:], " "))
-				if err != nil {
-					cmd.Println(err)
-					lastLineErrored = true
-				} else {
-					lastLineErrored = false
+				if result != "" {
+					cmd.Println(result)
+					cmd.Println()
 				}
-
-				cmd.Println(result)
+				if err != nil {
+					cmd.Printf("%v: %v\n", aurora.Red("error").Bold(), err)
+					lastLineErrored = true
+				}
 			default:
 				cmd.Printf("Command '%v' not found.\n", fields[0])
 				lastLineErrored = true

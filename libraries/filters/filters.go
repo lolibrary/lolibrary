@@ -13,6 +13,7 @@ var commonFilters = [...]typhon.Filter{
 	typhon.ErrorFilter,
 }
 
+// clientFilters is used for setting up the default typhon.Client
 var clientFilters = [...]typhon.Filter{
 	ClientURLFilter,
 	typhon.ErrorFilter,

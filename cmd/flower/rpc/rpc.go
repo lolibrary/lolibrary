@@ -9,11 +9,11 @@ package rpc
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/hokaccha/go-prettyjson"
-	"github.com/monzo/slog"
+	"github.com/lolibrary/lolibrary/libraries/filters"
 	"github.com/monzo/terrors"
 	"github.com/monzo/typhon"
 )
@@ -34,75 +34,75 @@ func SetExternalEdgeProxy(url string) {
 }
 
 // Request sends an RPC call through the internal edge proxy.
+// Both return values from this function should be printed to stdout if not empty/nil.
 func InternalRequest(ctx context.Context, method, path, body string) (string, error) {
+	req, err := internalRequest(ctx, method, path, body)
+	if err != nil {
+		return "", err
+	}
+
 	if internalEdgeProxyURL == "" {
 		return "", terrors.New("bad_request.env_not_set", "Environment has not been set.", nil)
 	}
 
-	switch method {
-	case "GET", "POST", "PUT", "DELETE", "PATCH":
-	case "get", "post", "put", "delete", "patch":
-	default:
-		return "", terrors.New("bad_request.bad_param.method", "Method must be a valid HTTP method.", nil)
-	}
+	client := typhon.Client.
+		Filter(filters.EdgeProxyFilter(internalEdgeProxyURL)).
+		Filter(typhon.ErrorFilter)
 
-	b := []byte(body)
-
-	req := typhon.NewRequest(ctx, method, internalEdgeProxyURL+path, nil)
-	if n, err := req.Write(b); err != nil || n != len(b) {
-		slog.Error(ctx, "Response not fully written. Aborting Request.")
-		return "", err
-	}
-
-	rsp := req.Send().Response()
+	rsp := req.SendVia(client).Response()
 	if rsp.Error != nil {
-		slog.Error(ctx, "Error sending request via typhon: %v", rsp.Error)
-		return "", rsp.Error
+		return parseError(rsp)
 	}
 
+	return parseResponse(rsp)
+}
+
+// internalRequest creates a typhon request from options.
+func internalRequest(ctx context.Context, method, path, body string) (typhon.Request, error) {
+	req := typhon.NewRequest(ctx, method, path, nil)
+	if _, err := req.Write([]byte(body)); err != nil {
+		return typhon.Request{}, err
+	}
+
+	return req, nil
+}
+
+// parseResponse returns pretty-printed JSON from responses.
+func parseResponse(rsp typhon.Response) (string, error) {
 	// pretty-print the returned body
 	buf, err := rsp.BodyBytes(true)
 	if err != nil {
-		slog.Error(ctx, "Error getting body contents: %v", err)
 		return "", terrors.Wrap(err, nil)
-	}
-
-	// We got an error. Format it and remove the stack.
-	if rsp.Header.Get("Terror") == "1" {
-		return handleError(ctx, buf)
 	}
 
 	responseBody, err := prettyjson.Format(buf)
 	if err != nil {
-		slog.Error(ctx, "Error formatting response JSON: %v", err)
 		return "", terrors.Wrap(err, nil)
 	}
 
 	return string(responseBody), nil
 }
 
-// Request sends an RPC call through the internal edge proxy.
-// It returns a pretty-printed body on success, or an error on failure.
-func ExternalRequest(path, body string) (string, error) {
-	return "", terrors.New("not_implemented", "Not yet implemented", nil)
-}
+// parseError returns a representation of any errors in the response.
+func parseError(rsp typhon.Response) (string, error) {
+	if terr, ok := rsp.Error.(*terrors.Error); ok {
+		payload := map[string]interface{}{"message": terr.Message, "code": terr.Code}
+		if os.Getenv("DEBUG") == "1" {
+			payload["stack"] = terr.StackFrames
+		}
 
-func handleError(ctx context.Context, buf []byte) (string, error) {
-	errCheck := make(map[string]interface{})
-	if err := json.Unmarshal(buf, &errCheck); err != nil {
-		slog.Error(ctx, "Failed to unmarshal error body: %v", err)
-		return string(buf), terrors.Wrap(err, nil)
+		b, err := prettyjson.Marshal(payload)
+		if err != nil {
+			return "", err
+		}
+
+		return string(b), terr
+	} else {
+		// if we have a body, return that verbatim.
+		if b, err := rsp.BodyBytes(true); err == nil {
+			return string(b), rsp.Error
+		}
+
+		return "", rsp.Error
 	}
-
-	// if there is a "stack" key, delete it.
-	delete(errCheck, "stack")
-
-	// pretty print it
-	responseBody, err := prettyjson.Marshal(errCheck)
-	if err != nil {
-		slog.Error(ctx, "Unable to pretty-print error body: %v", err)
-		return "", terrors.Wrap(err, nil)
-	}
-
-	return string(responseBody), errRequest
 }
