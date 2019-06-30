@@ -3,7 +3,8 @@
 set -e
 
 VERSION=$(git rev-parse HEAD)
-BASE="${GOPATH}/src/github.com/lolibrary/lolibrary"
+PROJECT="github.com/lolibrary/lolibrary
+BASE="${GOPATH}/src/${PROJECT}"
 PROJECT="lolibrary-180111"
 
 cd "${BASE}"
@@ -62,7 +63,7 @@ echo
 
 CGO_ENABLED=0 GOOS=linux ARCH=amd64 \
     go build -i -installsuffix docker \
-        -ldflags "-X \"github.com/lolibrary/lolibrary/foundation.Version=${VERSION}\"" \
+        -ldflags "-X \"${PROJECT}/foundation.Version=${VERSION}\" -X \"${PROJECT}/libraries/filters.Version=${VERSION}"" \
         -o "${cache}/${binary}" "./${name}"
 
 echo -e "🐳  Building docker image ${grn}${tag}${rst}"

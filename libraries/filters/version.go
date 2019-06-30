@@ -1,9 +1,11 @@
 package filters
 
 import (
-	"github.com/lolibrary/lolibrary/foundation"
 	"github.com/monzo/typhon"
 )
+
+// Version is also replicated in github.com/lolibrary/lolibrary/foundation and set at compile time.
+var Version = "dev"
 
 type versionResponse struct {
 	Version string `json:"version"`
@@ -13,7 +15,7 @@ type versionResponse struct {
 // It is used to see if this service is up to date.
 func VersionFilter(req typhon.Request, svc typhon.Service) typhon.Response {
 	if matchesVersionPath(req) {
-		return req.Response(&versionResponse{Version: foundation.Version})
+		return req.Response(&versionResponse{Version: Version})
 	}
 
 	return svc(req)
