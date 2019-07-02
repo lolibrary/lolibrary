@@ -39,9 +39,6 @@ function setup/parse_options() {
             -p | --push)
                 OPT_DOCKER_PUSH=yes
                 ;;
-            -f | --force)
-                OPT_FORCE=yes
-                ;;
             -v | --print-options)
                 OPT_PRINT_OPTIONS=yes
                 ;;
@@ -72,14 +69,13 @@ function setup/configure() {
 
 # Print usage and exit.
 function setup/usage() {
-    print -P "🌸 Usage: %F{red}build%f [-p|--push] [-d|--deploy] [-f|--force] %F{green}SERVICE%f"
+    print -P "🌸 Usage: %F{red}build%f [-p|--push] [-d|--deploy] %F{green}service.foo%f"
     exit
 }
 
 function setup/print_options() {
     print -P "%F{red}OPT_DOCKER_PUSH%f: %F{blue}$OPT_DOCKER_PUSH%f"
     print -P "%F{red}OPT_K8S_DEPLOY %f: %F{blue}$OPT_K8S_DEPLOY %f"
-    print -P "%F{red}OPT_FORCE      %f: %F{blue}$OPT_FORCE      %f"
     print -P "%F{red}SERVICE_NAME   %f: %F{blue}$SERVICE_NAME   %f"
     print -P "%F{red}SERVICE_DIR    %f: %F{blue}$SERVICE_DIR    %f"
     print -P "%F{red}BINARY_NAME    %f: %F{blue}$BINARY_NAME    %f"
@@ -147,19 +143,6 @@ function k8s/deploy() {
     print -P "✅  Deployed %F{red}$SERVICE_NAME%f successfully"
 }
 
-function k8s/confirm() {
-    if [[ $OPT_FORCE = "yes" ]]; then
-        debug_print "deploy was forced"
-        return 0
-    fi
-
-    read -p "    🔔  Would you like to deploy the new image? [y/N] " confirm
-
-    if [[ "$confirm" =~ ^[Yy]$ ]]; return 0
-
-    return 1
-}
-
 function debug_print() {
     if [[ "$VERBOSE" = "true" ]]; then
         print $1
@@ -191,5 +174,5 @@ fi
 debug_print "ready to deploy, checking."
 # deploy to k8s with a confirmation.
 if [[ $OPT_K8S_DEPLOY = "yes" ]]; then
-    k8s/confirm && k8s/deploy
+    k8s/deploy
 fi
