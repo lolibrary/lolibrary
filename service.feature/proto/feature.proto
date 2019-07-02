@@ -7,5 +7,85 @@ service feature {
     option (router).name = "service.feature";
     option (router).short_name = "s-feature";
 
-    //
+    rpc ReadFeature (GETReadFeatureRequest) returns (GETReadFeatureResponse) {
+        option (handler).path = "/read";
+    }
+
+    rpc UpdateFeature (PUTUpdateFeatureRequest) returns (PUTUpdateFeatureResponse) {
+        option (handler).path = "/update";
+    }
+
+    rpc DeleteFeature (DELETERemoveFeatureRequest) returns (DELETERemoveFeatureResponse) {
+        option (handler).path = "/delete";
+    }
+
+    rpc CreateFeature (POSTCreateFeatureRequest) returns (POSTCreateFeatureResponse) {
+        option (handler).path = "/create";
+    }
+
+    rpc ListFeatures (GETListFeaturesRequest) returns (GETListFeaturesResponse) {
+        option (handler).path = "/list";
+    }
 }
+
+message Feature {
+    string id = 1;
+    string slug = 2;
+    string name = 4;
+
+    // timestamps
+    string created_at = 100;
+    string updated_at = 101;
+}
+
+// GET /service.feature/read {"id": "<uuid>"}
+
+message GETReadFeatureRequest {
+    string id = 1;
+    string slug = 2;
+}
+
+message GETReadFeatureResponse {
+    Feature feature = 1;
+}
+
+// GET /service.feature/list
+
+message GETListFeaturesRequest {
+}
+
+message GETListFeaturesResponse {
+    repeated Feature features = 1;
+}
+
+// POST /service.feature/create {"feature": {...}}
+
+message POSTCreateFeatureRequest {
+    string slug = 1;
+    string name = 3;
+}
+
+message POSTCreateFeatureResponse {
+    Feature feature = 1;
+}
+
+// PUT /service.feature/update {"id": "...", "feature": {...}}
+
+message PUTUpdateFeatureRequest {
+    string id = 1;
+    string name = 2;
+}
+
+message PUTUpdateFeatureResponse {
+    Feature feature = 1;
+}
+
+// DELETE /service.feature/delete {"id": "..."}
+
+message DELETERemoveFeatureRequest {
+    string id = 1;
+}
+
+message DELETERemoveFeatureResponse {
+}
+

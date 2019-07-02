@@ -7,3 +7,368 @@ import (
 
 	"github.com/monzo/typhon"
 )
+
+// -------------------------
+// GET /service.feature/read
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body GETReadFeatureRequest) Method() string {
+	return "GET"
+}
+
+// Path is the HTTP path to this endpoint
+func (body GETReadFeatureRequest) Path() string {
+	return "/read"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body GETReadFeatureRequest) ServiceName() string {
+	return "service.feature"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body GETReadFeatureRequest) Host() string {
+	return "s-feature"
+}
+
+// FullPath is the full routable URL to this service.
+func (body GETReadFeatureRequest) FullPath() string {
+	return "http://s-feature/read"
+}
+
+// Request returns a typhon request for this type.
+func (body GETReadFeatureRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body GETReadFeatureRequest) Response(ctx context.Context) (*GETReadFeatureResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETReadFeatureRequest) Send(ctx context.Context) *GETReadFeatureFuture {
+	return &GETReadFeatureFuture{Future: body.Request(ctx).Send()}
+}
+
+// GETReadFeatureFuture is an intermediate future used for parallel requests with GETReadFeatureRequest
+type GETReadFeatureFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *GETReadFeatureFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *GETReadFeatureFuture) DecodeResponse() (*GETReadFeatureResponse, error) {
+	f.Done()
+
+	body := &GETReadFeatureResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// PUT /service.feature/update
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body PUTUpdateFeatureRequest) Method() string {
+	return "PUT"
+}
+
+// Path is the HTTP path to this endpoint
+func (body PUTUpdateFeatureRequest) Path() string {
+	return "/update"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body PUTUpdateFeatureRequest) ServiceName() string {
+	return "service.feature"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body PUTUpdateFeatureRequest) Host() string {
+	return "s-feature"
+}
+
+// FullPath is the full routable URL to this service.
+func (body PUTUpdateFeatureRequest) FullPath() string {
+	return "http://s-feature/update"
+}
+
+// Request returns a typhon request for this type.
+func (body PUTUpdateFeatureRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body PUTUpdateFeatureRequest) Response(ctx context.Context) (*PUTUpdateFeatureResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body PUTUpdateFeatureRequest) Send(ctx context.Context) *PUTUpdateFeatureFuture {
+	return &PUTUpdateFeatureFuture{Future: body.Request(ctx).Send()}
+}
+
+// PUTUpdateFeatureFuture is an intermediate future used for parallel requests with PUTUpdateFeatureRequest
+type PUTUpdateFeatureFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *PUTUpdateFeatureFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *PUTUpdateFeatureFuture) DecodeResponse() (*PUTUpdateFeatureResponse, error) {
+	f.Done()
+
+	body := &PUTUpdateFeatureResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// DELETE /service.feature/delete
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body DELETERemoveFeatureRequest) Method() string {
+	return "DELETE"
+}
+
+// Path is the HTTP path to this endpoint
+func (body DELETERemoveFeatureRequest) Path() string {
+	return "/delete"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body DELETERemoveFeatureRequest) ServiceName() string {
+	return "service.feature"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body DELETERemoveFeatureRequest) Host() string {
+	return "s-feature"
+}
+
+// FullPath is the full routable URL to this service.
+func (body DELETERemoveFeatureRequest) FullPath() string {
+	return "http://s-feature/delete"
+}
+
+// Request returns a typhon request for this type.
+func (body DELETERemoveFeatureRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body DELETERemoveFeatureRequest) Response(ctx context.Context) (*DELETERemoveFeatureResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body DELETERemoveFeatureRequest) Send(ctx context.Context) *DELETERemoveFeatureFuture {
+	return &DELETERemoveFeatureFuture{Future: body.Request(ctx).Send()}
+}
+
+// DELETERemoveFeatureFuture is an intermediate future used for parallel requests with DELETERemoveFeatureRequest
+type DELETERemoveFeatureFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *DELETERemoveFeatureFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *DELETERemoveFeatureFuture) DecodeResponse() (*DELETERemoveFeatureResponse, error) {
+	f.Done()
+
+	body := &DELETERemoveFeatureResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// POST /service.feature/create
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body POSTCreateFeatureRequest) Method() string {
+	return "POST"
+}
+
+// Path is the HTTP path to this endpoint
+func (body POSTCreateFeatureRequest) Path() string {
+	return "/create"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body POSTCreateFeatureRequest) ServiceName() string {
+	return "service.feature"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body POSTCreateFeatureRequest) Host() string {
+	return "s-feature"
+}
+
+// FullPath is the full routable URL to this service.
+func (body POSTCreateFeatureRequest) FullPath() string {
+	return "http://s-feature/create"
+}
+
+// Request returns a typhon request for this type.
+func (body POSTCreateFeatureRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body POSTCreateFeatureRequest) Response(ctx context.Context) (*POSTCreateFeatureResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateFeatureRequest) Send(ctx context.Context) *POSTCreateFeatureFuture {
+	return &POSTCreateFeatureFuture{Future: body.Request(ctx).Send()}
+}
+
+// POSTCreateFeatureFuture is an intermediate future used for parallel requests with POSTCreateFeatureRequest
+type POSTCreateFeatureFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *POSTCreateFeatureFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *POSTCreateFeatureFuture) DecodeResponse() (*POSTCreateFeatureResponse, error) {
+	f.Done()
+
+	body := &POSTCreateFeatureResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// GET /service.feature/list
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body GETListFeaturesRequest) Method() string {
+	return "GET"
+}
+
+// Path is the HTTP path to this endpoint
+func (body GETListFeaturesRequest) Path() string {
+	return "/list"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body GETListFeaturesRequest) ServiceName() string {
+	return "service.feature"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body GETListFeaturesRequest) Host() string {
+	return "s-feature"
+}
+
+// FullPath is the full routable URL to this service.
+func (body GETListFeaturesRequest) FullPath() string {
+	return "http://s-feature/list"
+}
+
+// Request returns a typhon request for this type.
+func (body GETListFeaturesRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body GETListFeaturesRequest) Response(ctx context.Context) (*GETListFeaturesResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETListFeaturesRequest) Send(ctx context.Context) *GETListFeaturesFuture {
+	return &GETListFeaturesFuture{Future: body.Request(ctx).Send()}
+}
+
+// GETListFeaturesFuture is an intermediate future used for parallel requests with GETListFeaturesRequest
+type GETListFeaturesFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *GETListFeaturesFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *GETListFeaturesFuture) DecodeResponse() (*GETListFeaturesResponse, error) {
+	f.Done()
+
+	body := &GETListFeaturesResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}

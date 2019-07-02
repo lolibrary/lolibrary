@@ -21,19 +21,526 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type Feature struct {
+	Id   string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Slug string `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
+	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	// timestamps
+	CreatedAt            string   `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Feature) Reset()         { *m = Feature{} }
+func (m *Feature) String() string { return proto.CompactTextString(m) }
+func (*Feature) ProtoMessage()    {}
+func (*Feature) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8f2c16154c28db72, []int{0}
+}
+
+func (m *Feature) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Feature.Unmarshal(m, b)
+}
+func (m *Feature) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Feature.Marshal(b, m, deterministic)
+}
+func (m *Feature) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Feature.Merge(m, src)
+}
+func (m *Feature) XXX_Size() int {
+	return xxx_messageInfo_Feature.Size(m)
+}
+func (m *Feature) XXX_DiscardUnknown() {
+	xxx_messageInfo_Feature.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Feature proto.InternalMessageInfo
+
+func (m *Feature) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Feature) GetSlug() string {
+	if m != nil {
+		return m.Slug
+	}
+	return ""
+}
+
+func (m *Feature) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *Feature) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *Feature) GetUpdatedAt() string {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return ""
+}
+
+type GETReadFeatureRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Slug                 string   `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GETReadFeatureRequest) Reset()         { *m = GETReadFeatureRequest{} }
+func (m *GETReadFeatureRequest) String() string { return proto.CompactTextString(m) }
+func (*GETReadFeatureRequest) ProtoMessage()    {}
+func (*GETReadFeatureRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8f2c16154c28db72, []int{1}
+}
+
+func (m *GETReadFeatureRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETReadFeatureRequest.Unmarshal(m, b)
+}
+func (m *GETReadFeatureRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETReadFeatureRequest.Marshal(b, m, deterministic)
+}
+func (m *GETReadFeatureRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETReadFeatureRequest.Merge(m, src)
+}
+func (m *GETReadFeatureRequest) XXX_Size() int {
+	return xxx_messageInfo_GETReadFeatureRequest.Size(m)
+}
+func (m *GETReadFeatureRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETReadFeatureRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETReadFeatureRequest proto.InternalMessageInfo
+
+func (m *GETReadFeatureRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *GETReadFeatureRequest) GetSlug() string {
+	if m != nil {
+		return m.Slug
+	}
+	return ""
+}
+
+type GETReadFeatureResponse struct {
+	Feature              *Feature `protobuf:"bytes,1,opt,name=feature,proto3" json:"feature,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GETReadFeatureResponse) Reset()         { *m = GETReadFeatureResponse{} }
+func (m *GETReadFeatureResponse) String() string { return proto.CompactTextString(m) }
+func (*GETReadFeatureResponse) ProtoMessage()    {}
+func (*GETReadFeatureResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8f2c16154c28db72, []int{2}
+}
+
+func (m *GETReadFeatureResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETReadFeatureResponse.Unmarshal(m, b)
+}
+func (m *GETReadFeatureResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETReadFeatureResponse.Marshal(b, m, deterministic)
+}
+func (m *GETReadFeatureResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETReadFeatureResponse.Merge(m, src)
+}
+func (m *GETReadFeatureResponse) XXX_Size() int {
+	return xxx_messageInfo_GETReadFeatureResponse.Size(m)
+}
+func (m *GETReadFeatureResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETReadFeatureResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETReadFeatureResponse proto.InternalMessageInfo
+
+func (m *GETReadFeatureResponse) GetFeature() *Feature {
+	if m != nil {
+		return m.Feature
+	}
+	return nil
+}
+
+type GETListFeaturesRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GETListFeaturesRequest) Reset()         { *m = GETListFeaturesRequest{} }
+func (m *GETListFeaturesRequest) String() string { return proto.CompactTextString(m) }
+func (*GETListFeaturesRequest) ProtoMessage()    {}
+func (*GETListFeaturesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8f2c16154c28db72, []int{3}
+}
+
+func (m *GETListFeaturesRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETListFeaturesRequest.Unmarshal(m, b)
+}
+func (m *GETListFeaturesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETListFeaturesRequest.Marshal(b, m, deterministic)
+}
+func (m *GETListFeaturesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETListFeaturesRequest.Merge(m, src)
+}
+func (m *GETListFeaturesRequest) XXX_Size() int {
+	return xxx_messageInfo_GETListFeaturesRequest.Size(m)
+}
+func (m *GETListFeaturesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETListFeaturesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETListFeaturesRequest proto.InternalMessageInfo
+
+type GETListFeaturesResponse struct {
+	Features             []*Feature `protobuf:"bytes,1,rep,name=features,proto3" json:"features,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *GETListFeaturesResponse) Reset()         { *m = GETListFeaturesResponse{} }
+func (m *GETListFeaturesResponse) String() string { return proto.CompactTextString(m) }
+func (*GETListFeaturesResponse) ProtoMessage()    {}
+func (*GETListFeaturesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8f2c16154c28db72, []int{4}
+}
+
+func (m *GETListFeaturesResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETListFeaturesResponse.Unmarshal(m, b)
+}
+func (m *GETListFeaturesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETListFeaturesResponse.Marshal(b, m, deterministic)
+}
+func (m *GETListFeaturesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETListFeaturesResponse.Merge(m, src)
+}
+func (m *GETListFeaturesResponse) XXX_Size() int {
+	return xxx_messageInfo_GETListFeaturesResponse.Size(m)
+}
+func (m *GETListFeaturesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETListFeaturesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETListFeaturesResponse proto.InternalMessageInfo
+
+func (m *GETListFeaturesResponse) GetFeatures() []*Feature {
+	if m != nil {
+		return m.Features
+	}
+	return nil
+}
+
+type POSTCreateFeatureRequest struct {
+	Slug                 string   `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`
+	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *POSTCreateFeatureRequest) Reset()         { *m = POSTCreateFeatureRequest{} }
+func (m *POSTCreateFeatureRequest) String() string { return proto.CompactTextString(m) }
+func (*POSTCreateFeatureRequest) ProtoMessage()    {}
+func (*POSTCreateFeatureRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8f2c16154c28db72, []int{5}
+}
+
+func (m *POSTCreateFeatureRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_POSTCreateFeatureRequest.Unmarshal(m, b)
+}
+func (m *POSTCreateFeatureRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_POSTCreateFeatureRequest.Marshal(b, m, deterministic)
+}
+func (m *POSTCreateFeatureRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_POSTCreateFeatureRequest.Merge(m, src)
+}
+func (m *POSTCreateFeatureRequest) XXX_Size() int {
+	return xxx_messageInfo_POSTCreateFeatureRequest.Size(m)
+}
+func (m *POSTCreateFeatureRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_POSTCreateFeatureRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_POSTCreateFeatureRequest proto.InternalMessageInfo
+
+func (m *POSTCreateFeatureRequest) GetSlug() string {
+	if m != nil {
+		return m.Slug
+	}
+	return ""
+}
+
+func (m *POSTCreateFeatureRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+type POSTCreateFeatureResponse struct {
+	Feature              *Feature `protobuf:"bytes,1,opt,name=feature,proto3" json:"feature,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *POSTCreateFeatureResponse) Reset()         { *m = POSTCreateFeatureResponse{} }
+func (m *POSTCreateFeatureResponse) String() string { return proto.CompactTextString(m) }
+func (*POSTCreateFeatureResponse) ProtoMessage()    {}
+func (*POSTCreateFeatureResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8f2c16154c28db72, []int{6}
+}
+
+func (m *POSTCreateFeatureResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_POSTCreateFeatureResponse.Unmarshal(m, b)
+}
+func (m *POSTCreateFeatureResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_POSTCreateFeatureResponse.Marshal(b, m, deterministic)
+}
+func (m *POSTCreateFeatureResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_POSTCreateFeatureResponse.Merge(m, src)
+}
+func (m *POSTCreateFeatureResponse) XXX_Size() int {
+	return xxx_messageInfo_POSTCreateFeatureResponse.Size(m)
+}
+func (m *POSTCreateFeatureResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_POSTCreateFeatureResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_POSTCreateFeatureResponse proto.InternalMessageInfo
+
+func (m *POSTCreateFeatureResponse) GetFeature() *Feature {
+	if m != nil {
+		return m.Feature
+	}
+	return nil
+}
+
+type PUTUpdateFeatureRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PUTUpdateFeatureRequest) Reset()         { *m = PUTUpdateFeatureRequest{} }
+func (m *PUTUpdateFeatureRequest) String() string { return proto.CompactTextString(m) }
+func (*PUTUpdateFeatureRequest) ProtoMessage()    {}
+func (*PUTUpdateFeatureRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8f2c16154c28db72, []int{7}
+}
+
+func (m *PUTUpdateFeatureRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PUTUpdateFeatureRequest.Unmarshal(m, b)
+}
+func (m *PUTUpdateFeatureRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PUTUpdateFeatureRequest.Marshal(b, m, deterministic)
+}
+func (m *PUTUpdateFeatureRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PUTUpdateFeatureRequest.Merge(m, src)
+}
+func (m *PUTUpdateFeatureRequest) XXX_Size() int {
+	return xxx_messageInfo_PUTUpdateFeatureRequest.Size(m)
+}
+func (m *PUTUpdateFeatureRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PUTUpdateFeatureRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PUTUpdateFeatureRequest proto.InternalMessageInfo
+
+func (m *PUTUpdateFeatureRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *PUTUpdateFeatureRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+type PUTUpdateFeatureResponse struct {
+	Feature              *Feature `protobuf:"bytes,1,opt,name=feature,proto3" json:"feature,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PUTUpdateFeatureResponse) Reset()         { *m = PUTUpdateFeatureResponse{} }
+func (m *PUTUpdateFeatureResponse) String() string { return proto.CompactTextString(m) }
+func (*PUTUpdateFeatureResponse) ProtoMessage()    {}
+func (*PUTUpdateFeatureResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8f2c16154c28db72, []int{8}
+}
+
+func (m *PUTUpdateFeatureResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PUTUpdateFeatureResponse.Unmarshal(m, b)
+}
+func (m *PUTUpdateFeatureResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PUTUpdateFeatureResponse.Marshal(b, m, deterministic)
+}
+func (m *PUTUpdateFeatureResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PUTUpdateFeatureResponse.Merge(m, src)
+}
+func (m *PUTUpdateFeatureResponse) XXX_Size() int {
+	return xxx_messageInfo_PUTUpdateFeatureResponse.Size(m)
+}
+func (m *PUTUpdateFeatureResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_PUTUpdateFeatureResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PUTUpdateFeatureResponse proto.InternalMessageInfo
+
+func (m *PUTUpdateFeatureResponse) GetFeature() *Feature {
+	if m != nil {
+		return m.Feature
+	}
+	return nil
+}
+
+type DELETERemoveFeatureRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DELETERemoveFeatureRequest) Reset()         { *m = DELETERemoveFeatureRequest{} }
+func (m *DELETERemoveFeatureRequest) String() string { return proto.CompactTextString(m) }
+func (*DELETERemoveFeatureRequest) ProtoMessage()    {}
+func (*DELETERemoveFeatureRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8f2c16154c28db72, []int{9}
+}
+
+func (m *DELETERemoveFeatureRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DELETERemoveFeatureRequest.Unmarshal(m, b)
+}
+func (m *DELETERemoveFeatureRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DELETERemoveFeatureRequest.Marshal(b, m, deterministic)
+}
+func (m *DELETERemoveFeatureRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DELETERemoveFeatureRequest.Merge(m, src)
+}
+func (m *DELETERemoveFeatureRequest) XXX_Size() int {
+	return xxx_messageInfo_DELETERemoveFeatureRequest.Size(m)
+}
+func (m *DELETERemoveFeatureRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DELETERemoveFeatureRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DELETERemoveFeatureRequest proto.InternalMessageInfo
+
+func (m *DELETERemoveFeatureRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type DELETERemoveFeatureResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DELETERemoveFeatureResponse) Reset()         { *m = DELETERemoveFeatureResponse{} }
+func (m *DELETERemoveFeatureResponse) String() string { return proto.CompactTextString(m) }
+func (*DELETERemoveFeatureResponse) ProtoMessage()    {}
+func (*DELETERemoveFeatureResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_8f2c16154c28db72, []int{10}
+}
+
+func (m *DELETERemoveFeatureResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DELETERemoveFeatureResponse.Unmarshal(m, b)
+}
+func (m *DELETERemoveFeatureResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DELETERemoveFeatureResponse.Marshal(b, m, deterministic)
+}
+func (m *DELETERemoveFeatureResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DELETERemoveFeatureResponse.Merge(m, src)
+}
+func (m *DELETERemoveFeatureResponse) XXX_Size() int {
+	return xxx_messageInfo_DELETERemoveFeatureResponse.Size(m)
+}
+func (m *DELETERemoveFeatureResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_DELETERemoveFeatureResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DELETERemoveFeatureResponse proto.InternalMessageInfo
+
+func init() {
+	proto.RegisterType((*Feature)(nil), "featureproto.Feature")
+	proto.RegisterType((*GETReadFeatureRequest)(nil), "featureproto.GETReadFeatureRequest")
+	proto.RegisterType((*GETReadFeatureResponse)(nil), "featureproto.GETReadFeatureResponse")
+	proto.RegisterType((*GETListFeaturesRequest)(nil), "featureproto.GETListFeaturesRequest")
+	proto.RegisterType((*GETListFeaturesResponse)(nil), "featureproto.GETListFeaturesResponse")
+	proto.RegisterType((*POSTCreateFeatureRequest)(nil), "featureproto.POSTCreateFeatureRequest")
+	proto.RegisterType((*POSTCreateFeatureResponse)(nil), "featureproto.POSTCreateFeatureResponse")
+	proto.RegisterType((*PUTUpdateFeatureRequest)(nil), "featureproto.PUTUpdateFeatureRequest")
+	proto.RegisterType((*PUTUpdateFeatureResponse)(nil), "featureproto.PUTUpdateFeatureResponse")
+	proto.RegisterType((*DELETERemoveFeatureRequest)(nil), "featureproto.DELETERemoveFeatureRequest")
+	proto.RegisterType((*DELETERemoveFeatureResponse)(nil), "featureproto.DELETERemoveFeatureResponse")
+}
+
 func init() {
 	proto.RegisterFile("github.com/lolibrary/lolibrary/service.feature/proto/feature.proto", fileDescriptor_8f2c16154c28db72)
 }
 
 var fileDescriptor_8f2c16154c28db72 = []byte{
-	// 139 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x72, 0x4a, 0xcf, 0x2c, 0xc9,
-	0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0xcf, 0xc9, 0xcf, 0xc9, 0x4c, 0x2a, 0x4a, 0x2c, 0xaa,
-	0x44, 0x62, 0x15, 0xa7, 0x16, 0x95, 0x65, 0x26, 0xa7, 0xea, 0xa5, 0xa5, 0x26, 0x96, 0x94, 0x16,
-	0xa5, 0xea, 0x17, 0x14, 0xe5, 0x97, 0xe4, 0xeb, 0x43, 0x79, 0x7a, 0x60, 0x9e, 0x10, 0x0f, 0x94,
-	0x0b, 0xe6, 0x49, 0xb9, 0x13, 0x30, 0x31, 0x39, 0x37, 0x05, 0x62, 0x4a, 0xb2, 0x6e, 0x7a, 0x6a,
-	0x9e, 0x6e, 0x51, 0x7e, 0x69, 0x49, 0x6a, 0x11, 0xd4, 0x5c, 0x08, 0x07, 0x62, 0xac, 0x91, 0x3e,
-	0x17, 0x3b, 0xd4, 0x60, 0x29, 0x95, 0xa6, 0x65, 0xb2, 0x82, 0x5c, 0xfc, 0x68, 0x8e, 0x69, 0x5a,
-	0x26, 0xcb, 0x2d, 0xc4, 0x59, 0xac, 0x0b, 0xe5, 0x26, 0xb1, 0x81, 0xf5, 0x19, 0x03, 0x02, 0x00,
-	0x00, 0xff, 0xff, 0x81, 0xed, 0xd4, 0xad, 0xd4, 0x00, 0x00, 0x00,
+	// 506 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0xd1, 0x6e, 0xd3, 0x30,
+	0x14, 0x55, 0xbb, 0x42, 0xe9, 0xed, 0x0a, 0xc2, 0xd2, 0x98, 0x09, 0xaa, 0x34, 0x19, 0x06, 0x43,
+	0xa2, 0x89, 0x18, 0x8f, 0x88, 0x87, 0x8d, 0x95, 0x09, 0x51, 0x89, 0xa9, 0x74, 0xcf, 0x28, 0x8d,
+	0x2f, 0x5d, 0xa4, 0xa4, 0x29, 0xb6, 0x33, 0x89, 0x27, 0xa4, 0x7e, 0xcc, 0xfe, 0x60, 0x9f, 0xc2,
+	0xff, 0xa0, 0xda, 0xee, 0x96, 0xa4, 0xe9, 0x32, 0xf5, 0xcd, 0xf7, 0xde, 0xe3, 0x73, 0x8e, 0xef,
+	0xb5, 0x0d, 0xc7, 0x93, 0x50, 0x5d, 0xa4, 0x63, 0x37, 0x48, 0x62, 0x2f, 0x4a, 0xa2, 0x70, 0x2c,
+	0x7c, 0xf1, 0x27, 0xb3, 0x92, 0x28, 0x2e, 0xc3, 0x00, 0xdd, 0x5f, 0xe8, 0xab, 0x54, 0xa0, 0x37,
+	0x13, 0x89, 0x4a, 0x3c, 0x1b, 0xb9, 0x3a, 0x22, 0xdb, 0x36, 0xd4, 0x91, 0x73, 0x5a, 0xc1, 0x18,
+	0xc4, 0xdc, 0xb0, 0x04, 0xbd, 0x09, 0x4e, 0x7b, 0x22, 0x49, 0x15, 0x0a, 0xcb, 0x6b, 0x02, 0x43,
+	0xcb, 0xfe, 0x42, 0xf3, 0x8b, 0x21, 0x26, 0x8f, 0xa1, 0x1e, 0x72, 0x5a, 0xdb, 0xab, 0x1d, 0xb4,
+	0x86, 0xf5, 0x90, 0x13, 0x02, 0x0d, 0x19, 0xa5, 0x13, 0x5a, 0xd7, 0x19, 0xbd, 0x5e, 0xe4, 0xa6,
+	0x7e, 0x8c, 0xb4, 0x61, 0x72, 0x8b, 0x35, 0xe9, 0x02, 0x04, 0x02, 0x7d, 0x85, 0xfc, 0xa7, 0xaf,
+	0x28, 0xd7, 0x95, 0x96, 0xcd, 0x1c, 0xa9, 0x45, 0x39, 0x9d, 0xf1, 0x65, 0x19, 0x4d, 0xd9, 0x66,
+	0x8e, 0x14, 0xfb, 0x08, 0x3b, 0xa7, 0xfd, 0xd1, 0x10, 0x7d, 0x6e, 0x7d, 0x0c, 0xf1, 0x77, 0x8a,
+	0x52, 0xdd, 0xc7, 0x0e, 0xfb, 0x0a, 0xcf, 0x8a, 0x9b, 0xe5, 0x2c, 0x99, 0x4a, 0x24, 0x1e, 0x34,
+	0x6d, 0xc3, 0x34, 0x45, 0xfb, 0x70, 0xc7, 0xcd, 0x36, 0xd0, 0x5d, 0xe2, 0x97, 0x28, 0x46, 0x35,
+	0xd5, 0x20, 0x94, 0xca, 0x96, 0xa4, 0x35, 0xc2, 0x06, 0xb0, 0xbb, 0x52, 0xb1, 0x2a, 0xef, 0xe1,
+	0x91, 0xdd, 0x2f, 0x69, 0x6d, 0x6f, 0x6b, 0xbd, 0xcc, 0x0d, 0x8c, 0x1d, 0x03, 0x3d, 0xfb, 0xfe,
+	0x63, 0xf4, 0x59, 0xf7, 0xa7, 0x70, 0xe4, 0xe5, 0x11, 0x6b, 0x25, 0x1d, 0xdf, 0xba, 0xed, 0x38,
+	0x1b, 0xc0, 0xf3, 0x12, 0x8e, 0x4d, 0x4f, 0xfe, 0x09, 0x76, 0xcf, 0xce, 0x47, 0xe7, 0x7a, 0x22,
+	0xd5, 0x33, 0xd0, 0x66, 0xea, 0x19, 0x33, 0xdf, 0x80, 0xae, 0x6e, 0xdf, 0xd4, 0xcb, 0x3b, 0x70,
+	0x4e, 0xfa, 0x83, 0xfe, 0xa8, 0x3f, 0xc4, 0x38, 0xb9, 0xac, 0xb0, 0xc3, 0xba, 0xf0, 0xa2, 0x14,
+	0x6d, 0xd4, 0x0f, 0xff, 0x35, 0x6e, 0xe4, 0x09, 0x42, 0x3b, 0x73, 0x4d, 0xc8, 0xcb, 0xbc, 0x8f,
+	0xd2, 0x1b, 0xe8, 0xbc, 0xba, 0x1b, 0x64, 0x54, 0x58, 0x7b, 0x7e, 0x4d, 0x9b, 0xf0, 0xc0, 0x13,
+	0xe8, 0x73, 0x12, 0x43, 0x27, 0xd7, 0x09, 0xb2, 0x9f, 0xe7, 0x58, 0xd3, 0x68, 0xe7, 0x75, 0x15,
+	0xcc, 0x8a, 0x75, 0xe6, 0xd7, 0xb4, 0x05, 0x4d, 0xcf, 0xbc, 0x1f, 0x22, 0xa1, 0x73, 0x82, 0x11,
+	0xde, 0xca, 0x1d, 0xe4, 0x79, 0xd6, 0xf7, 0xd2, 0x79, 0x7b, 0x0f, 0x64, 0x41, 0x94, 0x6b, 0x29,
+	0x92, 0x40, 0x27, 0x77, 0xf3, 0x48, 0xd1, 0xfc, 0x9a, 0xeb, 0xed, 0xbc, 0xa9, 0xc4, 0x15, 0x04,
+	0xcd, 0x27, 0x42, 0x2e, 0x60, 0x3b, 0xfb, 0xfa, 0xc8, 0xea, 0x5c, 0x4a, 0x9e, 0xad, 0xb3, 0x5f,
+	0x81, 0x2a, 0x8c, 0x2f, 0x0a, 0x17, 0x13, 0x9f, 0x5f, 0x75, 0x9f, 0xc2, 0x93, 0xc2, 0x7f, 0x3c,
+	0xbf, 0xea, 0xb6, 0x49, 0x4b, 0xf6, 0x6c, 0x38, 0x7e, 0xa8, 0x19, 0x3f, 0xfc, 0x0f, 0x00, 0x00,
+	0xff, 0xff, 0x76, 0xca, 0x75, 0xb9, 0xd7, 0x05, 0x00, 0x00,
 }
