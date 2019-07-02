@@ -7,3 +7,368 @@ import (
 
 	"github.com/monzo/typhon"
 )
+
+// -------------------------
+// GET /service.color/read
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body GETReadColorRequest) Method() string {
+	return "GET"
+}
+
+// Path is the HTTP path to this endpoint
+func (body GETReadColorRequest) Path() string {
+	return "/read"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body GETReadColorRequest) ServiceName() string {
+	return "service.color"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body GETReadColorRequest) Host() string {
+	return "s-color"
+}
+
+// FullPath is the full routable URL to this service.
+func (body GETReadColorRequest) FullPath() string {
+	return "http://s-color/read"
+}
+
+// Request returns a typhon request for this type.
+func (body GETReadColorRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body GETReadColorRequest) Response(ctx context.Context) (*GETReadColorResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETReadColorRequest) Send(ctx context.Context) *GETReadColorFuture {
+	return &GETReadColorFuture{Future: body.Request(ctx).Send()}
+}
+
+// GETReadColorFuture is an intermediate future used for parallel requests with GETReadColorRequest
+type GETReadColorFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *GETReadColorFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *GETReadColorFuture) DecodeResponse() (*GETReadColorResponse, error) {
+	f.Done()
+
+	body := &GETReadColorResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// PUT /service.color/update
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body PUTUpdateColorRequest) Method() string {
+	return "PUT"
+}
+
+// Path is the HTTP path to this endpoint
+func (body PUTUpdateColorRequest) Path() string {
+	return "/update"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body PUTUpdateColorRequest) ServiceName() string {
+	return "service.color"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body PUTUpdateColorRequest) Host() string {
+	return "s-color"
+}
+
+// FullPath is the full routable URL to this service.
+func (body PUTUpdateColorRequest) FullPath() string {
+	return "http://s-color/update"
+}
+
+// Request returns a typhon request for this type.
+func (body PUTUpdateColorRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body PUTUpdateColorRequest) Response(ctx context.Context) (*PUTUpdateColorResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body PUTUpdateColorRequest) Send(ctx context.Context) *PUTUpdateColorFuture {
+	return &PUTUpdateColorFuture{Future: body.Request(ctx).Send()}
+}
+
+// PUTUpdateColorFuture is an intermediate future used for parallel requests with PUTUpdateColorRequest
+type PUTUpdateColorFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *PUTUpdateColorFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *PUTUpdateColorFuture) DecodeResponse() (*PUTUpdateColorResponse, error) {
+	f.Done()
+
+	body := &PUTUpdateColorResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// DELETE /service.color/delete
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body DELETERemoveColorRequest) Method() string {
+	return "DELETE"
+}
+
+// Path is the HTTP path to this endpoint
+func (body DELETERemoveColorRequest) Path() string {
+	return "/delete"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body DELETERemoveColorRequest) ServiceName() string {
+	return "service.color"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body DELETERemoveColorRequest) Host() string {
+	return "s-color"
+}
+
+// FullPath is the full routable URL to this service.
+func (body DELETERemoveColorRequest) FullPath() string {
+	return "http://s-color/delete"
+}
+
+// Request returns a typhon request for this type.
+func (body DELETERemoveColorRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body DELETERemoveColorRequest) Response(ctx context.Context) (*DELETERemoveColorResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body DELETERemoveColorRequest) Send(ctx context.Context) *DELETERemoveColorFuture {
+	return &DELETERemoveColorFuture{Future: body.Request(ctx).Send()}
+}
+
+// DELETERemoveColorFuture is an intermediate future used for parallel requests with DELETERemoveColorRequest
+type DELETERemoveColorFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *DELETERemoveColorFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *DELETERemoveColorFuture) DecodeResponse() (*DELETERemoveColorResponse, error) {
+	f.Done()
+
+	body := &DELETERemoveColorResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// POST /service.color/create
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body POSTCreateColorRequest) Method() string {
+	return "POST"
+}
+
+// Path is the HTTP path to this endpoint
+func (body POSTCreateColorRequest) Path() string {
+	return "/create"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body POSTCreateColorRequest) ServiceName() string {
+	return "service.color"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body POSTCreateColorRequest) Host() string {
+	return "s-color"
+}
+
+// FullPath is the full routable URL to this service.
+func (body POSTCreateColorRequest) FullPath() string {
+	return "http://s-color/create"
+}
+
+// Request returns a typhon request for this type.
+func (body POSTCreateColorRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body POSTCreateColorRequest) Response(ctx context.Context) (*POSTCreateColorResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateColorRequest) Send(ctx context.Context) *POSTCreateColorFuture {
+	return &POSTCreateColorFuture{Future: body.Request(ctx).Send()}
+}
+
+// POSTCreateColorFuture is an intermediate future used for parallel requests with POSTCreateColorRequest
+type POSTCreateColorFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *POSTCreateColorFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *POSTCreateColorFuture) DecodeResponse() (*POSTCreateColorResponse, error) {
+	f.Done()
+
+	body := &POSTCreateColorResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// GET /service.color/list
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body GETListColorsRequest) Method() string {
+	return "GET"
+}
+
+// Path is the HTTP path to this endpoint
+func (body GETListColorsRequest) Path() string {
+	return "/list"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body GETListColorsRequest) ServiceName() string {
+	return "service.color"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body GETListColorsRequest) Host() string {
+	return "s-color"
+}
+
+// FullPath is the full routable URL to this service.
+func (body GETListColorsRequest) FullPath() string {
+	return "http://s-color/list"
+}
+
+// Request returns a typhon request for this type.
+func (body GETListColorsRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body GETListColorsRequest) Response(ctx context.Context) (*GETListColorsResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETListColorsRequest) Send(ctx context.Context) *GETListColorsFuture {
+	return &GETListColorsFuture{Future: body.Request(ctx).Send()}
+}
+
+// GETListColorsFuture is an intermediate future used for parallel requests with GETListColorsRequest
+type GETListColorsFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *GETListColorsFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *GETListColorsFuture) DecodeResponse() (*GETListColorsResponse, error) {
+	f.Done()
+
+	body := &GETListColorsResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}

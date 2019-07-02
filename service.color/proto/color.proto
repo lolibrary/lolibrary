@@ -7,5 +7,85 @@ service color {
     option (router).name = "service.color";
     option (router).short_name = "s-color";
 
-    //
+    rpc ReadColor (GETReadColorRequest) returns (GETReadColorResponse) {
+        option (handler).path = "/read";
+    }
+
+    rpc UpdateColor (PUTUpdateColorRequest) returns (PUTUpdateColorResponse) {
+        option (handler).path = "/update";
+    }
+
+    rpc DeleteColor (DELETERemoveColorRequest) returns (DELETERemoveColorResponse) {
+        option (handler).path = "/delete";
+    }
+
+    rpc CreateColor (POSTCreateColorRequest) returns (POSTCreateColorResponse) {
+        option (handler).path = "/create";
+    }
+
+    rpc ListColors (GETListColorsRequest) returns (GETListColorsResponse) {
+        option (handler).path = "/list";
+    }
 }
+
+message Color {
+    string id = 1;
+    string slug = 2;
+    string name = 4;
+
+    // timestamps
+    string created_at = 100;
+    string updated_at = 101;
+}
+
+// GET /service.color/read {"id": "<uuid>"}
+
+message GETReadColorRequest {
+    string id = 1;
+    string slug = 2;
+}
+
+message GETReadColorResponse {
+    Color color = 1;
+}
+
+// GET /service.color/list
+
+message GETListColorsRequest {
+}
+
+message GETListColorsResponse {
+    repeated Color colors = 1;
+}
+
+// POST /service.color/create {"color": {...}}
+
+message POSTCreateColorRequest {
+    string slug = 1;
+    string name = 3;
+}
+
+message POSTCreateColorResponse {
+    Color color = 1;
+}
+
+// PUT /service.color/update {"id": "...", "color": {...}}
+
+message PUTUpdateColorRequest {
+    string id = 1;
+    string name = 2;
+}
+
+message PUTUpdateColorResponse {
+    Color color = 1;
+}
+
+// DELETE /service.color/delete {"id": "..."}
+
+message DELETERemoveColorRequest {
+    string id = 1;
+}
+
+message DELETERemoveColorResponse {
+}
+

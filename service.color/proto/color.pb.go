@@ -21,19 +21,526 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type Color struct {
+	Id   string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Slug string `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
+	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	// timestamps
+	CreatedAt            string   `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Color) Reset()         { *m = Color{} }
+func (m *Color) String() string { return proto.CompactTextString(m) }
+func (*Color) ProtoMessage()    {}
+func (*Color) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d9eff94eab42a591, []int{0}
+}
+
+func (m *Color) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Color.Unmarshal(m, b)
+}
+func (m *Color) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Color.Marshal(b, m, deterministic)
+}
+func (m *Color) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Color.Merge(m, src)
+}
+func (m *Color) XXX_Size() int {
+	return xxx_messageInfo_Color.Size(m)
+}
+func (m *Color) XXX_DiscardUnknown() {
+	xxx_messageInfo_Color.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Color proto.InternalMessageInfo
+
+func (m *Color) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Color) GetSlug() string {
+	if m != nil {
+		return m.Slug
+	}
+	return ""
+}
+
+func (m *Color) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *Color) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *Color) GetUpdatedAt() string {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return ""
+}
+
+type GETReadColorRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Slug                 string   `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GETReadColorRequest) Reset()         { *m = GETReadColorRequest{} }
+func (m *GETReadColorRequest) String() string { return proto.CompactTextString(m) }
+func (*GETReadColorRequest) ProtoMessage()    {}
+func (*GETReadColorRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d9eff94eab42a591, []int{1}
+}
+
+func (m *GETReadColorRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETReadColorRequest.Unmarshal(m, b)
+}
+func (m *GETReadColorRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETReadColorRequest.Marshal(b, m, deterministic)
+}
+func (m *GETReadColorRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETReadColorRequest.Merge(m, src)
+}
+func (m *GETReadColorRequest) XXX_Size() int {
+	return xxx_messageInfo_GETReadColorRequest.Size(m)
+}
+func (m *GETReadColorRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETReadColorRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETReadColorRequest proto.InternalMessageInfo
+
+func (m *GETReadColorRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *GETReadColorRequest) GetSlug() string {
+	if m != nil {
+		return m.Slug
+	}
+	return ""
+}
+
+type GETReadColorResponse struct {
+	Color                *Color   `protobuf:"bytes,1,opt,name=color,proto3" json:"color,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GETReadColorResponse) Reset()         { *m = GETReadColorResponse{} }
+func (m *GETReadColorResponse) String() string { return proto.CompactTextString(m) }
+func (*GETReadColorResponse) ProtoMessage()    {}
+func (*GETReadColorResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d9eff94eab42a591, []int{2}
+}
+
+func (m *GETReadColorResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETReadColorResponse.Unmarshal(m, b)
+}
+func (m *GETReadColorResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETReadColorResponse.Marshal(b, m, deterministic)
+}
+func (m *GETReadColorResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETReadColorResponse.Merge(m, src)
+}
+func (m *GETReadColorResponse) XXX_Size() int {
+	return xxx_messageInfo_GETReadColorResponse.Size(m)
+}
+func (m *GETReadColorResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETReadColorResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETReadColorResponse proto.InternalMessageInfo
+
+func (m *GETReadColorResponse) GetColor() *Color {
+	if m != nil {
+		return m.Color
+	}
+	return nil
+}
+
+type GETListColorsRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GETListColorsRequest) Reset()         { *m = GETListColorsRequest{} }
+func (m *GETListColorsRequest) String() string { return proto.CompactTextString(m) }
+func (*GETListColorsRequest) ProtoMessage()    {}
+func (*GETListColorsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d9eff94eab42a591, []int{3}
+}
+
+func (m *GETListColorsRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETListColorsRequest.Unmarshal(m, b)
+}
+func (m *GETListColorsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETListColorsRequest.Marshal(b, m, deterministic)
+}
+func (m *GETListColorsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETListColorsRequest.Merge(m, src)
+}
+func (m *GETListColorsRequest) XXX_Size() int {
+	return xxx_messageInfo_GETListColorsRequest.Size(m)
+}
+func (m *GETListColorsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETListColorsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETListColorsRequest proto.InternalMessageInfo
+
+type GETListColorsResponse struct {
+	Colors               []*Color `protobuf:"bytes,1,rep,name=colors,proto3" json:"colors,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GETListColorsResponse) Reset()         { *m = GETListColorsResponse{} }
+func (m *GETListColorsResponse) String() string { return proto.CompactTextString(m) }
+func (*GETListColorsResponse) ProtoMessage()    {}
+func (*GETListColorsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d9eff94eab42a591, []int{4}
+}
+
+func (m *GETListColorsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETListColorsResponse.Unmarshal(m, b)
+}
+func (m *GETListColorsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETListColorsResponse.Marshal(b, m, deterministic)
+}
+func (m *GETListColorsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETListColorsResponse.Merge(m, src)
+}
+func (m *GETListColorsResponse) XXX_Size() int {
+	return xxx_messageInfo_GETListColorsResponse.Size(m)
+}
+func (m *GETListColorsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETListColorsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETListColorsResponse proto.InternalMessageInfo
+
+func (m *GETListColorsResponse) GetColors() []*Color {
+	if m != nil {
+		return m.Colors
+	}
+	return nil
+}
+
+type POSTCreateColorRequest struct {
+	Slug                 string   `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`
+	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *POSTCreateColorRequest) Reset()         { *m = POSTCreateColorRequest{} }
+func (m *POSTCreateColorRequest) String() string { return proto.CompactTextString(m) }
+func (*POSTCreateColorRequest) ProtoMessage()    {}
+func (*POSTCreateColorRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d9eff94eab42a591, []int{5}
+}
+
+func (m *POSTCreateColorRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_POSTCreateColorRequest.Unmarshal(m, b)
+}
+func (m *POSTCreateColorRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_POSTCreateColorRequest.Marshal(b, m, deterministic)
+}
+func (m *POSTCreateColorRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_POSTCreateColorRequest.Merge(m, src)
+}
+func (m *POSTCreateColorRequest) XXX_Size() int {
+	return xxx_messageInfo_POSTCreateColorRequest.Size(m)
+}
+func (m *POSTCreateColorRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_POSTCreateColorRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_POSTCreateColorRequest proto.InternalMessageInfo
+
+func (m *POSTCreateColorRequest) GetSlug() string {
+	if m != nil {
+		return m.Slug
+	}
+	return ""
+}
+
+func (m *POSTCreateColorRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+type POSTCreateColorResponse struct {
+	Color                *Color   `protobuf:"bytes,1,opt,name=color,proto3" json:"color,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *POSTCreateColorResponse) Reset()         { *m = POSTCreateColorResponse{} }
+func (m *POSTCreateColorResponse) String() string { return proto.CompactTextString(m) }
+func (*POSTCreateColorResponse) ProtoMessage()    {}
+func (*POSTCreateColorResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d9eff94eab42a591, []int{6}
+}
+
+func (m *POSTCreateColorResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_POSTCreateColorResponse.Unmarshal(m, b)
+}
+func (m *POSTCreateColorResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_POSTCreateColorResponse.Marshal(b, m, deterministic)
+}
+func (m *POSTCreateColorResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_POSTCreateColorResponse.Merge(m, src)
+}
+func (m *POSTCreateColorResponse) XXX_Size() int {
+	return xxx_messageInfo_POSTCreateColorResponse.Size(m)
+}
+func (m *POSTCreateColorResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_POSTCreateColorResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_POSTCreateColorResponse proto.InternalMessageInfo
+
+func (m *POSTCreateColorResponse) GetColor() *Color {
+	if m != nil {
+		return m.Color
+	}
+	return nil
+}
+
+type PUTUpdateColorRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PUTUpdateColorRequest) Reset()         { *m = PUTUpdateColorRequest{} }
+func (m *PUTUpdateColorRequest) String() string { return proto.CompactTextString(m) }
+func (*PUTUpdateColorRequest) ProtoMessage()    {}
+func (*PUTUpdateColorRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d9eff94eab42a591, []int{7}
+}
+
+func (m *PUTUpdateColorRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PUTUpdateColorRequest.Unmarshal(m, b)
+}
+func (m *PUTUpdateColorRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PUTUpdateColorRequest.Marshal(b, m, deterministic)
+}
+func (m *PUTUpdateColorRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PUTUpdateColorRequest.Merge(m, src)
+}
+func (m *PUTUpdateColorRequest) XXX_Size() int {
+	return xxx_messageInfo_PUTUpdateColorRequest.Size(m)
+}
+func (m *PUTUpdateColorRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PUTUpdateColorRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PUTUpdateColorRequest proto.InternalMessageInfo
+
+func (m *PUTUpdateColorRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *PUTUpdateColorRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+type PUTUpdateColorResponse struct {
+	Color                *Color   `protobuf:"bytes,1,opt,name=color,proto3" json:"color,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PUTUpdateColorResponse) Reset()         { *m = PUTUpdateColorResponse{} }
+func (m *PUTUpdateColorResponse) String() string { return proto.CompactTextString(m) }
+func (*PUTUpdateColorResponse) ProtoMessage()    {}
+func (*PUTUpdateColorResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d9eff94eab42a591, []int{8}
+}
+
+func (m *PUTUpdateColorResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PUTUpdateColorResponse.Unmarshal(m, b)
+}
+func (m *PUTUpdateColorResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PUTUpdateColorResponse.Marshal(b, m, deterministic)
+}
+func (m *PUTUpdateColorResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PUTUpdateColorResponse.Merge(m, src)
+}
+func (m *PUTUpdateColorResponse) XXX_Size() int {
+	return xxx_messageInfo_PUTUpdateColorResponse.Size(m)
+}
+func (m *PUTUpdateColorResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_PUTUpdateColorResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PUTUpdateColorResponse proto.InternalMessageInfo
+
+func (m *PUTUpdateColorResponse) GetColor() *Color {
+	if m != nil {
+		return m.Color
+	}
+	return nil
+}
+
+type DELETERemoveColorRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DELETERemoveColorRequest) Reset()         { *m = DELETERemoveColorRequest{} }
+func (m *DELETERemoveColorRequest) String() string { return proto.CompactTextString(m) }
+func (*DELETERemoveColorRequest) ProtoMessage()    {}
+func (*DELETERemoveColorRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d9eff94eab42a591, []int{9}
+}
+
+func (m *DELETERemoveColorRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DELETERemoveColorRequest.Unmarshal(m, b)
+}
+func (m *DELETERemoveColorRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DELETERemoveColorRequest.Marshal(b, m, deterministic)
+}
+func (m *DELETERemoveColorRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DELETERemoveColorRequest.Merge(m, src)
+}
+func (m *DELETERemoveColorRequest) XXX_Size() int {
+	return xxx_messageInfo_DELETERemoveColorRequest.Size(m)
+}
+func (m *DELETERemoveColorRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DELETERemoveColorRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DELETERemoveColorRequest proto.InternalMessageInfo
+
+func (m *DELETERemoveColorRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type DELETERemoveColorResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DELETERemoveColorResponse) Reset()         { *m = DELETERemoveColorResponse{} }
+func (m *DELETERemoveColorResponse) String() string { return proto.CompactTextString(m) }
+func (*DELETERemoveColorResponse) ProtoMessage()    {}
+func (*DELETERemoveColorResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d9eff94eab42a591, []int{10}
+}
+
+func (m *DELETERemoveColorResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DELETERemoveColorResponse.Unmarshal(m, b)
+}
+func (m *DELETERemoveColorResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DELETERemoveColorResponse.Marshal(b, m, deterministic)
+}
+func (m *DELETERemoveColorResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DELETERemoveColorResponse.Merge(m, src)
+}
+func (m *DELETERemoveColorResponse) XXX_Size() int {
+	return xxx_messageInfo_DELETERemoveColorResponse.Size(m)
+}
+func (m *DELETERemoveColorResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_DELETERemoveColorResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DELETERemoveColorResponse proto.InternalMessageInfo
+
+func init() {
+	proto.RegisterType((*Color)(nil), "colorproto.Color")
+	proto.RegisterType((*GETReadColorRequest)(nil), "colorproto.GETReadColorRequest")
+	proto.RegisterType((*GETReadColorResponse)(nil), "colorproto.GETReadColorResponse")
+	proto.RegisterType((*GETListColorsRequest)(nil), "colorproto.GETListColorsRequest")
+	proto.RegisterType((*GETListColorsResponse)(nil), "colorproto.GETListColorsResponse")
+	proto.RegisterType((*POSTCreateColorRequest)(nil), "colorproto.POSTCreateColorRequest")
+	proto.RegisterType((*POSTCreateColorResponse)(nil), "colorproto.POSTCreateColorResponse")
+	proto.RegisterType((*PUTUpdateColorRequest)(nil), "colorproto.PUTUpdateColorRequest")
+	proto.RegisterType((*PUTUpdateColorResponse)(nil), "colorproto.PUTUpdateColorResponse")
+	proto.RegisterType((*DELETERemoveColorRequest)(nil), "colorproto.DELETERemoveColorRequest")
+	proto.RegisterType((*DELETERemoveColorResponse)(nil), "colorproto.DELETERemoveColorResponse")
+}
+
 func init() {
 	proto.RegisterFile("github.com/lolibrary/lolibrary/service.color/proto/color.proto", fileDescriptor_d9eff94eab42a591)
 }
 
 var fileDescriptor_d9eff94eab42a591 = []byte{
-	// 136 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xb2, 0x4b, 0xcf, 0x2c, 0xc9,
-	0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0xcf, 0xc9, 0xcf, 0xc9, 0x4c, 0x2a, 0x4a, 0x2c, 0xaa,
-	0x44, 0x62, 0x15, 0xa7, 0x16, 0x95, 0x65, 0x26, 0xa7, 0xea, 0x25, 0xe7, 0xe7, 0xe4, 0x17, 0xe9,
-	0x17, 0x14, 0xe5, 0x97, 0xe4, 0xeb, 0x83, 0xd9, 0x7a, 0x60, 0xb6, 0x10, 0x17, 0x98, 0x03, 0x66,
-	0x4b, 0xb9, 0x13, 0x30, 0x2b, 0x39, 0x37, 0x05, 0x62, 0x42, 0xb2, 0x6e, 0x7a, 0x6a, 0x9e, 0x6e,
-	0x51, 0x7e, 0x69, 0x49, 0x2a, 0xcc, 0x4c, 0x08, 0x07, 0x62, 0xa8, 0x91, 0x26, 0x17, 0x2b, 0xd8,
-	0x58, 0x29, 0x85, 0xa6, 0x65, 0xb2, 0xfc, 0x5c, 0xbc, 0x28, 0x8e, 0x68, 0x5a, 0x26, 0xcb, 0x29,
-	0xc4, 0x5e, 0xac, 0x0b, 0xe6, 0x24, 0xb1, 0x81, 0x75, 0x18, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff,
-	0x0a, 0x12, 0xce, 0x4e, 0xc8, 0x00, 0x00, 0x00,
+	// 504 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x54, 0x4f, 0x6f, 0xd3, 0x4e,
+	0x10, 0x55, 0xd2, 0xa4, 0x91, 0xc7, 0xea, 0xef, 0x27, 0x16, 0x1a, 0x8c, 0x51, 0x44, 0xba, 0x80,
+	0xf8, 0x23, 0xc5, 0x96, 0xca, 0x09, 0x21, 0x01, 0x69, 0x1b, 0xf5, 0x52, 0x89, 0x2a, 0xa4, 0x27,
+	0x24, 0x90, 0xe3, 0x1d, 0x05, 0x4b, 0x4e, 0x36, 0x78, 0xd7, 0x95, 0x38, 0x70, 0xc9, 0xf7, 0xe0,
+	0xda, 0x6f, 0xd0, 0xef, 0x87, 0x3c, 0xeb, 0x10, 0xc7, 0x75, 0x13, 0x7a, 0x1b, 0xcf, 0xbc, 0x79,
+	0x6f, 0xf6, 0xed, 0xac, 0xe1, 0xfd, 0x24, 0xd2, 0xdf, 0xd3, 0xb1, 0x17, 0xca, 0xa9, 0x1f, 0xcb,
+	0x38, 0x1a, 0x27, 0x41, 0xf2, 0xb3, 0x10, 0x29, 0x4c, 0x2e, 0xa3, 0x10, 0xbd, 0x50, 0xc6, 0x32,
+	0xf1, 0xe7, 0x89, 0xd4, 0xd2, 0xa7, 0xd8, 0xa3, 0x98, 0x01, 0x7d, 0x50, 0xec, 0x9e, 0x6e, 0xe1,
+	0x0a, 0xa7, 0xc2, 0x30, 0x84, 0xbd, 0x09, 0xce, 0x7a, 0x89, 0x4c, 0x35, 0x2e, 0x39, 0xcd, 0x87,
+	0x21, 0xe5, 0xbf, 0xa0, 0x79, 0x9c, 0xd1, 0xb2, 0xff, 0xa0, 0x1e, 0x09, 0xa7, 0xd6, 0xad, 0xbd,
+	0xb4, 0x86, 0xf5, 0x48, 0x30, 0x06, 0x0d, 0x15, 0xa7, 0x13, 0xa7, 0x4e, 0x19, 0x8a, 0xb3, 0xdc,
+	0x2c, 0x98, 0xa2, 0xd3, 0x30, 0xb9, 0x2c, 0x66, 0x1d, 0x80, 0x30, 0xc1, 0x40, 0xa3, 0xf8, 0x16,
+	0x68, 0x47, 0x50, 0xc5, 0xca, 0x33, 0x7d, 0x9d, 0x95, 0xd3, 0xb9, 0x58, 0x96, 0xd1, 0x94, 0xf3,
+	0x4c, 0x5f, 0xf3, 0xb7, 0x70, 0xff, 0x74, 0x30, 0x1a, 0x62, 0x20, 0x68, 0x8a, 0x21, 0xfe, 0x48,
+	0x51, 0xe9, 0x7f, 0x19, 0x86, 0x7f, 0x80, 0x07, 0xeb, 0xad, 0x6a, 0x2e, 0x67, 0x0a, 0xd9, 0x0b,
+	0x68, 0x92, 0x51, 0xd4, 0x6e, 0x1f, 0xde, 0xf3, 0x56, 0xb6, 0x79, 0x06, 0x69, 0xea, 0xbc, 0x4d,
+	0x04, 0x67, 0x91, 0xd2, 0x94, 0x56, 0xb9, 0x38, 0x3f, 0x82, 0xfd, 0x52, 0x3e, 0x67, 0x7e, 0x05,
+	0xbb, 0xd4, 0xa9, 0x9c, 0x5a, 0x77, 0xa7, 0x9a, 0x3a, 0x07, 0xf0, 0x8f, 0xd0, 0x3e, 0xff, 0xf4,
+	0x79, 0x74, 0x4c, 0x3e, 0xac, 0x1d, 0x6d, 0x79, 0x94, 0x5a, 0x85, 0xaf, 0x3b, 0x2b, 0x5f, 0xf9,
+	0x11, 0x3c, 0xbc, 0xc1, 0x70, 0xd7, 0x13, 0xbe, 0x83, 0xfd, 0xf3, 0x8b, 0xd1, 0x05, 0xb9, 0xbd,
+	0xcd, 0x5f, 0x1a, 0xa0, 0x5e, 0x18, 0xa0, 0x0f, 0xed, 0x72, 0xf3, 0x5d, 0xf5, 0x5f, 0x83, 0x73,
+	0x32, 0x38, 0x1b, 0x8c, 0x06, 0x43, 0x9c, 0xca, 0xcb, 0x8d, 0x23, 0xf0, 0xc7, 0xf0, 0xa8, 0x02,
+	0x6b, 0x14, 0x0f, 0x7f, 0x37, 0x72, 0x49, 0xf6, 0x05, 0xac, 0xbf, 0x57, 0xce, 0x9e, 0x14, 0x95,
+	0x2b, 0xf6, 0xc8, 0xed, 0xde, 0x0e, 0x30, 0xcc, 0xdc, 0x5e, 0x5c, 0x3b, 0x2d, 0x68, 0xfa, 0x09,
+	0x06, 0x82, 0x85, 0x60, 0x17, 0xce, 0xcb, 0x0e, 0x8a, 0xdd, 0x95, 0x46, 0xba, 0x7c, 0x13, 0x24,
+	0x97, 0xd8, 0x5b, 0x5c, 0x3b, 0x16, 0xb4, 0x7c, 0xb3, 0xf5, 0x2c, 0x02, 0xfb, 0x04, 0x63, 0x5c,
+	0x8a, 0x3c, 0x2b, 0x32, 0xdc, 0xe6, 0x96, 0xfb, 0x7c, 0x0b, 0xaa, 0x24, 0x25, 0x48, 0x80, 0x21,
+	0xd8, 0x85, 0xfd, 0x61, 0xeb, 0xc3, 0x56, 0xae, 0xa7, 0xfb, 0x74, 0x23, 0xa6, 0x24, 0x63, 0x9e,
+	0x39, 0xfb, 0x0a, 0xb0, 0x7a, 0x2d, 0xac, 0xec, 0xf9, 0x8d, 0x07, 0xe6, 0x1e, 0x6c, 0x40, 0x94,
+	0xae, 0x25, 0x8e, 0xb2, 0x5b, 0x5c, 0x5c, 0x75, 0xfe, 0x87, 0xbd, 0xb5, 0xff, 0xe3, 0xe2, 0xaa,
+	0x63, 0xb1, 0x96, 0xea, 0xd1, 0xc7, 0x78, 0x97, 0xb8, 0xde, 0xfc, 0x09, 0x00, 0x00, 0xff, 0xff,
+	0x9d, 0xde, 0x58, 0xfb, 0x63, 0x05, 0x00, 0x00,
 }
