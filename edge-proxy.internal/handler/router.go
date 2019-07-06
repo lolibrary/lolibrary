@@ -50,10 +50,16 @@ func handle(req typhon.Request, service, path string) typhon.Response {
 	slog.Trace(req, "Handling parsed URL: %v", url)
 
 	if _, err := net.Dial("tcp", "%s:80"); err != nil {
+		slog.Error(req, "Unable to connect to %s: %v", service, err)
 		return typhon.Response{Error: terrors.NotFound("service", fmt.Sprintf("Unable to connect to %v", service), nil)}
 	}
 
-	return typhon.NewRequest(req, req.Method, url, req.Body).Send().Response()
+	req.Host = service
+	req.URL.Scheme = "http"
+	req.URL.Path = "/" + strings.TrimPrefix(path, "/")
+	req.URL.Host = service
+
+	return req.Send().Response()
 }
 
 // handleAPI takes a request and sends it to an internal API endpoint
