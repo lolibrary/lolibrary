@@ -34,6 +34,15 @@ spec:
     - name: cockroachdb-client
       image: cockroachdb/cockroach:v19.1.2
       imagePullPolicy: IfNotPresent
+      env:
+        - name: COCKROACH_CERTS_DIR
+          value: /cockroach-certs
+        - name: COCKROACH_HOST
+          value: running-kitten-cockroachdb-public
+        - name: COCKROACH_USER
+          value: root
+        - name: COCKROACH_DATABASE
+          value: lolibrary
       volumeMounts:
         - name: client-certs
           mountPath: /cockroach-certs
