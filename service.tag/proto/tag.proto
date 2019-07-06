@@ -7,5 +7,85 @@ service tag {
     option (router).name = "service.tag";
     option (router).short_name = "s-tag";
 
-    //
+    rpc ReadTag (GETReadTagRequest) returns (GETReadTagResponse) {
+        option (handler).path = "/read";
+    }
+
+    rpc UpdateTag (PUTUpdateTagRequest) returns (PUTUpdateTagResponse) {
+        option (handler).path = "/update";
+    }
+
+    rpc DeleteTag (DELETERemoveTagRequest) returns (DELETERemoveTagResponse) {
+        option (handler).path = "/delete";
+    }
+
+    rpc CreateTag (POSTCreateTagRequest) returns (POSTCreateTagResponse) {
+        option (handler).path = "/create";
+    }
+
+    rpc ListTags (GETListTagsRequest) returns (GETListTagsResponse) {
+        option (handler).path = "/list";
+    }
 }
+
+message Tag {
+    string id = 1;
+    string slug = 2;
+    string name = 4;
+
+    // timestamps
+    string created_at = 100;
+    string updated_at = 101;
+}
+
+// GET /service.tag/read {"id": "<uuid>"}
+
+message GETReadTagRequest {
+    string id = 1;
+    string slug = 2;
+}
+
+message GETReadTagResponse {
+    Tag tag = 1;
+}
+
+// GET /service.tag/list
+
+message GETListTagsRequest {
+}
+
+message GETListTagsResponse {
+    repeated Tag tags = 1;
+}
+
+// POST /service.tag/create {"tag": {...}}
+
+message POSTCreateTagRequest {
+    string slug = 1;
+    string name = 3;
+}
+
+message POSTCreateTagResponse {
+    Tag tag = 1;
+}
+
+// PUT /service.tag/update {"id": "...", "tag": {...}}
+
+message PUTUpdateTagRequest {
+    string id = 1;
+    string name = 2;
+}
+
+message PUTUpdateTagResponse {
+    Tag tag = 1;
+}
+
+// DELETE /service.tag/delete {"id": "..."}
+
+message DELETERemoveTagRequest {
+    string id = 1;
+}
+
+message DELETERemoveTagResponse {
+}
+

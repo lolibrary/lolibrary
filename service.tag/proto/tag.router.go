@@ -7,3 +7,368 @@ import (
 
 	"github.com/monzo/typhon"
 )
+
+// -------------------------
+// GET /service.tag/read
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body GETReadTagRequest) Method() string {
+	return "GET"
+}
+
+// Path is the HTTP path to this endpoint
+func (body GETReadTagRequest) Path() string {
+	return "/read"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body GETReadTagRequest) ServiceName() string {
+	return "service.tag"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body GETReadTagRequest) Host() string {
+	return "s-tag"
+}
+
+// FullPath is the full routable URL to this service.
+func (body GETReadTagRequest) FullPath() string {
+	return "http://s-tag/read"
+}
+
+// Request returns a typhon request for this type.
+func (body GETReadTagRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body GETReadTagRequest) Response(ctx context.Context) (*GETReadTagResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETReadTagRequest) Send(ctx context.Context) *GETReadTagFuture {
+	return &GETReadTagFuture{Future: body.Request(ctx).Send()}
+}
+
+// GETReadTagFuture is an intermediate future used for parallel requests with GETReadTagRequest
+type GETReadTagFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *GETReadTagFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *GETReadTagFuture) DecodeResponse() (*GETReadTagResponse, error) {
+	f.Done()
+
+	body := &GETReadTagResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// PUT /service.tag/update
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body PUTUpdateTagRequest) Method() string {
+	return "PUT"
+}
+
+// Path is the HTTP path to this endpoint
+func (body PUTUpdateTagRequest) Path() string {
+	return "/update"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body PUTUpdateTagRequest) ServiceName() string {
+	return "service.tag"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body PUTUpdateTagRequest) Host() string {
+	return "s-tag"
+}
+
+// FullPath is the full routable URL to this service.
+func (body PUTUpdateTagRequest) FullPath() string {
+	return "http://s-tag/update"
+}
+
+// Request returns a typhon request for this type.
+func (body PUTUpdateTagRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body PUTUpdateTagRequest) Response(ctx context.Context) (*PUTUpdateTagResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body PUTUpdateTagRequest) Send(ctx context.Context) *PUTUpdateTagFuture {
+	return &PUTUpdateTagFuture{Future: body.Request(ctx).Send()}
+}
+
+// PUTUpdateTagFuture is an intermediate future used for parallel requests with PUTUpdateTagRequest
+type PUTUpdateTagFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *PUTUpdateTagFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *PUTUpdateTagFuture) DecodeResponse() (*PUTUpdateTagResponse, error) {
+	f.Done()
+
+	body := &PUTUpdateTagResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// DELETE /service.tag/delete
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body DELETERemoveTagRequest) Method() string {
+	return "DELETE"
+}
+
+// Path is the HTTP path to this endpoint
+func (body DELETERemoveTagRequest) Path() string {
+	return "/delete"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body DELETERemoveTagRequest) ServiceName() string {
+	return "service.tag"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body DELETERemoveTagRequest) Host() string {
+	return "s-tag"
+}
+
+// FullPath is the full routable URL to this service.
+func (body DELETERemoveTagRequest) FullPath() string {
+	return "http://s-tag/delete"
+}
+
+// Request returns a typhon request for this type.
+func (body DELETERemoveTagRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body DELETERemoveTagRequest) Response(ctx context.Context) (*DELETERemoveTagResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body DELETERemoveTagRequest) Send(ctx context.Context) *DELETERemoveTagFuture {
+	return &DELETERemoveTagFuture{Future: body.Request(ctx).Send()}
+}
+
+// DELETERemoveTagFuture is an intermediate future used for parallel requests with DELETERemoveTagRequest
+type DELETERemoveTagFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *DELETERemoveTagFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *DELETERemoveTagFuture) DecodeResponse() (*DELETERemoveTagResponse, error) {
+	f.Done()
+
+	body := &DELETERemoveTagResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// POST /service.tag/create
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body POSTCreateTagRequest) Method() string {
+	return "POST"
+}
+
+// Path is the HTTP path to this endpoint
+func (body POSTCreateTagRequest) Path() string {
+	return "/create"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body POSTCreateTagRequest) ServiceName() string {
+	return "service.tag"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body POSTCreateTagRequest) Host() string {
+	return "s-tag"
+}
+
+// FullPath is the full routable URL to this service.
+func (body POSTCreateTagRequest) FullPath() string {
+	return "http://s-tag/create"
+}
+
+// Request returns a typhon request for this type.
+func (body POSTCreateTagRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body POSTCreateTagRequest) Response(ctx context.Context) (*POSTCreateTagResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateTagRequest) Send(ctx context.Context) *POSTCreateTagFuture {
+	return &POSTCreateTagFuture{Future: body.Request(ctx).Send()}
+}
+
+// POSTCreateTagFuture is an intermediate future used for parallel requests with POSTCreateTagRequest
+type POSTCreateTagFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *POSTCreateTagFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *POSTCreateTagFuture) DecodeResponse() (*POSTCreateTagResponse, error) {
+	f.Done()
+
+	body := &POSTCreateTagResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// GET /service.tag/list
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body GETListTagsRequest) Method() string {
+	return "GET"
+}
+
+// Path is the HTTP path to this endpoint
+func (body GETListTagsRequest) Path() string {
+	return "/list"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body GETListTagsRequest) ServiceName() string {
+	return "service.tag"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body GETListTagsRequest) Host() string {
+	return "s-tag"
+}
+
+// FullPath is the full routable URL to this service.
+func (body GETListTagsRequest) FullPath() string {
+	return "http://s-tag/list"
+}
+
+// Request returns a typhon request for this type.
+func (body GETListTagsRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body GETListTagsRequest) Response(ctx context.Context) (*GETListTagsResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETListTagsRequest) Send(ctx context.Context) *GETListTagsFuture {
+	return &GETListTagsFuture{Future: body.Request(ctx).Send()}
+}
+
+// GETListTagsFuture is an intermediate future used for parallel requests with GETListTagsRequest
+type GETListTagsFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *GETListTagsFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *GETListTagsFuture) DecodeResponse() (*GETListTagsResponse, error) {
+	f.Done()
+
+	body := &GETListTagsResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
