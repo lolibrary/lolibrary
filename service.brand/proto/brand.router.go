@@ -55,6 +55,12 @@ func (body GETReadBrandRequest) Send(ctx context.Context) *GETReadBrandFuture {
 	return &GETReadBrandFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETReadBrandRequest) SendVia(ctx context.Context, svc typhon.Service) *GETReadBrandFuture {
+	return &GETReadBrandFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // GETReadBrandFuture is an intermediate future used for parallel requests with GETReadBrandRequest
 type GETReadBrandFuture struct {
 	Future   *typhon.ResponseFuture
@@ -126,6 +132,12 @@ func (body PUTUpdateBrandRequest) Response(ctx context.Context) (*PUTUpdateBrand
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
 func (body PUTUpdateBrandRequest) Send(ctx context.Context) *PUTUpdateBrandFuture {
 	return &PUTUpdateBrandFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body PUTUpdateBrandRequest) SendVia(ctx context.Context, svc typhon.Service) *PUTUpdateBrandFuture {
+	return &PUTUpdateBrandFuture{Future: body.Request(ctx).SendVia(svc)}
 }
 
 // PUTUpdateBrandFuture is an intermediate future used for parallel requests with PUTUpdateBrandRequest
@@ -201,6 +213,12 @@ func (body DELETERemoveBrandRequest) Send(ctx context.Context) *DELETERemoveBran
 	return &DELETERemoveBrandFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body DELETERemoveBrandRequest) SendVia(ctx context.Context, svc typhon.Service) *DELETERemoveBrandFuture {
+	return &DELETERemoveBrandFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // DELETERemoveBrandFuture is an intermediate future used for parallel requests with DELETERemoveBrandRequest
 type DELETERemoveBrandFuture struct {
 	Future   *typhon.ResponseFuture
@@ -274,6 +292,12 @@ func (body POSTCreateBrandRequest) Send(ctx context.Context) *POSTCreateBrandFut
 	return &POSTCreateBrandFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateBrandRequest) SendVia(ctx context.Context, svc typhon.Service) *POSTCreateBrandFuture {
+	return &POSTCreateBrandFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // POSTCreateBrandFuture is an intermediate future used for parallel requests with POSTCreateBrandRequest
 type POSTCreateBrandFuture struct {
 	Future   *typhon.ResponseFuture
@@ -345,6 +369,12 @@ func (body GETListBrandsRequest) Response(ctx context.Context) (*GETListBrandsRe
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
 func (body GETListBrandsRequest) Send(ctx context.Context) *GETListBrandsFuture {
 	return &GETListBrandsFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETListBrandsRequest) SendVia(ctx context.Context, svc typhon.Service) *GETListBrandsFuture {
+	return &GETListBrandsFuture{Future: body.Request(ctx).SendVia(svc)}
 }
 
 // GETListBrandsFuture is an intermediate future used for parallel requests with GETListBrandsRequest

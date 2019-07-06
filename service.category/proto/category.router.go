@@ -55,6 +55,12 @@ func (body GETReadCategoryRequest) Send(ctx context.Context) *GETReadCategoryFut
 	return &GETReadCategoryFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETReadCategoryRequest) SendVia(ctx context.Context, svc typhon.Service) *GETReadCategoryFuture {
+	return &GETReadCategoryFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // GETReadCategoryFuture is an intermediate future used for parallel requests with GETReadCategoryRequest
 type GETReadCategoryFuture struct {
 	Future   *typhon.ResponseFuture
@@ -126,6 +132,12 @@ func (body PUTUpdateCategoryRequest) Response(ctx context.Context) (*PUTUpdateCa
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
 func (body PUTUpdateCategoryRequest) Send(ctx context.Context) *PUTUpdateCategoryFuture {
 	return &PUTUpdateCategoryFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body PUTUpdateCategoryRequest) SendVia(ctx context.Context, svc typhon.Service) *PUTUpdateCategoryFuture {
+	return &PUTUpdateCategoryFuture{Future: body.Request(ctx).SendVia(svc)}
 }
 
 // PUTUpdateCategoryFuture is an intermediate future used for parallel requests with PUTUpdateCategoryRequest
@@ -201,6 +213,12 @@ func (body DELETERemoveCategoryRequest) Send(ctx context.Context) *DELETERemoveC
 	return &DELETERemoveCategoryFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body DELETERemoveCategoryRequest) SendVia(ctx context.Context, svc typhon.Service) *DELETERemoveCategoryFuture {
+	return &DELETERemoveCategoryFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // DELETERemoveCategoryFuture is an intermediate future used for parallel requests with DELETERemoveCategoryRequest
 type DELETERemoveCategoryFuture struct {
 	Future   *typhon.ResponseFuture
@@ -274,6 +292,12 @@ func (body POSTCreateCategoryRequest) Send(ctx context.Context) *POSTCreateCateg
 	return &POSTCreateCategoryFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateCategoryRequest) SendVia(ctx context.Context, svc typhon.Service) *POSTCreateCategoryFuture {
+	return &POSTCreateCategoryFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // POSTCreateCategoryFuture is an intermediate future used for parallel requests with POSTCreateCategoryRequest
 type POSTCreateCategoryFuture struct {
 	Future   *typhon.ResponseFuture
@@ -345,6 +369,12 @@ func (body GETListCategoriesRequest) Response(ctx context.Context) (*GETListCate
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
 func (body GETListCategoriesRequest) Send(ctx context.Context) *GETListCategoriesFuture {
 	return &GETListCategoriesFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETListCategoriesRequest) SendVia(ctx context.Context, svc typhon.Service) *GETListCategoriesFuture {
+	return &GETListCategoriesFuture{Future: body.Request(ctx).SendVia(svc)}
 }
 
 // GETListCategoriesFuture is an intermediate future used for parallel requests with GETListCategoriesRequest

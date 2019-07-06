@@ -7,5 +7,38 @@ service user {
     option (router).name = "service.user";
     option (router).short_name = "s-user";
 
-    //
+    rpc CreateUser (POSTCreateUserRequest) returns (POSTCreateUserResponse) {
+        option (handler).path = "/create";
+    }
+}
+
+message User {
+    string id = 1;
+    string email = 2;
+    string username = 3;
+    string password = 4;
+    string name = 5;
+    string role = 6;
+
+    // general-purpose metadata as an annotation.
+    // stored in the database as JSON.
+    map<string, string> metadata = 50;
+
+    bool verified = 51;
+    bool banned = 52;
+
+    string created_at = 100;
+    string updated_at = 101;
+    string verified_at = 102;
+}
+
+message POSTCreateUserRequest {
+    string email = 1;
+    string username = 2;
+    string password = 3;
+    string name = 4;
+}
+
+message POSTCreateUserResponse {
+    User user = 1;
 }

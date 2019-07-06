@@ -55,6 +55,12 @@ func (body GETReadTagRequest) Send(ctx context.Context) *GETReadTagFuture {
 	return &GETReadTagFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETReadTagRequest) SendVia(ctx context.Context, svc typhon.Service) *GETReadTagFuture {
+	return &GETReadTagFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // GETReadTagFuture is an intermediate future used for parallel requests with GETReadTagRequest
 type GETReadTagFuture struct {
 	Future   *typhon.ResponseFuture
@@ -126,6 +132,12 @@ func (body PUTUpdateTagRequest) Response(ctx context.Context) (*PUTUpdateTagResp
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
 func (body PUTUpdateTagRequest) Send(ctx context.Context) *PUTUpdateTagFuture {
 	return &PUTUpdateTagFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body PUTUpdateTagRequest) SendVia(ctx context.Context, svc typhon.Service) *PUTUpdateTagFuture {
+	return &PUTUpdateTagFuture{Future: body.Request(ctx).SendVia(svc)}
 }
 
 // PUTUpdateTagFuture is an intermediate future used for parallel requests with PUTUpdateTagRequest
@@ -201,6 +213,12 @@ func (body DELETERemoveTagRequest) Send(ctx context.Context) *DELETERemoveTagFut
 	return &DELETERemoveTagFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body DELETERemoveTagRequest) SendVia(ctx context.Context, svc typhon.Service) *DELETERemoveTagFuture {
+	return &DELETERemoveTagFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // DELETERemoveTagFuture is an intermediate future used for parallel requests with DELETERemoveTagRequest
 type DELETERemoveTagFuture struct {
 	Future   *typhon.ResponseFuture
@@ -274,6 +292,12 @@ func (body POSTCreateTagRequest) Send(ctx context.Context) *POSTCreateTagFuture 
 	return &POSTCreateTagFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateTagRequest) SendVia(ctx context.Context, svc typhon.Service) *POSTCreateTagFuture {
+	return &POSTCreateTagFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // POSTCreateTagFuture is an intermediate future used for parallel requests with POSTCreateTagRequest
 type POSTCreateTagFuture struct {
 	Future   *typhon.ResponseFuture
@@ -345,6 +369,12 @@ func (body GETListTagsRequest) Response(ctx context.Context) (*GETListTagsRespon
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
 func (body GETListTagsRequest) Send(ctx context.Context) *GETListTagsFuture {
 	return &GETListTagsFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETListTagsRequest) SendVia(ctx context.Context, svc typhon.Service) *GETListTagsFuture {
+	return &GETListTagsFuture{Future: body.Request(ctx).SendVia(svc)}
 }
 
 // GETListTagsFuture is an intermediate future used for parallel requests with GETListTagsRequest

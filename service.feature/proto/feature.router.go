@@ -55,6 +55,12 @@ func (body GETReadFeatureRequest) Send(ctx context.Context) *GETReadFeatureFutur
 	return &GETReadFeatureFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETReadFeatureRequest) SendVia(ctx context.Context, svc typhon.Service) *GETReadFeatureFuture {
+	return &GETReadFeatureFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // GETReadFeatureFuture is an intermediate future used for parallel requests with GETReadFeatureRequest
 type GETReadFeatureFuture struct {
 	Future   *typhon.ResponseFuture
@@ -126,6 +132,12 @@ func (body PUTUpdateFeatureRequest) Response(ctx context.Context) (*PUTUpdateFea
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
 func (body PUTUpdateFeatureRequest) Send(ctx context.Context) *PUTUpdateFeatureFuture {
 	return &PUTUpdateFeatureFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body PUTUpdateFeatureRequest) SendVia(ctx context.Context, svc typhon.Service) *PUTUpdateFeatureFuture {
+	return &PUTUpdateFeatureFuture{Future: body.Request(ctx).SendVia(svc)}
 }
 
 // PUTUpdateFeatureFuture is an intermediate future used for parallel requests with PUTUpdateFeatureRequest
@@ -201,6 +213,12 @@ func (body DELETERemoveFeatureRequest) Send(ctx context.Context) *DELETERemoveFe
 	return &DELETERemoveFeatureFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body DELETERemoveFeatureRequest) SendVia(ctx context.Context, svc typhon.Service) *DELETERemoveFeatureFuture {
+	return &DELETERemoveFeatureFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // DELETERemoveFeatureFuture is an intermediate future used for parallel requests with DELETERemoveFeatureRequest
 type DELETERemoveFeatureFuture struct {
 	Future   *typhon.ResponseFuture
@@ -274,6 +292,12 @@ func (body POSTCreateFeatureRequest) Send(ctx context.Context) *POSTCreateFeatur
 	return &POSTCreateFeatureFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateFeatureRequest) SendVia(ctx context.Context, svc typhon.Service) *POSTCreateFeatureFuture {
+	return &POSTCreateFeatureFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // POSTCreateFeatureFuture is an intermediate future used for parallel requests with POSTCreateFeatureRequest
 type POSTCreateFeatureFuture struct {
 	Future   *typhon.ResponseFuture
@@ -345,6 +369,12 @@ func (body GETListFeaturesRequest) Response(ctx context.Context) (*GETListFeatur
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
 func (body GETListFeaturesRequest) Send(ctx context.Context) *GETListFeaturesFuture {
 	return &GETListFeaturesFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETListFeaturesRequest) SendVia(ctx context.Context, svc typhon.Service) *GETListFeaturesFuture {
+	return &GETListFeaturesFuture{Future: body.Request(ctx).SendVia(svc)}
 }
 
 // GETListFeaturesFuture is an intermediate future used for parallel requests with GETListFeaturesRequest

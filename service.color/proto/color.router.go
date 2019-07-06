@@ -55,6 +55,12 @@ func (body GETReadColorRequest) Send(ctx context.Context) *GETReadColorFuture {
 	return &GETReadColorFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETReadColorRequest) SendVia(ctx context.Context, svc typhon.Service) *GETReadColorFuture {
+	return &GETReadColorFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // GETReadColorFuture is an intermediate future used for parallel requests with GETReadColorRequest
 type GETReadColorFuture struct {
 	Future   *typhon.ResponseFuture
@@ -126,6 +132,12 @@ func (body PUTUpdateColorRequest) Response(ctx context.Context) (*PUTUpdateColor
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
 func (body PUTUpdateColorRequest) Send(ctx context.Context) *PUTUpdateColorFuture {
 	return &PUTUpdateColorFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body PUTUpdateColorRequest) SendVia(ctx context.Context, svc typhon.Service) *PUTUpdateColorFuture {
+	return &PUTUpdateColorFuture{Future: body.Request(ctx).SendVia(svc)}
 }
 
 // PUTUpdateColorFuture is an intermediate future used for parallel requests with PUTUpdateColorRequest
@@ -201,6 +213,12 @@ func (body DELETERemoveColorRequest) Send(ctx context.Context) *DELETERemoveColo
 	return &DELETERemoveColorFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body DELETERemoveColorRequest) SendVia(ctx context.Context, svc typhon.Service) *DELETERemoveColorFuture {
+	return &DELETERemoveColorFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // DELETERemoveColorFuture is an intermediate future used for parallel requests with DELETERemoveColorRequest
 type DELETERemoveColorFuture struct {
 	Future   *typhon.ResponseFuture
@@ -274,6 +292,12 @@ func (body POSTCreateColorRequest) Send(ctx context.Context) *POSTCreateColorFut
 	return &POSTCreateColorFuture{Future: body.Request(ctx).Send()}
 }
 
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateColorRequest) SendVia(ctx context.Context, svc typhon.Service) *POSTCreateColorFuture {
+	return &POSTCreateColorFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
 // POSTCreateColorFuture is an intermediate future used for parallel requests with POSTCreateColorRequest
 type POSTCreateColorFuture struct {
 	Future   *typhon.ResponseFuture
@@ -345,6 +369,12 @@ func (body GETListColorsRequest) Response(ctx context.Context) (*GETListColorsRe
 // To wait for the request to complete and return the response, use DecodeResponse on the returned future.
 func (body GETListColorsRequest) Send(ctx context.Context) *GETListColorsFuture {
 	return &GETListColorsFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETListColorsRequest) SendVia(ctx context.Context, svc typhon.Service) *GETListColorsFuture {
+	return &GETListColorsFuture{Future: body.Request(ctx).SendVia(svc)}
 }
 
 // GETListColorsFuture is an intermediate future used for parallel requests with GETListColorsRequest

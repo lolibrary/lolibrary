@@ -240,6 +240,12 @@ import (
         return &{{ .Future }}{Future: body.Request(ctx).Send()}
     }
 
+	// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+	// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+	func (body {{ .Request }}) SendVia(ctx context.Context, svc typhon.Service) *{{ .Future }} {
+		return &{{ .Future }}{Future: body.Request(ctx).SendVia(svc)}
+	}
+
     // {{ .Future }} is an intermediate future used for parallel requests with {{ .Request }}
     type {{ .Future }} struct {
         Future   *typhon.ResponseFuture

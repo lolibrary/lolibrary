@@ -7,3 +7,82 @@ import (
 
 	"github.com/monzo/typhon"
 )
+
+// -------------------------
+// POST /service.user/create
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body POSTCreateUserRequest) Method() string {
+	return "POST"
+}
+
+// Path is the HTTP path to this endpoint
+func (body POSTCreateUserRequest) Path() string {
+	return "/create"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body POSTCreateUserRequest) ServiceName() string {
+	return "service.user"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body POSTCreateUserRequest) Host() string {
+	return "s-user"
+}
+
+// FullPath is the full routable URL to this service.
+func (body POSTCreateUserRequest) FullPath() string {
+	return "http://s-user/create"
+}
+
+// Request returns a typhon request for this type.
+func (body POSTCreateUserRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body POSTCreateUserRequest) Response(ctx context.Context) (*POSTCreateUserResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateUserRequest) Send(ctx context.Context) *POSTCreateUserFuture {
+	return &POSTCreateUserFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateUserRequest) SendVia(ctx context.Context, svc typhon.Service) *POSTCreateUserFuture {
+	return &POSTCreateUserFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
+// POSTCreateUserFuture is an intermediate future used for parallel requests with POSTCreateUserRequest
+type POSTCreateUserFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *POSTCreateUserFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *POSTCreateUserFuture) DecodeResponse() (*POSTCreateUserResponse, error) {
+	f.Done()
+
+	body := &POSTCreateUserResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
