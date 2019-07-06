@@ -6,5 +6,3 @@ COPY --from=cockroach /cockroach/cockroach /usr/bin/cockroach
 COPY backup.sh /usr/bin/backup
 
 RUN chmod +x /usr/bin/backup
-
-ENTRYPOINT ["/usr/bin/backup"]
