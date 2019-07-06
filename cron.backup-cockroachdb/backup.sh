@@ -8,6 +8,7 @@ grn="\033[0;32m"
 database=$1
 bucket=$2
 serviceaccount=$3
+pingurl=$4
 
 if [[ "$database" = "" ]]; then
   echo "⚠️  Database not set."
@@ -25,6 +26,10 @@ if [[ "$serviceaccount" = "" ]]; then
   echo "⚠️  Service account not set."
   echo -e " > Usage: backup <${grn}database${rst}> <${grn}gs://bucket${rst}> <${grn}service-account${rst}>"
   exit 1
+fi
+
+if [[ "$pingurl" = "" ]]; then
+
 fi
 
 current_date=$(date +%Y-%m-%dT%T%z)
@@ -49,4 +54,6 @@ rm -rf /tmp/$filename
 
 # ping healthcheck to say we uploaded properly.
 # curl ...
-echo "Not running cron healthcheck ping yet (not enabled)"
+echo "⌛️  Running cron healthcheck ping"
+curl -fsS --retry=3 $pingurl > /dev/null
+echo "✅  Pinged successfully."

@@ -4,11 +4,13 @@ kind: CronJob
 metadata:
   name: cron-backup-cockroachdb
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "0 * * * *"
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       template:
         spec:
+          restartPolicy: Never
           serviceAccountName: running-kitten-cockroachdb
           initContainers:
             - name: init-certs
@@ -37,10 +39,15 @@ spec:
                   value: running-kitten-cockroachdb-public
                 - name: COCKROACH_USER
                   value: root
+                - name: CRON_PING_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: cron-backup-cockroachdb-ping
+                      key: url
               volumeMounts:
                 - name: client-certs
                   mountPath: /cockroach-certs
-                - name: cockroachdb-backup-sa
+                - name: cockroach-backup-sa
                   mountPath: /var/run/secrets/google
                   readOnly: true
               command:
@@ -48,10 +55,11 @@ spec:
                 - lolibrary
                 - "gs://lolibrary-cockroachdb-backups"
                 - cockroachdb-backup-sa
+                - "$CRON_PING_URL"
           volumes:
             - name: client-certs
               emptyDir: {}
-            - name: cockroachdb-backup-sa
+            - name: cockroach-backup-sa
               secret:
                 defaultMode: 0400
-                secretName: cockroachdb-backup-sa
+                secretName: cockroach-backup-sa
