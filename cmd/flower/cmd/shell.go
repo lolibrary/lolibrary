@@ -132,7 +132,11 @@ var shellCmd = &cobra.Command{
 				}
 
 				lastLineErrored = false
-				result, err := rpc.InternalRequest(nil, fields[1], fields[2], strings.Join(fields[3:], " "))
+				result, err := rpc.InternalRequest(&rpc.Request{
+					Method: fields[1],
+					Path:   strings.TrimPrefix(fields[2], "/"),
+					Body:   []byte(strings.Join(fields[3:], " ")),
+				})
 				if result != "" {
 					cmd.Println(result)
 					cmd.Println()

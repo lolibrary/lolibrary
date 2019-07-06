@@ -8,7 +8,6 @@
 package rpc
 
 import (
-	"context"
 	"fmt"
 	"os"
 
@@ -25,6 +24,12 @@ var (
 	errRequest = fmt.Errorf("")
 )
 
+// Request is a struct holding options for an RPC request.
+type Request struct {
+	Method, Path string
+	Body         []byte
+}
+
 func SetInternalEdgeProxy(url string) {
 	internalEdgeProxyURL = url
 }
@@ -33,10 +38,10 @@ func SetExternalEdgeProxy(url string) {
 	externalEdgeProxyURL = url
 }
 
-// Request sends an RPC call through the internal edge proxy.
+// InternalRequest sends an RPC call through the internal edge proxy.
 // Both return values from this function should be printed to stdout if not empty/nil.
-func InternalRequest(ctx context.Context, method, path, body string) (string, error) {
-	req, err := internalRequest(ctx, method, path, body)
+func InternalRequest(rpc *Request) (string, error) {
+	req, err := NewRequest(rpc)
 	if err != nil {
 		return "", err
 	}
@@ -57,10 +62,10 @@ func InternalRequest(ctx context.Context, method, path, body string) (string, er
 	return parseResponse(rsp)
 }
 
-// internalRequest creates a typhon request from options.
-func internalRequest(ctx context.Context, method, path, body string) (typhon.Request, error) {
-	req := typhon.NewRequest(ctx, method, path, nil)
-	if _, err := req.Write([]byte(body)); err != nil {
+// NewRequest creates a typhon request from an RPC request.
+func NewRequest(rpc *Request) (typhon.Request, error) {
+	req := typhon.NewRequest(nil, rpc.Method, rpc.Path, nil)
+	if _, err := req.Write(rpc.Body); err != nil {
 		return typhon.Request{}, err
 	}
 
