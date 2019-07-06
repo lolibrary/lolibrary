@@ -83,8 +83,6 @@ func main() {
 	defer uiprogress.Stop()
 
 	bar := uiprogress.AddBar(len(categories))
-	bar.AppendCompleted()
-
 	errors := 0
 
 	for _, category := range categories {
