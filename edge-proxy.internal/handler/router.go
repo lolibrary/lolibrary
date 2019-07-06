@@ -40,7 +40,9 @@ func Proxy(req typhon.Request) typhon.Response {
 		return handleService(req)
 	}
 
-	return typhon.Response{Error: terrors.NotFound("missing_endpoint", "Don't know how to query that service!", nil)}
+	return typhon.Response{Error: terrors.NotFound("missing_endpoint", "Don't know how to query that service!", map[string]string{
+		"path": path,
+	})}
 }
 
 // handle takes a request and sends it to an internal service.

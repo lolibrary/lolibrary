@@ -17,6 +17,11 @@ func EdgeProxyFilter(endpoint string) typhon.Filter {
 		req.URL.Host = endpoint
 		req.URL.Path = fmt.Sprintf("/%s%s", service, req.URL.Path)
 
+		// put a default in here
+		if req.URL.Scheme == "" {
+			req.URL.Scheme = "http"
+		}
+
 		return svc(req)
 	}
 }

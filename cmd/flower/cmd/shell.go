@@ -83,7 +83,7 @@ var shellCmd = &cobra.Command{
 			case "exit", "\\q":
 				cmd.Println("Exiting 👋")
 				return
-			case "help", "h", "?":
+			case "help", "h", "?", "\\?":
 				cmd.Printf("\n")
 
 				for _, entry := range help {

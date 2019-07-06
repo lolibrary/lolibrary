@@ -87,6 +87,10 @@ func parseResponse(rsp typhon.Response) (string, error) {
 func parseError(rsp typhon.Response) (string, error) {
 	if terr, ok := rsp.Error.(*terrors.Error); ok {
 		payload := map[string]interface{}{"message": terr.Message, "code": terr.Code}
+		if len(terr.Params) > 0 {
+			payload["params"] = terr.Params
+		}
+
 		if os.Getenv("DEBUG") == "1" {
 			payload["stack"] = terr.StackFrames
 		}
