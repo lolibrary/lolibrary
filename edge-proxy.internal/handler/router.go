@@ -47,8 +47,10 @@ func Proxy(req typhon.Request) typhon.Response {
 func handle(req typhon.Request, service, path string) typhon.Response {
 	url := fmt.Sprintf(requestFormat, service, path)
 
+	slog.Trace(req, "Handling parsed URL: %v", url)
+
 	if _, err := net.Dial("tcp", "%s:80"); err != nil {
-		return typhon.Response{Error: terrors.NotFound("service", "Unable to connect to the specified service.", nil)}
+		return typhon.Response{Error: terrors.NotFound("service", fmt.Sprintf("Unable to connect to %v", service), nil)}
 	}
 
 	return typhon.NewRequest(req, req.Method, url, req.Body).Send().Response()
