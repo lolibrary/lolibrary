@@ -3,12 +3,14 @@ package main
 import (
 	"context"
 	"fmt"
-	"os"
 
 	"github.com/gosuri/uiprogress"
-	"github.com/lolibrary/lolibrary/libraries/api"
+	"github.com/logrusorgru/aurora"
+	"github.com/lolibrary/lolibrary/libraries/filters"
+	"github.com/lolibrary/lolibrary/libraries/portforward"
 	"github.com/lolibrary/lolibrary/service.category/domain"
 	categoryproto "github.com/lolibrary/lolibrary/service.category/proto"
+	"github.com/monzo/typhon"
 )
 
 /*
@@ -67,31 +69,39 @@ var categories = []*domain.Category{
 }
 
 func main() {
-	api.Run(backfill)
+	fmt.Printf("⚙️  Backfilling %v Category records via the API.\n", aurora.Green(len(categories)))
 
-	fmt.Println("✅ All done!")
-}
-
-func backfill() {
 	ctx := context.Background()
+	port, cmd := portforward.Enable()
+	defer cmd.Close()
+
+	client := typhon.Client.
+		Filter(filters.EdgeProxyFilter(fmt.Sprintf("127.0.0.1:%d", port))).
+		Filter(typhon.ErrorFilter)
+
 	uiprogress.Start()
 	defer uiprogress.Stop()
 
 	bar := uiprogress.AddBar(len(categories))
-	bar.PrependElapsed()
 	bar.AppendCompleted()
 
+	errors := 0
+
 	for _, category := range categories {
-		req := categoryproto.POSTCreateCategoryRequest{
+		_, err := categoryproto.POSTCreateCategoryRequest{
 			Slug: category.Slug,
 			Name: category.Name,
-		}
-		_, err := req.Send(ctx).DecodeResponse()
+		}.SendVia(ctx, client).DecodeResponse()
 		if err != nil {
-			fmt.Printf("❌ Error: %v (%v)\n", err, req.Request(ctx).URL)
-			os.Exit(1)
+			errors++
 		}
 
 		bar.Incr()
+	}
+
+	if errors > 0 {
+		fmt.Printf("⚠️  Completed with %v errors\n", aurora.Red(errors))
+	} else {
+		fmt.Println("✅ All done!")
 	}
 }
