@@ -7,5 +7,86 @@ service attribute {
     option (router).name = "service.attribute";
     option (router).short_name = "s-attribute";
 
-    //
+    rpc ReadAttribute (GETReadAttributeRequest) returns (GETReadAttributeResponse) {
+        option (handler).path = "/read";
+    }
+
+    rpc UpdateAttribute (PUTUpdateAttributeRequest) returns (PUTUpdateAttributeResponse) {
+        option (handler).path = "/update";
+    }
+
+    rpc DeleteAttribute (DELETERemoveAttributeRequest) returns (DELETERemoveAttributeResponse) {
+        option (handler).path = "/delete";
+    }
+
+    rpc CreateAttribute (POSTCreateAttributeRequest) returns (POSTCreateAttributeResponse) {
+        option (handler).path = "/create";
+    }
+
+    rpc ListAttributes (GETListAttributesRequest) returns (GETListAttributesResponse) {
+        option (handler).path = "/list";
+    }
 }
+
+message Attribute {
+    string id = 1;
+    string slug = 2;
+    string name = 4;
+
+    // timestamps
+    string created_at = 100;
+    string updated_at = 101;
+}
+
+// GET /service.attribute/read {"id": "<uuid>"}
+
+message GETReadAttributeRequest {
+    string id = 1;
+    string slug = 2;
+}
+
+message GETReadAttributeResponse {
+    Attribute attribute = 1;
+}
+
+// GET /service.attribute/list
+
+message GETListAttributesRequest {
+}
+
+message GETListAttributesResponse {
+    repeated Attribute attributes = 1;
+}
+
+// POST /service.attribute/create {"attribute": {...}}
+
+message POSTCreateAttributeRequest {
+    string id = 1;
+    string slug = 2;
+    string name = 3;
+}
+
+message POSTCreateAttributeResponse {
+    Attribute attribute = 1;
+}
+
+// PUT /service.attribute/update {"id": "...", "attribute": {...}}
+
+message PUTUpdateAttributeRequest {
+    string id = 1;
+    string name = 2;
+}
+
+message PUTUpdateAttributeResponse {
+    Attribute attribute = 1;
+}
+
+// DELETE /service.attribute/delete {"id": "..."}
+
+message DELETERemoveAttributeRequest {
+    string id = 1;
+}
+
+message DELETERemoveAttributeResponse {
+}
+

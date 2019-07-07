@@ -7,3 +7,398 @@ import (
 
 	"github.com/monzo/typhon"
 )
+
+// -------------------------
+// GET /service.attribute/read
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body GETReadAttributeRequest) Method() string {
+	return "GET"
+}
+
+// Path is the HTTP path to this endpoint
+func (body GETReadAttributeRequest) Path() string {
+	return "/read"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body GETReadAttributeRequest) ServiceName() string {
+	return "service.attribute"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body GETReadAttributeRequest) Host() string {
+	return "s-attribute"
+}
+
+// FullPath is the full routable URL to this service.
+func (body GETReadAttributeRequest) FullPath() string {
+	return "http://s-attribute/read"
+}
+
+// Request returns a typhon request for this type.
+func (body GETReadAttributeRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body GETReadAttributeRequest) Response(ctx context.Context) (*GETReadAttributeResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETReadAttributeRequest) Send(ctx context.Context) *GETReadAttributeFuture {
+	return &GETReadAttributeFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETReadAttributeRequest) SendVia(ctx context.Context, svc typhon.Service) *GETReadAttributeFuture {
+	return &GETReadAttributeFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
+// GETReadAttributeFuture is an intermediate future used for parallel requests with GETReadAttributeRequest
+type GETReadAttributeFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *GETReadAttributeFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *GETReadAttributeFuture) DecodeResponse() (*GETReadAttributeResponse, error) {
+	f.Done()
+
+	body := &GETReadAttributeResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// PUT /service.attribute/update
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body PUTUpdateAttributeRequest) Method() string {
+	return "PUT"
+}
+
+// Path is the HTTP path to this endpoint
+func (body PUTUpdateAttributeRequest) Path() string {
+	return "/update"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body PUTUpdateAttributeRequest) ServiceName() string {
+	return "service.attribute"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body PUTUpdateAttributeRequest) Host() string {
+	return "s-attribute"
+}
+
+// FullPath is the full routable URL to this service.
+func (body PUTUpdateAttributeRequest) FullPath() string {
+	return "http://s-attribute/update"
+}
+
+// Request returns a typhon request for this type.
+func (body PUTUpdateAttributeRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body PUTUpdateAttributeRequest) Response(ctx context.Context) (*PUTUpdateAttributeResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body PUTUpdateAttributeRequest) Send(ctx context.Context) *PUTUpdateAttributeFuture {
+	return &PUTUpdateAttributeFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body PUTUpdateAttributeRequest) SendVia(ctx context.Context, svc typhon.Service) *PUTUpdateAttributeFuture {
+	return &PUTUpdateAttributeFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
+// PUTUpdateAttributeFuture is an intermediate future used for parallel requests with PUTUpdateAttributeRequest
+type PUTUpdateAttributeFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *PUTUpdateAttributeFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *PUTUpdateAttributeFuture) DecodeResponse() (*PUTUpdateAttributeResponse, error) {
+	f.Done()
+
+	body := &PUTUpdateAttributeResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// DELETE /service.attribute/delete
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body DELETERemoveAttributeRequest) Method() string {
+	return "DELETE"
+}
+
+// Path is the HTTP path to this endpoint
+func (body DELETERemoveAttributeRequest) Path() string {
+	return "/delete"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body DELETERemoveAttributeRequest) ServiceName() string {
+	return "service.attribute"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body DELETERemoveAttributeRequest) Host() string {
+	return "s-attribute"
+}
+
+// FullPath is the full routable URL to this service.
+func (body DELETERemoveAttributeRequest) FullPath() string {
+	return "http://s-attribute/delete"
+}
+
+// Request returns a typhon request for this type.
+func (body DELETERemoveAttributeRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body DELETERemoveAttributeRequest) Response(ctx context.Context) (*DELETERemoveAttributeResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body DELETERemoveAttributeRequest) Send(ctx context.Context) *DELETERemoveAttributeFuture {
+	return &DELETERemoveAttributeFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body DELETERemoveAttributeRequest) SendVia(ctx context.Context, svc typhon.Service) *DELETERemoveAttributeFuture {
+	return &DELETERemoveAttributeFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
+// DELETERemoveAttributeFuture is an intermediate future used for parallel requests with DELETERemoveAttributeRequest
+type DELETERemoveAttributeFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *DELETERemoveAttributeFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *DELETERemoveAttributeFuture) DecodeResponse() (*DELETERemoveAttributeResponse, error) {
+	f.Done()
+
+	body := &DELETERemoveAttributeResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// POST /service.attribute/create
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body POSTCreateAttributeRequest) Method() string {
+	return "POST"
+}
+
+// Path is the HTTP path to this endpoint
+func (body POSTCreateAttributeRequest) Path() string {
+	return "/create"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body POSTCreateAttributeRequest) ServiceName() string {
+	return "service.attribute"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body POSTCreateAttributeRequest) Host() string {
+	return "s-attribute"
+}
+
+// FullPath is the full routable URL to this service.
+func (body POSTCreateAttributeRequest) FullPath() string {
+	return "http://s-attribute/create"
+}
+
+// Request returns a typhon request for this type.
+func (body POSTCreateAttributeRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body POSTCreateAttributeRequest) Response(ctx context.Context) (*POSTCreateAttributeResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateAttributeRequest) Send(ctx context.Context) *POSTCreateAttributeFuture {
+	return &POSTCreateAttributeFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateAttributeRequest) SendVia(ctx context.Context, svc typhon.Service) *POSTCreateAttributeFuture {
+	return &POSTCreateAttributeFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
+// POSTCreateAttributeFuture is an intermediate future used for parallel requests with POSTCreateAttributeRequest
+type POSTCreateAttributeFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *POSTCreateAttributeFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *POSTCreateAttributeFuture) DecodeResponse() (*POSTCreateAttributeResponse, error) {
+	f.Done()
+
+	body := &POSTCreateAttributeResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// GET /service.attribute/list
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body GETListAttributesRequest) Method() string {
+	return "GET"
+}
+
+// Path is the HTTP path to this endpoint
+func (body GETListAttributesRequest) Path() string {
+	return "/list"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body GETListAttributesRequest) ServiceName() string {
+	return "service.attribute"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body GETListAttributesRequest) Host() string {
+	return "s-attribute"
+}
+
+// FullPath is the full routable URL to this service.
+func (body GETListAttributesRequest) FullPath() string {
+	return "http://s-attribute/list"
+}
+
+// Request returns a typhon request for this type.
+func (body GETListAttributesRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body GETListAttributesRequest) Response(ctx context.Context) (*GETListAttributesResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETListAttributesRequest) Send(ctx context.Context) *GETListAttributesFuture {
+	return &GETListAttributesFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETListAttributesRequest) SendVia(ctx context.Context, svc typhon.Service) *GETListAttributesFuture {
+	return &GETListAttributesFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
+// GETListAttributesFuture is an intermediate future used for parallel requests with GETListAttributesRequest
+type GETListAttributesFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *GETListAttributesFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *GETListAttributesFuture) DecodeResponse() (*GETListAttributesResponse, error) {
+	f.Done()
+
+	body := &GETListAttributesResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}

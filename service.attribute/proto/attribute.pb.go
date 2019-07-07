@@ -21,19 +21,534 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type Attribute struct {
+	Id   string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Slug string `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
+	Name string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	// timestamps
+	CreatedAt            string   `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Attribute) Reset()         { *m = Attribute{} }
+func (m *Attribute) String() string { return proto.CompactTextString(m) }
+func (*Attribute) ProtoMessage()    {}
+func (*Attribute) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c79f94c32f7d1bce, []int{0}
+}
+
+func (m *Attribute) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Attribute.Unmarshal(m, b)
+}
+func (m *Attribute) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Attribute.Marshal(b, m, deterministic)
+}
+func (m *Attribute) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Attribute.Merge(m, src)
+}
+func (m *Attribute) XXX_Size() int {
+	return xxx_messageInfo_Attribute.Size(m)
+}
+func (m *Attribute) XXX_DiscardUnknown() {
+	xxx_messageInfo_Attribute.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Attribute proto.InternalMessageInfo
+
+func (m *Attribute) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Attribute) GetSlug() string {
+	if m != nil {
+		return m.Slug
+	}
+	return ""
+}
+
+func (m *Attribute) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *Attribute) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *Attribute) GetUpdatedAt() string {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return ""
+}
+
+type GETReadAttributeRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Slug                 string   `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GETReadAttributeRequest) Reset()         { *m = GETReadAttributeRequest{} }
+func (m *GETReadAttributeRequest) String() string { return proto.CompactTextString(m) }
+func (*GETReadAttributeRequest) ProtoMessage()    {}
+func (*GETReadAttributeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c79f94c32f7d1bce, []int{1}
+}
+
+func (m *GETReadAttributeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETReadAttributeRequest.Unmarshal(m, b)
+}
+func (m *GETReadAttributeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETReadAttributeRequest.Marshal(b, m, deterministic)
+}
+func (m *GETReadAttributeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETReadAttributeRequest.Merge(m, src)
+}
+func (m *GETReadAttributeRequest) XXX_Size() int {
+	return xxx_messageInfo_GETReadAttributeRequest.Size(m)
+}
+func (m *GETReadAttributeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETReadAttributeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETReadAttributeRequest proto.InternalMessageInfo
+
+func (m *GETReadAttributeRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *GETReadAttributeRequest) GetSlug() string {
+	if m != nil {
+		return m.Slug
+	}
+	return ""
+}
+
+type GETReadAttributeResponse struct {
+	Attribute            *Attribute `protobuf:"bytes,1,opt,name=attribute,proto3" json:"attribute,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *GETReadAttributeResponse) Reset()         { *m = GETReadAttributeResponse{} }
+func (m *GETReadAttributeResponse) String() string { return proto.CompactTextString(m) }
+func (*GETReadAttributeResponse) ProtoMessage()    {}
+func (*GETReadAttributeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c79f94c32f7d1bce, []int{2}
+}
+
+func (m *GETReadAttributeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETReadAttributeResponse.Unmarshal(m, b)
+}
+func (m *GETReadAttributeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETReadAttributeResponse.Marshal(b, m, deterministic)
+}
+func (m *GETReadAttributeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETReadAttributeResponse.Merge(m, src)
+}
+func (m *GETReadAttributeResponse) XXX_Size() int {
+	return xxx_messageInfo_GETReadAttributeResponse.Size(m)
+}
+func (m *GETReadAttributeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETReadAttributeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETReadAttributeResponse proto.InternalMessageInfo
+
+func (m *GETReadAttributeResponse) GetAttribute() *Attribute {
+	if m != nil {
+		return m.Attribute
+	}
+	return nil
+}
+
+type GETListAttributesRequest struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GETListAttributesRequest) Reset()         { *m = GETListAttributesRequest{} }
+func (m *GETListAttributesRequest) String() string { return proto.CompactTextString(m) }
+func (*GETListAttributesRequest) ProtoMessage()    {}
+func (*GETListAttributesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c79f94c32f7d1bce, []int{3}
+}
+
+func (m *GETListAttributesRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETListAttributesRequest.Unmarshal(m, b)
+}
+func (m *GETListAttributesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETListAttributesRequest.Marshal(b, m, deterministic)
+}
+func (m *GETListAttributesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETListAttributesRequest.Merge(m, src)
+}
+func (m *GETListAttributesRequest) XXX_Size() int {
+	return xxx_messageInfo_GETListAttributesRequest.Size(m)
+}
+func (m *GETListAttributesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETListAttributesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETListAttributesRequest proto.InternalMessageInfo
+
+type GETListAttributesResponse struct {
+	Attributes           []*Attribute `protobuf:"bytes,1,rep,name=attributes,proto3" json:"attributes,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
+	XXX_unrecognized     []byte       `json:"-"`
+	XXX_sizecache        int32        `json:"-"`
+}
+
+func (m *GETListAttributesResponse) Reset()         { *m = GETListAttributesResponse{} }
+func (m *GETListAttributesResponse) String() string { return proto.CompactTextString(m) }
+func (*GETListAttributesResponse) ProtoMessage()    {}
+func (*GETListAttributesResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c79f94c32f7d1bce, []int{4}
+}
+
+func (m *GETListAttributesResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETListAttributesResponse.Unmarshal(m, b)
+}
+func (m *GETListAttributesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETListAttributesResponse.Marshal(b, m, deterministic)
+}
+func (m *GETListAttributesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETListAttributesResponse.Merge(m, src)
+}
+func (m *GETListAttributesResponse) XXX_Size() int {
+	return xxx_messageInfo_GETListAttributesResponse.Size(m)
+}
+func (m *GETListAttributesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETListAttributesResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETListAttributesResponse proto.InternalMessageInfo
+
+func (m *GETListAttributesResponse) GetAttributes() []*Attribute {
+	if m != nil {
+		return m.Attributes
+	}
+	return nil
+}
+
+type POSTCreateAttributeRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Slug                 string   `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
+	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *POSTCreateAttributeRequest) Reset()         { *m = POSTCreateAttributeRequest{} }
+func (m *POSTCreateAttributeRequest) String() string { return proto.CompactTextString(m) }
+func (*POSTCreateAttributeRequest) ProtoMessage()    {}
+func (*POSTCreateAttributeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c79f94c32f7d1bce, []int{5}
+}
+
+func (m *POSTCreateAttributeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_POSTCreateAttributeRequest.Unmarshal(m, b)
+}
+func (m *POSTCreateAttributeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_POSTCreateAttributeRequest.Marshal(b, m, deterministic)
+}
+func (m *POSTCreateAttributeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_POSTCreateAttributeRequest.Merge(m, src)
+}
+func (m *POSTCreateAttributeRequest) XXX_Size() int {
+	return xxx_messageInfo_POSTCreateAttributeRequest.Size(m)
+}
+func (m *POSTCreateAttributeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_POSTCreateAttributeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_POSTCreateAttributeRequest proto.InternalMessageInfo
+
+func (m *POSTCreateAttributeRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *POSTCreateAttributeRequest) GetSlug() string {
+	if m != nil {
+		return m.Slug
+	}
+	return ""
+}
+
+func (m *POSTCreateAttributeRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+type POSTCreateAttributeResponse struct {
+	Attribute            *Attribute `protobuf:"bytes,1,opt,name=attribute,proto3" json:"attribute,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *POSTCreateAttributeResponse) Reset()         { *m = POSTCreateAttributeResponse{} }
+func (m *POSTCreateAttributeResponse) String() string { return proto.CompactTextString(m) }
+func (*POSTCreateAttributeResponse) ProtoMessage()    {}
+func (*POSTCreateAttributeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c79f94c32f7d1bce, []int{6}
+}
+
+func (m *POSTCreateAttributeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_POSTCreateAttributeResponse.Unmarshal(m, b)
+}
+func (m *POSTCreateAttributeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_POSTCreateAttributeResponse.Marshal(b, m, deterministic)
+}
+func (m *POSTCreateAttributeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_POSTCreateAttributeResponse.Merge(m, src)
+}
+func (m *POSTCreateAttributeResponse) XXX_Size() int {
+	return xxx_messageInfo_POSTCreateAttributeResponse.Size(m)
+}
+func (m *POSTCreateAttributeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_POSTCreateAttributeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_POSTCreateAttributeResponse proto.InternalMessageInfo
+
+func (m *POSTCreateAttributeResponse) GetAttribute() *Attribute {
+	if m != nil {
+		return m.Attribute
+	}
+	return nil
+}
+
+type PUTUpdateAttributeRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PUTUpdateAttributeRequest) Reset()         { *m = PUTUpdateAttributeRequest{} }
+func (m *PUTUpdateAttributeRequest) String() string { return proto.CompactTextString(m) }
+func (*PUTUpdateAttributeRequest) ProtoMessage()    {}
+func (*PUTUpdateAttributeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c79f94c32f7d1bce, []int{7}
+}
+
+func (m *PUTUpdateAttributeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PUTUpdateAttributeRequest.Unmarshal(m, b)
+}
+func (m *PUTUpdateAttributeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PUTUpdateAttributeRequest.Marshal(b, m, deterministic)
+}
+func (m *PUTUpdateAttributeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PUTUpdateAttributeRequest.Merge(m, src)
+}
+func (m *PUTUpdateAttributeRequest) XXX_Size() int {
+	return xxx_messageInfo_PUTUpdateAttributeRequest.Size(m)
+}
+func (m *PUTUpdateAttributeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PUTUpdateAttributeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PUTUpdateAttributeRequest proto.InternalMessageInfo
+
+func (m *PUTUpdateAttributeRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *PUTUpdateAttributeRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+type PUTUpdateAttributeResponse struct {
+	Attribute            *Attribute `protobuf:"bytes,1,opt,name=attribute,proto3" json:"attribute,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
+	XXX_unrecognized     []byte     `json:"-"`
+	XXX_sizecache        int32      `json:"-"`
+}
+
+func (m *PUTUpdateAttributeResponse) Reset()         { *m = PUTUpdateAttributeResponse{} }
+func (m *PUTUpdateAttributeResponse) String() string { return proto.CompactTextString(m) }
+func (*PUTUpdateAttributeResponse) ProtoMessage()    {}
+func (*PUTUpdateAttributeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c79f94c32f7d1bce, []int{8}
+}
+
+func (m *PUTUpdateAttributeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PUTUpdateAttributeResponse.Unmarshal(m, b)
+}
+func (m *PUTUpdateAttributeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PUTUpdateAttributeResponse.Marshal(b, m, deterministic)
+}
+func (m *PUTUpdateAttributeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PUTUpdateAttributeResponse.Merge(m, src)
+}
+func (m *PUTUpdateAttributeResponse) XXX_Size() int {
+	return xxx_messageInfo_PUTUpdateAttributeResponse.Size(m)
+}
+func (m *PUTUpdateAttributeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_PUTUpdateAttributeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PUTUpdateAttributeResponse proto.InternalMessageInfo
+
+func (m *PUTUpdateAttributeResponse) GetAttribute() *Attribute {
+	if m != nil {
+		return m.Attribute
+	}
+	return nil
+}
+
+type DELETERemoveAttributeRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DELETERemoveAttributeRequest) Reset()         { *m = DELETERemoveAttributeRequest{} }
+func (m *DELETERemoveAttributeRequest) String() string { return proto.CompactTextString(m) }
+func (*DELETERemoveAttributeRequest) ProtoMessage()    {}
+func (*DELETERemoveAttributeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c79f94c32f7d1bce, []int{9}
+}
+
+func (m *DELETERemoveAttributeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DELETERemoveAttributeRequest.Unmarshal(m, b)
+}
+func (m *DELETERemoveAttributeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DELETERemoveAttributeRequest.Marshal(b, m, deterministic)
+}
+func (m *DELETERemoveAttributeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DELETERemoveAttributeRequest.Merge(m, src)
+}
+func (m *DELETERemoveAttributeRequest) XXX_Size() int {
+	return xxx_messageInfo_DELETERemoveAttributeRequest.Size(m)
+}
+func (m *DELETERemoveAttributeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DELETERemoveAttributeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DELETERemoveAttributeRequest proto.InternalMessageInfo
+
+func (m *DELETERemoveAttributeRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type DELETERemoveAttributeResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DELETERemoveAttributeResponse) Reset()         { *m = DELETERemoveAttributeResponse{} }
+func (m *DELETERemoveAttributeResponse) String() string { return proto.CompactTextString(m) }
+func (*DELETERemoveAttributeResponse) ProtoMessage()    {}
+func (*DELETERemoveAttributeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c79f94c32f7d1bce, []int{10}
+}
+
+func (m *DELETERemoveAttributeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DELETERemoveAttributeResponse.Unmarshal(m, b)
+}
+func (m *DELETERemoveAttributeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DELETERemoveAttributeResponse.Marshal(b, m, deterministic)
+}
+func (m *DELETERemoveAttributeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DELETERemoveAttributeResponse.Merge(m, src)
+}
+func (m *DELETERemoveAttributeResponse) XXX_Size() int {
+	return xxx_messageInfo_DELETERemoveAttributeResponse.Size(m)
+}
+func (m *DELETERemoveAttributeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_DELETERemoveAttributeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DELETERemoveAttributeResponse proto.InternalMessageInfo
+
+func init() {
+	proto.RegisterType((*Attribute)(nil), "attributeproto.Attribute")
+	proto.RegisterType((*GETReadAttributeRequest)(nil), "attributeproto.GETReadAttributeRequest")
+	proto.RegisterType((*GETReadAttributeResponse)(nil), "attributeproto.GETReadAttributeResponse")
+	proto.RegisterType((*GETListAttributesRequest)(nil), "attributeproto.GETListAttributesRequest")
+	proto.RegisterType((*GETListAttributesResponse)(nil), "attributeproto.GETListAttributesResponse")
+	proto.RegisterType((*POSTCreateAttributeRequest)(nil), "attributeproto.POSTCreateAttributeRequest")
+	proto.RegisterType((*POSTCreateAttributeResponse)(nil), "attributeproto.POSTCreateAttributeResponse")
+	proto.RegisterType((*PUTUpdateAttributeRequest)(nil), "attributeproto.PUTUpdateAttributeRequest")
+	proto.RegisterType((*PUTUpdateAttributeResponse)(nil), "attributeproto.PUTUpdateAttributeResponse")
+	proto.RegisterType((*DELETERemoveAttributeRequest)(nil), "attributeproto.DELETERemoveAttributeRequest")
+	proto.RegisterType((*DELETERemoveAttributeResponse)(nil), "attributeproto.DELETERemoveAttributeResponse")
+}
+
 func init() {
 	proto.RegisterFile("github.com/lolibrary/lolibrary/service.attribute/proto/attribute.proto", fileDescriptor_c79f94c32f7d1bce)
 }
 
 var fileDescriptor_c79f94c32f7d1bce = []byte{
-	// 141 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x72, 0x4b, 0xcf, 0x2c, 0xc9,
-	0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0xcf, 0xc9, 0xcf, 0xc9, 0x4c, 0x2a, 0x4a, 0x2c, 0xaa,
-	0x44, 0x62, 0x15, 0xa7, 0x16, 0x95, 0x65, 0x26, 0xa7, 0xea, 0x25, 0x96, 0x94, 0x14, 0x65, 0x26,
-	0x95, 0x96, 0xa4, 0xea, 0x17, 0x14, 0xe5, 0x97, 0xe4, 0xeb, 0xc3, 0xf9, 0x7a, 0x60, 0xbe, 0x10,
-	0x1f, 0x5c, 0x00, 0xcc, 0x97, 0x72, 0x27, 0x60, 0x6e, 0x72, 0x6e, 0x0a, 0xc4, 0xa4, 0x64, 0xdd,
-	0xf4, 0xd4, 0x3c, 0xdd, 0xa2, 0xfc, 0xd2, 0x92, 0xd4, 0x22, 0xa8, 0xd9, 0x10, 0x0e, 0xc4, 0x60,
-	0x23, 0x53, 0x2e, 0x4e, 0xb8, 0xd1, 0x52, 0x1a, 0x4d, 0xcb, 0x64, 0x85, 0xb9, 0x04, 0x31, 0x1c,
-	0xd5, 0xb4, 0x4c, 0x96, 0x57, 0x88, 0xbb, 0x58, 0x17, 0x2e, 0x90, 0xc4, 0x06, 0xd6, 0x6d, 0x0c,
-	0x08, 0x00, 0x00, 0xff, 0xff, 0x19, 0x61, 0xa9, 0xe6, 0xe0, 0x00, 0x00, 0x00,
+	// 510 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x55, 0xc1, 0x6e, 0xd3, 0x40,
+	0x10, 0x55, 0xd2, 0x96, 0xca, 0x53, 0x25, 0x11, 0xcb, 0x01, 0x67, 0x21, 0xa2, 0xda, 0x0b, 0x2d,
+	0x10, 0x5b, 0x2a, 0x07, 0xc4, 0x01, 0xa1, 0x88, 0x86, 0x5e, 0x2a, 0x51, 0xa5, 0x4e, 0xaf, 0xc8,
+	0xf1, 0x8e, 0x82, 0x25, 0x27, 0x0e, 0xbb, 0xeb, 0xa2, 0x1e, 0x38, 0x90, 0x3b, 0xbf, 0xd1, 0x3f,
+	0xe8, 0xff, 0xa1, 0xec, 0xba, 0x8e, 0xe3, 0x38, 0x8d, 0x45, 0x6f, 0x3b, 0x33, 0xcf, 0xef, 0xbd,
+	0xcc, 0xcc, 0x6e, 0xe0, 0xeb, 0x38, 0x54, 0x3f, 0x92, 0x91, 0x13, 0xc4, 0x13, 0x37, 0x8a, 0xa3,
+	0x70, 0x24, 0x7c, 0x71, 0x93, 0x3b, 0x49, 0x14, 0xd7, 0x61, 0x80, 0x8e, 0xaf, 0x94, 0x08, 0x47,
+	0x89, 0x42, 0x77, 0x26, 0x62, 0x15, 0xbb, 0x59, 0xec, 0xe8, 0x98, 0x34, 0xb3, 0x84, 0x8e, 0xe9,
+	0xd9, 0x16, 0xde, 0x60, 0xc2, 0x0d, 0x53, 0xd0, 0x1d, 0xe3, 0xb4, 0x2b, 0xe2, 0x44, 0xa1, 0x48,
+	0xb9, 0x4d, 0x60, 0x88, 0xd9, 0x9f, 0x1a, 0x58, 0xbd, 0x7b, 0x6e, 0xd2, 0x84, 0x7a, 0xc8, 0xed,
+	0xda, 0x61, 0xed, 0xc8, 0x1a, 0xd4, 0x43, 0x4e, 0x08, 0xec, 0xca, 0x28, 0x19, 0xdb, 0x75, 0x9d,
+	0xd1, 0xe7, 0x45, 0x6e, 0xea, 0x4f, 0xd0, 0xde, 0x35, 0xb9, 0xc5, 0x99, 0x74, 0x00, 0x02, 0x81,
+	0xbe, 0x42, 0xfe, 0xdd, 0x57, 0x36, 0xd7, 0x15, 0x2b, 0xcd, 0xf4, 0xd4, 0xa2, 0x9c, 0xcc, 0xf8,
+	0x7d, 0x19, 0x4d, 0x39, 0xcd, 0xf4, 0x14, 0xfb, 0x04, 0xcf, 0xcf, 0xfa, 0xde, 0x00, 0x7d, 0x9e,
+	0x39, 0x19, 0xe0, 0xcf, 0x04, 0xa5, 0xaa, 0x62, 0x88, 0x5d, 0x82, 0xbd, 0xfe, 0xb9, 0x9c, 0xc5,
+	0x53, 0x89, 0xe4, 0x03, 0x58, 0x59, 0xe7, 0x34, 0xcd, 0xc1, 0x49, 0xdb, 0x59, 0xed, 0xa5, 0xb3,
+	0xfc, 0x6a, 0x89, 0x65, 0x54, 0x93, 0x9e, 0x87, 0x52, 0x65, 0x65, 0x99, 0x9a, 0x62, 0x57, 0xd0,
+	0x2e, 0xa9, 0xa5, 0x8a, 0x1f, 0x01, 0x32, 0x16, 0x69, 0xd7, 0x0e, 0x77, 0x1e, 0x96, 0xcc, 0x81,
+	0x99, 0x07, 0xf4, 0xe2, 0xdb, 0xa5, 0xf7, 0x45, 0xf7, 0xed, 0x7f, 0x5a, 0x91, 0xcd, 0x66, 0x67,
+	0x39, 0x1b, 0x76, 0x05, 0x2f, 0x4a, 0x59, 0x1f, 0xdb, 0xa1, 0xcf, 0xd0, 0xbe, 0x18, 0x7a, 0x43,
+	0x3d, 0xc5, 0x2a, 0x66, 0xb5, 0xb1, 0x7a, 0xce, 0xd8, 0x10, 0x68, 0x19, 0xc1, 0x63, 0x7d, 0x39,
+	0xf0, 0xf2, 0xb4, 0x7f, 0xde, 0xf7, 0xfa, 0x03, 0x9c, 0xc4, 0xd7, 0x5b, 0xad, 0xb1, 0x57, 0xd0,
+	0xd9, 0x80, 0x37, 0x4e, 0x4e, 0xfe, 0xee, 0xe5, 0xac, 0x90, 0x18, 0x1a, 0x2b, 0xab, 0x46, 0x5e,
+	0x17, 0x5d, 0x6d, 0xd8, 0x65, 0x7a, 0xb4, 0x1d, 0x68, 0x14, 0xd9, 0xc1, 0xfc, 0xce, 0xde, 0x87,
+	0x3d, 0x57, 0xa0, 0xcf, 0xc9, 0x2f, 0x68, 0x15, 0x7a, 0x44, 0x8e, 0x8b, 0x4c, 0x1b, 0x07, 0x41,
+	0xdf, 0x54, 0x81, 0xa6, 0xb2, 0x8d, 0xf9, 0x9d, 0x6d, 0xc1, 0xbe, 0x6b, 0x6e, 0x26, 0xf9, 0x0d,
+	0xad, 0x53, 0x8c, 0x30, 0x2f, 0xfc, 0xae, 0xc8, 0xf6, 0x50, 0xa7, 0x69, 0xb7, 0x22, 0xba, 0x20,
+	0xcf, 0xb5, 0x28, 0xb9, 0x81, 0x56, 0x61, 0x67, 0xc9, 0xfa, 0x8f, 0xd9, 0x78, 0x5d, 0xe8, 0xdb,
+	0x4a, 0xd8, 0x82, 0xb4, 0x79, 0xb2, 0x88, 0x80, 0xe6, 0xea, 0xed, 0x26, 0x65, 0xb3, 0x2b, 0x7d,
+	0x1c, 0xe8, 0x71, 0x05, 0x64, 0x61, 0xcc, 0x51, 0xb8, 0xd8, 0x8e, 0xf9, 0x6d, 0xe7, 0x19, 0x3c,
+	0x5d, 0xfb, 0x43, 0x98, 0xdf, 0x76, 0x1a, 0xe4, 0x40, 0x76, 0xb3, 0xc4, 0xe8, 0x89, 0xe6, 0x7d,
+	0xff, 0x2f, 0x00, 0x00, 0xff, 0xff, 0xfb, 0xbe, 0x20, 0x30, 0x5c, 0x06, 0x00, 0x00,
 }
