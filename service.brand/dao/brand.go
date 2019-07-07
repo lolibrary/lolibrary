@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"github.com/lolibrary/lolibrary/libraries/database"
 	"github.com/lolibrary/lolibrary/service.brand/domain"
 	"github.com/monzo/terrors"
 )
@@ -8,6 +9,10 @@ import (
 func CreateBrand(brand *domain.Brand) error {
 	res := DB.Create(brand)
 	if res.Error != nil {
+		if err := database.DuplicateRecord(res.Error); err != nil {
+			return err
+		}
+
 		return terrors.Wrap(res.Error, nil)
 	}
 
