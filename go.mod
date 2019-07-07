@@ -22,6 +22,7 @@ require (
 	github.com/iancoleman/strcase v0.0.0-20190422225806-e506e3ef7365
 	github.com/jinzhu/gorm v1.9.9
 	github.com/kr/pretty v0.1.0 // indirect
+	github.com/lib/pq v1.1.1
 	github.com/logrusorgru/aurora v0.0.0-20190428105938-cea283e61946
 	github.com/mattn/go-colorable v0.1.2 // indirect
 	github.com/monzo/slog v0.0.0-20180411100359-4277a1759ecc

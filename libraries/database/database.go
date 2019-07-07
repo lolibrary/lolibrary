@@ -99,9 +99,12 @@ func DuplicateRecord(err error) error {
 
 // DuplicateRecordError casts a pq error to a terror with more details.
 func DuplicateRecordError(err *pq.Error) *terrors.Error {
-	return terrors.BadRequest(fmt.Sprintf("unique.%s", err.Column), "Key already exists for that table", map[string]string{
+	return terrors.BadRequest(fmt.Sprintf("unique.%s", err.Column), "Key already exists for that table:", map[string]string{
 		"column":     err.Column,
 		"table":      err.Table,
 		"constraint": err.Constraint,
+		"hint":       err.Hint,
+		"message":    err.Message,
+		"detail":     err.Detail,
 	})
 }
