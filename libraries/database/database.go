@@ -108,7 +108,7 @@ func DuplicateRecordError(err *pq.Error) *terrors.Error {
 
 		column, value, constraint := matches[1], matches[2], matches[3]
 
-		return terrors.BadRequest(fmt.Sprintf("unique.%s", column), "%s %s already exists", map[string]string{
+		return terrors.BadRequest(fmt.Sprintf("unique.%s", column), fmt.Sprintf("%s '%s' already exists", column, value), map[string]string{
 			"key": column,
 			"value": value,
 			"constraint": constraint,
