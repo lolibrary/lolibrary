@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"regexp"
 	"strconv"
 	"sync"
 	"sync/atomic"
@@ -30,6 +31,8 @@ var (
 	client typhon.Service
 	pool   *workerpool.WorkerPool
 )
+
+var re = regexp.MustCompile(`^bad_request\.bad_param\.(.*)\.unique`)
 
 func Start(recordType string, count int) {
 	fmt.Printf("⚙️  Backfilling %v %s records via the API.\n", aurora.Green(count), recordType)
@@ -98,16 +101,23 @@ func Request(request typhon.Request) {
 		request := request
 
 		rsp := request.SendVia(client).Response()
-		if rsp.Error != nil {
-			atomic.AddInt64(&errorCount, 1)
 
+		bar.Incr()
+
+		if rsp.Error != nil {
 			if terr, ok := rsp.Error.(*terrors.Error); ok {
+				if re.MatchString(terr.Code) {
+					// we ignore records that already exist.
+					return
+				}
+
 				errorsM.Lock()
 				errors = append(errors, terr)
 				errorsM.Unlock()
 			}
-		}
 
-		bar.Incr()
+
+			atomic.AddInt64(&errorCount, 1)
+		}
 	})
 }
