@@ -27,12 +27,12 @@ func environment() error {
 	switch env {
 	case "local", "":
 		env = "local"
-		fmt.Printf("🌸  Using environment %v\n\n", aurora.Blue("local"))
+		fmt.Printf("🌸 Using environment %v\n\n", aurora.Blue("local"))
 		rpc.SetInternalEdgeProxy(EnvLocal)
 		rpc.SetExternalEdgeProxy(EnvLocalAPI)
 	case "prod", "production":
 		env = "prod"
-		fmt.Printf("🌸  Using environment %v\n\n", aurora.Blue("prod"))
+		fmt.Printf("🌸 Using environment %v\n\n", aurora.Blue("prod"))
 		rpc.SetInternalEdgeProxy(EnvProd)
 		rpc.SetExternalEdgeProxy(EnvProdAPI)
 
@@ -54,7 +54,7 @@ func environment() error {
 func setEnvironment(input string) bool {
 	env = input
 	if err := environment(); err != nil {
-		fmt.Printf("❌  Error setting environment:\n%v", err)
+		fmt.Printf("❌ Error setting environment:\n%v", err)
 		return false
 	}
 

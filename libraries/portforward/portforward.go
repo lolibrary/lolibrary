@@ -87,7 +87,7 @@ func Enable() (uint16, io.Closer) {
 	attempts := 0
 
 	// wait for the port to start listening.
-	fmt.Printf("⏳  Waiting for connection ")
+	fmt.Printf("⏳ Waiting for connection ")
 	for {
 		conn, err := net.Dial("tcp", fmt.Sprintf("127.0.0.1:%d", port))
 		if err != nil {

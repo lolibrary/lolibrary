@@ -88,14 +88,14 @@ function build/create_cache() {
 }
 
 function build/go_build() {
-    print -P "👩‍🔧  Building %F{green}$BINARY_NAME%f with %F{red}go build%f"
+    print -P "👩‍🔧 Building %F{green}$BINARY_NAME%f with %F{red}go build%f"
 
     CGO_ENABLED=0 GOOS=linux ARCH=amd64 \
         go build -i -installsuffix docker \
             -ldflags "-X \"$PROJECT/foundation.Version=$VERSION\" -X \"$PROJECT/libraries/filters.Version=$VERSION\"" \
             -o "$CACHE_DIR/$BINARY_NAME" "$SERVICE_DIR/main.go"
 
-    print -P "✅  Binary %F{green}$BINARY_NAME%f built"
+    print -P "✅ Binary %F{green}$BINARY_NAME%f built"
 }
 
 function docker/dockerfile() {
@@ -117,14 +117,14 @@ ENTRYPOINT [\"/$BINARY_NAME\"]
 }
 
 function docker/build() {
-    print -P "🐳  Building docker image %F{green}$DOCKER_TAG%f"
+    print -P "🐳 Building docker image %F{green}$DOCKER_TAG%f"
 
     docker/dockerfile
     docker build -t $DOCKER_TAG $CACHE_DIR > /dev/null 2>&1
 }
 
 function docker/push() {
-    print -P "🚢  Pushing docker image to %F{green}$DOCKER_TAG%f"
+    print -P "🚢 Pushing docker image to %F{green}$DOCKER_TAG%f"
 
     docker push $DOCKER_TAG
 }
@@ -140,7 +140,7 @@ function k8s/deploy() {
 
     kubectl rollout status "deployment/$service" -n $NAMESPACE
 
-    print -P "✅  Deployed %F{red}$SERVICE_NAME%f successfully"
+    print -P "✅ Deployed %F{red}$SERVICE_NAME%f successfully"
 }
 
 function debug_print() {
