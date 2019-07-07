@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"github.com/lolibrary/lolibrary/libraries/database"
 	"github.com/lolibrary/lolibrary/service.feature/domain"
 	"github.com/monzo/terrors"
 )
@@ -8,6 +9,10 @@ import (
 func CreateFeature(feature *domain.Feature) error {
 	res := DB.Create(feature)
 	if res.Error != nil {
+		if err := database.DuplicateRecord(res.Error); err != nil {
+			return err
+		}
+
 		return terrors.Wrap(res.Error, nil)
 	}
 
@@ -17,6 +22,10 @@ func CreateFeature(feature *domain.Feature) error {
 func UpdateFeature(feature *domain.Feature) error {
 	res := DB.Update(feature)
 	if res.Error != nil {
+		if err := database.DuplicateRecord(res.Error); err != nil {
+			return err
+		}
+
 		if res.RecordNotFound() {
 			return terrors.NotFound("feature", "Feature not found", nil)
 		}

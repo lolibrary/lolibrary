@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"github.com/lolibrary/lolibrary/libraries/database"
 	"github.com/lolibrary/lolibrary/service.tag/domain"
 	"github.com/monzo/terrors"
 )
@@ -8,6 +9,10 @@ import (
 func CreateTag(tag *domain.Tag) error {
 	res := DB.Create(tag)
 	if res.Error != nil {
+		if err := database.DuplicateRecord(res.Error); err != nil {
+			return err
+		}
+
 		return terrors.Wrap(res.Error, nil)
 	}
 
@@ -17,6 +22,10 @@ func CreateTag(tag *domain.Tag) error {
 func UpdateTag(tag *domain.Tag) error {
 	res := DB.Update(tag)
 	if res.Error != nil {
+		if err := database.DuplicateRecord(res.Error); err != nil {
+			return err
+		}
+
 		if res.RecordNotFound() {
 			return terrors.NotFound("tag", "Tag not found", nil)
 		}

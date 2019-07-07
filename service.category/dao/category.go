@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"github.com/lolibrary/lolibrary/libraries/database"
 	"github.com/lolibrary/lolibrary/service.category/domain"
 	"github.com/monzo/terrors"
 )
@@ -8,6 +9,10 @@ import (
 func CreateCategory(category *domain.Category) error {
 	res := DB.Create(category)
 	if res.Error != nil {
+		if err := database.DuplicateRecord(res.Error); err != nil {
+			return err
+		}
+
 		return terrors.Wrap(res.Error, nil)
 	}
 
@@ -17,6 +22,10 @@ func CreateCategory(category *domain.Category) error {
 func UpdateCategory(category *domain.Category) error {
 	res := DB.Update(category)
 	if res.Error != nil {
+		if err := database.DuplicateRecord(res.Error); err != nil {
+			return err
+		}
+
 		if res.RecordNotFound() {
 			return terrors.NotFound("category", "Category not found", nil)
 		}

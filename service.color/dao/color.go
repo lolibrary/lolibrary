@@ -1,6 +1,7 @@
 package dao
 
 import (
+	"github.com/lolibrary/lolibrary/libraries/database"
 	"github.com/lolibrary/lolibrary/service.color/domain"
 	"github.com/monzo/terrors"
 )
@@ -8,6 +9,10 @@ import (
 func CreateColor(color *domain.Color) error {
 	res := DB.Create(color)
 	if res.Error != nil {
+		if err := database.DuplicateRecord(res.Error); err != nil {
+			return err
+		}
+
 		return terrors.Wrap(res.Error, nil)
 	}
 
@@ -17,6 +22,10 @@ func CreateColor(color *domain.Color) error {
 func UpdateColor(color *domain.Color) error {
 	res := DB.Update(color)
 	if res.Error != nil {
+		if err := database.DuplicateRecord(res.Error); err != nil {
+			return err
+		}
+
 		if res.RecordNotFound() {
 			return terrors.NotFound("color", "Color not found", nil)
 		}

@@ -22,6 +22,10 @@ func CreateBrand(brand *domain.Brand) error {
 func UpdateBrand(brand *domain.Brand) error {
 	res := DB.Update(brand)
 	if res.Error != nil {
+		if err := database.DuplicateRecord(res.Error); err != nil {
+			return err
+		}
+
 		if res.RecordNotFound() {
 			return terrors.NotFound("brand", "Brand not found", nil)
 		}
