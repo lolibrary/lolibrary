@@ -9,10 +9,10 @@ import (
 )
 
 func main() {
-	svc := handler.Service().Filter(filters.CommonFilters)
+	srv := foundation.Init("service.brand")
 	db := dao.Init()
 	defer db.Close()
 
-	srv := foundation.Init("service.brand")
+	svc := handler.Service().Filter(filters.CommonFilters)
 	srv.Run(svc)
 }
