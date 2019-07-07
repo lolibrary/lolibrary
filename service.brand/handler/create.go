@@ -38,10 +38,16 @@ func handleCreateBrand(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: validation.ErrBadParam("short_name", "short_name should be in kebab-case")}
 	}
 
-	id, err := idgen.New()
-	if err != nil {
-		slog.Error(req, "Error generating ID: %v", err)
-		return typhon.Response{Error: err}
+	var id string
+	var err error
+	if body.AllowId {
+		id = body.Id
+	} else {
+		id, err = idgen.New()
+		if err != nil {
+			slog.Error(req, "Error generating ID: %v", err)
+			return typhon.Response{Error: err}
+		}
 	}
 
 	brand := &domain.Brand{

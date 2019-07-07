@@ -62,6 +62,9 @@ message GETListCategoriesResponse {
 message POSTCreateCategoryRequest {
     string slug = 1;
     string name = 3;
+
+    bool allow_id = 10;
+    string id = 11;
 }
 
 message POSTCreateCategoryResponse {
