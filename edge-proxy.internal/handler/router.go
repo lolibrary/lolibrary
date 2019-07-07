@@ -12,9 +12,9 @@ import (
 )
 
 var (
-	reAPI          = regexp.MustCompile(`^/service\.api\.([a-z\-]+)/([a-z\-]*)$`)
-	reService      = regexp.MustCompile(`^/service\.([a-z\-]+)/([a-z\-]*)$`)
-	reShortService = regexp.MustCompile(`^/s-([a-z\-]+)/([a-z\-]*)$`)
+	reAPI          = regexp.MustCompile(`^/service\.api\.([a-z\-]+)/(.*)$`)
+	reService      = regexp.MustCompile(`^/service\.([a-z\-]+)/(.*)$`)
+	reShortService = regexp.MustCompile(`^/s-([a-z\-]+)/(.*)$`)
 
 	// requestFormat is the format we'll send to upstream services.
 	requestFormat = "http://%s/%s"
