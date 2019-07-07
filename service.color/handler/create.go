@@ -22,6 +22,8 @@ func handleCreateColor(req typhon.Request) typhon.Response {
 	}
 
 	switch {
+	case body.Id != "" && !validation.UUID(body.Id):
+		return typhon.Response{Error: validation.ErrBadParam("id", "id should be a valid uuid")}
 	case body.Slug == "":
 		return typhon.Response{Error: validation.ErrMissingParam("slug")}
 	case body.Name == "":
@@ -30,20 +32,18 @@ func handleCreateColor(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: validation.ErrBadParam("slug", "slug should be in kebab-case")}
 	}
 
-	var id string
-	var err error
-	if body.AllowId {
-		id = body.Id
-	} else {
-		id, err = idgen.New()
+	if body.Id == "" {
+		id, err := idgen.New()
 		if err != nil {
 			slog.Error(req, "Error generating ID: %v", err)
 			return typhon.Response{Error: err}
 		}
+
+		body.Id = id
 	}
 
 	color := &domain.Color{
-		ID:        id,
+		ID:        body.Id,
 		Slug:      body.Slug,
 		Name:      body.Name,
 		CreatedAt: time.Now().UTC(),

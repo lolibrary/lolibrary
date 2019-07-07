@@ -30,20 +30,18 @@ func handleCreateFeature(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: validation.ErrBadParam("slug", "slug should be in kebab-case")}
 	}
 
-	var id string
-	var err error
-	if body.AllowId {
-		id = body.Id
-	} else {
-		id, err = idgen.New()
+	if body.Id == "" {
+		id, err := idgen.New()
 		if err != nil {
 			slog.Error(req, "Error generating ID: %v", err)
 			return typhon.Response{Error: err}
 		}
+
+		body.Id = id
 	}
 
 	feature := &domain.Feature{
-		ID:        id,
+		ID:        body.Id,
 		Slug:      body.Slug,
 		Name:      body.Name,
 		CreatedAt: time.Now().UTC(),

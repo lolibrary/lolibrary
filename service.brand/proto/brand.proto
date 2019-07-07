@@ -64,14 +64,12 @@ message GETListBrandsResponse {
 // POST /service.brand/create {"brand": {...}}
 
 message POSTCreateBrandRequest {
-    string slug = 1;
-    string short_name = 2;
-    string name = 3;
-    string description = 4;
-    string image_id = 5;
-
-    bool allow_id = 10;
-    string id = 11;
+    string id = 1;
+    string slug = 2;
+    string short_name = 3;
+    string name = 4;
+    string description = 5;
+    string image_id = 6;
 }
 
 message POSTCreateBrandResponse {

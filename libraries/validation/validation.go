@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/monzo/terrors"
+	uuid "github.com/nu7hatch/gouuid"
 )
 
 func ErrMissingParam(param string) error {
@@ -27,4 +28,10 @@ func AtLeastOne(params ...string) bool {
 	}
 
 	return false
+}
+
+// UUID checks if a given UUID is valid.
+func UUID(id string) bool {
+	_, err := uuid.ParseHex(id)
+	return err == nil
 }

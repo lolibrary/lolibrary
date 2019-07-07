@@ -61,11 +61,9 @@ message GETListColorsResponse {
 // POST /service.color/create {"color": {...}}
 
 message POSTCreateColorRequest {
-    string slug = 1;
+    string id = 1;
+    string slug = 2;
     string name = 3;
-
-    bool allow_id = 10;
-    string id = 11;
 }
 
 message POSTCreateColorResponse {

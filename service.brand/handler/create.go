@@ -22,6 +22,8 @@ func handleCreateBrand(req typhon.Request) typhon.Response {
 	}
 
 	switch {
+	case body.Id != "" && !validation.UUID(body.Id):
+		return typhon.Response{Error: validation.ErrBadParam("id", "id should be a valid uuid")}
 	case body.Slug == "":
 		return typhon.Response{Error: validation.ErrMissingParam("slug")}
 	case body.ShortName == "":
@@ -38,20 +40,18 @@ func handleCreateBrand(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: validation.ErrBadParam("short_name", "short_name should be in kebab-case")}
 	}
 
-	var id string
-	var err error
-	if body.AllowId {
-		id = body.Id
-	} else {
-		id, err = idgen.New()
+	if body.Id == "" {
+		id, err := idgen.New()
 		if err != nil {
 			slog.Error(req, "Error generating ID: %v", err)
 			return typhon.Response{Error: err}
 		}
+
+		body.Id = id
 	}
 
 	brand := &domain.Brand{
-		ID:          id,
+		ID:          body.Id,
 		ImageID:     body.ImageId,
 		Slug:        body.Slug,
 		ShortName:   body.ShortName,
