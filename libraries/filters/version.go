@@ -1,6 +1,8 @@
 package filters
 
 import (
+	"strings"
+
 	"github.com/monzo/typhon"
 )
 
@@ -22,5 +24,5 @@ func VersionFilter(req typhon.Request, svc typhon.Service) typhon.Response {
 }
 
 func matchesVersionPath(req typhon.Request) bool {
-	return req.Method == "GET" && req.URL.Path == "/foundation/version"
+	return strings.ToUpper(req.Method) == "GET" && req.URL.Path == "/foundation/version"
 }

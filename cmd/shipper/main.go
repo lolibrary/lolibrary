@@ -7,6 +7,7 @@ import (
 	"os/exec"
 
 	"github.com/logrusorgru/aurora"
+	"github.com/lolibrary/lolibrary/cmd/shipper/commands"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -26,6 +27,11 @@ func main() {
 			Name:   "connect",
 			Usage:  "💽 connect directly to CockroachDB.",
 			Action: connect,
+		},
+		{
+			Name: "status",
+			Usage: "🕵️‍♀️ Check the current versions of deploys in production",
+			Action: commands.Status,
 		},
 	}
 
