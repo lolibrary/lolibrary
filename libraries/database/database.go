@@ -7,6 +7,8 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/lib/pq"
+	"github.com/monzo/terrors"
 	_ "github.com/proullon/ramsql/driver"
 )
 
@@ -77,4 +79,29 @@ func defaultDSN() string {
 	)
 
 	return connection + options
+}
+
+// DuplicateRecord returns an error if the given error is a unique constraint violation from libpq.
+func DuplicateRecord(err error) error {
+	if err == nil {
+		return nil
+	}
+
+	// try and cast to a pq error.
+	if perr, ok := err.(*pq.Error); ok {
+		if perr.Code == "23505" {
+			return DuplicateRecordError(perr)
+		}
+	}
+
+	return nil
+}
+
+// DuplicateRecordError casts a pq error to a terror with more details.
+func DuplicateRecordError(err *pq.Error) *terrors.Error {
+	return terrors.BadRequest(fmt.Sprintf("unique.%s", err.Column), "Key already exists for that table", map[string]string{
+		"column":     err.Column,
+		"table":      err.Table,
+		"constraint": err.Constraint,
+	})
 }
