@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"os"
+	"regexp"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -19,6 +20,8 @@ const (
 	defaultDB     = "lolibrary"
 	defaultRootCA = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
 )
+
+var reUnique = regexp.MustCompile(`duplicate key value \(([a-z0-9_]+)\)=\('([^']+)'\) violates unique constraint "([a-z0-9_]+)"`)
 
 // Connect takes a service and returns a database connection.
 func Connect() *gorm.DB {
@@ -99,12 +102,18 @@ func DuplicateRecord(err error) error {
 
 // DuplicateRecordError casts a pq error to a terror with more details.
 func DuplicateRecordError(err *pq.Error) *terrors.Error {
-	return terrors.BadRequest(fmt.Sprintf("unique.%s", err.Column), "Key already exists for that table:", map[string]string{
-		"column":     err.Column,
-		"table":      err.Table,
-		"constraint": err.Constraint,
-		"hint":       err.Hint,
-		"message":    err.Message,
-		"detail":     err.Detail,
-	})
+	// try to match the regex to get more info
+	if reUnique.MatchString(err.Message) {
+		matches := reUnique.FindStringSubmatch(err.Message)
+
+		column, value, constraint := matches[1], matches[2], matches[3]
+
+		return terrors.BadRequest(fmt.Sprintf("unique.%s", column), "%s %s already exists", map[string]string{
+			"key": column,
+			"value": value,
+			"constraint": constraint,
+		})
+	}
+
+	return terrors.BadRequest("unique", "Unable to create record; key already exists", nil)
 }
