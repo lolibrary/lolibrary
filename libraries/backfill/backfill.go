@@ -5,7 +5,10 @@ import (
 	"io"
 	"os"
 	"strconv"
+	"sync"
+	"sync/atomic"
 
+	"github.com/gammazero/workerpool"
 	"github.com/gosuri/uiprogress"
 	"github.com/hokaccha/go-prettyjson"
 	"github.com/logrusorgru/aurora"
@@ -16,18 +19,27 @@ import (
 )
 
 var (
-	errorCount = 0
+	errorCount int64 = 0
 	errors     []*terrors.Error
+	errorsM    sync.Mutex
 )
 
 var (
 	cmd    io.Closer
 	bar    *uiprogress.Bar
 	client typhon.Service
+	pool   *workerpool.WorkerPool
 )
 
 func Start(recordType string, count int) {
 	fmt.Printf("⚙️  Backfilling %v %s records via the API.\n", aurora.Green(count), recordType)
+
+	concurrency, _ := strconv.ParseInt(os.Getenv("CONCURRENCY"), 10, 64)
+	if concurrency <= 0 {
+		concurrency = 8
+	}
+
+	pool = workerpool.New(int(concurrency))
 
 	port, closer := portforward.Enable()
 	cmd = closer
@@ -42,14 +54,19 @@ func Start(recordType string, count int) {
 }
 
 func Stop() {
+	// wait for everything to complete first.
+	pool.StopWait()
+
 	uiprogress.Stop()
 
 	if cmd != nil {
 		cmd.Close()
 	}
 
-	if errorCount > 0 {
-		fmt.Printf("⚠️  Completed with %v errors\n", aurora.Red(errorCount))
+	count := atomic.LoadInt64(&errorCount)
+
+	if count > 0 {
+		fmt.Printf("⚠️  Completed with %v errors\n", aurora.Red(count))
 
 		if debug, _ := strconv.ParseBool(os.Getenv("DEBUG")); debug {
 			for _, terr := range errors {
@@ -77,14 +94,20 @@ func Stop() {
 }
 
 func Request(request typhon.Request) {
-	rsp := request.SendVia(client).Response()
-	if rsp.Error != nil {
-		errorCount++
+	pool.Submit(func() {
+		request := request
 
-		if terr, ok := rsp.Error.(*terrors.Error); ok {
-			errors = append(errors, terr)
+		rsp := request.SendVia(client).Response()
+		if rsp.Error != nil {
+			atomic.AddInt64(&errorCount, 1)
+
+			if terr, ok := rsp.Error.(*terrors.Error); ok {
+				errorsM.Lock()
+				errors = append(errors, terr)
+				errorsM.Unlock()
+			}
 		}
-	}
 
-	bar.Incr()
+		bar.Incr()
+	})
 }

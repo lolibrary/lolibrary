@@ -13,6 +13,7 @@ require (
 	github.com/docker/go-units v0.4.0 // indirect
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/fortytw2/leaktest v1.3.0 // indirect
+	github.com/gammazero/workerpool v0.0.0-20190608213748-0ed5e40ec55e
 	github.com/golang/protobuf v1.3.1
 	github.com/googleapis/gax-go/v2 v2.0.5 // indirect
 	github.com/gosuri/uilive v0.0.3 // indirect

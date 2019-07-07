@@ -31,6 +31,10 @@ github.com/docker/go-connections/nat
 github.com/docker/go-units
 # github.com/fatih/color v1.7.0
 github.com/fatih/color
+# github.com/gammazero/deque v0.0.0-20190521012701-46e4ffb7a622
+github.com/gammazero/deque
+# github.com/gammazero/workerpool v0.0.0-20190608213748-0ed5e40ec55e
+github.com/gammazero/workerpool
 # github.com/golang/protobuf v1.3.1
 github.com/golang/protobuf/proto
 github.com/golang/protobuf/protoc-gen-go/descriptor
