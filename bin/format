@@ -7,10 +7,12 @@ FORMATTABLE=(
     'edge-proxy.*'
     'libraries'
     'foundation'
+    'scripts'
     'cmd/flower'
     'cmd/shipper'
     'cmd/protoc-gen-*'
-    'scripts'
+    'cmd/generate/main.go'
+    'cmd/generate/cmd'
 )
 
 for dir in ${FORMATTABLE[@]}; do
