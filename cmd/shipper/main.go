@@ -29,8 +29,8 @@ func main() {
 			Action: connect,
 		},
 		{
-			Name: "status",
-			Usage: "🕵️‍♀️ Check the current versions of deploys in production",
+			Name:   "status",
+			Usage:  "🕵️‍♀️ Check the current versions of deploys in production",
 			Action: commands.Status,
 		},
 	}

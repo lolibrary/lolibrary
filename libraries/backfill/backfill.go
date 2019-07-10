@@ -116,7 +116,6 @@ func Request(request typhon.Request) {
 				errorsM.Unlock()
 			}
 
-
 			atomic.AddInt64(&errorCount, 1)
 		}
 	})

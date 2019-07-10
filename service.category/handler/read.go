@@ -28,7 +28,7 @@ func handleReadCategory(req typhon.Request) typhon.Response {
 
 	var (
 		category *domain.Category
-		err   error
+		err      error
 	)
 
 	switch {

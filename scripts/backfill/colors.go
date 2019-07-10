@@ -88,6 +88,7 @@ a1c2ea36-02df-4045-9666-3e1b17b7daa5,white-x-green,White x Green
 0a4e7498-d182-43ef-9a6d-67fecc8ba2e0,lavender-x-black,Lavender x Black
 9804e495-074b-4bea-92dd-b1775546a311,offwhitecream,Offwhite/Cream
 `
+
 // in: ^([^,]+),([^,]+),(.*)$
 // out: {\n\tId: "$1",\n\tSlug: "$2",\n\tName: "$3",\n},
 var colors = []*colorproto.POSTCreateColorRequest{

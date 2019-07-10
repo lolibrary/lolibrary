@@ -28,7 +28,7 @@ func handleReadItem(req typhon.Request) typhon.Response {
 
 	var (
 		item *domain.Item
-		err   error
+		err  error
 	)
 
 	switch {

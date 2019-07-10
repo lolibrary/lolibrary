@@ -28,7 +28,7 @@ func handleReadTag(req typhon.Request) typhon.Response {
 
 	var (
 		tag *domain.Tag
-		err   error
+		err error
 	)
 
 	switch {

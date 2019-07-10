@@ -28,7 +28,7 @@ func handleReadFeature(req typhon.Request) typhon.Response {
 
 	var (
 		feature *domain.Feature
-		err   error
+		err     error
 	)
 
 	switch {

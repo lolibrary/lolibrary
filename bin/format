@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+FORMATTABLE=(
+    'service.*'
+    'edge-proxy.*'
+    'libraries'
+    'foundation'
+    'cmd/flower'
+    'cmd/shipper'
+    'cmd/protoc-gen-*'
+    'scripts'
+)
+
+for dir in ${FORMATTABLE[@]}; do
+    if [[ -f $dir ]]; then
+        go fmt ./$dir
+    else
+        go fmt ./$dir/...
+    fi
+done

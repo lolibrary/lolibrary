@@ -30,7 +30,7 @@ type versionResponse struct {
 }
 
 var (
-	mutex sync.Mutex
+	mutex    sync.Mutex
 	versions = map[string]string{
 		"service.brand":     "unknown",
 		"service.category":  "unknown",

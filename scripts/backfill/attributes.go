@@ -136,5 +136,3 @@ var attributes = []*attributeproto.POSTCreateAttributeRequest{
 		Name: "Thigh",
 	},
 }
-
-
