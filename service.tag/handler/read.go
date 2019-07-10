@@ -22,8 +22,8 @@ func handleReadTag(req typhon.Request) typhon.Response {
 	switch {
 	case !validation.AtLeastOne(body.Id, body.Slug):
 		return typhon.Response{Error: validation.ErrMissingOneOf("id", "slug", "short_name")}
-	case body.Slug != strcase.ToKebab(body.Slug):
-		return typhon.Response{Error: validation.ErrBadParam("slug", "slug should be in kebab-case")}
+	case !validation.Slug(body.Slug):
+		return typhon.Response{Error: validation.ErrBadSlug("slug", body.Slug)}
 	}
 
 	var (

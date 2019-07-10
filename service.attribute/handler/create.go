@@ -3,7 +3,6 @@ package handler
 import (
 	"time"
 
-	"github.com/iancoleman/strcase"
 	"github.com/lolibrary/lolibrary/libraries/idgen"
 	"github.com/lolibrary/lolibrary/libraries/validation"
 	"github.com/lolibrary/lolibrary/service.attribute/dao"
@@ -28,8 +27,8 @@ func handleCreateAttribute(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: validation.ErrMissingParam("slug")}
 	case body.Name == "":
 		return typhon.Response{Error: validation.ErrMissingParam("name")}
-	case body.Slug != strcase.ToKebab(body.Slug):
-		return typhon.Response{Error: validation.ErrBadParam("slug", "slug should be in kebab-case")}
+	case !validation.Slug(body.Slug):
+		return typhon.Response{Error: validation.ErrBadSlug("slug", body.Slug)}
 	}
 
 	if body.Id == "" {
