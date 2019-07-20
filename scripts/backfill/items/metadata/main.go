@@ -1,13 +1,15 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"io/ioutil"
 	"log"
 	"os"
 	"path"
 
-	"github.com/gammazero/workerpool"
+	"github.com/lolibrary/lolibrary/libraries/backfill"
+	itemproto "github.com/lolibrary/lolibrary/service.item/proto"
 )
 
 var metaPath = path.Join(
@@ -32,15 +34,16 @@ func main() {
 		log.Fatalf("⚠️  Error json decoding metadata.json:\n\t > %v\n", err)
 	}
 
-	pool := workerpool.New(10)
+	backfill.Start("item.metadata", len(meta))
+	defer backfill.Stop()
 
 	for id, m := range meta {
-		pool.Submit(func () {
-			id := id
-			m := m
-
-			//
-		})
+		backfill.Request(itemproto.PUTUpdateItemRequest{
+			Id: id,
+			Metadata: map[string]string{
+				"original_id": m.OriginalID,
+				"original_slug": m.OriginalSlug,
+			},
+		}.Request(context.Background()))
 	}
-
 }
