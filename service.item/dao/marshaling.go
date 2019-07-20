@@ -30,6 +30,11 @@ type daoItem struct {
 	PublishedAt   time.Time
 }
 
+// TableName sets this model's table name to "users", overriding the default (dao_users).
+func (daoItem) TableName() string {
+	return "users"
+}
+
 func domainToDAO(model *domain.Item) (*daoItem, error) {
 	// first we need to marshal our metadata to []byte
 	metadata := []byte("{}")
