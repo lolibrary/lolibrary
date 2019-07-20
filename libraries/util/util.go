@@ -15,6 +15,14 @@ func TimeToProto(t time.Time) string {
 	return t.Truncate(time.Millisecond).Format(time.RFC3339Nano)
 }
 
+func TimeToRFC3339(t time.Time) string {
+	if t.IsZero() {
+		return ""
+	}
+
+	return t.Truncate(time.Second).Format(time.RFC3339)
+}
+
 // ProtoToTime converts a protoc datetime to a time.Time.
 func ProtoToTime(date string) (time.Time, error) {
 	t, err := time.Parse(time.RFC3339Nano, date)

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package sitemapgeneratorproto;
+
+import "github.com/lolibrary/lolibrary/cmd/protoc-gen-router/proto/router.proto";
+
+service sitemap_generator {
+    option (router).name = "service.sitemap-generator";
+    option (router).short_name = "s-sitemap-generator";
+
+    rpc GenerateSitemap (POSTGenerateSitemapRequest) returns (POSTGenerateSitemapResponse) {
+        option (handler).path = "/generate";
+    }
+}
+
+message POSTGenerateSitemapRequest {}
+message POSTGenerateSitemapResponse {}

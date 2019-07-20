@@ -125,6 +125,8 @@ github.com/ory/dockertest/docker/pkg/term/windows
 github.com/ory/dockertest/docker/types/blkiodev
 github.com/ory/dockertest/docker/types/strslice
 github.com/ory/dockertest/docker/types/versions
+# github.com/pahanini/go-sitemap-generator v0.0.0-20161102132113-fe0794d1e806
+github.com/pahanini/go-sitemap-generator
 # github.com/peterh/liner v1.1.0
 github.com/peterh/liner
 # github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
@@ -166,7 +168,7 @@ go.opencensus.io/internal
 go.opencensus.io/trace/internal
 go.opencensus.io/trace/tracestate
 go.opencensus.io
-# golang.org/x/net v0.0.0-20190620200207-3b0461eec859
+# golang.org/x/net v0.0.0-20190628185345-da137c7871d7
 golang.org/x/net/context
 golang.org/x/net/http/httpguts
 golang.org/x/net/http2
