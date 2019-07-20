@@ -14,6 +14,10 @@ service item {
     rpc CreateItem (POSTCreateItemRequest) returns (POSTCreateItemResponse) {
         option (handler).path = "/create";
     }
+
+    rpc UpdateItem (PUTUpdateItemRequest) returns (PUTUpdateItemResponse) {
+        option (handler).path = "/update";
+    }
 }
 
 message Item {
@@ -76,8 +80,31 @@ message POSTCreateItemRequest {
     string price = 12;
     int32 year = 13;
     string notes = 14;
+    map<string, string> metadata = 50;
 }
 
 message POSTCreateItemResponse {
+    Item item = 1;
+}
+
+message PUTUpdateItemRequest {
+    string id = 1;
+
+    string slug = 2;
+    string brand_id = 3;
+    string category_id = 4;
+    string image_id = 6;
+    string english_name = 8;
+    string foreign_name = 9;
+    string product_number = 10;
+    string currency = 11;
+    string price = 12;
+    int32 year = 13;
+    string notes = 14;
+
+    map<string, string> metadata = 50;
+}
+
+message PUTUpdateItemResponse {
     Item item = 1;
 }

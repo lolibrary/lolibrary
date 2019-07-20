@@ -6,6 +6,7 @@ import (
 
 	"github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/lolibrary/lolibrary/service.item/domain"
+	"github.com/monzo/terrors"
 )
 
 type daoItem struct {
@@ -41,7 +42,7 @@ func domainToDAO(model *domain.Item) (*daoItem, error) {
 	if len(model.Metadata) > 0 {
 		b, err := json.Marshal(model.Metadata)
 		if err != nil {
-			return nil, err
+			return nil, terrors.Wrap(err, nil)
 		}
 		metadata = b
 	}
@@ -73,7 +74,7 @@ func daoToDomain(model *daoItem) (*domain.Item, error) {
 	// decode the raw message
 	var metadata map[string]string
 	if err := json.Unmarshal(model.Metadata.RawMessage, &metadata); err != nil {
-		return nil, err
+		return nil, terrors.Wrap(err, nil)
 	}
 
 	return &domain.Item{

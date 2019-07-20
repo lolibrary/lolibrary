@@ -165,3 +165,82 @@ func (f *POSTCreateItemFuture) DecodeResponse() (*POSTCreateItemResponse, error)
 
 	return body, nil
 }
+
+// -------------------------
+// PUT /service.item/update
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body PUTUpdateItemRequest) Method() string {
+	return "PUT"
+}
+
+// Path is the HTTP path to this endpoint
+func (body PUTUpdateItemRequest) Path() string {
+	return "/update"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body PUTUpdateItemRequest) ServiceName() string {
+	return "service.item"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body PUTUpdateItemRequest) Host() string {
+	return "s-item"
+}
+
+// FullPath is the full routable URL to this service.
+func (body PUTUpdateItemRequest) FullPath() string {
+	return "http://s-item/update"
+}
+
+// Request returns a typhon request for this type.
+func (body PUTUpdateItemRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body PUTUpdateItemRequest) Response(ctx context.Context) (*PUTUpdateItemResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body PUTUpdateItemRequest) Send(ctx context.Context) *PUTUpdateItemFuture {
+	return &PUTUpdateItemFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body PUTUpdateItemRequest) SendVia(ctx context.Context, svc typhon.Service) *PUTUpdateItemFuture {
+	return &PUTUpdateItemFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
+// PUTUpdateItemFuture is an intermediate future used for parallel requests with PUTUpdateItemRequest
+type PUTUpdateItemFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *PUTUpdateItemFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *PUTUpdateItemFuture) DecodeResponse() (*PUTUpdateItemResponse, error) {
+	f.Done()
+
+	body := &PUTUpdateItemResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}

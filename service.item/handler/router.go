@@ -6,7 +6,7 @@ var router = typhon.Router{}
 
 func init() {
 	router.GET("/read", handleReadItem)
-	// router.PUT("/update", handleUpdateItem)
+	router.PUT("/update", handleUpdateItem)
 	// router.DELETE("/delete", handleDeleteItem)
 }
 
