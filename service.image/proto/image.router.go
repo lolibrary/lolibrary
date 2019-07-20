@@ -7,3 +7,161 @@ import (
 
 	"github.com/monzo/typhon"
 )
+
+// -------------------------
+// POST /service.image/create
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body POSTCreateImageRequest) Method() string {
+	return "POST"
+}
+
+// Path is the HTTP path to this endpoint
+func (body POSTCreateImageRequest) Path() string {
+	return "/create"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body POSTCreateImageRequest) ServiceName() string {
+	return "service.image"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body POSTCreateImageRequest) Host() string {
+	return "s-image"
+}
+
+// FullPath is the full routable URL to this service.
+func (body POSTCreateImageRequest) FullPath() string {
+	return "http://s-image/create"
+}
+
+// Request returns a typhon request for this type.
+func (body POSTCreateImageRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body POSTCreateImageRequest) Response(ctx context.Context) (*POSTCreateImageResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateImageRequest) Send(ctx context.Context) *POSTCreateImageFuture {
+	return &POSTCreateImageFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body POSTCreateImageRequest) SendVia(ctx context.Context, svc typhon.Service) *POSTCreateImageFuture {
+	return &POSTCreateImageFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
+// POSTCreateImageFuture is an intermediate future used for parallel requests with POSTCreateImageRequest
+type POSTCreateImageFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *POSTCreateImageFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *POSTCreateImageFuture) DecodeResponse() (*POSTCreateImageResponse, error) {
+	f.Done()
+
+	body := &POSTCreateImageResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}
+
+// -------------------------
+// GET /service.image/read
+// -------------------------
+
+// Method is the HTTP method used for this request.
+// It is inferred from the name of the Request using a prefix match.
+func (body GETReadImageRequest) Method() string {
+	return "GET"
+}
+
+// Path is the HTTP path to this endpoint
+func (body GETReadImageRequest) Path() string {
+	return "/read"
+}
+
+// ServiceName is the long-form service name, e.g. service.brand.
+func (body GETReadImageRequest) ServiceName() string {
+	return "service.image"
+}
+
+// Host is the short-form service name, e.g. s-brand.
+func (body GETReadImageRequest) Host() string {
+	return "s-image"
+}
+
+// FullPath is the full routable URL to this service.
+func (body GETReadImageRequest) FullPath() string {
+	return "http://s-image/read"
+}
+
+// Request returns a typhon request for this type.
+func (body GETReadImageRequest) Request(ctx context.Context) typhon.Request {
+	return typhon.NewRequest(ctx, body.Method(), body.FullPath(), body)
+}
+
+// Response is a shortcut for .Send(ctx).DecodeResponse(), for when you do not need a future.
+// This saves on boilerplate throughout the codebase and you should use this method unless you need parallel requests.
+func (body GETReadImageRequest) Response(ctx context.Context) (*GETReadImageResponse, error) {
+	return body.Send(ctx).DecodeResponse()
+}
+
+// Send creates a typhon future and immediately returns it.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETReadImageRequest) Send(ctx context.Context) *GETReadImageFuture {
+	return &GETReadImageFuture{Future: body.Request(ctx).Send()}
+}
+
+// SendVia creates a typhon future and immediately returns it, passing the request through svc.
+// To wait for the request to complete and return the response, use DecodeResponse on the returned future.
+func (body GETReadImageRequest) SendVia(ctx context.Context, svc typhon.Service) *GETReadImageFuture {
+	return &GETReadImageFuture{Future: body.Request(ctx).SendVia(svc)}
+}
+
+// GETReadImageFuture is an intermediate future used for parallel requests with GETReadImageRequest
+type GETReadImageFuture struct {
+	Future   *typhon.ResponseFuture
+	Response *typhon.Response
+}
+
+// Done waits for a response from a typhon future, and is safe to call multiple times in a row.
+func (f *GETReadImageFuture) Done() {
+	if f.Response == nil {
+		rsp := f.Future.Response()
+		f.Response = &rsp
+	}
+}
+
+// DecodeResponse waits for this future to be done and then decodes the response into a concrete type.
+func (f *GETReadImageFuture) DecodeResponse() (*GETReadImageResponse, error) {
+	f.Done()
+
+	body := &GETReadImageResponse{}
+	if err := f.Response.Decode(body); err != nil {
+		return nil, err
+	}
+
+	return body, nil
+}

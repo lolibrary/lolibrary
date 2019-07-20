@@ -21,19 +21,293 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type Image struct {
+	Id       string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Filename string `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`
+	Name     string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	// timestamps
+	CreatedAt            string   `protobuf:"bytes,100,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,101,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Image) Reset()         { *m = Image{} }
+func (m *Image) String() string { return proto.CompactTextString(m) }
+func (*Image) ProtoMessage()    {}
+func (*Image) Descriptor() ([]byte, []int) {
+	return fileDescriptor_04936b294c4d7e54, []int{0}
+}
+
+func (m *Image) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Image.Unmarshal(m, b)
+}
+func (m *Image) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Image.Marshal(b, m, deterministic)
+}
+func (m *Image) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Image.Merge(m, src)
+}
+func (m *Image) XXX_Size() int {
+	return xxx_messageInfo_Image.Size(m)
+}
+func (m *Image) XXX_DiscardUnknown() {
+	xxx_messageInfo_Image.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Image proto.InternalMessageInfo
+
+func (m *Image) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Image) GetFilename() string {
+	if m != nil {
+		return m.Filename
+	}
+	return ""
+}
+
+func (m *Image) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *Image) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *Image) GetUpdatedAt() string {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return ""
+}
+
+type POSTCreateImageRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Filename             string   `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`
+	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *POSTCreateImageRequest) Reset()         { *m = POSTCreateImageRequest{} }
+func (m *POSTCreateImageRequest) String() string { return proto.CompactTextString(m) }
+func (*POSTCreateImageRequest) ProtoMessage()    {}
+func (*POSTCreateImageRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_04936b294c4d7e54, []int{1}
+}
+
+func (m *POSTCreateImageRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_POSTCreateImageRequest.Unmarshal(m, b)
+}
+func (m *POSTCreateImageRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_POSTCreateImageRequest.Marshal(b, m, deterministic)
+}
+func (m *POSTCreateImageRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_POSTCreateImageRequest.Merge(m, src)
+}
+func (m *POSTCreateImageRequest) XXX_Size() int {
+	return xxx_messageInfo_POSTCreateImageRequest.Size(m)
+}
+func (m *POSTCreateImageRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_POSTCreateImageRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_POSTCreateImageRequest proto.InternalMessageInfo
+
+func (m *POSTCreateImageRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *POSTCreateImageRequest) GetFilename() string {
+	if m != nil {
+		return m.Filename
+	}
+	return ""
+}
+
+func (m *POSTCreateImageRequest) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+type POSTCreateImageResponse struct {
+	Image                *Image   `protobuf:"bytes,1,opt,name=image,proto3" json:"image,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *POSTCreateImageResponse) Reset()         { *m = POSTCreateImageResponse{} }
+func (m *POSTCreateImageResponse) String() string { return proto.CompactTextString(m) }
+func (*POSTCreateImageResponse) ProtoMessage()    {}
+func (*POSTCreateImageResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_04936b294c4d7e54, []int{2}
+}
+
+func (m *POSTCreateImageResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_POSTCreateImageResponse.Unmarshal(m, b)
+}
+func (m *POSTCreateImageResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_POSTCreateImageResponse.Marshal(b, m, deterministic)
+}
+func (m *POSTCreateImageResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_POSTCreateImageResponse.Merge(m, src)
+}
+func (m *POSTCreateImageResponse) XXX_Size() int {
+	return xxx_messageInfo_POSTCreateImageResponse.Size(m)
+}
+func (m *POSTCreateImageResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_POSTCreateImageResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_POSTCreateImageResponse proto.InternalMessageInfo
+
+func (m *POSTCreateImageResponse) GetImage() *Image {
+	if m != nil {
+		return m.Image
+	}
+	return nil
+}
+
+type GETReadImageRequest struct {
+	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Filename             string   `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GETReadImageRequest) Reset()         { *m = GETReadImageRequest{} }
+func (m *GETReadImageRequest) String() string { return proto.CompactTextString(m) }
+func (*GETReadImageRequest) ProtoMessage()    {}
+func (*GETReadImageRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_04936b294c4d7e54, []int{3}
+}
+
+func (m *GETReadImageRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETReadImageRequest.Unmarshal(m, b)
+}
+func (m *GETReadImageRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETReadImageRequest.Marshal(b, m, deterministic)
+}
+func (m *GETReadImageRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETReadImageRequest.Merge(m, src)
+}
+func (m *GETReadImageRequest) XXX_Size() int {
+	return xxx_messageInfo_GETReadImageRequest.Size(m)
+}
+func (m *GETReadImageRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETReadImageRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETReadImageRequest proto.InternalMessageInfo
+
+func (m *GETReadImageRequest) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *GETReadImageRequest) GetFilename() string {
+	if m != nil {
+		return m.Filename
+	}
+	return ""
+}
+
+type GETReadImageResponse struct {
+	Image                *Image   `protobuf:"bytes,1,opt,name=image,proto3" json:"image,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GETReadImageResponse) Reset()         { *m = GETReadImageResponse{} }
+func (m *GETReadImageResponse) String() string { return proto.CompactTextString(m) }
+func (*GETReadImageResponse) ProtoMessage()    {}
+func (*GETReadImageResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_04936b294c4d7e54, []int{4}
+}
+
+func (m *GETReadImageResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GETReadImageResponse.Unmarshal(m, b)
+}
+func (m *GETReadImageResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GETReadImageResponse.Marshal(b, m, deterministic)
+}
+func (m *GETReadImageResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GETReadImageResponse.Merge(m, src)
+}
+func (m *GETReadImageResponse) XXX_Size() int {
+	return xxx_messageInfo_GETReadImageResponse.Size(m)
+}
+func (m *GETReadImageResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GETReadImageResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GETReadImageResponse proto.InternalMessageInfo
+
+func (m *GETReadImageResponse) GetImage() *Image {
+	if m != nil {
+		return m.Image
+	}
+	return nil
+}
+
+func init() {
+	proto.RegisterType((*Image)(nil), "imageproto.Image")
+	proto.RegisterType((*POSTCreateImageRequest)(nil), "imageproto.POSTCreateImageRequest")
+	proto.RegisterType((*POSTCreateImageResponse)(nil), "imageproto.POSTCreateImageResponse")
+	proto.RegisterType((*GETReadImageRequest)(nil), "imageproto.GETReadImageRequest")
+	proto.RegisterType((*GETReadImageResponse)(nil), "imageproto.GETReadImageResponse")
+}
+
 func init() {
 	proto.RegisterFile("github.com/lolibrary/lolibrary/service.image/proto/image.proto", fileDescriptor_04936b294c4d7e54)
 }
 
 var fileDescriptor_04936b294c4d7e54 = []byte{
-	// 137 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xb2, 0x4b, 0xcf, 0x2c, 0xc9,
-	0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0xcf, 0xc9, 0xcf, 0xc9, 0x4c, 0x2a, 0x4a, 0x2c, 0xaa,
-	0x44, 0x62, 0x15, 0xa7, 0x16, 0x95, 0x65, 0x26, 0xa7, 0xea, 0x65, 0xe6, 0x26, 0xa6, 0xa7, 0xea,
-	0x17, 0x14, 0xe5, 0x97, 0xe4, 0xeb, 0x83, 0xd9, 0x7a, 0x60, 0xb6, 0x10, 0x17, 0x98, 0x03, 0x66,
-	0x4b, 0xb9, 0x13, 0x30, 0x2b, 0x39, 0x37, 0x05, 0x62, 0x42, 0xb2, 0x6e, 0x7a, 0x6a, 0x9e, 0x6e,
-	0x51, 0x7e, 0x69, 0x49, 0x6a, 0x11, 0xd4, 0x4c, 0x08, 0x07, 0x62, 0xa8, 0x91, 0x26, 0x17, 0x2b,
-	0xd8, 0x58, 0x29, 0x85, 0xa6, 0x65, 0xb2, 0xfc, 0x5c, 0xbc, 0x28, 0x8e, 0x68, 0x5a, 0x26, 0xcb,
-	0x29, 0xc4, 0x5e, 0xac, 0x0b, 0xe6, 0x24, 0xb1, 0x81, 0x75, 0x18, 0x03, 0x02, 0x00, 0x00, 0xff,
-	0xff, 0xab, 0x69, 0x4f, 0x31, 0xc8, 0x00, 0x00, 0x00,
+	// 355 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x92, 0xc1, 0x4a, 0xf3, 0x40,
+	0x14, 0x85, 0x49, 0xff, 0xbf, 0xd6, 0xdc, 0x52, 0xc5, 0x51, 0x34, 0x04, 0x8a, 0x25, 0x2e, 0x74,
+	0xd3, 0x04, 0xea, 0x5e, 0xa9, 0x22, 0xc5, 0x95, 0x52, 0xbb, 0x10, 0x5c, 0xc8, 0x34, 0x73, 0xad,
+	0x03, 0x4d, 0x53, 0x27, 0x13, 0xc1, 0x6d, 0xc0, 0x57, 0xe9, 0x1b, 0xf4, 0xb1, 0x7c, 0x07, 0xe9,
+	0x9d, 0x58, 0x53, 0xac, 0x8a, 0xba, 0xbb, 0xf7, 0x9c, 0x93, 0x8f, 0x93, 0x9b, 0xc0, 0xd1, 0x40,
+	0xea, 0xfb, 0xb4, 0xef, 0x87, 0x71, 0x14, 0x0c, 0xe3, 0xa1, 0xec, 0x2b, 0xae, 0x9e, 0x0a, 0x53,
+	0x82, 0xea, 0x51, 0x86, 0xe8, 0xcb, 0x88, 0x0f, 0x30, 0x18, 0xab, 0x58, 0xc7, 0x01, 0xcd, 0x3e,
+	0xcd, 0x0c, 0x68, 0xa1, 0xd9, 0xed, 0x7c, 0xc3, 0x0a, 0x23, 0x61, 0x08, 0x61, 0x73, 0x80, 0xa3,
+	0xa6, 0x8a, 0x53, 0x8d, 0x2a, 0x67, 0x9a, 0xc5, 0x40, 0xbd, 0x67, 0x0b, 0xca, 0xe7, 0x33, 0x2e,
+	0x5b, 0x83, 0x92, 0x14, 0x8e, 0xd5, 0xb0, 0x0e, 0xec, 0x6e, 0x49, 0x0a, 0xe6, 0xc2, 0xea, 0x9d,
+	0x1c, 0xe2, 0x88, 0x47, 0xe8, 0x94, 0x48, 0x9d, 0xef, 0x8c, 0xc1, 0x7f, 0xd2, 0xff, 0x91, 0x4e,
+	0x33, 0xab, 0x03, 0x84, 0x0a, 0xb9, 0x46, 0x71, 0xcb, 0xb5, 0x23, 0xc8, 0xb1, 0x73, 0xa5, 0xad,
+	0x67, 0x76, 0x3a, 0x16, 0x6f, 0x36, 0x1a, 0x3b, 0x57, 0xda, 0xda, 0xbb, 0x86, 0xed, 0xcb, 0x8b,
+	0xab, 0xde, 0x29, 0xe5, 0xa9, 0x50, 0x17, 0x1f, 0x52, 0x4c, 0xf4, 0x5f, 0x7b, 0x79, 0x27, 0xb0,
+	0xf3, 0x81, 0x9c, 0x8c, 0xe3, 0x51, 0x82, 0x6c, 0x1f, 0xca, 0x74, 0x53, 0xa2, 0x57, 0x5b, 0x1b,
+	0xfe, 0xfb, 0x85, 0x7d, 0x93, 0x34, 0xbe, 0xd7, 0x86, 0xcd, 0xce, 0x59, 0xaf, 0x8b, 0x5c, 0xfc,
+	0xb6, 0x9a, 0x77, 0x0c, 0x5b, 0x8b, 0x88, 0x1f, 0x76, 0x68, 0xbd, 0x58, 0x79, 0x92, 0x21, 0x54,
+	0x0b, 0x6f, 0xc3, 0xbc, 0xe2, 0x23, 0xcb, 0x8f, 0xe8, 0xee, 0x7d, 0x99, 0x31, 0x55, 0xbc, 0x5a,
+	0x36, 0x75, 0x6c, 0xa8, 0x04, 0xe6, 0xa3, 0xb1, 0x1b, 0xb0, 0xe7, 0x75, 0xd9, 0x6e, 0x11, 0xb0,
+	0xe4, 0x16, 0x6e, 0xe3, 0xf3, 0x40, 0x8e, 0xaf, 0x66, 0x53, 0xa7, 0x02, 0xe5, 0x40, 0x21, 0x17,
+	0x6e, 0x23, 0x9b, 0xd4, 0xd7, 0xa1, 0xb6, 0xf0, 0xcf, 0x67, 0x93, 0xba, 0xcd, 0x2a, 0x49, 0x93,
+	0x96, 0xfe, 0x0a, 0xa1, 0x0e, 0x5f, 0x03, 0x00, 0x00, 0xff, 0xff, 0xd5, 0x12, 0xea, 0xa4, 0x37,
+	0x03, 0x00, 0x00,
 }

@@ -7,5 +7,40 @@ service image {
     option (router).name = "service.image";
     option (router).short_name = "s-image";
 
-    //
+    rpc CreateImage (POSTCreateImageRequest) returns (POSTCreateImageResponse) {
+        option (handler).path = "/create";
+    }
+
+    rpc ReadImage (GETReadImageRequest) returns (GETReadImageResponse) {
+        option (handler).path = "/read";
+    }
+}
+
+message Image {
+    string id = 1;
+    string filename = 2;
+    string name = 3;
+
+    // timestamps
+    string created_at = 100;
+    string updated_at = 101;
+}
+
+message POSTCreateImageRequest {
+    string id = 1;
+    string filename = 2;
+    string name = 3;
+}
+
+message POSTCreateImageResponse {
+    Image image = 1;
+}
+
+message GETReadImageRequest {
+    string id = 1;
+    string filename = 2;
+}
+
+message GETReadImageResponse {
+    Image image = 1;
 }
