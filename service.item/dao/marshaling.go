@@ -32,7 +32,7 @@ type daoItem struct {
 
 // TableName sets this model's table name to "users", overriding the default (dao_users).
 func (daoItem) TableName() string {
-	return "users"
+	return "items"
 }
 
 func domainToDAO(model *domain.Item) (*daoItem, error) {
