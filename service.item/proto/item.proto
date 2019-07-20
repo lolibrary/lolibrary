@@ -33,7 +33,7 @@ message Item {
     string notes = 14;
 
     // status is used for draft/non-draft but could be a bitmask later.
-    int32 status = 40;
+    Status status = 40;
 
     // key-value searchable metadata.
     map<string, string> metadata = 50;
@@ -42,6 +42,12 @@ message Item {
     string created_at = 100;
     string updated_at = 101;
     string published_at = 102;
+}
+
+enum Status {
+    DRAFT = 0;
+    PUBLISHED = 1;
+    UNKNOWN = 2;
 }
 
 // GET /service.item/read {"id": "<uuid>"}

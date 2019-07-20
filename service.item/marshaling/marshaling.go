@@ -12,11 +12,25 @@ func ItemToProto(item *domain.Item) *itemproto.Item {
 	}
 
 	return &itemproto.Item{
-		Id:        item.ID,
-		Slug:      item.Slug,
-		Name:      item.Name,
-		CreatedAt: util.TimeToProto(item.CreatedAt),
-		UpdatedAt: util.TimeToProto(item.UpdatedAt),
+		Id:            item.ID,
+		Slug:          item.Slug,
+		BrandId:       item.BrandID,
+		CategoryId:    item.CategoryID,
+		UserId:        item.UserID,
+		ImageId:       item.ImageID,
+		PublisherId:   item.PublisherID,
+		EnglishName:   item.EnglishName,
+		ForeignName:   item.ForeignName,
+		ProductNumber: item.ProductNumber,
+		Currency:      item.Currency,
+		Price:         item.Price,
+		Year:          int32(item.Year),
+		Notes:         item.Notes,
+		Status:        StatusToProto(item.Status),
+		Metadata:      item.Metadata,
+		CreatedAt:     util.TimeToProto(item.CreatedAt),
+		UpdatedAt:     util.TimeToProto(item.UpdatedAt),
+		PublishedAt:   util.TimeToProto(item.PublishedAt),
 	}
 }
 
@@ -27,4 +41,15 @@ func ItemsToProto(items []*domain.Item) []*itemproto.Item {
 	}
 
 	return protos
+}
+
+func StatusToProto(status int) itemproto.Status {
+	switch status {
+	case 0:
+		return itemproto.Status_DRAFT
+	case 1:
+		return itemproto.Status_PUBLISHED
+	default:
+		return itemproto.Status_UNKNOWN
+	}
 }
