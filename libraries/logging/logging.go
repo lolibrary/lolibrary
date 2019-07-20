@@ -1,6 +1,9 @@
 package logging
 
 import (
+	"context"
+	"os"
+
 	"cloud.google.com/go/logging"
 	"github.com/monzo/slog"
 )
@@ -38,7 +41,16 @@ func (s *stackdriverLogger) Flush() error {
 }
 
 // Init sets up the default logger.
-func Init() {
-	logger, err := logging.NewClient()
-	slog.SetDefaultLogger(&stackdriverLogger{})
+func Init(service string) {
+	parent := "projects/lolibrary-180111"
+	if envParent := os.Getenv("LOG_STACKDRIVER_PARENT"); envParent != "" {
+		parent = envParent
+	}
+
+	logger, err := logging.NewClient(context.Background(), parent)
+	if err != nil {
+		panic(err)
+	}
+
+	slog.SetDefaultLogger(&stackdriverLogger{logger: logger.Logger(service)})
 }
