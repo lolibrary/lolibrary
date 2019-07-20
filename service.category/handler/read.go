@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"github.com/iancoleman/strcase"
 	"github.com/lolibrary/lolibrary/libraries/validation"
 	"github.com/lolibrary/lolibrary/service.category/dao"
 	"github.com/lolibrary/lolibrary/service.category/domain"

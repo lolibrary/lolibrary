@@ -1,6 +1,6 @@
 create table if not exists items
 (
-    id             uuid                   not null,
+    id             uuid                   not null PRIMARY KEY,
     brand_id       uuid                   not null,
     category_id    uuid                   not null,
     user_id        uuid                   not null,
@@ -18,8 +18,7 @@ create table if not exists items
     metadata       jsonb                           default '{}',
     created_at     timestamp with time zone,
     updated_at     timestamp with time zone,
-    published_at   timestamp with time zone,
-    primary key (id)
+    published_at   timestamp with time zone
 );
 
 -- slug has to be unique
@@ -36,15 +35,3 @@ create index if not exists items_updated_at_index on items (updated_at);
 
 -- create an inverted index to search json metadata.
 create index if not exists items_metadata_inverted on items using gin (metadata);
-
-
--- relation tables for items goes here.
-create table if not exists attribute_item (
-    id uuid not null,
-    attribute_id uuid not null,
-    item_id uuid not null,
-    value character varying(255) not null,
-    primary key (id)
-);
-
-create unique index if not exists attribute_item_unique on attribute_item (attribute_id, item_id);
