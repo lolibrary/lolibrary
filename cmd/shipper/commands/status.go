@@ -23,6 +23,9 @@ var services = []string{
 	"service.color",
 	"service.tag",
 	"service.attribute",
+	"service.item",
+	"service.image",
+	"service.sitemap-generator",
 }
 
 type versionResponse struct {
@@ -32,12 +35,15 @@ type versionResponse struct {
 var (
 	mutex    sync.Mutex
 	versions = map[string]string{
-		"service.brand":     "unknown",
-		"service.category":  "unknown",
-		"service.feature":   "unknown",
-		"service.color":     "unknown",
-		"service.tag":       "unknown",
-		"service.attribute": "unknown",
+		"service.brand":             "unknown",
+		"service.category":          "unknown",
+		"service.feature":           "unknown",
+		"service.color":             "unknown",
+		"service.tag":               "unknown",
+		"service.attribute":         "unknown",
+		"service.item":              "unknown",
+		"service.image":             "unknown",
+		"service.sitemap-generator": "unknown",
 	}
 )
 
