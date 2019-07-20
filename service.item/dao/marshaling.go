@@ -9,7 +9,7 @@ import (
 	"github.com/monzo/terrors"
 )
 
-type daoItem struct {
+type item struct {
 	ID            string
 	Slug          string
 	BrandID       string
@@ -32,14 +32,14 @@ type daoItem struct {
 }
 
 // TableName sets this model's table name to "users", overriding the default (dao_users).
-func (daoItem) TableName() string {
+func (item) TableName() string {
 	return "items"
 }
 
-func domainToDAO(model *domain.Item) (*daoItem, error) {
+func domainToDAO(model *domain.Item) (*item, error) {
 	// first we need to marshal our metadata to []byte
 	metadata := []byte("{}")
-	if len(model.Metadata) > 0 {
+	if model.Metadata != nil {
 		b, err := json.Marshal(model.Metadata)
 		if err != nil {
 			return nil, terrors.Wrap(err, nil)
@@ -47,7 +47,7 @@ func domainToDAO(model *domain.Item) (*daoItem, error) {
 		metadata = b
 	}
 
-	return &daoItem{
+	return &item{
 		ID:            model.ID,
 		Slug:          model.Slug,
 		BrandID:       model.BrandID,
@@ -70,7 +70,7 @@ func domainToDAO(model *domain.Item) (*daoItem, error) {
 	}, nil
 }
 
-func daoToDomain(model *daoItem) (*domain.Item, error) {
+func daoToDomain(model *item) (*domain.Item, error) {
 	// decode the raw message
 	var metadata map[string]string
 	if err := json.Unmarshal(model.Metadata.RawMessage, &metadata); err != nil {

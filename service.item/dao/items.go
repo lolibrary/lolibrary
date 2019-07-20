@@ -7,9 +7,9 @@ import (
 )
 
 func ReadItem(id string) (*domain.Item, error) {
-	item := &daoItem{}
+	i := &item{}
 
-	res := DB.Where("id = ?", id).First(item)
+	res := DB.Where("id = ?", id).First(i)
 	if res.Error != nil {
 		if res.RecordNotFound() {
 			return nil, nil
@@ -18,13 +18,13 @@ func ReadItem(id string) (*domain.Item, error) {
 		return nil, terrors.Wrap(res.Error, nil)
 	}
 
-	return daoToDomain(item)
+	return daoToDomain(i)
 }
 
 func ReadItemBySlug(slug string) (*domain.Item, error) {
-	item := &daoItem{}
+	i := &item{}
 
-	res := DB.Where("slug = ?", slug).First(item)
+	res := DB.Where("slug = ?", slug).First(i)
 	if res.Error != nil {
 		if res.RecordNotFound() {
 			return nil, nil
@@ -33,16 +33,16 @@ func ReadItemBySlug(slug string) (*domain.Item, error) {
 		return nil, terrors.Wrap(res.Error, nil)
 	}
 
-	return daoToDomain(item)
+	return daoToDomain(i)
 }
 
 func UpdateItem(input *domain.Item) error {
-	item, err := domainToDAO(input)
+	i, err := domainToDAO(input)
 	if err != nil {
 		return err
 	}
 
-	res := DB.Update(item)
+	res := DB.Table("items").Update(i)
 	if res.Error != nil {
 		if err := database.DuplicateRecord(res.Error); err != nil {
 			return err
