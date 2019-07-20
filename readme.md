@@ -12,51 +12,45 @@ Lolibrary is a lolita fashion archive website. This repository is a monorepo con
 
 ## Getting Started
 
-To get started, you'll need to [install Docker](https://www.docker.com/community-edition). This should be your only real requirement to run Lolibrary's code.
+To get started, you'll need to install Docker and the go compiler.
+You'll also need kubectl at a minimum, and if you're a Lolibrary core dev, access to our GKE cluster (ask on Discord, and use your @lolibrary.org email).
 
-💻 On macOS, [install Homebrew](https://brew.sh) before you run `bash setup.sh`.
+As a note, this only really supports macOS right now.
 
-To get started, run `bash setup.sh`; you may be prompted for your password.
+First, run `./bin/install`. This will compile all Go tools and stick them into `$GOPATH/bin`. Add this to your path if needed!
 
-⚠️ Windows does not currently work with `setup.sh`; you'll need to run commands manually.
+💻 On macOS, you can [install Homebrew](https://brew.sh) to get all of these tools.
 
-Copy `.env.example` to `.env` if it hasn't been done already; this is your entire config and sets environment variables. The default is enough to get started.
+## Running internal tools
 
-### General running
-
-To run all code/containers, you'll need to run the following. This is your "normal" command to run to start Lolibrary running. This will start everything in the background; to start in the foreground just omit `-d`. To see logs, run `docker-compose logs` in the same directory as `docker-compose.yml`.
-
-```sh
-docker-compose up -d
-```
-
-Setup will have already ran this.
-
-This will start the postgres/redis containers, spin up your web container to serve the application, run the queue workers, and build the frontend assets.
-
-After making changes, your queue workers won't automatically restart. To do this, issue the following command:
-
-```sh
-docker-compose exec app php artisan horizon:terminate
-```
-
-docker-compose will automatically restart the container that was running queue workers.
+- To communicate with production (or your local environment), see [Flower CLI](./docs/flower.md)
+- To deploy, see [Deploying Lolibrary](./docs/deploying.md)
+- To connect to CockroachDB, see [Connecting to CockroachDB](./docs/cockroachdb.md)
 
 ### HTTPS certificate
 
-Lolibrary in dev should be running on HTTPS, as that assumption is made everywhere. There is a self-signed certificate in the `pki` folder of this repository; you should trust this certificate on your development machine.
+Lolibrary's ingress in dev should be running on HTTPS, as that assumption is made everywhere.
 
-See the `pki` folder in this directory for more information; `setup.sh` will automatically add this certificate.
+There is a self-signed certificate in the `pki` folder of this repository; you should trust this certificate on your development machine.
+
+Then, provided you follow the guidance below, you'll be able to reach:
+
+- lolibrary.test:443 (main user frontend)
+- api.lolibrary.test:443 (all services that start with `service.api.`)
+- admin.lolibrary.test:443 (admin user frontend)
+- image-proxy.lolibrary.test:443 (a proxy to our configured CDN so that you load images locally)
+
+This is only needed when running full tests across the entire platform. In most cases when you test a service in isolation you don't use the ingress, so you can just find it on localhost.
 
 ### Hostnames
 
 Add a dns resolver such as dnsmasq to resolve all `.test` domains to localhost. This will be needed! (`setup.sh`, again, does this automatically on Mac).
 
-On windows, you can get away with just adding `lolibrary.test` to your hosts file pointing to `127.0.0.1`
+On windows, you can get away with just adding `lolibrary.test` and related domains to your hosts file pointing to `127.0.0.1`
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within this repo, email [amelia@lolibrary.org](mailto:amelia@lolibrary.org). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this repo, email [engineering@lolibrary.org](mailto:engineering@lolibrary.org). All security vulnerabilities will be promptly addressed.
 
 ## License
 
