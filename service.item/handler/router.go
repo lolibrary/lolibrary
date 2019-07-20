@@ -6,8 +6,8 @@ var router = typhon.Router{}
 
 func init() {
 	router.GET("/read", handleReadItem)
-	router.PUT("/update", handleUpdateItem)
-	router.DELETE("/delete", handleDeleteItem)
+	// router.PUT("/update", handleUpdateItem)
+	// router.DELETE("/delete", handleDeleteItem)
 }
 
 // Service serves this router as a typhon service.
