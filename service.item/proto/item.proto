@@ -31,8 +31,6 @@ message Item {
     string price = 12;
     int32 year = 13;
     string notes = 14;
-
-    // status is used for draft/non-draft but could be a bitmask later.
     Status status = 40;
 
     // key-value searchable metadata.

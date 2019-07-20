@@ -64,8 +64,7 @@ type Item struct {
 	Price         string `protobuf:"bytes,12,opt,name=price,proto3" json:"price,omitempty"`
 	Year          int32  `protobuf:"varint,13,opt,name=year,proto3" json:"year,omitempty"`
 	Notes         string `protobuf:"bytes,14,opt,name=notes,proto3" json:"notes,omitempty"`
-	// status is used for draft/non-draft but could be a bitmask later.
-	Status Status `protobuf:"varint,40,opt,name=status,proto3,enum=itemproto.Status" json:"status,omitempty"`
+	Status        Status `protobuf:"varint,40,opt,name=status,proto3,enum=itemproto.Status" json:"status,omitempty"`
 	// key-value searchable metadata.
 	Metadata map[string]string `protobuf:"bytes,50,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// timestamps

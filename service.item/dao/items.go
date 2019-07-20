@@ -6,7 +6,7 @@ import (
 )
 
 func ReadItem(id string) (*domain.Item, error) {
-	item := &domain.Item{}
+	item := &daoItem{}
 
 	res := DB.Where("id = ?", id).First(item)
 	if res.Error != nil {
@@ -17,11 +17,11 @@ func ReadItem(id string) (*domain.Item, error) {
 		return nil, terrors.Wrap(res.Error, nil)
 	}
 
-	return item, nil
+	return daoToDomain(item)
 }
 
 func ReadItemBySlug(slug string) (*domain.Item, error) {
-	item := &domain.Item{}
+	item := &daoItem{}
 
 	res := DB.Where("slug = ?", slug).First(item)
 	if res.Error != nil {
@@ -32,5 +32,5 @@ func ReadItemBySlug(slug string) (*domain.Item, error) {
 		return nil, terrors.Wrap(res.Error, nil)
 	}
 
-	return item, nil
+	return daoToDomain(item)
 }
