@@ -15,7 +15,7 @@ func handleListTags(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: err}
 	}
 
-	tags, err := dao.ListTags()
+	tags, err := dao.ListTags(req)
 	if err != nil {
 		slog.Error(req, "Failed to read tags: %v", err)
 		return typhon.Response{Error: err}

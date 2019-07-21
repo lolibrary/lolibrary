@@ -1,21 +1,30 @@
 package dao
 
 import (
-	"io"
+	"context"
 
-	"github.com/jinzhu/gorm"
-	"github.com/lolibrary/lolibrary/libraries/database"
+	"cloud.google.com/go/firestore"
 )
 
 var (
-	DB *gorm.DB
+	Firestore *firestore.Client
+
+	tagsByID   *firestore.CollectionRef
+	tagsBySlug *firestore.CollectionRef
 )
 
 // Init starts up the database access object package and configures a database.
-func Init() io.Closer {
-	if DB == nil {
-		DB = database.Connect()
+func Init() {
+	if Firestore == nil {
+		// add this to database package later
+		client, err := firestore.NewClient(context.Background(), "lolibrary-180111")
+		if err != nil {
+			panic(err)
+		}
+
+		Firestore = client
 	}
 
-	return DB
+	tagsByID = Firestore.Collection("tags")
+	tagsBySlug = Firestore.Collection("tags-by-slug")
 }

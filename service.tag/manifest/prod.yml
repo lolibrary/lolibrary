@@ -64,6 +64,8 @@ spec:
                 secretKeyRef:
                   name: sentry
                   key: dsn
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: "/var/run/secrets/google/key.json"
           resources:
             requests:
               cpu: 10m
@@ -83,14 +85,14 @@ spec:
                 - name: Host
                   value: service.tag
           volumeMounts:
-            - name: cockroach-service-account
-              mountPath: /certs
+            - name: pod-google-credentials
+              mountPath: /var/run/secrets/google/key.json
               readOnly: true
       volumes:
-        - name: cockroach-service-account
+        - name: pod-google-credentials
           secret:
             defaultMode: 0400
-            secretName: cockroach-service-account
+            secretName: pod-google-credentials
 ---
 apiVersion: v1
 kind: Service

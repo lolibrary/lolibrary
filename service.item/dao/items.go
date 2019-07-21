@@ -53,3 +53,39 @@ func CreateItem(ctx context.Context, item *domain.Item) error {
 
 	return nil
 }
+
+func UpdateItem(ctx context.Context, item *domain.Item) error {
+	if err := Firestore.RunTransaction(ctx, func(ctx context.Context, tx *firestore.Transaction) error {
+		if err := tx.Set(itemsByID.Doc(item.ID), item); err != nil {
+			return err
+		}
+
+		if err := tx.Set(itemsBySlug.Doc(item.Slug), item); err != nil {
+			return err
+		}
+
+		return nil
+	}); err != nil {
+		return terrors.Wrap(err, nil)
+	}
+
+	return nil
+}
+
+func DeleteItem(ctx context.Context, item *domain.Item) error {
+	if err := Firestore.RunTransaction(ctx, func(ctx context.Context, tx *firestore.Transaction) error {
+		if err := tx.Delete(itemsByID.Doc(item.ID)); err != nil {
+			return err
+		}
+
+		if err := tx.Delete(itemsBySlug.Doc(item.Slug)); err != nil {
+			return err
+		}
+
+		return nil
+	}); err != nil {
+		return terrors.Wrap(err, nil)
+	}
+
+	return nil
+}

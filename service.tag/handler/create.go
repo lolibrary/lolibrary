@@ -48,7 +48,7 @@ func handleCreateTag(req typhon.Request) typhon.Response {
 		CreatedAt: time.Now().UTC(),
 	}
 
-	if err := dao.CreateTag(tag); err != nil {
+	if err := dao.CreateTag(req, tag); err != nil {
 		slog.Error(req, "Failed to create tag entry: %v", err)
 		return typhon.Response{Error: err}
 	}

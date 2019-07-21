@@ -25,7 +25,7 @@ func handleDeleteTag(req typhon.Request) typhon.Response {
 
 	slogParams := map[string]string{"tag_id": body.Id}
 
-	tag, err := dao.ReadTag(body.Id)
+	tag, err := dao.ReadTag(req, body.Id)
 	if err != nil {
 		slog.Error(req, "Error checking if tag exists: %v", err, slogParams)
 		return typhon.Response{Error: err}
@@ -34,7 +34,7 @@ func handleDeleteTag(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: terrors.NotFound("tag", fmt.Sprintf("Tag '%s' not found", body.Id), nil)}
 	}
 
-	if err := dao.DeleteTag(tag.ID); err != nil {
+	if err := dao.DeleteTag(req, tag); err != nil {
 		slog.Error(req, "Error deleting tag: %v", err, slogParams)
 		return typhon.Response{Error: err}
 	}

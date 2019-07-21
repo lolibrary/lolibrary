@@ -32,9 +32,9 @@ func handleReadTag(req typhon.Request) typhon.Response {
 
 	switch {
 	case body.Id != "":
-		tag, err = dao.ReadTag(body.Id)
+		tag, err = dao.ReadTag(req, body.Id)
 	case body.Slug != "":
-		tag, err = dao.ReadTagBySlug(body.Slug)
+		tag, err = dao.ReadTagBySlug(req, body.Slug)
 	}
 
 	if err != nil {

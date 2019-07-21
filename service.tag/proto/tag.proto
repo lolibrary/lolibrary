@@ -74,7 +74,8 @@ message POSTCreateTagResponse {
 
 message PUTUpdateTagRequest {
     string id = 1;
-    string name = 2;
+    string slug = 2;
+    string name = 3;
 }
 
 message PUTUpdateTagResponse {

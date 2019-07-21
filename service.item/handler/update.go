@@ -28,7 +28,7 @@ func handleUpdateItem(req typhon.Request) typhon.Response {
 
 	slogParams := map[string]string{"item_id": body.Id}
 
-	item, err := dao.ReadItem(body.Id)
+	item, err := dao.ReadItem(req, body.Id)
 	if err != nil {
 		slog.Error(req, "Error checking if item exists: %v", err, slogParams)
 		return typhon.Response{Error: err}
@@ -37,10 +37,10 @@ func handleUpdateItem(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: terrors.NotFound("item", fmt.Sprintf("Item '%s' not found", body.Id), nil)}
 	}
 
-	item = handleUserUpdates(body, item)
+	item = handleUserUpdates(item, body)
 	item.UpdatedAt = time.Now().UTC()
 
-	if err := dao.UpdateItem(item); err != nil {
+	if err := dao.UpdateItem(req, item); err != nil {
 		slog.Error(req, "Error updating feature: %v", err, slogParams)
 		return typhon.Response{Error: err}
 	}
@@ -50,7 +50,7 @@ func handleUpdateItem(req typhon.Request) typhon.Response {
 	})
 }
 
-func handleUserUpdates(body *itemproto.PUTUpdateItemRequest, item *domain.Item) *domain.Item {
+func handleUserUpdates(item *domain.Item, body *itemproto.PUTUpdateItemRequest) *domain.Item {
 	if body.Slug != "" {
 		item.Slug = body.Slug
 	}

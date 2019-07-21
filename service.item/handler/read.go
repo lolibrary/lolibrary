@@ -32,9 +32,9 @@ func handleReadItem(req typhon.Request) typhon.Response {
 
 	switch {
 	case body.Id != "":
-		item, err = dao.ReadItem(body.Id)
+		item, err = dao.ReadItem(req, body.Id)
 	case body.Slug != "":
-		item, err = dao.ReadItemBySlug(body.Slug)
+		item, err = dao.ReadItemBySlug(req, body.Slug)
 	}
 
 	if err != nil {
