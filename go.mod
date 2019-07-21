@@ -3,6 +3,7 @@ module github.com/lolibrary/lolibrary
 require (
 	cloud.google.com/go v0.40.0
 	github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78 // indirect
+	github.com/DATA-DOG/go-sqlmock v1.3.3 // indirect
 	github.com/Microsoft/go-winio v0.4.12 // indirect
 	github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5 // indirect
 	github.com/cenkalti/backoff v2.1.1+incompatible // indirect
@@ -41,6 +42,7 @@ require (
 	github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/proullon/ramsql v0.0.0-20181213202341-817cee58a244
+	github.com/selvatico/go-mocket v1.0.7 // indirect
 	github.com/sirupsen/logrus v1.4.2 // indirect
 	github.com/snabb/sitemap v1.0.0 // indirect
 	github.com/spf13/cobra v0.0.5
@@ -56,5 +58,5 @@ require (
 	google.golang.org/genproto v0.0.0-20190627175344-8a5ba248b858 // indirect
 	google.golang.org/grpc v1.21.1 // indirect
 	gopkg.in/urfave/cli.v1 v1.20.0
-	gotest.tools v2.2.0+incompatible // indirect
+	gotest.tools v2.2.0+incompatible
 )

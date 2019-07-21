@@ -1,58 +1,54 @@
 package dao
 
 import (
-	"github.com/lolibrary/lolibrary/libraries/database"
+	"context"
+
+	"cloud.google.com/go/firestore"
 	"github.com/lolibrary/lolibrary/service.item/domain"
 	"github.com/monzo/terrors"
 )
 
-func ReadItem(id string) (*domain.Item, error) {
-	i := &item{}
-
-	res := DB.Where("id = ?", id).First(i)
-	if res.Error != nil {
-		if res.RecordNotFound() {
-			return nil, nil
-		}
-
-		return nil, terrors.Wrap(res.Error, nil)
-	}
-
-	return daoToDomain(i)
-}
-
-func ReadItemBySlug(slug string) (*domain.Item, error) {
-	i := &item{}
-
-	res := DB.Where("slug = ?", slug).First(i)
-	if res.Error != nil {
-		if res.RecordNotFound() {
-			return nil, nil
-		}
-
-		return nil, terrors.Wrap(res.Error, nil)
-	}
-
-	return daoToDomain(i)
-}
-
-func UpdateItem(input *domain.Item) error {
-	i, err := domainToDAO(input)
+func ReadItem(ctx context.Context, id string) (*domain.Item, error) {
+	snap, err := itemsByID.Doc(id).Get(ctx)
 	if err != nil {
-		return err
+		return nil, terrors.Wrap(err, nil)
 	}
 
-	res := DB.Save(i)
-	if res.Error != nil {
-		if err := database.DuplicateRecord(res.Error); err != nil {
+	item := &domain.Item{}
+	if err := snap.DataTo(&item); err != nil {
+		return nil, terrors.Wrap(err, nil)
+	}
+
+	return item, nil
+}
+
+func ReadItemBySlug(ctx context.Context, slug string) (*domain.Item, error) {
+	snap, err := itemsBySlug.Doc(slug).Get(ctx)
+	if err != nil {
+		return nil, terrors.Wrap(err, nil)
+	}
+
+	item := &domain.Item{}
+	if err := snap.DataTo(&item); err != nil {
+		return nil, terrors.Wrap(err, nil)
+	}
+
+	return item, nil
+}
+
+func CreateItem(ctx context.Context, item *domain.Item) error {
+	if err := Firestore.RunTransaction(ctx, func(ctx context.Context, tx *firestore.Transaction) error {
+		if err := tx.Create(itemsByID.Doc(item.ID), item); err != nil {
 			return err
 		}
 
-		if res.RecordNotFound() {
-			return terrors.NotFound("item", "Item not found", nil)
+		if err := tx.Create(itemsBySlug.Doc(item.Slug), item); err != nil {
+			return err
 		}
 
-		return terrors.Wrap(res.Error, nil)
+		return nil
+	}); err != nil {
+		return terrors.Wrap(err, nil)
 	}
 
 	return nil
