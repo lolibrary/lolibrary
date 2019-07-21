@@ -88,11 +88,18 @@ spec:
             - name: pod-google-credentials
               mountPath: /var/run/secrets/google
               readOnly: true
+            - name: ca-certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
       volumes:
         - name: pod-google-credentials
           secret:
             defaultMode: 0400
             secretName: pod-google-credentials
+        - name: ca-certs
+          secret:
+            defaultMode: 0444
+            secretName: ca-certs
 ---
 apiVersion: v1
 kind: Service
