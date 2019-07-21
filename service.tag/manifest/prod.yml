@@ -86,7 +86,7 @@ spec:
                   value: service.tag
           volumeMounts:
             - name: pod-google-credentials
-              mountPath: /var/run/secrets/google/key.json
+              mountPath: /var/run/secrets/google
               readOnly: true
       volumes:
         - name: pod-google-credentials
