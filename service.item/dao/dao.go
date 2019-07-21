@@ -2,6 +2,8 @@ package dao
 
 import (
 	"io"
+	"log"
+	"os"
 
 	"github.com/jinzhu/gorm"
 	"github.com/lolibrary/lolibrary/libraries/database"
@@ -15,6 +17,7 @@ var (
 func Init() io.Closer {
 	if DB == nil {
 		DB = database.Connect()
+		DB.SetLogger(log.New(os.Stdout, "\n", 0))
 	}
 
 	return DB
