@@ -132,7 +132,7 @@ function docker/push() {
 function k8s/deploy() {
     local service=$(echo $SERVICE_NAME | sed "s/\./-/g" | sed "s/^service/s/")
 
-    print -P "⚙️  Updating %F{red}$service%f to  %F{cyan}$DOCKER_TAG%f in k8s"
+    print -P "⚙️  Updating %F{red}$service%f to %F{cyan}$DOCKER_TAG%f in k8s"
 
     cat "$SERVICE_DIR/manifest/prod.yml" | sed "s#PLACEHOLDER#\"$DOCKER_TAG\"#" | kubectl apply --record -f -
 
