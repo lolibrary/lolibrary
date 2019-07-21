@@ -6,12 +6,13 @@ import (
 	"os"
 	"regexp"
 
-	"cloud.google.com/go/firestore"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/lib/pq"
 	"github.com/monzo/terrors"
 	_ "github.com/proullon/ramsql/driver"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 const (
@@ -119,10 +120,22 @@ func DuplicateRecordError(err *pq.Error) *terrors.Error {
 	return terrors.BadRequest("bad_param.unique", "Unable to create record; key already exists", nil)
 }
 
-func NotFound(ref *firestore.DocumentSnapshot) bool {
-	if ref == nil {
-		return false
-	}
+func NotFound(err error) bool {
+	return status.Code(err) == codes.NotFound
+}
 
-	return !ref.Exists()
+func ErrNotFound(name, key, id string) *terrors.Error {
+	return terrors.NotFound(key, fmt.Sprintf("%s with %s '%s' not found", name, key, id), map[string]string{
+		key: id,
+	})
+}
+
+func AlreadyExists(err error) bool {
+	return status.Code(err) == codes.AlreadyExists
+}
+
+func ErrAlreadyExists(name, key, id string) *terrors.Error {
+	return terrors.BadRequest("unique", fmt.Sprintf("%s with %s '%s' already exists", name, key, id), map[string]string{
+		key: id,
+	})
 }

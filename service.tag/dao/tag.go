@@ -13,10 +13,8 @@ import (
 func ReadTag(ctx context.Context, id string) (*domain.Tag, error) {
 	snap, err := tagsByID.Doc(id).Get(ctx)
 	if err != nil {
-		if database.NotFound(snap) {
-			return nil, terrors.NotFound("item", "Item not found", map[string]string{
-				"id": id,
-			})
+		if database.NotFound(err) {
+			return nil, database.ErrNotFound("tag", "id", id)
 		}
 
 		return nil, terrors.Wrap(err, nil)
@@ -33,10 +31,8 @@ func ReadTag(ctx context.Context, id string) (*domain.Tag, error) {
 func ReadTagBySlug(ctx context.Context, slug string) (*domain.Tag, error) {
 	snap, err := tagsBySlug.Doc(slug).Get(ctx)
 	if err != nil {
-		if database.NotFound(snap) {
-			return nil, terrors.NotFound("item", "Item not found", map[string]string{
-				"slug": slug,
-			})
+		if database.NotFound(err) {
+			return nil, database.ErrNotFound("tag", "slug", slug)
 		}
 
 		return nil, terrors.Wrap(err, nil)
@@ -53,10 +49,18 @@ func ReadTagBySlug(ctx context.Context, slug string) (*domain.Tag, error) {
 func CreateTag(ctx context.Context, tag *domain.Tag) error {
 	if err := Firestore.RunTransaction(ctx, func(ctx context.Context, tx *firestore.Transaction) error {
 		if err := tx.Create(tagsByID.Doc(tag.ID), tag); err != nil {
+			if database.AlreadyExists(err) {
+				return database.ErrAlreadyExists("tag", "id", tag.ID)
+			}
+
 			return err
 		}
 
 		if err := tx.Create(tagsBySlug.Doc(tag.Slug), tag); err != nil {
+			if database.AlreadyExists(err) {
+				return database.ErrAlreadyExists("tag", "slug", tag.Slug)
+			}
+
 			return err
 		}
 
