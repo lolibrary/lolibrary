@@ -21,7 +21,7 @@ func handleReadFeature(req typhon.Request) typhon.Response {
 	switch {
 	case !validation.AtLeastOne(body.Id, body.Slug):
 		return typhon.Response{Error: validation.ErrMissingOneOf("id", "slug", "short_name")}
-	case !validation.Slug(body.Slug):
+	case body.Slug != "" && !validation.Slug(body.Slug):
 		return typhon.Response{Error: validation.ErrBadSlug("slug", body.Slug)}
 	}
 
