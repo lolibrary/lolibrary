@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"cloud.google.com/go/firestore"
+	"github.com/lolibrary/lolibrary/libraries/database"
 	"github.com/lolibrary/lolibrary/service.item/domain"
 	"github.com/monzo/terrors"
 )
@@ -11,6 +12,12 @@ import (
 func ReadItem(ctx context.Context, id string) (*domain.Item, error) {
 	snap, err := itemsByID.Doc(id).Get(ctx)
 	if err != nil {
+		if database.NotFound(snap) {
+			return nil, terrors.NotFound("item", "Item not found", map[string]string{
+				"id": id,
+			})
+		}
+
 		return nil, terrors.Wrap(err, nil)
 	}
 
@@ -25,6 +32,12 @@ func ReadItem(ctx context.Context, id string) (*domain.Item, error) {
 func ReadItemBySlug(ctx context.Context, slug string) (*domain.Item, error) {
 	snap, err := itemsBySlug.Doc(slug).Get(ctx)
 	if err != nil {
+		if database.NotFound(snap) {
+			return nil, terrors.NotFound("item", "Item not found", map[string]string{
+				"slug": slug,
+			})
+		}
+
 		return nil, terrors.Wrap(err, nil)
 	}
 

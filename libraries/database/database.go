@@ -6,6 +6,7 @@ import (
 	"os"
 	"regexp"
 
+	"cloud.google.com/go/firestore"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/lib/pq"
@@ -116,4 +117,12 @@ func DuplicateRecordError(err *pq.Error) *terrors.Error {
 	}
 
 	return terrors.BadRequest("bad_param.unique", "Unable to create record; key already exists", nil)
+}
+
+func NotFound(ref *firestore.DocumentSnapshot) bool {
+	if ref == nil {
+		return false
+	}
+
+	return !ref.Exists()
 }

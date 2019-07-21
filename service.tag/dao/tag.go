@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"cloud.google.com/go/firestore"
+	"github.com/lolibrary/lolibrary/libraries/database"
 	"github.com/lolibrary/lolibrary/service.tag/domain"
 	"github.com/monzo/terrors"
 	"google.golang.org/api/iterator"
@@ -12,6 +13,12 @@ import (
 func ReadTag(ctx context.Context, id string) (*domain.Tag, error) {
 	snap, err := tagsByID.Doc(id).Get(ctx)
 	if err != nil {
+		if database.NotFound(snap) {
+			return nil, terrors.NotFound("item", "Item not found", map[string]string{
+				"id": id,
+			})
+		}
+
 		return nil, terrors.Wrap(err, nil)
 	}
 
@@ -26,6 +33,12 @@ func ReadTag(ctx context.Context, id string) (*domain.Tag, error) {
 func ReadTagBySlug(ctx context.Context, slug string) (*domain.Tag, error) {
 	snap, err := tagsBySlug.Doc(slug).Get(ctx)
 	if err != nil {
+		if database.NotFound(snap) {
+			return nil, terrors.NotFound("item", "Item not found", map[string]string{
+				"slug": slug,
+			})
+		}
+
 		return nil, terrors.Wrap(err, nil)
 	}
 
