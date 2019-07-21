@@ -42,7 +42,7 @@ func UpdateItem(input *domain.Item) error {
 		return err
 	}
 
-	res := DB.Table("items").Update(i)
+	res := DB.Save(i)
 	if res.Error != nil {
 		if err := database.DuplicateRecord(res.Error); err != nil {
 			return err
