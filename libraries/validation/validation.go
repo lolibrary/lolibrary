@@ -8,7 +8,7 @@ import (
 	uuid "github.com/nu7hatch/gouuid"
 )
 
-var reSlug = regexp.MustCompile(`^[a-z0-9][a-z0-9\-]+[a-z0-9]$`)
+var reSlug = regexp.MustCompile(`^[a-z0-9][a-z0-9\-]*[a-z0-9]$`)
 
 func ErrMissingParam(param string) error {
 	return terrors.BadRequest(fmt.Sprintf("missing_param.%s", param), fmt.Sprintf("Param '%s' is required", param), nil)
