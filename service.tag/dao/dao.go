@@ -1,10 +1,10 @@
 package dao
 
 import (
-	"context"
 	"io"
 
 	"cloud.google.com/go/firestore"
+	"github.com/lolibrary/lolibrary/libraries/database"
 )
 
 var (
@@ -17,13 +17,7 @@ var (
 // Init starts up the database access object package and configures a database.
 func Init() io.Closer {
 	if Firestore == nil {
-		// add this to database package later
-		client, err := firestore.NewClient(context.Background(), "lolibrary-180111")
-		if err != nil {
-			panic(err)
-		}
-
-		Firestore = client
+		Firestore = database.NewClient()
 	}
 
 	tagsByID = Firestore.Collection("tags")

@@ -46,6 +46,7 @@ func handleCreateTag(req typhon.Request) typhon.Response {
 		Slug:      body.Slug,
 		Name:      body.Name,
 		CreatedAt: time.Now().UTC(),
+		UpdatedAt: time.Now().UTC(),
 	}
 
 	if err := dao.CreateTag(req, tag); err != nil {
