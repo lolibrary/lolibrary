@@ -27,14 +27,14 @@ func handleReadFeature(req typhon.Request) typhon.Response {
 
 	var (
 		feature *domain.Feature
-		err     error
+		err error
 	)
 
 	switch {
 	case body.Id != "":
-		feature, err = dao.ReadFeature(body.Id)
+		feature, err = dao.ReadFeature(req, body.Id)
 	case body.Slug != "":
-		feature, err = dao.ReadFeatureBySlug(body.Slug)
+		feature, err = dao.ReadFeatureBySlug(req, body.Slug)
 	}
 
 	if err != nil {

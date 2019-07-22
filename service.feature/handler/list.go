@@ -15,7 +15,7 @@ func handleListFeatures(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: err}
 	}
 
-	features, err := dao.ListFeatures()
+	features, err := dao.ListFeatures(req)
 	if err != nil {
 		slog.Error(req, "Failed to read features: %v", err)
 		return typhon.Response{Error: err}

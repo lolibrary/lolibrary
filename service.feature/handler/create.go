@@ -21,6 +21,8 @@ func handleCreateFeature(req typhon.Request) typhon.Response {
 	}
 
 	switch {
+	case body.Id != "" && !validation.UUID(body.Id):
+		return typhon.Response{Error: validation.ErrBadParam("id", "id should be a valid uuid")}
 	case body.Slug == "":
 		return typhon.Response{Error: validation.ErrMissingParam("slug")}
 	case body.Name == "":
@@ -44,9 +46,10 @@ func handleCreateFeature(req typhon.Request) typhon.Response {
 		Slug:      body.Slug,
 		Name:      body.Name,
 		CreatedAt: time.Now().UTC(),
+		UpdatedAt: time.Now().UTC(),
 	}
 
-	if err := dao.CreateFeature(feature); err != nil {
+	if err := dao.CreateFeature(req, feature); err != nil {
 		slog.Error(req, "Failed to create feature entry: %v", err)
 		return typhon.Response{Error: err}
 	}
