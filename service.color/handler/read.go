@@ -27,7 +27,7 @@ func handleReadColor(req typhon.Request) typhon.Response {
 
 	var (
 		color *domain.Color
-		err error
+		err   error
 	)
 
 	switch {
