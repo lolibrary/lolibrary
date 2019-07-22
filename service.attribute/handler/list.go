@@ -15,7 +15,7 @@ func handleListAttributes(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: err}
 	}
 
-	attributes, err := dao.ListAttributes()
+	attributes, err := dao.ListAttributes(req)
 	if err != nil {
 		slog.Error(req, "Failed to read attributes: %v", err)
 		return typhon.Response{Error: err}

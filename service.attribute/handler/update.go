@@ -6,6 +6,7 @@ import (
 
 	"github.com/lolibrary/lolibrary/libraries/validation"
 	"github.com/lolibrary/lolibrary/service.attribute/dao"
+	"github.com/lolibrary/lolibrary/service.attribute/domain"
 	"github.com/lolibrary/lolibrary/service.attribute/marshaling"
 	attributeproto "github.com/lolibrary/lolibrary/service.attribute/proto"
 	"github.com/monzo/terrors"
@@ -28,7 +29,7 @@ func handleUpdateAttribute(req typhon.Request) typhon.Response {
 
 	slogParams := map[string]string{"attribute_id": body.Id}
 
-	attribute, err := dao.ReadAttribute(body.Id)
+	attribute, err := dao.ReadAttribute(req, body.Id)
 	if err != nil {
 		slog.Error(req, "Error checking if attribute exists: %v", err, slogParams)
 		return typhon.Response{Error: err}
@@ -37,13 +38,10 @@ func handleUpdateAttribute(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: terrors.NotFound("attribute", fmt.Sprintf("Attribute '%s' not found", body.Id), nil)}
 	}
 
-	if body.Name != "" {
-		attribute.Name = body.Name
-	}
-
+	attribute = handleUserUpdates(attribute, body)
 	attribute.UpdatedAt = time.Now().UTC()
 
-	if err := dao.UpdateAttribute(attribute); err != nil {
+	if err := dao.UpdateAttribute(req, attribute); err != nil {
 		slog.Error(req, "Error updating attribute: %v", err, slogParams)
 		return typhon.Response{Error: err}
 	}
@@ -51,4 +49,16 @@ func handleUpdateAttribute(req typhon.Request) typhon.Response {
 	return req.Response(&attributeproto.PUTUpdateAttributeResponse{
 		Attribute: marshaling.AttributeToProto(attribute),
 	})
+}
+
+func handleUserUpdates(attribute *domain.Attribute, body *attributeproto.PUTUpdateAttributeRequest) *domain.Attribute {
+	if body.Slug != "" {
+		attribute.Slug = body.Slug
+	}
+
+	if body.Name != "" {
+		attribute.Name = body.Name
+	}
+
+	return attribute
 }

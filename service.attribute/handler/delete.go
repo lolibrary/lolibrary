@@ -25,7 +25,7 @@ func handleDeleteAttribute(req typhon.Request) typhon.Response {
 
 	slogParams := map[string]string{"attribute_id": body.Id}
 
-	attribute, err := dao.ReadAttribute(body.Id)
+	attribute, err := dao.ReadAttribute(req, body.Id)
 	if err != nil {
 		slog.Error(req, "Error checking if attribute exists: %v", err, slogParams)
 		return typhon.Response{Error: err}
@@ -34,7 +34,7 @@ func handleDeleteAttribute(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: terrors.NotFound("attribute", fmt.Sprintf("Attribute '%s' not found", body.Id), nil)}
 	}
 
-	if err := dao.DeleteAttribute(attribute.ID); err != nil {
+	if err := dao.DeleteAttribute(req, attribute); err != nil {
 		slog.Error(req, "Error deleting attribute: %v", err, slogParams)
 		return typhon.Response{Error: err}
 	}

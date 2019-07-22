@@ -32,9 +32,9 @@ func handleReadAttribute(req typhon.Request) typhon.Response {
 
 	switch {
 	case body.Id != "":
-		attribute, err = dao.ReadAttribute(body.Id)
+		attribute, err = dao.ReadAttribute(req, body.Id)
 	case body.Slug != "":
-		attribute, err = dao.ReadAttributeBySlug(body.Slug)
+		attribute, err = dao.ReadAttributeBySlug(req, body.Slug)
 	}
 
 	if err != nil {

@@ -46,9 +46,10 @@ func handleCreateAttribute(req typhon.Request) typhon.Response {
 		Slug:      body.Slug,
 		Name:      body.Name,
 		CreatedAt: time.Now().UTC(),
+		UpdatedAt: time.Now().UTC(),
 	}
 
-	if err := dao.CreateAttribute(attribute); err != nil {
+	if err := dao.CreateAttribute(req, attribute); err != nil {
 		slog.Error(req, "Failed to create attribute entry: %v", err)
 		return typhon.Response{Error: err}
 	}

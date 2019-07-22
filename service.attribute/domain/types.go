@@ -4,23 +4,17 @@ import "time"
 
 type Attribute struct {
 	// ID is a UUID.
-	ID string
+	ID string `firestore:"id"`
 
 	// Slug is a unique human-readable identifier used in URLs.
-	Slug string
+	Slug string `firestore:"slug"`
 
 	// Name is the human readable name of this attribute.
-	Name string
+	Name string `firestore:"name"`
 
 	// CreatedAt is when this record was inserted.
-	CreatedAt time.Time
+	CreatedAt time.Time `firestore:"created_at"`
 
 	// UpdatedAt is when this record was last updated.
-	UpdatedAt time.Time
-}
-
-type AttributeLink struct {
-	BrandID   string
-	Value     string
-	Attribute Attribute
+	UpdatedAt time.Time `firestore:"updated_at"`
 }
