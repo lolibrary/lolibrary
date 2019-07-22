@@ -28,3 +28,25 @@ func AttributesToProto(attributes []*domain.Attribute) []*attributeproto.Attribu
 
 	return protos
 }
+
+func AttributeValueToProto(value *domain.AttributeValue) *attributeproto.AttributeValue {
+	if value == nil {
+		return nil
+	}
+
+	return &attributeproto.AttributeValue{
+		Id:          value.ID,
+		AttributeId: value.AttributeID,
+		ItemId:      value.ItemID,
+		Value:       value.Value,
+	}
+}
+
+func AttributeValuesToProto(values []*domain.AttributeValue) []*attributeproto.AttributeValue {
+	protos := make([]*attributeproto.AttributeValue, 0, len(values))
+	for _, val := range values {
+		protos = append(protos, AttributeValueToProto(val))
+	}
+
+	return protos
+}

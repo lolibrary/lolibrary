@@ -14,7 +14,7 @@ func ReadAttribute(ctx context.Context, id string) (*domain.Attribute, error) {
 	snap, err := attributesByID.Doc(id).Get(ctx)
 	if err != nil {
 		if database.NotFound(err) {
-			return nil, database.ErrNotFound("attribute", "id", id)
+			return nil, nil
 		}
 
 		return nil, terrors.Wrap(err, nil)
@@ -32,7 +32,7 @@ func ReadAttributeBySlug(ctx context.Context, slug string) (*domain.Attribute, e
 	snap, err := attributesBySlug.Doc(slug).Get(ctx)
 	if err != nil {
 		if database.NotFound(err) {
-			return nil, database.ErrNotFound("attribute", "slug", slug)
+			return nil, nil
 		}
 
 		return nil, terrors.Wrap(err, nil)

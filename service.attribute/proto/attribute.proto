@@ -26,12 +26,43 @@ service attribute {
     rpc ListAttributes (GETListAttributesRequest) returns (GETListAttributesResponse) {
         option (handler).path = "/list";
     }
+    
+    rpc ListAttributesByItem (GETListAttributesByItemRequest) returns (GETListAttributesByItemResponse) {
+        option (handler).path = "/values-by-item/list";
+    }
+
+    rpc ReadAttributeValue (GETReadAttributeValueRequest) returns (GETReadAttributeValueResponse) {
+        option (handler).path = "/values/read";
+    }
+
+    rpc CreateAttributeValue (POSTCreateAttributeValueRequest) returns (POSTCreateAttributeValueResponse) {
+        option (handler).path = "/values/create";
+    }
+
+    rpc UpdateAttributeValue (PUTUpdateAttributeValueRequest) returns (PUTUpdateAttributeValueResponse) {
+        option (handler).path = "/values/update";
+    }
+
+    rpc DeleteAttributeValue (DELETERemoveAttributeValueRequest) returns (DELETERemoveAttributeValueResponse) {
+        option (handler).path = "/values/delete";
+    }
 }
 
 message Attribute {
     string id = 1;
     string slug = 2;
     string name = 4;
+
+    // timestamps
+    string created_at = 100;
+    string updated_at = 101;
+}
+
+message AttributeValue {
+    string id = 1;
+    string attribute_id = 2;
+    string item_id = 3;
+    string value = 4;
 
     // timestamps
     string created_at = 100;
@@ -87,6 +118,45 @@ message DELETERemoveAttributeRequest {
     string id = 1;
 }
 
-message DELETERemoveAttributeResponse {
+message DELETERemoveAttributeResponse {}
+
+message GETListAttributesByItemRequest {
+    string item_id = 1;
 }
 
+message GETListAttributesByItemResponse {
+    repeated AttributeValue attributes = 1;
+}
+
+message GETReadAttributeValueRequest {
+    string id = 1;
+}
+
+message GETReadAttributeValueResponse {
+    AttributeValue attribute = 1;
+}
+
+message POSTCreateAttributeValueRequest {
+    string attribute_id = 1;
+    string item_id = 2;
+    string value = 3;
+}
+
+message POSTCreateAttributeValueResponse {
+    AttributeValue attribute = 1;
+}
+
+message PUTUpdateAttributeValueRequest {
+    string id = 1;
+    string value = 2;
+}
+
+message PUTUpdateAttributeValueResponse {
+    AttributeValue attribute = 1;
+}
+
+message DELETERemoveAttributeValueRequest {
+    string id = 1;
+}
+
+message DELETERemoveAttributeValueResponse {}

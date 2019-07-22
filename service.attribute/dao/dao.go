@@ -10,8 +10,9 @@ import (
 var (
 	Firestore *firestore.Client
 
-	attributesByID   *firestore.CollectionRef
-	attributesBySlug *firestore.CollectionRef
+	attributesByID     *firestore.CollectionRef
+	attributesBySlug   *firestore.CollectionRef
+	attributesByItemID *firestore.CollectionRef
 )
 
 // Init starts up the database access object package and configures a database.
@@ -22,6 +23,7 @@ func Init() io.Closer {
 
 	attributesByID = Firestore.Collection("attributes")
 	attributesBySlug = Firestore.Collection("attributes-by-slug")
+	attributesByItemID = Firestore.Collection("attributes-by-item-id")
 
 	return Firestore
 }
