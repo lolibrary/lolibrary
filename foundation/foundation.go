@@ -11,7 +11,6 @@ import (
 	"time"
 
 	"github.com/lolibrary/lolibrary/libraries/filters"
-	"github.com/lolibrary/lolibrary/libraries/logging"
 	"github.com/monzo/slog"
 	"github.com/monzo/typhon"
 )
