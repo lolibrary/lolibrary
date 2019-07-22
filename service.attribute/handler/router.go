@@ -10,6 +10,12 @@ func init() {
 	router.POST("/create", handleCreateAttribute)
 	router.PUT("/update", handleUpdateAttribute)
 	router.DELETE("/delete", handleDeleteAttribute)
+
+	router.GET("/values-by-item/list", handleListAttributesByItem)
+	router.GET("/values/read", handleReadAttributeValue)
+	router.POST("/values/create", handleCreateAttributeValue)
+	router.PUT("/values/update", handleUpdateAttributeValue)
+	router.DELETE("/values/delete", handleDeleteAttributeValue)
 }
 
 // Service serves this router as a typhon service.

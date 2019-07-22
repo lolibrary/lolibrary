@@ -1,19 +1,16 @@
 package handler
 
 import (
-	"time"
-
 	"github.com/lolibrary/lolibrary/libraries/validation"
 	"github.com/lolibrary/lolibrary/service.attribute/dao"
-	"github.com/lolibrary/lolibrary/service.attribute/marshaling"
 	attributeproto "github.com/lolibrary/lolibrary/service.attribute/proto"
 	"github.com/monzo/slog"
 	"github.com/monzo/terrors"
 	"github.com/monzo/typhon"
 )
 
-func handleUpdateAttributeValue(req typhon.Request) typhon.Response {
-	body := &attributeproto.PUTUpdateAttributeValueRequest{}
+func handleDeleteAttributeValue(req typhon.Request) typhon.Response {
+	body := &attributeproto.DELETERemoveAttributeValueRequest{}
 	if err := req.Decode(body); err != nil {
 		slog.Error(req, "Error decoding request body: %v", err)
 		return typhon.Response{Error: err}
@@ -22,8 +19,6 @@ func handleUpdateAttributeValue(req typhon.Request) typhon.Response {
 	switch {
 	case body.Id == "":
 		return typhon.Response{Error: validation.ErrMissingParam("id")}
-	case body.Value == "":
-		return typhon.Response{Error: validation.ErrMissingParam("value")}
 	}
 
 	slogParams := map[string]string{
@@ -39,15 +34,10 @@ func handleUpdateAttributeValue(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: terrors.NotFound("attribute_value", "Attribute value not found", slogParams)}
 	}
 
-	value.Value = body.Value
-	value.UpdatedAt = time.Now().UTC()
-
-	if err := dao.UpdateAttributeValue(req, value); err != nil {
-		slog.Error(req, "Failed to update attribute value entry: %v", err)
+	if err := dao.DeleteAttributeValue(req, value); err != nil {
+		slog.Error(req, "Failed to delete attribute value entry: %v", err)
 		return typhon.Response{Error: err}
 	}
 
-	return req.Response(&attributeproto.PUTUpdateAttributeValueResponse{
-		Attribute: marshaling.AttributeValueToProto(value),
-	})
+	return req.Response(&attributeproto.DELETERemoveAttributeValueResponse{})
 }
