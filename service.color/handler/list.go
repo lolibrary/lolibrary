@@ -15,7 +15,7 @@ func handleListColors(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: err}
 	}
 
-	colors, err := dao.ListColors()
+	colors, err := dao.ListColors(req)
 	if err != nil {
 		slog.Error(req, "Failed to read colors: %v", err)
 		return typhon.Response{Error: err}

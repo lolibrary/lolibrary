@@ -6,6 +6,7 @@ import (
 
 	"github.com/lolibrary/lolibrary/libraries/validation"
 	"github.com/lolibrary/lolibrary/service.color/dao"
+	"github.com/lolibrary/lolibrary/service.color/domain"
 	"github.com/lolibrary/lolibrary/service.color/marshaling"
 	colorproto "github.com/lolibrary/lolibrary/service.color/proto"
 	"github.com/monzo/terrors"
@@ -28,7 +29,7 @@ func handleUpdateColor(req typhon.Request) typhon.Response {
 
 	slogParams := map[string]string{"color_id": body.Id}
 
-	color, err := dao.ReadColor(body.Id)
+	color, err := dao.ReadColor(req, body.Id)
 	if err != nil {
 		slog.Error(req, "Error checking if color exists: %v", err, slogParams)
 		return typhon.Response{Error: err}
@@ -37,13 +38,10 @@ func handleUpdateColor(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: terrors.NotFound("color", fmt.Sprintf("Color '%s' not found", body.Id), nil)}
 	}
 
-	if body.Name != "" {
-		color.Name = body.Name
-	}
-
+	color = handleUserUpdates(color, body)
 	color.UpdatedAt = time.Now().UTC()
 
-	if err := dao.UpdateColor(color); err != nil {
+	if err := dao.UpdateColor(req, color); err != nil {
 		slog.Error(req, "Error updating color: %v", err, slogParams)
 		return typhon.Response{Error: err}
 	}
@@ -51,4 +49,16 @@ func handleUpdateColor(req typhon.Request) typhon.Response {
 	return req.Response(&colorproto.PUTUpdateColorResponse{
 		Color: marshaling.ColorToProto(color),
 	})
+}
+
+func handleUserUpdates(color *domain.Color, body *colorproto.PUTUpdateColorRequest) *domain.Color {
+	if body.Slug != "" {
+		color.Slug = body.Slug
+	}
+
+	if body.Name != "" {
+		color.Name = body.Name
+	}
+
+	return color
 }

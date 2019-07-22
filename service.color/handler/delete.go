@@ -25,7 +25,7 @@ func handleDeleteColor(req typhon.Request) typhon.Response {
 
 	slogParams := map[string]string{"color_id": body.Id}
 
-	color, err := dao.ReadColor(body.Id)
+	color, err := dao.ReadColor(req, body.Id)
 	if err != nil {
 		slog.Error(req, "Error checking if color exists: %v", err, slogParams)
 		return typhon.Response{Error: err}
@@ -34,7 +34,7 @@ func handleDeleteColor(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: terrors.NotFound("color", fmt.Sprintf("Color '%s' not found", body.Id), nil)}
 	}
 
-	if err := dao.DeleteColor(color.ID); err != nil {
+	if err := dao.DeleteColor(req, color); err != nil {
 		slog.Error(req, "Error deleting color: %v", err, slogParams)
 		return typhon.Response{Error: err}
 	}

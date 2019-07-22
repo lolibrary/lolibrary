@@ -46,9 +46,10 @@ func handleCreateColor(req typhon.Request) typhon.Response {
 		Slug:      body.Slug,
 		Name:      body.Name,
 		CreatedAt: time.Now().UTC(),
+		UpdatedAt: time.Now().UTC(),
 	}
 
-	if err := dao.CreateColor(color); err != nil {
+	if err := dao.CreateColor(req, color); err != nil {
 		slog.Error(req, "Failed to create color entry: %v", err)
 		return typhon.Response{Error: err}
 	}

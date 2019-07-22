@@ -27,14 +27,14 @@ func handleReadColor(req typhon.Request) typhon.Response {
 
 	var (
 		color *domain.Color
-		err   error
+		err error
 	)
 
 	switch {
 	case body.Id != "":
-		color, err = dao.ReadColor(body.Id)
+		color, err = dao.ReadColor(req, body.Id)
 	case body.Slug != "":
-		color, err = dao.ReadColorBySlug(body.Slug)
+		color, err = dao.ReadColorBySlug(req, body.Slug)
 	}
 
 	if err != nil {
