@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+    kubernetes.io/ingress.global-static-ip-name: lolibrary-static-ip
+  name: lolibrary-ingress
+  namespace: default
+  selfLink: /apis/extensions/v1beta1/namespaces/default/ingresses/lolibrary-ingress
+spec:
+  backend:
+    serviceName: frontend-production
+    servicePort: 80
+  rules:
+    - host: lolibrary.org
+      http:
+        paths:
+          - backend:
+              serviceName: frontend-production
+              servicePort: 80
+            path: /*
+    - host: lolibrary.space
+      http:
+        paths:
+          - backend:
+              serviceName: beta
+              servicePort: 80
+            path: /*
+    - host: uppy.lolibrary.org
+      http:
+        paths:
+          - backend:
+              serviceName: web-uppy-companion
+              servicePort: 80
+            path: /*
+  tls:
+    - hosts:
+        - lolibrary.org
+        - www.lolibrary.org
+        - uppy.lolibrary.org
+        - lolibrary.space
+      secretName: lolibrary-prod-tls
