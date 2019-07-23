@@ -1,4 +1,8 @@
 {
   "CN": "lolibrary.test",
-  "hosts": ["lolibrary.test", "*.lolibrary.test", "*.tools.lolibrary.test"]
+  "hosts": ["lolibrary.test", "*.lolibrary.test", "*.tools.lolibrary.test"],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  }
 }
