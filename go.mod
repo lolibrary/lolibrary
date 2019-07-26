@@ -43,6 +43,7 @@ require (
 	github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/proullon/ramsql v0.0.0-20181213202341-817cee58a244
+	github.com/segmentio/ksuid v1.0.2
 	github.com/selvatico/go-mocket v1.0.7 // indirect
 	github.com/sirupsen/logrus v1.4.2 // indirect
 	github.com/snabb/sitemap v1.0.0 // indirect

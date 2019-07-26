@@ -1,0 +1,21 @@
+syntax = "proto3";
+package idproto;
+
+import "github.com/lolibrary/lolibrary/cmd/protoc-gen-router/proto/router.proto";
+
+service id {
+    option (router).name = "service.id";
+    option (router).short_name = "s-id";
+
+    rpc GenerateFlake (POSTGenerateFlakeRequest) returns (POSTGenerateFlakeResponse) {
+        option (handler).path = "/generate/flake";
+    }
+}
+
+message POSTGenerateFlakeRequest {
+    string prefix = 1;
+}
+
+message POSTGenerateFlakeResponse {
+    string id = 1;
+}
