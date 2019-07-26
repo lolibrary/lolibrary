@@ -20,7 +20,6 @@ func ProtoToTag(tag *tagproto.Tag) *domain.Tag {
 	}
 
 	return &domain.Tag{
-		ID:   tag.Id,
 		Slug: tag.Slug,
 		Name: tag.Name,
 	}
