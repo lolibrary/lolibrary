@@ -25,7 +25,7 @@ func handleDeleteBrand(req typhon.Request) typhon.Response {
 
 	slogParams := map[string]string{"brand_id": body.Id}
 
-	brand, err := dao.ReadBrand(body.Id)
+	brand, err := dao.ReadBrand(req, body.Id)
 	if err != nil {
 		slog.Error(req, "Error checking if brand exists: %v", err, slogParams)
 		return typhon.Response{Error: err}
@@ -34,7 +34,7 @@ func handleDeleteBrand(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: terrors.NotFound("brand", fmt.Sprintf("Brand '%s' not found", body.Id), nil)}
 	}
 
-	if err := dao.DeleteBrand(brand.ID); err != nil {
+	if err := dao.DeleteBrand(req, brand.ID); err != nil {
 		slog.Error(req, "Error deleting brand: %v", err, slogParams)
 		return typhon.Response{Error: err}
 	}

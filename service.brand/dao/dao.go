@@ -3,19 +3,27 @@ package dao
 import (
 	"io"
 
-	"github.com/jinzhu/gorm"
+	"cloud.google.com/go/firestore"
 	"github.com/lolibrary/lolibrary/libraries/database"
 )
 
 var (
-	DB *gorm.DB
+	Firestore *firestore.Client
+
+	brandsByID        *firestore.CollectionRef
+	brandsBySlug      *firestore.CollectionRef
+	brandsByShortName *firestore.CollectionRef
 )
 
 // Init starts up the database access object package and configures a database.
 func Init() io.Closer {
-	if DB == nil {
-		DB = database.Connect()
+	if Firestore == nil {
+		Firestore = database.NewClient()
 	}
 
-	return DB
+	brandsByID = Firestore.Collection("attributes")
+	brandsBySlug = Firestore.Collection("attributes-by-slug")
+	brandsByShortName = Firestore.Collection("attributes-by-item-id")
+
+	return Firestore
 }

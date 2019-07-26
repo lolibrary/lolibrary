@@ -28,7 +28,7 @@ func handleUpdateBrand(req typhon.Request) typhon.Response {
 
 	slogParams := map[string]string{"brand_id": body.Id}
 
-	brand, err := dao.ReadBrand(body.Id)
+	brand, err := dao.ReadBrand(req, body.Id)
 	if err != nil {
 		slog.Error(req, "Error checking if brand exists: %v", err, slogParams)
 		return typhon.Response{Error: err}
@@ -51,7 +51,7 @@ func handleUpdateBrand(req typhon.Request) typhon.Response {
 		brand.UpdatedAt = time.Now().UTC()
 	}
 
-	if err := dao.UpdateBrand(brand); err != nil {
+	if err := dao.UpdateBrand(req, brand); err != nil {
 		slog.Error(req, "Error updating brand: %v", err, slogParams)
 		return typhon.Response{Error: err}
 	}

@@ -3,7 +3,6 @@ package handler
 import (
 	"time"
 
-	"github.com/iancoleman/strcase"
 	"github.com/lolibrary/lolibrary/libraries/idgen"
 	"github.com/lolibrary/lolibrary/libraries/validation"
 	"github.com/lolibrary/lolibrary/service.brand/dao"
@@ -36,8 +35,8 @@ func handleCreateBrand(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: validation.ErrMissingParam("image_id")}
 	case !validation.Slug(body.Slug):
 		return typhon.Response{Error: validation.ErrBadSlug("slug", body.Slug)}
-	case body.ShortName != strcase.ToKebab(body.ShortName):
-		return typhon.Response{Error: validation.ErrBadParam("short_name", "short_name should be in kebab-case")}
+	case !validation.Slug(body.ShortName):
+		return typhon.Response{Error: validation.ErrBadSlug("short_name", body.ShortName)}
 	}
 
 	if body.Id == "" {
@@ -58,9 +57,10 @@ func handleCreateBrand(req typhon.Request) typhon.Response {
 		Name:        body.Name,
 		Description: body.Description,
 		CreatedAt:   time.Now().UTC(),
+		UpdatedAt:   time.Now().UTC(),
 	}
 
-	if err := dao.CreateBrand(brand); err != nil {
+	if err := dao.CreateBrand(req, brand); err != nil {
 		slog.Error(req, "Failed to create brand entry: %v", err)
 		return typhon.Response{Error: err}
 	}

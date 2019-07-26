@@ -15,7 +15,7 @@ func handleListBrands(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: err}
 	}
 
-	brands, err := dao.ListBrands()
+	brands, err := dao.ListBrands(req)
 	if err != nil {
 		slog.Error(req, "Failed to read brands: %v", err)
 		return typhon.Response{Error: err}

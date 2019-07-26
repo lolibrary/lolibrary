@@ -24,7 +24,7 @@ func handleReadBrand(req typhon.Request) typhon.Response {
 	case body.Slug != "" && !validation.Slug(body.Slug):
 		return typhon.Response{Error: validation.ErrBadSlug("slug", body.Slug)}
 	case body.ShortName != "" && !validation.Slug(body.ShortName):
-		return typhon.Response{Error: validation.ErrBadParam("short_name", "short_name should be in kebab-case")}
+		return typhon.Response{Error: validation.ErrBadSlug("short_name", body.ShortName)}
 	}
 
 	var (
@@ -34,11 +34,11 @@ func handleReadBrand(req typhon.Request) typhon.Response {
 
 	switch {
 	case body.Id != "":
-		brand, err = dao.ReadBrand(body.Id)
+		brand, err = dao.ReadBrand(req, body.Id)
 	case body.Slug != "":
-		brand, err = dao.ReadBrandBySlug(body.Slug)
+		brand, err = dao.ReadBrandBySlug(req, body.Slug)
 	case body.ShortName != "":
-		brand, err = dao.ReadBrandByShortName(body.ShortName)
+		brand, err = dao.ReadBrandByShortName(req, body.ShortName)
 	}
 
 	if err != nil {
