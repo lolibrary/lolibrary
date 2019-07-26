@@ -24,6 +24,7 @@ func handleAPI(req typhon.Request) typhon.Response {
 	req.Host = service
 	req.URL.Host = service
 	req.URL.Path = path
+	req.URL.Scheme = "http"
 
 	return typhon.Send(req).Response()
 }
