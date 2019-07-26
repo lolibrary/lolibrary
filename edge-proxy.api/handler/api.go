@@ -31,7 +31,7 @@ func handleAPI(req typhon.Request) typhon.Response {
 func validateService(service string) error {
 	conn, err := net.Dial("tcp", fmt.Sprintf("%s:80", service))
 	if err != nil {
-		return terrors.NotFound("service", fmt.Sprintf("Unable to connect to %v", service), nil)
+		return terrors.NotFound("service", "Service not found", nil)
 	}
 	defer conn.Close()
 
