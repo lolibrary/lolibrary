@@ -9,31 +9,16 @@ cloud.google.com/go/internal/version
 cloud.google.com/go/compute/metadata
 cloud.google.com/go/logging/apiv2
 cloud.google.com/go/logging/internal
-# github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78
-github.com/Azure/go-ansiterm/winterm
-github.com/Azure/go-ansiterm
-# github.com/Microsoft/go-winio v0.4.12
-github.com/Microsoft/go-winio
-# github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5
-github.com/Nvveen/Gotty
-# github.com/cenkalti/backoff v2.1.1+incompatible
-github.com/cenkalti/backoff
 # github.com/cihub/seelog v0.0.0-20170130134532-f561c5e57575
 github.com/cihub/seelog
 github.com/cihub/seelog/archive
 github.com/cihub/seelog/archive/gzip
 github.com/cihub/seelog/archive/tar
 github.com/cihub/seelog/archive/zip
-# github.com/containerd/continuity v0.0.0-20190426062206-aaeac12a7ffc
-github.com/containerd/continuity/pathdriver
 # github.com/davecgh/go-spew v1.1.1
 github.com/davecgh/go-spew/spew
 # github.com/deckarep/golang-set v1.7.1
 github.com/deckarep/golang-set
-# github.com/docker/go-connections v0.4.0
-github.com/docker/go-connections/nat
-# github.com/docker/go-units v0.4.0
-github.com/docker/go-units
 # github.com/fatih/color v1.7.0
 github.com/fatih/color
 # github.com/gammazero/deque v0.0.0-20190521012701-46e4ffb7a622
@@ -70,17 +55,13 @@ github.com/gosuri/uiprogress/util/strutil
 github.com/hashicorp/golang-lru/simplelru
 # github.com/hokaccha/go-prettyjson v0.0.0-20180920040306-f579f869bbfe
 github.com/hokaccha/go-prettyjson
-# github.com/iancoleman/strcase v0.0.0-20190422225806-e506e3ef7365
-github.com/iancoleman/strcase
 # github.com/inconshreveable/mousetrap v1.0.0
 github.com/inconshreveable/mousetrap
 # github.com/jinzhu/gorm v1.9.9
-github.com/jinzhu/gorm
 github.com/jinzhu/gorm/dialects/postgres
+github.com/jinzhu/gorm
 # github.com/jinzhu/inflection v1.0.0
 github.com/jinzhu/inflection
-# github.com/konsorten/go-windows-terminal-sequences v1.0.1
-github.com/konsorten/go-windows-terminal-sequences
 # github.com/lib/pq v1.1.1
 github.com/lib/pq
 github.com/lib/pq/hstore
@@ -104,39 +85,6 @@ github.com/monzo/terrors/stack
 github.com/monzo/typhon
 # github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
 github.com/nu7hatch/gouuid
-# github.com/opencontainers/go-digest v1.0.0-rc1
-github.com/opencontainers/go-digest
-# github.com/opencontainers/image-spec v1.0.1
-github.com/opencontainers/image-spec/specs-go/v1
-github.com/opencontainers/image-spec/specs-go
-# github.com/opencontainers/runc v0.1.1
-github.com/opencontainers/runc/libcontainer/user
-# github.com/ory/dockertest v3.3.4+incompatible
-github.com/ory/dockertest
-github.com/ory/dockertest/docker
-github.com/ory/dockertest/docker/opts
-github.com/ory/dockertest/docker/pkg/archive
-github.com/ory/dockertest/docker/pkg/fileutils
-github.com/ory/dockertest/docker/pkg/homedir
-github.com/ory/dockertest/docker/pkg/jsonmessage
-github.com/ory/dockertest/docker/pkg/stdcopy
-github.com/ory/dockertest/docker/types/registry
-github.com/ory/dockertest/docker/types
-github.com/ory/dockertest/docker/pkg/idtools
-github.com/ory/dockertest/docker/pkg/ioutils
-github.com/ory/dockertest/docker/pkg/longpath
-github.com/ory/dockertest/docker/pkg/pools
-github.com/ory/dockertest/docker/pkg/system
-github.com/ory/dockertest/docker/pkg/term
-github.com/ory/dockertest/docker/types/container
-github.com/ory/dockertest/docker/types/filters
-github.com/ory/dockertest/docker/types/mount
-github.com/ory/dockertest/docker/types/network
-github.com/ory/dockertest/docker/pkg/mount
-github.com/ory/dockertest/docker/pkg/term/windows
-github.com/ory/dockertest/docker/types/blkiodev
-github.com/ory/dockertest/docker/types/strslice
-github.com/ory/dockertest/docker/types/versions
 # github.com/pahanini/go-sitemap-generator v0.0.0-20161102132113-fe0794d1e806
 github.com/pahanini/go-sitemap-generator
 # github.com/peterh/liner v1.1.0
@@ -155,8 +103,6 @@ github.com/proullon/ramsql/engine/parser
 github.com/proullon/ramsql/engine/protocol
 # github.com/segmentio/ksuid v1.0.2
 github.com/segmentio/ksuid
-# github.com/sirupsen/logrus v1.4.2
-github.com/sirupsen/logrus
 # github.com/spf13/cobra v0.0.5
 github.com/spf13/cobra
 # github.com/spf13/pflag v1.0.3
@@ -202,7 +148,6 @@ golang.org/x/oauth2/jwt
 golang.org/x/sync/semaphore
 # golang.org/x/sys v0.0.0-20190626221950-04f50cda93cb
 golang.org/x/sys/unix
-golang.org/x/sys/windows
 # golang.org/x/text v0.3.2
 golang.org/x/text/secure/bidirule
 golang.org/x/text/unicode/bidi
