@@ -5,7 +5,7 @@ import "github.com/monzo/typhon"
 var router = typhon.Router{}
 
 func init() {
-	router.GET("/generate/flake", handleGenerateFlake)
+	router.POST("/generate/flake", handleGenerateFlake)
 }
 
 // Service serves this router as a typhon service.
