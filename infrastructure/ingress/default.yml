@@ -19,13 +19,6 @@ spec:
               serviceName: frontend-production
               servicePort: 80
             path: /*
-    - host: lolibrary.space
-      http:
-        paths:
-          - backend:
-              serviceName: beta
-              servicePort: 80
-            path: /*
     - host: uppy.lolibrary.org
       http:
         paths:
@@ -33,10 +26,17 @@ spec:
               serviceName: web-uppy-companion
               servicePort: 80
             path: /*
+    - host: api.lolibrary.space
+      http:
+        paths:
+          - backend:
+              serviceName: edge-proxy-api
+              servicePort: 80
+            path: /*
   tls:
     - hosts:
         - lolibrary.org
         - www.lolibrary.org
         - uppy.lolibrary.org
-        - lolibrary.space
+        - api.lolibrary.space
       secretName: lolibrary-prod-tls
