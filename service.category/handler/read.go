@@ -32,9 +32,9 @@ func handleReadCategory(req typhon.Request) typhon.Response {
 
 	switch {
 	case body.Id != "":
-		category, err = dao.ReadCategory(body.Id)
+		category, err = dao.ReadCategory(req, body.Id)
 	case body.Slug != "":
-		category, err = dao.ReadCategoryBySlug(body.Slug)
+		category, err = dao.ReadCategoryBySlug(req, body.Slug)
 	}
 
 	if err != nil {

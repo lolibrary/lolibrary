@@ -1,90 +1,133 @@
 package dao
 
 import (
+	"context"
+
+	"cloud.google.com/go/firestore"
 	"github.com/lolibrary/lolibrary/libraries/database"
 	"github.com/lolibrary/lolibrary/service.category/domain"
 	"github.com/monzo/terrors"
+	"google.golang.org/api/iterator"
 )
 
-func CreateCategory(category *domain.Category) error {
-	res := DB.Create(category)
-	if res.Error != nil {
-		if err := database.DuplicateRecord(res.Error); err != nil {
-			return err
+func ReadCategory(ctx context.Context, id string) (*domain.Category, error) {
+	snap, err := categoriesByID.Doc(id).Get(ctx)
+	if err != nil {
+		if database.NotFound(err) {
+			return nil, database.ErrNotFound("category", "id", id)
 		}
 
-		return terrors.Wrap(res.Error, nil)
+		return nil, terrors.Wrap(err, nil)
 	}
 
-	return nil
-}
-
-func UpdateCategory(category *domain.Category) error {
-	res := DB.Update(category)
-	if res.Error != nil {
-		if err := database.DuplicateRecord(res.Error); err != nil {
-			return err
-		}
-
-		if res.RecordNotFound() {
-			return terrors.NotFound("category", "Category not found", nil)
-		}
-
-		return terrors.Wrap(res.Error, nil)
-	}
-
-	return nil
-}
-
-func ReadCategory(id string) (*domain.Category, error) {
 	category := &domain.Category{}
-
-	res := DB.Where("id = ?", id).First(category)
-	if res.Error != nil {
-		if res.RecordNotFound() {
-			return nil, nil
-		}
-
-		return nil, terrors.Wrap(res.Error, nil)
+	if err := snap.DataTo(&category); err != nil {
+		return nil, terrors.Wrap(err, nil)
 	}
 
 	return category, nil
 }
 
-func ReadCategoryBySlug(slug string) (*domain.Category, error) {
-	category := &domain.Category{}
-
-	res := DB.Where("slug = ?", slug).First(category)
-	if res.Error != nil {
-		if res.RecordNotFound() {
-			return nil, nil
+func ReadCategoryBySlug(ctx context.Context, slug string) (*domain.Category, error) {
+	snap, err := categoriesBySlug.Doc(slug).Get(ctx)
+	if err != nil {
+		if database.NotFound(err) {
+			return nil, database.ErrNotFound("category", "slug", slug)
 		}
 
-		return nil, terrors.Wrap(res.Error, nil)
+		return nil, terrors.Wrap(err, nil)
+	}
+
+	category := &domain.Category{}
+	if err := snap.DataTo(&category); err != nil {
+		return nil, terrors.Wrap(err, nil)
 	}
 
 	return category, nil
 }
 
-func DeleteCategory(id string) error {
-	res := DB.Where("id = ?", id).Delete(&domain.Category{})
-	if res.Error != nil {
-		return terrors.Wrap(res.Error, nil)
+func CreateCategory(ctx context.Context, category *domain.Category) error {
+	if err := Firestore.RunTransaction(ctx, func(ctx context.Context, tx *firestore.Transaction) error {
+		if err := tx.Create(categoriesByID.Doc(category.ID), category); err != nil {
+			if database.AlreadyExists(err) {
+				return database.ErrAlreadyExists("category", "id", category.ID)
+			}
+
+			return err
+		}
+
+		if err := tx.Create(categoriesBySlug.Doc(category.Slug), category); err != nil {
+			if database.AlreadyExists(err) {
+				return database.ErrAlreadyExists("category", "slug", category.Slug)
+			}
+
+			return err
+		}
+
+		return nil
+	}); err != nil {
+		return terrors.Wrap(err, nil)
 	}
 
 	return nil
 }
 
-func ListCategories() ([]*domain.Category, error) {
-	categories := make([]*domain.Category, 0)
-
-	res := DB.Find(&categories)
-	if res.Error != nil {
-		if res.RecordNotFound() {
-			return nil, nil
+func UpdateCategory(ctx context.Context, category *domain.Category) error {
+	if err := Firestore.RunTransaction(ctx, func(ctx context.Context, tx *firestore.Transaction) error {
+		if err := tx.Set(categoriesByID.Doc(category.ID), category); err != nil {
+			return err
 		}
 
-		return nil, terrors.Wrap(res.Error, nil)
+		if err := tx.Set(categoriesBySlug.Doc(category.Slug), category); err != nil {
+			return err
+		}
+
+		return nil
+	}); err != nil {
+		return terrors.Wrap(err, nil)
+	}
+
+	return nil
+}
+
+func DeleteCategory(ctx context.Context, category *domain.Category) error {
+	if err := Firestore.RunTransaction(ctx, func(ctx context.Context, tx *firestore.Transaction) error {
+		if err := tx.Delete(categoriesByID.Doc(category.ID)); err != nil {
+			return err
+		}
+
+		if err := tx.Delete(categoriesBySlug.Doc(category.Slug)); err != nil {
+			return err
+		}
+
+		return nil
+	}); err != nil {
+		return terrors.Wrap(err, nil)
+	}
+
+	return nil
+}
+
+func ListCategories(ctx context.Context) ([]*domain.Category, error) {
+	documents := categoriesByID.Documents(ctx)
+	defer documents.Stop()
+
+	categories := make([]*domain.Category, 0, 32)
+	for {
+		doc, err := documents.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			return nil, terrors.Wrap(err, nil)
+		}
+
+		category := &domain.Category{}
+		if err := doc.DataTo(&category); err != nil {
+			return nil, terrors.Wrap(err, nil)
+		}
+
+		categories = append(categories, category)
 	}
 
 	return categories, nil

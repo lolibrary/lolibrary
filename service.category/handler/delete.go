@@ -25,7 +25,7 @@ func handleDeleteCategory(req typhon.Request) typhon.Response {
 
 	slogParams := map[string]string{"category_id": body.Id}
 
-	category, err := dao.ReadCategory(body.Id)
+	category, err := dao.ReadCategory(req, body.Id)
 	if err != nil {
 		slog.Error(req, "Error checking if category exists: %v", err, slogParams)
 		return typhon.Response{Error: err}
@@ -34,7 +34,7 @@ func handleDeleteCategory(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: terrors.NotFound("category", fmt.Sprintf("Category '%s' not found", body.Id), nil)}
 	}
 
-	if err := dao.DeleteCategory(category.ID); err != nil {
+	if err := dao.DeleteCategory(req, category); err != nil {
 		slog.Error(req, "Error deleting category: %v", err, slogParams)
 		return typhon.Response{Error: err}
 	}

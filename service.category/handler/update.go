@@ -6,6 +6,7 @@ import (
 
 	"github.com/lolibrary/lolibrary/libraries/validation"
 	"github.com/lolibrary/lolibrary/service.category/dao"
+	"github.com/lolibrary/lolibrary/service.category/domain"
 	"github.com/lolibrary/lolibrary/service.category/marshaling"
 	categoryproto "github.com/lolibrary/lolibrary/service.category/proto"
 	"github.com/monzo/terrors"
@@ -28,7 +29,7 @@ func handleUpdateCategory(req typhon.Request) typhon.Response {
 
 	slogParams := map[string]string{"category_id": body.Id}
 
-	category, err := dao.ReadCategory(body.Id)
+	category, err := dao.ReadCategory(req, body.Id)
 	if err != nil {
 		slog.Error(req, "Error checking if category exists: %v", err, slogParams)
 		return typhon.Response{Error: err}
@@ -37,13 +38,10 @@ func handleUpdateCategory(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: terrors.NotFound("category", fmt.Sprintf("Category '%s' not found", body.Id), nil)}
 	}
 
-	if body.Name != "" {
-		category.Name = body.Name
-	}
-
+	category = handleUserUpdates(category, body)
 	category.UpdatedAt = time.Now().UTC()
 
-	if err := dao.UpdateCategory(category); err != nil {
+	if err := dao.UpdateCategory(req, category); err != nil {
 		slog.Error(req, "Error updating category: %v", err, slogParams)
 		return typhon.Response{Error: err}
 	}
@@ -51,4 +49,16 @@ func handleUpdateCategory(req typhon.Request) typhon.Response {
 	return req.Response(&categoryproto.PUTUpdateCategoryResponse{
 		Category: marshaling.CategoryToProto(category),
 	})
+}
+
+func handleUserUpdates(category *domain.Category, body *categoryproto.PUTUpdateCategoryRequest) *domain.Category {
+	if body.Slug != "" {
+		category.Slug = body.Slug
+	}
+
+	if body.Name != "" {
+		category.Name = body.Name
+	}
+
+	return category
 }

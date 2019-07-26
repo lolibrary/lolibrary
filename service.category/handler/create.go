@@ -46,9 +46,10 @@ func handleCreateCategory(req typhon.Request) typhon.Response {
 		Slug:      body.Slug,
 		Name:      body.Name,
 		CreatedAt: time.Now().UTC(),
+		UpdatedAt: time.Now().UTC(),
 	}
 
-	if err := dao.CreateCategory(category); err != nil {
+	if err := dao.CreateCategory(req, category); err != nil {
 		slog.Error(req, "Failed to create category entry: %v", err)
 		return typhon.Response{Error: err}
 	}

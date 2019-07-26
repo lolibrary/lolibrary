@@ -15,7 +15,7 @@ func handleListCategories(req typhon.Request) typhon.Response {
 		return typhon.Response{Error: err}
 	}
 
-	categories, err := dao.ListCategories()
+	categories, err := dao.ListCategories(req)
 	if err != nil {
 		slog.Error(req, "Failed to read categories: %v", err)
 		return typhon.Response{Error: err}

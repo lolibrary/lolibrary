@@ -3,18 +3,18 @@ package domain
 import "time"
 
 type Category struct {
-	// ID a UUID.
-	ID string
+	// ID is a UUID.
+	ID string `firestore:"id"`
 
 	// Slug is a unique human-readable identifier used in URLs.
-	Slug string
+	Slug string `firestore:"slug"`
 
 	// Name is the human readable name of this category.
-	Name string
+	Name string `firestore:"name"`
 
 	// CreatedAt is when this record was inserted.
-	CreatedAt time.Time
+	CreatedAt time.Time `firestore:"created_at"`
 
 	// UpdatedAt is when this record was last updated.
-	UpdatedAt time.Time
+	UpdatedAt time.Time `firestore:"updated_at"`
 }
