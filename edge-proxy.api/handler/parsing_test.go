@@ -28,19 +28,19 @@ func TestParsePath(t *testing.T) {
 		{
 			name: "Service without Path",
 			path: "/images",
-			expectedService: "s-api-images.lolibrary",
+			expectedService: "s-api-images.lolibrary.svc.cluster.local",
 			expectedPath: "/",
 		},
 		{
 			name: "Service with Slash",
 			path: "/images/",
-			expectedService: "s-api-images.lolibrary.lolibrary",
+			expectedService: "s-api-images.lolibrary.svc.cluster.local",
 			expectedPath: "/",
 		},
 		{
 			name: "Service with Path",
 			path: "/images/upload/presigned-url",
-			expectedService: "s-api-images.lolibrary.lolibrary",
+			expectedService: "s-api-images.lolibrary.svc.cluster.local",
 			expectedPath: "/upload/presigned-url",
 		},
 		{
@@ -56,7 +56,7 @@ func TestParsePath(t *testing.T) {
 		{
 			name: "Service with Numbers and Dashes",
 			path: "/test-service-123/upload/presigned-url",
-			expectedService: "s-api-test-service-123.lolibrary",
+			expectedService: "s-api-test-service-123.lolibrary.svc.cluster.local",
 			expectedPath: "/upload/presigned-url",
 		},
 	}

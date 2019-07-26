@@ -10,7 +10,7 @@ import (
 
 var re = regexp.MustCompile(`^[a-z0-9][a-z0-9\-]{0,28}[a-z0-9]$`)
 
-const serviceFormat = "s-api-%s.lolibrary"
+const serviceFormat = "s-api-%s.lolibrary.svc.cluster.local"
 
 func parsePath(path string) (string, string, error) {
 	switch path {
