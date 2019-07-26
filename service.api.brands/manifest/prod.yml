@@ -1,0 +1,122 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: s-api-brands
+  namespace: lolibrary
+  selfLink: /api/v1/namespaces/lolibrary/serviceaccounts/s-api-brands
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    lolibrary.org/routing-name: service.api.brands
+  name: s-api-brands
+  namespace: lolibrary
+  selfLink: /apis/extensions/v1beta1/namespaces/lolibrary/deployments/s-api-brands
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: org.lolibrary.service.api.brands
+      lolibrary.org/routing-name: service.api.brands
+  strategy:
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 20%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: org.lolibrary.service.api.brands
+        lolibrary.org/routing-name: service.api.brands
+      namespace: lolibrary
+    spec:
+      serviceAccountName: s-api-brands
+      containers:
+        - name: s-api-brands
+          securityContext:
+            readOnlyRootFilesystem: true
+          image: PLACEHOLDER
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "80"
+            - name: REGION
+              value: "us-central1"
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.hostIP
+            - name: GOMAXPROCS
+              value: "1"
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: sentry
+                  key: dsn
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: "/var/run/secrets/google/key.json"
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              cpu: 30m
+              memory: 30Mi
+          ports:
+            - containerPort: 80
+              name: http-service
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 80
+              httpHeaders:
+                - name: Host
+                  value: service.api.brand
+          volumeMounts:
+            - name: pod-google-credentials
+              mountPath: /var/run/secrets/google
+              readOnly: true
+            - name: ca-certs
+              mountPath: /etc/ssl/certs
+              readOnly: true
+      volumes:
+        - name: pod-google-credentials
+          secret:
+            defaultMode: 0400
+            secretName: pod-google-credentials
+        - name: ca-certs
+          secret:
+            defaultMode: 0444
+            secretName: ca-certs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    lolibrary.org/routing-name: service.api.brands
+  name: s-api-brands
+  namespace: lolibrary
+  selfLink: /api/v1/namespaces/lolibrary/services/s-api-brands
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: org.lolibrary.service.api.brands
+    lolibrary.org/routing-name: service.api.brands
+  sessionAffinity: None
+  type: ClusterIP
