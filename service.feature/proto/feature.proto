@@ -31,7 +31,7 @@ service feature {
 message Feature {
     string id = 1;
     string slug = 2;
-    string name = 4;
+    string name = 3;
 
     // timestamps
     string created_at = 100;
@@ -74,7 +74,8 @@ message POSTCreateFeatureResponse {
 
 message PUTUpdateFeatureRequest {
     string id = 1;
-    string name = 2;
+    string slug = 2;
+    string name = 3;
 }
 
 message PUTUpdateFeatureResponse {

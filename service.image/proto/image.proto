@@ -19,7 +19,10 @@ service image {
 message Image {
     string id = 1;
     string filename = 2;
-    string name = 3;
+    string type = 3;
+    string user_id = 4;
+    string subject_type = 5;
+    string subject_id = 6;
 
     // timestamps
     string created_at = 100;
