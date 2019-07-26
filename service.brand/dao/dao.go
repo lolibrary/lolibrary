@@ -21,9 +21,9 @@ func Init() io.Closer {
 		Firestore = database.NewClient()
 	}
 
-	brandsByID = Firestore.Collection("attributes")
-	brandsBySlug = Firestore.Collection("attributes-by-slug")
-	brandsByShortName = Firestore.Collection("attributes-by-item-id")
+	brandsByID = Firestore.Collection("brands")
+	brandsBySlug = Firestore.Collection("brands-by-slug")
+	brandsByShortName = Firestore.Collection("brands-by-short-name")
 
 	return Firestore
 }
