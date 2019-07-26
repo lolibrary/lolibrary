@@ -21,7 +21,14 @@ type Item struct {
 	Notes         string            `firestore:"notes"`
 	Status        int               `firestore:"status"`
 	Metadata      map[string]string `firestore:"metadata"`
-	CreatedAt     time.Time         `firestore:"created_at"`
-	UpdatedAt     time.Time         `firestore:"updated_at"`
-	PublishedAt   time.Time         `firestore:"published_at"`
+
+	// relations from other services - we store the IDs in an array
+	Features   []string          `firestore:"features"`
+	Colors     []string          `firestore:"colors"`
+	Tags       []string          `firestore:"tags"`
+	Attributes map[string]string `firestore:"attributes"`
+
+	CreatedAt   time.Time `firestore:"created_at"`
+	UpdatedAt   time.Time `firestore:"updated_at"`
+	PublishedAt time.Time `firestore:"published_at"`
 }

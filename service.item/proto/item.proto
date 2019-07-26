@@ -40,6 +40,11 @@ message Item {
     // key-value searchable metadata.
     map<string, string> metadata = 50;
 
+    repeated string features = 51;
+    repeated string colors = 52;
+    repeated string tags = 53;
+    map<string, string> attributes = 54;
+
     // timestamps
     string created_at = 100;
     string updated_at = 101;
@@ -72,7 +77,6 @@ message POSTCreateItemRequest {
     string category_id = 4;
     string user_id = 5;
     string image_id = 6;
-    // no publisher id or timestamps on creation
     string english_name = 8;
     string foreign_name = 9;
     string product_number = 10;
@@ -80,7 +84,19 @@ message POSTCreateItemRequest {
     string price = 12;
     int32 year = 13;
     string notes = 14;
+
+    // key-value searchable metadata.
     map<string, string> metadata = 50;
+
+    repeated string features = 51;
+    repeated string colors = 52;
+    repeated string tags = 53;
+    map<string, string> attributes = 54;
+
+    // timestamps
+    string created_at = 100;
+    string updated_at = 101;
+    string published_at = 102;
 }
 
 message POSTCreateItemResponse {

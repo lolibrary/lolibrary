@@ -12,7 +12,7 @@ import (
 func ReadItem(ctx context.Context, id string) (*domain.Item, error) {
 	snap, err := itemsByID.Doc(id).Get(ctx)
 	if err != nil {
-		if database.NotFound(snap) {
+		if database.NotFound(err) {
 			return nil, terrors.NotFound("item", "Item not found", map[string]string{
 				"id": id,
 			})
@@ -32,7 +32,7 @@ func ReadItem(ctx context.Context, id string) (*domain.Item, error) {
 func ReadItemBySlug(ctx context.Context, slug string) (*domain.Item, error) {
 	snap, err := itemsBySlug.Doc(slug).Get(ctx)
 	if err != nil {
-		if database.NotFound(snap) {
+		if database.NotFound(err) {
 			return nil, terrors.NotFound("item", "Item not found", map[string]string{
 				"slug": slug,
 			})
