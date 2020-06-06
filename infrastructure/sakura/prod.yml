@@ -1,0 +1,131 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: s-sakura
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: php-service
+data:
+  APP_DEBUG: "false"
+  APP_ENV: production
+  APP_NAME: Lolibrary
+  APP_URL: https://lolibrary.org
+  APP_DOMAIN: lolibrary.org
+  BROADCAST_DRIVER: log
+  CACHE_DRIVER: array
+  DB_CONNECTION: pgsql
+  FILESYSTEM_CLOUD: s3public
+  FILESYSTEM_DRIVER: s3public
+  LOG_CHANNEL: stderr
+  QUEUE_CONNECTION: sync
+  SESSION_DRIVER: database
+  SESSION_LIFETIME: "7200"
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: org.lolibrary.service.sakura
+    lolibrary.org/routing-name: service.sakura
+  name: s-sakura
+spec:
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: org.lolibrary.service.sakura
+      lolibrary.org/routing-name: service.sakura
+  strategy:
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 20%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: org.lolibrary.service.sakura
+        lolibrary.org/routing-name: service.sakura
+    spec:
+      containers:
+        - image: PLACEHOLDER
+          imagePullPolicy: IfNotPresent
+          name: s-sakura
+          envFrom:
+            - configMapRef:
+                name: php-service
+            - secretRef:
+                name: digitalocean-spaces
+            - secretRef:
+                name: postmarkapp
+            - secretRef:
+                name: sentry-php
+            - secretRef:
+                name: php-app-key
+            - secretRef:
+                name: php-cloud-sql
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: 80
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 70Mi
+        - command:
+            - /cloud_sql_proxy
+            - -instances=lolibrary-180111:us-central1:lolibrary=tcp:5432
+            - -credential_file=/secrets/cloudsql/credentials.json
+          image: gcr.io/cloudsql-docker/gce-proxy:1.11
+          imagePullPolicy: IfNotPresent
+          name: cloudsql-proxy
+          resources:
+            limits:
+              cpu: 100m
+              memory: 64Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+          volumeMounts:
+            - mountPath: /secrets/cloudsql
+              name: cloudsql-instance-credentials
+              readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 10
+      volumes:
+        - name: cloudsql-instance-credentials
+          secret:
+            defaultMode: 420
+            secretName: cloudsql-instance-credentials
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    lolibrary.org/routing-name: service.sakura
+  name: s-sakura
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: org.lolibrary.service.sakura
+    lolibrary.org/routing-name: service.sakura
+  sessionAffinity: None
+  type: NodePort
