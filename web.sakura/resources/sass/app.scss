@@ -1,0 +1,39 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Chosen
+@import '~sass-svg-uri/svg-uri';
+@import '~bootstrap4c-chosen/src/scss/component-variables';
+@import '~bootstrap4c-chosen/src/scss/component-chosen';
+
+// simple-lightbox
+@import '~simple-lightbox/dist/simpleLightbox';
+
+@import '~vue-select/dist/vue-select.css';
+
+// custom
+@import "component/scrollbox";
+@import "component/floating";
+@import "component/items";
+@import "component/forms";
+@import "component/footer";
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.alert-fullwidth {
+  border-radius: 0;
+}
+
+.text-regular {
+  font-family: Helvetica, Arial, sans-serif;
+}

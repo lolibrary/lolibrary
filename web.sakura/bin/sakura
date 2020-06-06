@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+cloudpsql() {
+    local pod=$(kubectl get -l app=org.lolibrary.debug.psql --template '{{$pod := index .items 0}}{{$pod.metadata.name}}' pods)
+    local database=${2:-library}
+    local dsn="postgres://\${DB_USERNAME}:\${DB_PASSWORD}@127.0.0.1:5432/${database}"
+
+    echo "Connecting to database ${database} on ${pod}..."
+
+    kubectl exec -it $pod -c psql -- /bin/sh -c "psql \"postgres://\${DB_USERNAME}:\${DB_PASSWORD}@127.0.0.1:5432/${database}\""
+}
+
+cloudtinker() {
+    local pod=$(kubectl get -l app=org.lolibrary.service.sakura --template '{{$pod := index .items 0}}{{$pod.metadata.name}}' pods)
+
+    echo "Running php artisan tinker on ${pod}..."
+
+    kubectl exec -it $pod -c s-sakura -- php artisan tinker
+}
+
+cloudmigrate() {
+    local pod=$(kubectl get -l app=org.lolibrary.service.sakura --template '{{$pod := index .items 0}}{{$pod.metadata.name}}' pods)
+
+    echo "Running php artisan migrate on ${pod}..."
+
+    kubectl exec -it $pod -c s-sakura -- php artisan migrate
+}
+
+cloudshell() {
+    local pod=$(kubectl get -l app=org.lolibrary.service.sakura --template '{{$pod := index .items 0}}{{$pod.metadata.name}}' pods)
+
+    echo "Running /bin/sh on ${pod}..."
+
+    kubectl exec -it $pod -c s-sakura -- /bin/sh
+}
+
+case $1 in
+    tinker)
+        cloudtinker
+        ;;
+    shell)
+        cloudshell
+        ;;
+    migrate)
+        cloudmigrate
+        ;;
+    psql)
+        cloudpsql 
+        ;;
+    build)
+        cd $GOPATH/src/github.com/lolibrary/build && zsh ./build.zsh ${2:-master}
+        ;;
+    *)
+        echo "🌸 Usage: sakura [command] ..."
+        echo "     - sakura tinker           : opens a tinker shell in k8s"
+        echo "     - sakura shell            : opens /bin/sh in k8s"
+        echo "     - sakura migrate          : runs php artisan migrate in k8s"
+        echo "     - sakura psql [database]  : opens a psql shell in GCP from the cluster"
+        echo "     - sakura build [commit]   : builds the site using the build repo"
+        ;;
+esac
+

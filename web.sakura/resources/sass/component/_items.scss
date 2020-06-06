@@ -1,0 +1,61 @@
+.item-image-columns {
+  .card {
+    margin-bottom: 0;
+    display: inline-block;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+
+  column-count: 2;
+  column-gap: 0;
+  orphans: 1;
+  widows: 1;
+
+  @include media-breakpoint-up(sm) {
+    column-count: 3;
+  }
+
+  @include media-breakpoint-up(md) {
+    column-count: 4;
+  }
+
+  @include media-breakpoint-up(lg) {
+    column-count: 5;
+  }
+
+  @include media-breakpoint-up(xl) {
+    column-count: 6;
+  }
+}
+
+.item-image-container {
+  height: 14rem;
+
+  @include media-breakpoint-up(sm) {
+    height: 10rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    height: 8rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    height: 7rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    height: 7rem;
+  }
+}
+
+.flex-scroll-container {
+  display: flex;
+  flex-wrap: nowrap;
+
+  // give us native scrolling in iOS
+  -webkit-overflow-scrolling: touch;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+}
